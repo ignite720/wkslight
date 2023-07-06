@@ -9,15 +9,15 @@ workspace(g_wkslight.workspace.name)
 	floatingpoint("Default")
 	rtti("Default")
 	exceptionhandling("Default")
-	filter("system:windows")
-		systemversion("latest")
-	filter("system:linux")
-		pic("On")
 	defines({
 		"__STDC_LIMIT_MACROS",
 		"__STDC_FORMAT_MACROS",
 		"__STDC_CONSTANT_MACROS",
 	})
+	filter("system:windows")
+		systemversion("latest")
+	filter("system:linux")
+		pic("On")
 	filter("action:vs*")
 		startproject(g_wkslight.workspace.startproject)
 		staticruntime("Off")
