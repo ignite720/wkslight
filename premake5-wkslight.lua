@@ -33,7 +33,7 @@ g_wkslight.workspace = {
 					"%{wks.location}/../libraries/TGUI/include",
 				},
 				libdirs = {
-					"%{wks.location}/../libraries/TGUI/lib/%{cfg.buildcfg}",
+					"%{wks.location}/../libraries/TGUI/lib/%{cfg.system}/%{cfg.architecture}/%{cfg.buildcfg}",
 				},
 				links = {
 					"tgui-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
@@ -45,7 +45,7 @@ g_wkslight.workspace = {
 					"VAR1=value1",
 					"VAR2=value2",
 				},
-				localdebugenv = "%{wks.location}/../libraries/TGUI/bin",
+				localdebugenv = "%{wks.location}/../libraries/TGUI/bin/%{cfg.system}/%{cfg.architecture}/%{cfg.buildcfg}",
 			},
 		},
 	},
