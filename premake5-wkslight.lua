@@ -14,12 +14,18 @@ g_wkslight.workspace = {
 				includedirs = {
 					"%{wks.location}/../libraries/bar/include",
 				},
+				links = {
+					"bar",
+				}
 			},
 			foo = {
 				location = "libraries/foo",
 				includedirs = {
 					"%{wks.location}/../libraries/foo/include",
 				},
+				links = {
+					"foo",
+				}
 			},
 			TGUI = {
 				location = nil,

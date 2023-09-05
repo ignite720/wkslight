@@ -11,10 +11,9 @@ project("app")
 	})
 	includedirs({
 		"src",
-		g_wkslight.workspace.libraries.projects.foo.includedirs,
-		g_wkslight.workspace.libraries.projects.bar.includedirs,
 	})
-	links({
-		"foo",
+	g_wkslight.uselibs({
 		"bar",
+		"foo",
+		--"TGUI",
 	})
