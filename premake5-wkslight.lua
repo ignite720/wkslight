@@ -3,25 +3,41 @@ g_wkslight.workspace = {
 	name = "wkslight",
 	startproject = "",
 	cppdialect = "C++20",
+	projects = {
+		"app",
+	},
 	libraries = {
 		name = "libraries",
 		projects = {
-			foo = {
-				location = "libraries/foo",
-				includedirs = {
-					"%{wks.location}/../libraries/foo/include",
-				},
-			},
 			bar = {
 				location = "libraries/bar",
 				includedirs = {
 					"%{wks.location}/../libraries/bar/include",
 				},
 			},
+			foo = {
+				location = "libraries/foo",
+				includedirs = {
+					"%{wks.location}/../libraries/foo/include",
+				},
+			},
+			TGUI = {
+				location = nil,
+				includedirs = {
+					"%{wks.location}/../libraries/TGUI/include",
+				},
+				libdirs = {
+					"%{wks.location}/../libraries/TGUI/lib/%{cfg.buildcfg}",
+				},
+				links = {
+					"tgui-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
+				},
+				defines = {
+					"TGUI_STATIC",
+				},
+				bindir = "%{wks.location}/../libraries/TGUI/bin",
+			},
 		},
-	},
-	projects = {
-		"app",
 	},
 }
 g_wkslight.extras = {

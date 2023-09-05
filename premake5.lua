@@ -41,7 +41,9 @@ workspace(g_wkslight.workspace.name)
 		optimize("Speed")
 group(g_wkslight.workspace.libraries.name)
 	for k, v in pairs(g_wkslight.workspace.libraries.projects) do
-		include(v.location)
+		if v.location ~= nil then
+			include(v.location)
+		end
 	end
 group("")
 	for i, v in ipairs(g_wkslight.workspace.projects) do
