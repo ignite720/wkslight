@@ -16,7 +16,7 @@ g_wkslight.workspace = {
 				},
 				links = {
 					"bar",
-				}
+				},
 			},
 			foo = {
 				location = "libraries/foo",
@@ -25,7 +25,7 @@ g_wkslight.workspace = {
 				},
 				links = {
 					"foo",
-				}
+				},
 			},
 			TGUI = {
 				location = nil,
@@ -41,7 +41,11 @@ g_wkslight.workspace = {
 				defines = {
 					"TGUI_STATIC",
 				},
-				bindir = "%{wks.location}/../libraries/TGUI/bin",
+				debugenvs = {
+					"VAR1=value1",
+					"VAR2=value2",
+				},
+				localdebugenv = "%{wks.location}/../libraries/TGUI/bin",
 			},
 		},
 	},
