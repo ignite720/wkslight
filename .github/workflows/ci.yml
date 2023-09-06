@@ -12,11 +12,11 @@ jobs:
       matrix:
         os: [ windows-latest, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
-    
+    env:
+      ARTIFACT_DIR: "temp/artifact/bin/${{ runner.os }}/"
+      
     steps:
-      - env:
-          ARTIFACT_DIR: "temp/artifact/bin/${{ runner.os }}/"
-        run: |
+      - run: |
           echo ${{ env.ARTIFACT_DIR }}
 
       - name: Checkout repository
