@@ -12,13 +12,8 @@ jobs:
       matrix:
         os: [ windows-latest, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
-    env:
-      ARTIFACT_DIR: "temp/artifact/bin/${{ runner.os }}/"
       
     steps:
-      - run: |
-          echo ${{ env.ARTIFACT_DIR }}
-
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -52,8 +47,8 @@ jobs:
 
       - name: Create artifact
         run: |
-          mkdir -pv ${{ env.ARTIFACT_DIR }}
-          cp -rv bin/ $artifactDir
+          mkdir -pv "temp/artifact/bin/${{ runner.os }}/"
+          cp -rv bin/ "temp/artifact/bin/${{ runner.os }}/"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
