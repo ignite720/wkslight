@@ -34,6 +34,7 @@ jobs:
         run: |
           premake5 vs2022
           msbuild build\wkslight.sln -nologo -m -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
+          $artifactDir=temp/artifact/bin/${{ runner.os }}/
       
       # Linux & macOS
       - name: Build
@@ -43,10 +44,10 @@ jobs:
           pushd build
           make config=release_x64
           popd
+          artifactDir=temp/artifact/bin/${{ runner.os }}/
         
       - name: Create artifact
         run: |
-          artifactDir=temp/artifact/bin/${{ runner.os }}/
           mkdir -pv $artifactDir
           cp -rv bin/ $artifactDir
           
