@@ -47,8 +47,8 @@ jobs:
 
       - name: Create artifact
         run: |
-          mkdir -pv "temp/artifact/bin/${{ runner.os }}/"
-          cp -rv bin/ "temp/artifact/bin/${{ runner.os }}/"
+          mkdir -p "temp/artifact/bin/${{ runner.os }}/"
+          cp -r bin/ "temp/artifact/bin/${{ runner.os }}/"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
