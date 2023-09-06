@@ -4,3 +4,6 @@
 [submodule "premake5-modules/wkslight"]
 	path = premake5-modules/wkslight
 	url = https://github.com/ignite720/premake-wkslight.git
+[submodule "libraries/linmath.h"]
+	path = libraries/linmath.h
+	url = https://github.com/ignite720/linmath.h
