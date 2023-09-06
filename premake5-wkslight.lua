@@ -10,13 +10,25 @@ g_wkslight.workspace = {
 		name = "libraries",
 		projects = {
 			bar = {
-				location = "libraries/bar",
+				location = nil,
 				includedirs = {
 					"%{wks.location}/../libraries/bar/include",
 				},
+				libdirs = {
+					"%{wks.location}/../libraries/bar/lib/%{g_wkslight.triplet}",
+				},
 				links = {
 					"bar",
+					--"bar-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
 				},
+				defines = {
+					"TGUI_STATIC",
+				},
+				debugenvs = {
+					"VAR1=value1",
+					"VAR2=value2",
+				},
+				localdebugenv = "PATH=%{wks.location}/../libraries/bar/lib/%{g_wkslight.triplet}",
 			},
 			foo = {
 				location = "libraries/foo",
@@ -32,26 +44,6 @@ g_wkslight.workspace = {
 				includedirs = {
 					"%{wks.location}/../libraries/linmath.h",
 				},
-			},
-			TGUI = {
-				location = nil,
-				includedirs = {
-					"%{wks.location}/../libraries/TGUI/include",
-				},
-				libdirs = {
-					"%{wks.location}/../libraries/TGUI/lib/%{cfg.system}/%{cfg.architecture}/%{cfg.buildcfg}",
-				},
-				links = {
-					"tgui-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
-				},
-				defines = {
-					"TGUI_STATIC",
-				},
-				debugenvs = {
-					"VAR1=value1",
-					"VAR2=value2",
-				},
-				localdebugenv = "%{wks.location}/../libraries/TGUI/bin/%{cfg.system}/%{cfg.architecture}/%{cfg.buildcfg}",
 			},
 		},
 	},
