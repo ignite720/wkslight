@@ -14,6 +14,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     steps:
+      - env:
+          ARTIFACT_DIR: "temp/artifact/bin/${{ runner.os }}/"
+        run: |
+          echo ${{ env.ARTIFACT_DIR }}
+
+      - name: Checkout repository
       - uses: actions/checkout@v3
         with:
           submodules: "recursive"
@@ -34,8 +40,7 @@ jobs:
         run: |
           premake5 vs2022
           msbuild build\wkslight.sln -nologo -m -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
-          $artifactDir=temp/artifact/bin/${{ runner.os }}/
-      
+
       # Linux & macOS
       - name: Build
         if: runner.os != 'Windows'
@@ -44,13 +49,12 @@ jobs:
           pushd build
           make config=release_x64
           popd
-          artifactDir=temp/artifact/bin/${{ runner.os }}/
-        
+
       - name: Create artifact
         run: |
-          mkdir -pv $artifactDir
+          mkdir -pv ${{ env.ARTIFACT_DIR }}
           cp -rv bin/ $artifactDir
-          
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
