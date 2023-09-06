@@ -27,6 +27,12 @@ g_wkslight.workspace = {
 					"foo",
 				},
 			},
+			linmath = {
+				location = nil,
+				includedirs = {
+					"%{wks.location}/../libraries/linmath.h",
+				},
+			},
 			TGUI = {
 				location = nil,
 				includedirs = {

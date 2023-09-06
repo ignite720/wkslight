@@ -15,5 +15,6 @@ project("app")
 	g_wkslight.uselibs({
 		"bar",
 		"foo",
+		"linmath",
 		--"TGUI",
 	})

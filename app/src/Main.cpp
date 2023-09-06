@@ -1,6 +1,8 @@
 #include <foo.h>
 #include <bar.h>
 
+#include <linmath.h>
+
 int main(int argc, char* argv[])
 {
     {
@@ -25,6 +27,18 @@ int main(int argc, char* argv[])
             bar3.print(201.0);
 #endif
         }
+    }
+
+    {
+        vec3 r;
+
+        vec3 i = { 1, 0, 0 };
+        vec3 j = { 0, 1, 0 };
+        vec3 k = { 0, 0, 1 };
+        vec3_mul_cross(r, i, j);
+
+        vec3_add(r, i, j);
+        vec3_add(r, r, k);
     }
 	return 0;
 }
