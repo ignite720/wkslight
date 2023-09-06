@@ -46,8 +46,9 @@ jobs:
         
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact
-          cp -r bin/x64/Release temp/artifact/
+          artifactDir=temp/artifact/bin/${{ runner.os }}/
+          mkdir -pv $artifactDir
+          cp -rv bin/ $artifactDir
           
       - name: Upload artifact
         uses: actions/upload-artifact@v3
