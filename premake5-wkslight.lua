@@ -15,7 +15,7 @@ g_wkslight.workspace = {
 					"%{wks.location}/../libraries/bar/include",
 				},
 				libdirs = {
-					"%{wks.location}/../libraries/bar/lib/%{g_wkslight.triplet}",
+					"%{wks.location}/../libraries/bar/lib/%{g_wkslight.targettriple}",
 				},
 				links = {
 					"bar",
@@ -28,7 +28,7 @@ g_wkslight.workspace = {
 					"VAR1=value1",
 					"VAR2=value2",
 				},
-				localdebugenv = "PATH=%{wks.location}/../libraries/bar/lib/%{g_wkslight.triplet}",
+				localdebugenv = "PATH=%{wks.location}/../libraries/bar/lib/%{g_wkslight.targettriple}",
 			},
 			foo = {
 				location = "libraries/foo",
