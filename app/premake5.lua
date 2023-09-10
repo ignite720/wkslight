@@ -16,5 +16,4 @@ project("app")
 		"bar",
 		"foo",
 		"linmath",
-		--"TGUI",
 	})
