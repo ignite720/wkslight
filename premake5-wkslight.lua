@@ -12,10 +12,11 @@ g_wkslight.workspace = {
 			bar = {
 				location = nil,
 				includedirs = {
-					"%{wks.location}/../libraries/bar/include",
+					"%{g_wkslight.librariesdir}/bar/include",
 				},
 				libdirs = {
-					"%{wks.location}/../libraries/bar/lib/%{g_wkslight.targettriple}",
+					"%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
+					--"%{g_wkslight.librariesdir}/bar/lib/%{cfg.platform:gsub('x86', 'Win32'):gsub('x64', 'Win64')}",
 				},
 				links = {
 					"bar",
@@ -28,12 +29,12 @@ g_wkslight.workspace = {
 					"VAR1=value1",
 					"VAR2=value2",
 				},
-				localdebugenv = "PATH=%{wks.location}/../libraries/bar/lib/%{g_wkslight.targettriple}",
+				localdebugenv = "PATH=%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
 			},
 			foo = {
 				location = "libraries/foo",
 				includedirs = {
-					"%{wks.location}/../libraries/foo/include",
+					"%{g_wkslight.librariesdir}/foo/include",
 				},
 				links = {
 					"foo",
@@ -42,7 +43,7 @@ g_wkslight.workspace = {
 			linmath = {
 				location = nil,
 				includedirs = {
-					"%{wks.location}/../libraries/linmath.h",
+					"%{g_wkslight.librariesdir}/linmath.h",
 				},
 			},
 		},
