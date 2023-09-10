@@ -7,3 +7,6 @@
 [submodule "libraries/linmath.h"]
 	path = libraries/linmath.h
 	url = https://github.com/ignite720/linmath.h
+[submodule "premake5-modules/emscripten"]
+	path = premake5-modules/emscripten
+	url = https://github.com/ignite720/premake-emscripten.git
