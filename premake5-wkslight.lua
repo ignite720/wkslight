@@ -23,7 +23,7 @@ g_wkslight.workspace = {
 					--"bar-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
 				},
 				defines = {
-					"TGUI_STATIC",
+					"BAR_CONFIG1",
 				},
 				debugenvs = {
 					"VAR1=value1",
