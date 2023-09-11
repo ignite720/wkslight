@@ -40,6 +40,12 @@ g_wkslight.workspace = {
 					"foo",
 				},
 			},
+			headeronly = {
+				location = nil,
+				includedirs = {
+					"%{g_wkslight.librariesdir}/headeronly",
+				},
+			},
 			linmath = {
 				location = nil,
 				includedirs = {
