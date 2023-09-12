@@ -29,7 +29,7 @@ g_wkslight.workspace = {
 					"VAR1=value1",
 					"VAR2=value2",
 				},
-				localdebugenv = "PATH=%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
+				vslocaldebugenv = "PATH=%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
 			},
 			foo = {
 				location = "libraries/foo",
@@ -56,5 +56,22 @@ g_wkslight.workspace = {
 	},
 }
 g_wkslight.extras = {
-	foobar = 0.0,
+	android = {
+		androidabis = {
+			"armeabi-v7a",
+			--"arm64-v8a",
+			--"x86",
+			--"x86_64",
+		},
+		androidndkpath = "ndk/path/???",
+		androiddependencies = {
+			"com.android.support:support-v4:27.1.0",
+		},
+		androidsdkversion = "28",
+		androidsdkversion = "28",
+		gradleversion = "com.android.tools.build:gradle:7.3.1",
+		gradlewrapper = {
+			"distributionUrl=https://services.gradle.org/distributions/gradle-7.5.1-bin.zip",
+		},
+	},
 }

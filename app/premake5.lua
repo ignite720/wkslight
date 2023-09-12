@@ -15,5 +15,15 @@ project("app")
 	g_wkslight.uselibs({
 		"bar",
 		"foo",
+		"headeronly",
 		"linmath",
 	})
+	filter("options:android")
+		androidprojectdependencies({
+			"bar",
+			"foo",
+		})
+	filter("options:uwp")
+		files({
+			"Package.appxmanifest",
+		})

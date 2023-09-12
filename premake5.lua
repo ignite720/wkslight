@@ -1,9 +1,23 @@
+require("premake5-modules/android-studio/android_studio")
 require("premake5-modules/emscripten")
 require("premake5-modules/vspropertysheets")
+require("premake5-modules/winrt")
 require("premake5-wkslight")
+newoption({
+	trigger = "android",
+	description = "Generate Android projects",
+})
+newoption({
+	trigger = "uwp",
+	description = "Generate Universal Windows Platform projects",
+})
+newoption({
+	trigger = "web",
+	description = "Generate Web projects",
+})
 workspace(g_wkslight.workspace.name)
 	location(path.getbasename(g_wkslight.workspacedir))
-	platforms({ "x86", "x64", "android", "wasm" })
+	platforms({ "x86", "x64" })
 	configurations({ "Debug", "Release" })
 	characterset("Default")
 	cppdialect(g_wkslight.workspace.cppdialect)
@@ -15,7 +29,22 @@ workspace(g_wkslight.workspace.name)
 		"__STDC_FORMAT_MACROS",
 		"__STDC_CONSTANT_MACROS",
 	})
-	filter("platforms:wasm")
+	filter("options:android")
+		androidabis(g_wkslight.extras.android.androidabis)
+		androidndkpath(g_wkslight.extras.android.androidndkpath)
+		androiddependencies(g_wkslight.extras.android.androiddependencies)
+		androidsdkversion(g_wkslight.extras.android.androidsdkversion)
+		androidminsdkversion(g_wkslight.extras.android.androidminsdkversion)
+		gradleversion(g_wkslight.extras.android.gradleversion)
+		gradlewrapper(g_wkslight.extras.android.gradlewrapper)
+		androidrepositories(g_wkslight.extras.android.androidrepositories)
+	filter("options:uwp")
+		cppdialect("C++17")
+		system("windowsuniversal")
+		defaultlanguage("en-US")
+		generatewinmd("false")
+		consumewinrtextension2("false")
+	filter("options:web")
 		toolset("emcc")
 	filter("system:windows")
 		systemversion("latest")

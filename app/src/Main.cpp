@@ -3,6 +3,11 @@
 
 #include <linmath.h>
 
+#include <filesystem.hpp>
+#include <tl/optional.hpp>
+
+namespace fs = ghc::filesystem;
+
 int main(int argc, char *argv[])
 {
     {
@@ -37,6 +42,15 @@ int main(int argc, char *argv[])
 
         vec3_add(r, i, j);
         vec3_add(r, r, k);
+    }
+
+    {
+        fs::path p = fs::current_path();
+        printf("%s\n", p.string().c_str());
+    }
+
+    {
+        tl::optional<int> opt1;
     }
 	return 0;
 }
