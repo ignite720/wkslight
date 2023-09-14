@@ -74,4 +74,33 @@ g_wkslight.extras = {
 			"distributionUrl=https://services.gradle.org/distributions/gradle-7.5.1-bin.zip",
 		},
 	},
+	wasm = {
+		libs = {
+			"idbfs.js",
+			"websocket.js",
+		},
+		extra_exported_runtime_methods = {
+			--"ccall",
+			--"cwrap",
+		},
+		exported_functions = {
+			--"_main",
+		},
+		use_pthreads = false,
+		asyncify = true,
+		asyncify_whitelist = {
+			--"main",
+		},
+		image_formats = {
+			--"bmp",
+			--"jpg",
+			"png",
+		},
+		preload_files = {
+			"assets",
+			"res",
+		},
+		shell_file = "%{cfg.debugdir}/platform/wasm/shell.html",
+		output_file = "%{cfg.targetdir}/../../index.html",
+	},
 }

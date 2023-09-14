@@ -27,3 +27,5 @@ project("app")
 		files({
 			"Package.appxmanifest",
 		})
+	filter("platforms:wasm")
+		g_wkslight.wasmlinkoptions()
