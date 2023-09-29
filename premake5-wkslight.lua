@@ -75,19 +75,32 @@ g_wkslight.extras = {
 		},
 	},
 	wasm = {
+		flags = (
+			g_wkslight.EWASMFlag.USE_ZLIB |
+			g_wkslight.EWASMFlag.USE_SDL2 |
+			--g_wkslight.EWASMFlag.USE_SDL_IMAGE |
+			--g_wkslight.EWASMFlag.USE_SDL_MIXER |
+			--g_wkslight.EWASMFlag.USE_SDL_NET |
+			--g_wkslight.EWASMFlag.USE_SDL_TTF |
+			g_wkslight.EWASMFlag.USE_WEBGL2 |
+			g_wkslight.EWASMFlag.EXPLICIT_SWAP_CONTROL |
+			--g_wkslight.EWASMFlag.ASYNCIFY |
+			g_wkslight.EWASMFlag.LINK_OPENAL |
+			g_wkslight.EWASMFlag.NONE
+		),
 		libs = {
 			"idbfs.js",
 			"websocket.js",
 		},
-		extra_exported_runtime_methods = {
-			--"ccall",
-			--"cwrap",
+		exported_runtime_methods = {
+			"ccall",
+			"cwrap",
 		},
 		exported_functions = {
-			--"_main",
+			"_main",
+			--"_malloc",
+			--"_free",
 		},
-		use_pthreads = false,
-		asyncify = true,
 		asyncify_whitelist = {
 			--"main",
 		},
@@ -97,10 +110,9 @@ g_wkslight.extras = {
 			"png",
 		},
 		preload_files = {
-			"assets",
-			"res",
+			"%{cfg.debugdir}/assets",
 		},
-		shell_file = "%{cfg.debugdir}/platform/wasm/shell.html",
+		--shell_file = "%{cfg.debugdir}/platform/wasm/shell_minimal.html",
 		output_file = "%{cfg.targetdir}/../../index.html",
 	},
 }

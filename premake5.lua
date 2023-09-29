@@ -47,6 +47,10 @@ workspace(g_wkslight.workspace.name)
 	filter("options:web")
 		platforms({ "wasm" })
 		toolset("emcc")
+		linkoptions({
+			--"-sUSE_PTHREADS=1",
+			--"-sPTHREAD_POOL_SIZE=8",
+		})
 	filter("system:windows")
 		systemversion("latest")
 	filter("system:linux")
@@ -59,9 +63,10 @@ workspace(g_wkslight.workspace.name)
 		defines({
 			"_CRT_SECURE_NO_WARNINGS",
 			"_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS",
+			"_SILENCE_ALL_CXX20_DEPRECATION_WARNINGS",
 			"_HAS_STD_BYTE=0",
 		})
-		--buildoptions({ "/utf-8", "/Zc:char8_t-" })
+		buildoptions({ "/utf-8", "/Zc:char8_t-" })
 	filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
 		buildoptions({ "-static" })
 	filter("configurations:Debug")
