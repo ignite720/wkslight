@@ -76,17 +76,17 @@ g_wkslight.extras = {
 	},
 	wasm = {
 		flags = (
-			g_wkslight.EWASMFlag.USE_ZLIB |
-			g_wkslight.EWASMFlag.USE_SDL2 |
-			--g_wkslight.EWASMFlag.USE_SDL_IMAGE |
-			--g_wkslight.EWASMFlag.USE_SDL_MIXER |
-			--g_wkslight.EWASMFlag.USE_SDL_NET |
-			--g_wkslight.EWASMFlag.USE_SDL_TTF |
-			g_wkslight.EWASMFlag.USE_WEBGL2 |
-			g_wkslight.EWASMFlag.EXPLICIT_SWAP_CONTROL |
-			--g_wkslight.EWASMFlag.ASYNCIFY |
-			g_wkslight.EWASMFlag.LINK_OPENAL |
-			g_wkslight.EWASMFlag.NONE
+			g_wkslight.EWasmFlag.USE_ZLIB |
+			g_wkslight.EWasmFlag.USE_SDL2 |
+			--g_wkslight.EWasmFlag.USE_SDL_IMAGE |
+			--g_wkslight.EWasmFlag.USE_SDL_MIXER |
+			--g_wkslight.EWasmFlag.USE_SDL_NET |
+			--g_wkslight.EWasmFlag.USE_SDL_TTF |
+			g_wkslight.EWasmFlag.USE_WEBGL2 |
+			g_wkslight.EWasmFlag.EXPLICIT_SWAP_CONTROL |
+			--g_wkslight.EWasmFlag.ASYNCIFY |
+			g_wkslight.EWasmFlag.LINK_OPENAL |
+			g_wkslight.EWasmFlag.NONE
 		),
 		libs = {
 			"idbfs.js",
