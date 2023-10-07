@@ -28,4 +28,4 @@ project("app")
 			"Package.appxmanifest",
 		})
 	filter("platforms:wasm")
-		g_wkslight.wasmlinkoptions()
+		g_wkslight.wasmlinkoptions(g_wkslight.extras.wasm)
