@@ -3,10 +3,7 @@
 
 #include <linmath.h>
 
-#include <filesystem.hpp>
 #include <tl/optional.hpp>
-
-namespace fs = ghc::filesystem;
 
 int main(int argc, char *argv[])
 {
@@ -45,12 +42,14 @@ int main(int argc, char *argv[])
     }
 
     {
-        fs::path p = fs::current_path();
-        printf("%s\n", p.string().c_str());
+        tl::optional<int> opt1;
+        opt1 = 500;
+        if (opt1)
+        {
+            printf("opt1: %d\n", opt1.value());
+        }
     }
 
-    {
-        tl::optional<int> opt1;
-    }
+    system("pause");
 	return 0;
 }
