@@ -5,6 +5,8 @@
 
 #include <tl/optional.hpp>
 
+#include <iostream>
+
 int main(int argc, char *argv[])
 {
     {
@@ -46,10 +48,8 @@ int main(int argc, char *argv[])
         opt1 = 500;
         if (opt1)
         {
-            printf("opt1: %d\n", opt1.value());
+            std::cout << "opt1: " << opt1.value() << std::endl;
         }
     }
-
-    system("pause");
 	return 0;
 }
