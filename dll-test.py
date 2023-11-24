@@ -3,13 +3,17 @@ import ctypes
 
 if platform.system() == 'Windows':
 	# __stdcall(msvc)
-	mydll = ctypes.WinDLL("bin/x64/Release/foo.dll")
+	the_dll = ctypes.WinDLL("bin/x64/Release/foo.dll")
 else:
 	# __cdecl(linux/macOS)
-	mydll = ctypes.CDLL("bin/x64/Release/libfoo.so")
+	if platform.system() == 'Linux':
+		the_dll_suffix = "so"
+	else:
+		the_dll_suffix = "dylib"
+	the_dll = ctypes.CDLL(f"bin/x64/Release/libfoo.{the_dll_suffix}")
 
-mydll.foo_print.argtypes = [ctypes.c_double]
-mydll.foo_print.restype = ctypes.c_void_p
-mydll.foo_print(10.0)
+the_dll.foo_print.argtypes = [ctypes.c_double]
+the_dll.foo_print.restype = ctypes.c_void_p
+the_dll.foo_print(10.0)
 
-mydll.foo_printi(20)
+the_dll.foo_printi(20)
