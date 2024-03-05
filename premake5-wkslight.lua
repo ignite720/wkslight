@@ -9,6 +9,7 @@ g_wkslight.workspace = {
 	libraries = {
 		name = "libraries",
 		projects = {
+			--[[
 			bar = {
 				location = nil,
 				includedirs = {
@@ -30,6 +31,16 @@ g_wkslight.workspace = {
 					"VAR2=value2",
 				},
 				vslocaldebugenv = "PATH=%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
+			},
+			]]--
+			bar = {
+				location = "libraries/bar",
+				includedirs = {
+					"%{g_wkslight.librariesdir}/bar/include",
+				},
+				links = {
+					"bar",
+				},
 			},
 			foo = {
 				location = "libraries/foo",

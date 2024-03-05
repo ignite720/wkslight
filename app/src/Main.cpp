@@ -7,8 +7,7 @@
 
 #include <iostream>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     {
         foo_print(10.0);
         foo_printi(20);
@@ -46,8 +45,7 @@ int main(int argc, char *argv[])
     {
         tl::optional<int> opt1;
         opt1 = 500;
-        if (opt1)
-        {
+        if (opt1) {
             std::cout << "opt1: " << opt1.value() << std::endl;
         }
     }
