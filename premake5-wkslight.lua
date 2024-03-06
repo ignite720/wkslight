@@ -89,8 +89,8 @@ g_wkslight.extras = {
 		flags = (
 			g_wkslight.EWasmFlag.USE_ZLIB |
 			g_wkslight.EWasmFlag.USE_SDL2 |
-			--g_wkslight.EWasmFlag.USE_SDL_IMAGE |
-			--g_wkslight.EWasmFlag.USE_SDL_MIXER |
+			g_wkslight.EWasmFlag.USE_SDL_IMAGE |
+			g_wkslight.EWasmFlag.USE_SDL_MIXER |
 			--g_wkslight.EWasmFlag.USE_SDL_NET |
 			--g_wkslight.EWasmFlag.USE_SDL_TTF |
 			g_wkslight.EWasmFlag.USE_WEBGL2 |
