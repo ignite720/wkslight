@@ -3,6 +3,9 @@ name: CI Web
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -24,14 +27,12 @@ jobs:
         run: |
           emcc -v
 
-          #source premake5-generate-gmake.sh
-          premake5 gmake2 --web
+          source premake5-generate-web.sh
 
           pushd build
           make config=release_wasm
           popd
-
-          ls -lah
+          
           rm -frv bin/wasm/
 
       - name: Deploy
