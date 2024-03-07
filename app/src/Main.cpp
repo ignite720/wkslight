@@ -22,9 +22,9 @@
 #ifdef TARGET_WEB
 #include <emscripten.h>
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 
 #define MOVE_STATE_CASE(state) \
 case SDLK_##state: { \
@@ -44,7 +44,7 @@ enum MOVE_STATE {
 };
 
 struct AppContext;
-bool load_texture(AppContext *ctx, const char *path, SDL_Texture *tex, int &w, int &h);
+bool load_texture(AppContext *ctx, const char *path, SDL_Texture **tex, int &w, int &h);
 
 struct Player {
     static constexpr int MOVE_DELTA = 2;
@@ -65,11 +65,13 @@ struct Player {
 struct AppContext {
     ~AppContext();
 
+    int init();
+
     SDL_Window *window;
     SDL_Renderer *renderer;
 
     Mix_Chunk *click_sound;
-    Player player;
+    Player *player;
 };
 
 Player::~Player() {
@@ -77,7 +79,7 @@ Player::~Player() {
 }
 
 void Player::init(AppContext *ctx) {
-    load_texture(ctx, "assets/player.png", this->tex, this->dst_rect.w, this->dst_rect.h);
+    load_texture(ctx, "assets/player.png", &this->tex, this->dst_rect.w, this->dst_rect.h);
 }
 
 void Player::update() {
@@ -108,11 +110,12 @@ void Player::draw(AppContext *ctx) {
 }
 
 int AppContext::init() {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) != 0) {
         return 1;
     }
 
-    SDL_CreateWindowAndRenderer(1280, 720, 0, &this->window, &this->renderer);
+    this->window = SDL_CreateWindow("web", 0, 0, 1280, 720, 0);
+    this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
@@ -124,26 +127,28 @@ int AppContext::init() {
     }
 
     this->player = new Player();
-    this->player->init(&ctx);
+    this->player->init(this);
     return 0;
 }
 
-~AppContext::AppContext() {
+AppContext::~AppContext() {
     delete this->player;
+    Mix_FreeChunk(this->click_sound);
 
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
+
     Mix_CloseAudio();
     SDL_Quit();
 }
 
-bool load_texture(AppContext *ctx, const char *path, SDL_Texture *tex, int &w, int &h) {
+bool load_texture(AppContext *ctx, const char *path, SDL_Texture **tex, int &w, int &h) {
     SDL_Surface *surface = IMG_Load(path);
     if (!surface) {
         return false;
     }
 
-    tex = SDL_CreateTextureFromSurface(ctx->renderer, surface);
+    *tex = SDL_CreateTextureFromSurface(ctx->renderer, surface);
     w = surface->w;
     h = surface->h;
 
@@ -195,7 +200,7 @@ int web_init() {
 }
 #endif
 
-int main(int argc, char *argv[]) {
+int main() {
     {
         foo_print(10.0);
         foo_printi(20);
