@@ -17,9 +17,9 @@
 #define MOVE_STATE_CASE(state) \
 case SDLK_##state: { \
     if (evt.key.type == SDL_KEYDOWN) { \
-        ctx.player.move_state |= MOVE_STATE_##state; \
+        ctx->player.move_state |= MOVE_STATE_##state; \
     } else if (evt.key.type == SDL_KEYUP) { \
-        ctx.player.move_state ^= MOVE_STATE_##state; \
+        ctx->player.move_state ^= MOVE_STATE_##state; \
     } \
 } break
 
@@ -31,17 +31,13 @@ enum MOVE_STATE {
     MOVE_STATE_RIGHT = 1 << 3,
 };
 
-typedef struct tagAppContext {
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-
-    Mix_Chunk *click_sound;
-    Player player;
-} AppContext;
+struct AppContext;
+bool load_texture(AppContext *ctx, const char *path, SDL_Texture *tex, int &w, int &h);
 
 struct Player {
     static constexpr int MOVE_DELTA = 2;
 
+    void init(AppContext *ctx);
     void update();
     void draw(AppContext *ctx);
 
@@ -50,10 +46,22 @@ struct Player {
 
     int move_state;
     vec2 v;
-} Player;
+};
+
+struct AppContext {
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+
+    Mix_Chunk *click_sound;
+    Player player;
+};
+
+void Player::init(AppContext *ctx) {
+    load_texture(ctx, "assets/player.png", this->tex, this->dst_rect.w, this->dst_rect.h);
+}
 
 void Player::update() {
-    this->v = { 0.0f, 0.0f };
+    this->v[0] = this->v[1] = 0.0;
     if (this->move_state & MOVE_STATE_UP) {
         this->v[1] = -MOVE_DELTA;
     }
@@ -116,17 +124,20 @@ void main_loop(void *arg) {
     }
 
     poll_events(ctx);
-    ctx.player.update();
+    ctx->player.update();
 
     SDL_RenderClear(ctx->renderer);
-    ctx.player.draw(&ctx);
+    ctx->player.draw(ctx);
 
     SDL_RenderPresent(ctx->renderer);
 }
 
 int web_init() {
     AppContext ctx = {0};
-    ctx.window = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+        return 1;
+    }
 
     SDL_CreateWindowAndRenderer(1280, 720, 0, &ctx.window, &ctx.renderer);
     SDL_SetRenderDrawColor(ctx.renderer, 255, 255, 255, 255);
@@ -135,7 +146,7 @@ int web_init() {
         return 1;
     }
 
-    load_texture(&ctx, ctx.player.tex, ctx.player.dst_rect.w, ctx.player.dst_rect.h);
+    ctx.player.init(&ctx);
 
     const int fps = -1;
     const int simulate_infinite_loop = 1;
