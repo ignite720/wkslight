@@ -26,6 +26,9 @@ jobs:
       - name: Build
         run: |
           emcc -v
+          
+          echo "int main() {}" > main.c
+          emcc main.c -O2 -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -sSDL2_IMAGE_FORMATS='["png"]' -sUSE_SDL_MIXER=2 -sUSE_SDL_NET=2 -sUSE_SDL_TTF=2 -o main.js
 
           source premake5-generate-web.sh
 
