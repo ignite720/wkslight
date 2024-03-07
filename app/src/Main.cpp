@@ -7,6 +7,14 @@
 
 #include <iostream>
 
+#ifdef _WIN32
+#if (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
+// pc
+#else
+// uwp
+#endif
+#endif
+
 #ifdef __EMSCRIPTEN__
 //#define TARGET_WEB
 #endif
