@@ -24,11 +24,14 @@ jobs:
         run: |
           emcc -v
 
-          source premake5-generate-gmake.sh
+          #source premake5-generate-gmake.sh
+          premake5 gmake2 --web
+
           pushd build
           make config=release_wasm
           popd
 
+          ls -lah
           rm -frv bin/wasm/
 
       - name: Deploy
