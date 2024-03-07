@@ -1,3 +1,3 @@
 @echo off
-premake5.exe gmake --web
+premake5 gmake --web
 timeout /t 2 > nul

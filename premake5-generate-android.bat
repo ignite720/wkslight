@@ -1,3 +1,3 @@
 @echo off
-premake5.exe android-studio --android
+premake5 android-studio --android
 timeout /t 2 > nul
