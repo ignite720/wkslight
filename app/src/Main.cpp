@@ -8,6 +8,10 @@
 #include <iostream>
 
 #ifdef __EMSCRIPTEN__
+//#define TARGET_WEB
+#endif
+
+#ifdef TARGET_WEB
 #include <emscripten.h>
 
 #include <SDL.h>
@@ -203,7 +207,7 @@ int main(int argc, char *argv[]) {
     }
 
     int ret = 0;
-#ifdef __EMSCRIPTEN__
+#ifdef TARGET_WEB
     ret = web_init();
 #endif
     return ret;
