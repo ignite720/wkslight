@@ -16,7 +16,7 @@
 #endif
 
 #ifdef __EMSCRIPTEN__
-//#define TARGET_WEB
+#define TARGET_WEB
 #endif
 
 #ifdef TARGET_WEB
@@ -29,9 +29,9 @@
 #define MOVE_STATE_CASE(state) \
 case SDLK_##state: { \
     if (evt.key.type == SDL_KEYDOWN) { \
-        ctx->player.move_state |= MOVE_STATE_##state; \
+        ctx->player->move_state |= MOVE_STATE_##state; \
     } else if (evt.key.type == SDL_KEYUP) { \
-        ctx->player.move_state ^= MOVE_STATE_##state; \
+        ctx->player->move_state ^= MOVE_STATE_##state; \
     } \
 } break
 
@@ -49,6 +49,8 @@ bool load_texture(AppContext *ctx, const char *path, SDL_Texture *tex, int &w, i
 struct Player {
     static constexpr int MOVE_DELTA = 2;
 
+    ~Player();
+
     void init(AppContext *ctx);
     void update();
     void draw(AppContext *ctx);
@@ -61,12 +63,18 @@ struct Player {
 };
 
 struct AppContext {
+    ~AppContext();
+
     SDL_Window *window;
     SDL_Renderer *renderer;
 
     Mix_Chunk *click_sound;
     Player player;
 };
+
+Player::~Player() {
+    SDL_DestroyTexture(this->tex);
+}
 
 void Player::init(AppContext *ctx) {
     load_texture(ctx, "assets/player.png", this->tex, this->dst_rect.w, this->dst_rect.h);
@@ -97,6 +105,36 @@ void Player::update() {
 
 void Player::draw(AppContext *ctx) {
     SDL_RenderCopy(ctx->renderer, this->tex, nullptr, &this->dst_rect);
+}
+
+int AppContext::init() {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+        return 1;
+    }
+
+    SDL_CreateWindowAndRenderer(1280, 720, 0, &this->window, &this->renderer);
+    SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
+
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        return 1;
+    }
+    this->click_sound = Mix_LoadWAV("assets/click.wav");
+    if (!this->click_sound) {
+        return 1;
+    }
+
+    this->player = new Player();
+    this->player->init(&ctx);
+    return 0;
+}
+
+~AppContext::AppContext() {
+    delete this->player;
+
+    SDL_DestroyRenderer(this->renderer);
+    SDL_DestroyWindow(this->window);
+    Mix_CloseAudio();
+    SDL_Quit();
 }
 
 bool load_texture(AppContext *ctx, const char *path, SDL_Texture *tex, int &w, int &h) {
@@ -136,37 +174,23 @@ void main_loop(void *arg) {
     }
 
     poll_events(ctx);
-    ctx->player.update();
+    ctx->player->update();
 
     SDL_RenderClear(ctx->renderer);
-    ctx->player.draw(ctx);
+    ctx->player->draw(ctx);
 
     SDL_RenderPresent(ctx->renderer);
 }
 
 int web_init() {
     AppContext ctx = {0};
-    
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+    if (ctx.init() != 0) {
         return 1;
     }
-
-    SDL_CreateWindowAndRenderer(1280, 720, 0, &ctx.window, &ctx.renderer);
-    SDL_SetRenderDrawColor(ctx.renderer, 255, 255, 255, 255);
-
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        return 1;
-    }
-
-    ctx.player.init(&ctx);
 
     const int fps = -1;
     const int simulate_infinite_loop = 1;
     emscripten_set_main_loop_arg(main_loop, &ctx, fps, simulate_infinite_loop);
-
-    SDL_DestroyWindow(ctx.window);
-    Mix_CloseAudio();
-    SDL_Quit();
     return 0;
 }
 #endif
