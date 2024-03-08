@@ -1,5 +1,3 @@
-set -e
-
 pushd build
 make config=release_wasm
 popd

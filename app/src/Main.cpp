@@ -8,6 +8,11 @@
 #include <iostream>
 #include <memory>
 
+//#define USE_ASSETS
+
+static constexpr int WIN_WIDTH = 1280/2;
+static constexpr int WIN_HEIGHT = 720/2;
+
 #ifdef _WIN32
 #if (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
 // pc
@@ -48,23 +53,39 @@ enum MOVE_STATE {
 };
 
 struct AppContext;
-bool load_texture(AppContext *ctx, const char *path, SDL_Texture **tex, int &w, int &h);
+void fill_rect(AppContext *ctx, const SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
+
+struct Sound {
+    ~Sound();
+
+    void load_from_file(const char *path);
+    void play() const;
+
+    Mix_Chunk *sound = nullptr;
+};
+
+struct Texture {
+    ~Texture();
+
+    bool load_from_file(AppContext *ctx, const char *path);
+
+    SDL_Texture *texture = nullptr;
+    int width = 0;
+    int height = 0;
+};
 
 struct Player {
     static constexpr int MOVE_DELTA = 2;
-
-    Player();
-    ~Player();
 
     void init(AppContext *ctx);
     void update();
     void draw(AppContext *ctx);
 
-    SDL_Texture *tex;
+    std::unique_ptr<Texture> tex;
     SDL_Rect dst_rect;
 
-    int move_state;
-    vec2 v;
+    int move_state = MOVE_STATE_NONE;
+    vec2 v = { 0.0f, 0.0f };
 };
 
 struct AppContext {
@@ -72,27 +93,59 @@ struct AppContext {
 
     int init();
 
-    SDL_Window *window;
-    SDL_Renderer *renderer;
+    SDL_Window *window = nullptr;
+    SDL_Renderer *renderer = nullptr;
 
-    Mix_Chunk *click_sound;
+    std::unique_ptr<Sound> click_sound;
     std::unique_ptr<Player> player;
 };
 
-Player::Player()
-    : tex(nullptr) {
-
+Sound::~Sound() {
+    Mix_FreeChunk(this->sound);
 }
 
-Player::~Player() {
-    SDL_DestroyTexture(this->tex);
+void Sound::load_from_file(const char *path) {
+    this->sound = Mix_LoadWAV(path);
+}
+
+void Sound::play() const {
+    Mix_PlayChannel(-1, this->sound, 0);
+}
+
+Texture::~Texture() {
+    SDL_DestroyTexture(this->texture);
+}
+
+bool Texture::load_from_file(AppContext *ctx, const char *path) {
+    SDL_Surface *surface = IMG_Load(path);
+    if (!surface) {
+        printf("failed to load image: %s\n", IMG_GetError());
+        return false;
+    }
+
+    this->texture = SDL_CreateTextureFromSurface(ctx->renderer, surface);
+    this->width = surface->w;
+    this->height = surface->h;
+
+    SDL_FreeSurface(surface);
+    return true;
 }
 
 void Player::init(AppContext *ctx) {
-    this->dst_rect.x = 100;
-    this->dst_rect.y = 100;
+#ifdef USE_ASSETS
+    this->tex = std::make_unique<Texture>();
+    this->tex->load_from_file(ctx, "assets/player.png");
+#endif
 
-    load_texture(ctx, "assets/player.png", &this->tex, this->dst_rect.w, this->dst_rect.h);
+    this->dst_rect.x = 0;
+    this->dst_rect.y = 0;
+
+    if (this->tex) {
+        this->dst_rect.w = this->tex->width;
+        this->dst_rect.h = this->tex->height;
+    } else {
+        this->dst_rect.w = this->dst_rect.h = 32;
+    }
 }
 
 void Player::update() {
@@ -119,7 +172,11 @@ void Player::update() {
 }
 
 void Player::draw(AppContext *ctx) {
-    SDL_RenderCopy(ctx->renderer, this->tex, nullptr, &this->dst_rect);
+    if (this->tex) {
+        SDL_RenderCopy(ctx->renderer, this->tex->texture, nullptr, &this->dst_rect);
+    } else {
+        fill_rect(ctx, &this->dst_rect, 0, 255, 255);
+    }
 }
 
 int AppContext::init() {
@@ -129,19 +186,20 @@ int AppContext::init() {
         return 1;
     }
 
-    this->window = SDL_CreateWindow("web", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        1280, 720, flags);
+    this->window = SDL_CreateWindow("web",
+        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+        WIN_WIDTH, WIN_HEIGHT, flags);
     this->renderer = SDL_CreateRenderer(this->window, -1, flags);
-    SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
         printf("failed to load 22.wav: %s\n", Mix_GetError());
         return 1;
     }
-#if 0
-    this->click_sound = Mix_LoadWAV("assets/click.wav");
+#ifdef USE_ASSETS
+    this->click_sound = std::make_unique<Sound>();
+    this->click_sound->load_from_file("assets/click.wav");
     if (!this->click_sound) {
-        printf("failed to load click.wav: %s\n", Mix_GetError());
+        printf("failed to load sound: %s\n", Mix_GetError());
         return 1;
     }
 #endif
@@ -153,7 +211,7 @@ int AppContext::init() {
 
 AppContext::~AppContext() {
     this->player.reset();
-    Mix_FreeChunk(this->click_sound);
+    this->click_sound.reset();
 
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
@@ -162,26 +220,18 @@ AppContext::~AppContext() {
     SDL_Quit();
 }
 
-bool load_texture(AppContext *ctx, const char *path, SDL_Texture **tex, int &w, int &h) {
-    SDL_Surface *surface = IMG_Load(path);
-    if (!surface) {
-        printf("img is null: %s\n", IMG_GetError());
-        return false;
-    }
-
-    *tex = SDL_CreateTextureFromSurface(ctx->renderer, surface);
-    w = surface->w;
-    h = surface->h;
-
-    SDL_FreeSurface(surface);
-    return true;
+void fill_rect(AppContext *ctx, const SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+    SDL_SetRenderDrawColor(ctx->renderer, r, g, b, a);
+    SDL_RenderFillRect(ctx->renderer, rect);
 }
 
-void poll_events(AppContext *ctx) {
+static void poll_events(AppContext *ctx) {
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
-            Mix_PlayChannel(-1, ctx->click_sound, 0);
+            if (ctx->click_sound) {
+                ctx->click_sound->play();
+            }
         }
 
         switch (evt.key.keysym.sym) {
@@ -196,28 +246,30 @@ void poll_events(AppContext *ctx) {
 
 std::unique_ptr<AppContext> g_ctx;
 
-void g_main_loop(void *arg) {
+static void main_loop(void *arg) {
     AppContext *ctx = (AppContext *) arg;
 
     poll_events(ctx);
     ctx->player->update();
 
     SDL_RenderClear(ctx->renderer);
+    const SDL_Rect dst_rect{ 0, 0, WIN_WIDTH, WIN_HEIGHT };
+    fill_rect(ctx, &dst_rect, 25, 25, 25);
+
     ctx->player->draw(ctx);
 
     SDL_RenderPresent(ctx->renderer);
 }
 
-int web_init() {
+static int web_init() {
     g_ctx = std::make_unique<AppContext>();
-    memset(g_ctx.get(), 0, sizeof(AppContext));
     if (g_ctx->init() != 0) {
         return 1;
     }
 
     constexpr int fps = -1;
     constexpr int simulate_infinite_loop = 1;
-    emscripten_set_main_loop_arg(g_main_loop, g_ctx.get(), fps, simulate_infinite_loop);
+    emscripten_set_main_loop_arg(main_loop, g_ctx.get(), fps, simulate_infinite_loop);
     return 0;
 }
 #endif

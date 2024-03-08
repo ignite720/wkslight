@@ -25,8 +25,7 @@ jobs:
       - name: Build app for release
         run: |
           premake5 vs2022 --uwp
-          #msbuild build\wkslight.sln -nologo -m -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
-          devenv.exe /Build "Release|x64" /ProjectConfig "Release|x64" /Project "build\app\app.vcxproj" "build\wkslight.sln"
+          msbuild build\wkslight.sln -nologo -m -p:GenerateAppxPackageOnBuild=false -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
 
       - name: Create artifact
         run: |
