@@ -6,6 +6,7 @@
 #include <tl/optional.hpp>
 
 #include <iostream>
+#include <memory>
 
 #ifdef _WIN32
 #if (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
@@ -20,7 +21,10 @@
 #endif
 
 #ifdef TARGET_WEB
+#include <stdio.h>
+
 #include <emscripten.h>
+#include <emscripten/html5.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -49,6 +53,7 @@ bool load_texture(AppContext *ctx, const char *path, SDL_Texture **tex, int &w, 
 struct Player {
     static constexpr int MOVE_DELTA = 2;
 
+    Player();
     ~Player();
 
     void init(AppContext *ctx);
@@ -71,14 +76,22 @@ struct AppContext {
     SDL_Renderer *renderer;
 
     Mix_Chunk *click_sound;
-    Player *player;
+    std::unique_ptr<Player> player;
 };
 
-Player::~Player() {
+Player::Player()
+    : tex(nullptr) {
+
+}
+
+Player::~Player() {2
     SDL_DestroyTexture(this->tex);
 }
 
 void Player::init(AppContext *ctx) {
+    this->dst_rect.x = 100;
+    this->dst_rect.y = 100;
+
     load_texture(ctx, "assets/player.png", &this->tex, this->dst_rect.w, this->dst_rect.h);
 }
 
@@ -110,29 +123,36 @@ void Player::draw(AppContext *ctx) {
 }
 
 int AppContext::init() {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) != 0) {
+    const Uint32 flags = SDL_RENDERER_PRESENTVSYNC;
+
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         return 1;
     }
 
-    this->window = SDL_CreateWindow("web", 0, 0, 1280, 720, 0);
-    this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_PRESENTVSYNC);
+    this->window = SDL_CreateWindow("web", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+        1280, 720, flags);
+    this->renderer = SDL_CreateRenderer(this->window, -1, flags);
     SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        printf("failed to load 22.wav: %s\n", Mix_GetError());
         return 1;
     }
+#if 0
     this->click_sound = Mix_LoadWAV("assets/click.wav");
     if (!this->click_sound) {
+        printf("failed to load click.wav: %s\n", Mix_GetError());
         return 1;
     }
+#endif
 
-    this->player = new Player();
+    this->player = std::make_unique<Player>();
     this->player->init(this);
     return 0;
 }
 
 AppContext::~AppContext() {
-    delete this->player;
+    this->player.reset();
     Mix_FreeChunk(this->click_sound);
 
     SDL_DestroyRenderer(this->renderer);
@@ -145,6 +165,7 @@ AppContext::~AppContext() {
 bool load_texture(AppContext *ctx, const char *path, SDL_Texture **tex, int &w, int &h) {
     SDL_Surface *surface = IMG_Load(path);
     if (!surface) {
+        printf("img is null: %s\n", IMG_GetError());
         return false;
     }
 
@@ -168,15 +189,15 @@ void poll_events(AppContext *ctx) {
             MOVE_STATE_CASE(DOWN);
             MOVE_STATE_CASE(LEFT);
             MOVE_STATE_CASE(RIGHT);
+            default: break;
         }
     }
 }
 
-void main_loop(void *arg) {
-    AppContext *ctx = (AppContext *) ctx;
-    if (!ctx) {
-        return;
-    }
+std::unique_ptr<AppContext> g_ctx;
+
+void g_main_loop(void *arg) {
+    AppContext *ctx = (AppContext *) arg;
 
     poll_events(ctx);
     ctx->player->update();
@@ -188,19 +209,20 @@ void main_loop(void *arg) {
 }
 
 int web_init() {
-    AppContext ctx = {0};
-    if (ctx.init() != 0) {
+    g_ctx = std::make_unique<AppContext>();
+    memset(g_ctx.get(), 0, sizeof(AppContext));
+    if (g_ctx->init() != 0) {
         return 1;
     }
 
-    const int fps = -1;
-    const int simulate_infinite_loop = 1;
-    emscripten_set_main_loop_arg(main_loop, &ctx, fps, simulate_infinite_loop);
+    constexpr int fps = -1;
+    constexpr int simulate_infinite_loop = 1;
+    emscripten_set_main_loop_arg(g_main_loop, g_ctx.get(), fps, simulate_infinite_loop);
     return 0;
 }
 #endif
 
-int main() {
+int main(int argc, char *argv[]) {
     {
         foo_print(10.0);
         foo_printi(20);
