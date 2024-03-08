@@ -26,7 +26,7 @@ jobs:
         run: |
           premake5 vs2022 --uwp
           #msbuild build\wkslight.sln -nologo -m -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
-          msvc-build.bat
+          C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe /Build "Release|x64" /ProjectConfig "Release|x64" /Project "build\app\app.vcxproj" "build\wkslight.sln"
 
       - name: Create artifact
         run: |
