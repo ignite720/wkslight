@@ -186,9 +186,7 @@ int AppContext::init() {
         return 1;
     }
 
-    this->window = SDL_CreateWindow("web",
-        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        WIN_WIDTH, WIN_HEIGHT, flags);
+    this->window = SDL_CreateWindow("web", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIN_WIDTH, WIN_HEIGHT, flags);
     this->renderer = SDL_CreateRenderer(this->window, -1, flags);
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
