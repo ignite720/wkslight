@@ -84,7 +84,7 @@ Player::Player()
 
 }
 
-Player::~Player() {2
+Player::~Player() {
     SDL_DestroyTexture(this->tex);
 }
 
