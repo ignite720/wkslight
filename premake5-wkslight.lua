@@ -116,8 +116,8 @@ g_wkslight.extras = {
 			--"main",
 		},
 		image_formats = {
-			--"bmp",
-			--"jpg",
+			"bmp",
+			"jpg",
 			"png",
 		},
 		preload_files = {

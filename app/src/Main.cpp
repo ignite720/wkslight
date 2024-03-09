@@ -9,6 +9,7 @@
 
 #ifdef __EMSCRIPTEN__
 #define TARGET_WEB
+#define USE_ASSETS
 
 #include "Web.h"
 
