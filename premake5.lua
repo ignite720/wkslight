@@ -66,7 +66,10 @@ workspace(g_wkslight.workspace.name)
 			"_SILENCE_ALL_CXX20_DEPRECATION_WARNINGS",
 			"_HAS_STD_BYTE=0",
 		})
-		buildoptions({ "/utf-8", "/Zc:char8_t-" })
+		buildoptions({
+			"/utf-8",
+			"/Zc:char8_t-",
+		})
 	filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
 		buildoptions({ "-static" })
 	filter("configurations:Debug")

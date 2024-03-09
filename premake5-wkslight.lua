@@ -1,6 +1,6 @@
 g_wkslight = require("premake5-modules/wkslight")
 g_wkslight.workspace = {
-	name = "wkslight",
+	name = "workspace_name",
 	startproject = "",
 	cppdialect = "C++20",
 	projects = {
@@ -122,6 +122,9 @@ g_wkslight.extras = {
 		},
 		preload_files = {
 			"%{cfg.debugdir}/assets",
+		},
+		embed_files = {
+			--"%{cfg.debugdir}/assets",
 		},
 		--shell_file = "%{cfg.debugdir}/platform/wasm/shell_minimal.html",
 		output_file = "%{cfg.targetdir}/../../index.html",

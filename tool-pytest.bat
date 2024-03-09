@@ -1,3 +1,3 @@
 @echo off
-python dll-test.py
+python tool-pytest.py
 timeout /t 2 > nul
