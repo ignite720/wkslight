@@ -104,6 +104,7 @@ bool Texture::load_from_file(App *app, const char *path) {
     this->texture = SDL_CreateTextureFromSurface(app->renderer, surface);
     this->width = surface->w;
     this->height = surface->h;
+    printf("Image loaded successfully: %s\n", path);
 
     SDL_FreeSurface(surface);
     return true;
@@ -183,6 +184,7 @@ int App::init(int width, int height, Uint32 flags) {
         printf("Failed to initialize audio: %s\n", Mix_GetError());
         return 1;
     }
+    
 #ifdef USE_ASSETS
     this->click_sound = std::make_unique<Sound>();
     this->click_sound->load_from_file("assets/click.wav");
