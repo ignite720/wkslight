@@ -25,6 +25,7 @@ project("app")
 		})
 	filter("options:uwp")
 		files({
+			"assets/*.png",
 			"Package.appxmanifest",
 		})
 		---[[fix uwp start]]---
@@ -36,5 +37,7 @@ project("app")
 			"foo.lib",
 		})
 		---[[fix uwp end]]---
+	filter({"options:uwp", "files:assets/*.png"})
+		deploy("true")
 	filter("platforms:wasm")
 		g_wkslight.wasmlinkoptions(g_wkslight.extras.wasm)
