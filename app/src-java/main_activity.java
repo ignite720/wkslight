@@ -8,7 +8,7 @@ public class main_activity extends Activity {
 	public static native int hello_cpp();
 
 	static {
-		System.loadLibrary("android_studio_example");
+		System.loadLibrary("app");
 	}
 
 	@Override
