@@ -11,7 +11,7 @@
 #define TARGET_WEB
 //#define USE_ASSETS
 
-#include "Web.h"
+#include "web.h"
 
 std::unique_ptr<App> g_app;
 

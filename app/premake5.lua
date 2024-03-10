@@ -8,6 +8,8 @@ project("app")
 	files({
 		"src/**.h",
 		"src/**.cpp",
+		"src-java/**.*",
+		"assets/**.*",
 	})
 	includedirs({
 		"src",
@@ -19,13 +21,24 @@ project("app")
 		"linmath",
 	})
 	filter("options:android")
+		androiddependencies({
+			"com.android.support:support-v4:27.1.0",
+		})
 		androidprojectdependencies({
 			"bar",
 			"foo",
 		})
+		androidkeystorefile("../../../.android/debug.keystore")
+		androidstorepassword("android")
+		androidkeyalias("androiddebugkey")
+		androidkeypassword("android")
+		--androidversioncode("2")
+		--androidversionname("1.0")
+		assetdirs({
+			"assets",
+		})
 	filter("options:uwp")
 		files({
-			"assets/*.png",
 			"Package.appxmanifest",
 		})
 		---[[fix uwp start]]---

@@ -1,3 +1,3 @@
 pushd build
-gradle build
+gradle build --info
 popd

@@ -20,9 +20,6 @@ jobs:
         with:
           version: "5.0.0-beta2"
 
-      - name: Setup emsdk
-        uses: mymindstorm/setup-emsdk@v14
-
       - name: Install Dependencies
         run: |
           echo "todo"

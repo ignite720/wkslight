@@ -75,15 +75,17 @@ g_wkslight.extras = {
 			--"x86",
 			--"x86_64",
 		},
-		androiddependencies = {
-			"com.android.support:support-v4:27.1.0",
-		},
-		androidsdkversion = "33",
-		androidminsdkversion = "24",
-		gradleversion = "com.android.tools.build:gradle:7.2",
+		androidsdkversion = "29",
+		androidminsdkversion = "29",
+		gradleversion = "com.android.tools.build:gradle:7.0.0",
 		gradlewrapper = {
 			"distributionUrl=https://services.gradle.org/distributions/gradle-7.5.1-bin.zip",
 		},
+		androidrepositories = {
+			--"jcenter()",
+			--"maven { url 'http://maven.gameanalytics.com/release' }",
+		},
+		androidappid = "com.wkslight.example",
 	},
 	wasm = {
 		flags = (
