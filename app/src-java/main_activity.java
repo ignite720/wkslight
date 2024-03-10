@@ -14,7 +14,6 @@ public class main_activity extends Activity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		Log.d("Hello world!", "I'm Java");
-
 		hello_cpp();
 
 		super.onCreate(arg0);
