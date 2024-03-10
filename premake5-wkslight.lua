@@ -69,18 +69,18 @@ g_wkslight.workspace = {
 g_wkslight.extras = {
 	android = {
 		androidabis = {
-			"armeabi-v7a",
-			--"arm64-v8a",
+			--"armeabi",
+			--"armeabi-v7a",
+			"arm64-v8a",
 			--"x86",
 			--"x86_64",
 		},
-		androidndkpath = "ndk/path/???",
 		androiddependencies = {
 			"com.android.support:support-v4:27.1.0",
 		},
-		androidsdkversion = "28",
-		androidsdkversion = "28",
-		gradleversion = "com.android.tools.build:gradle:7.3.1",
+		androidsdkversion = "33",
+		androidminsdkversion = "24",
+		gradleversion = "com.android.tools.build:gradle:7.2",
 		gradlewrapper = {
 			"distributionUrl=https://services.gradle.org/distributions/gradle-7.5.1-bin.zip",
 		},
