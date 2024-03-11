@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -20,9 +20,10 @@ jobs:
         with:
           version: "5.0.0-beta2"
 
-      - name: Install Dependencies
-        run: |
-          echo "hello"
+      - name: Setup gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 7.5.1
 
       - name: Build
         run: |
