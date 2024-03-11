@@ -30,7 +30,7 @@ project("app")
 		androidprojectdependencies({
 			"app_core",
 		})
-		androidkeystorefile("../../../.android/debug.keystore")
+		androidkeystorefile("../../../../.android/debug.keystore")
 		androidstorepassword("android")
 		androidkeyalias("androiddebugkey")
 		androidkeypassword("android")
