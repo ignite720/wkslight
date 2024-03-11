@@ -20,3 +20,13 @@ project("app_core")
 			"bar",
 			"foo",
 		})
+	filter("options:target_platform=uwp")
+		---[[fix uwp start]]---
+		libdirs({
+			"%{g_wkslight.targetdir}",
+		})
+		links({
+			"bar.lib",
+			"foo.lib",
+		})
+		---[[fix uwp end]]---
