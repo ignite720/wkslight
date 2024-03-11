@@ -2,11 +2,15 @@
 
 #include "bar_api.h"
 
+#include <iostream>
+
 template<typename T>
 class Bar
 {
 public:
-	void print(T value);
+	void print(T value) {
+		std::cout << "Bar.print: " << value << std::endl;
+	}
 };
 
 /* forward declaration for template */
