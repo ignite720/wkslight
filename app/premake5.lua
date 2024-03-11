@@ -47,8 +47,7 @@ project("app")
 			"%{g_wkslight.targetdir}",
 		})
 		links({
-			"bar.lib",
-			"foo.lib",
+			"app_core.lib",
 		})
 		---[[fix uwp end]]---
 	filter({ "options:target_platform=uwp", "files:assets/*.png" })

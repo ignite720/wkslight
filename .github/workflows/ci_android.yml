@@ -22,12 +22,12 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          echo "todo"
+          echo "hello"
 
       - name: Build
         run: |
           source premake5-generate-android.sh
-          source cargo-apk.sh
+          source android.build.sh
 
       - name: Create artifact
         run: |
