@@ -8,8 +8,8 @@ newoption({
 	description = "Generate project files for the specified target platform",
 	value = "<TARGET_PLATFORM>",
 	allowed = {
-		{ "pc", "Generate `PC` projects" },
 		{ "android", "Generate `Android` projects" },
+		{ "pc", "Generate `PC` projects" },
 		{ "uwp", "Generate `Universal Windows Platform` projects" },
 		{ "web", "Generate `Web` projects" },
 	},
