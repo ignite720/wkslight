@@ -8,7 +8,10 @@ project("app_core")
 		"src/**.cpp",
 	})
 	includedirs({
-		"src",
+		g_wkslight.workspace.libraries.projects.app_core.includedirs,
+	})
+	defines({
+		"APP_CORE_BUILD_DLL",
 	})
 	g_wkslight.uselibs({
 		"bar",

@@ -11,7 +11,7 @@
         #define TEMPLATE_EXTERN                         extern
     #endif
 
-    #ifdef BAR_BUILD_DLL
+    #ifdef APP_CORE_BUILD_DLL
         #define APP_CORE_API                            __declspec(dllexport)
     #else
         #define APP_CORE_API                            __declspec(dllimport)

@@ -36,7 +36,7 @@ g_wkslight.workspace = {
 			app_core = {
 				location = "libraries/app_core",
 				includedirs = {
-					"%{g_wkslight.librariesdir}/app_core/src",
+					"%{g_wkslight.librariesdir}/app_core/include",
 				},
 				links = {
 					"app_core",
