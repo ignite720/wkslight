@@ -11,10 +11,10 @@ FOO_API void foo_print(double n);
 FOO_API void foo_printi(int n);
 FOO_API void foo_printi64(int64_t n);
 
+C_API_END
+
 class FOO_API Foo
 {
 public:
 	void print(int n);
 };
-
-C_API_END
