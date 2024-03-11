@@ -15,29 +15,30 @@ project("app")
 		"src",
 	})
 	g_wkslight.uselibs({
+		"app_core",
 		"bar",
 		"foo",
-		"headeronly",
 		"linmath",
 	})
-	filter("options:android")
+	filter("options:target_platform=android")
+		links({
+			"log",
+		})
 		androiddependencies({
 			"com.android.support:support-v4:27.1.0",
 		})
 		androidprojectdependencies({
-			"bar",
-			"foo",
+			"app_core",
 		})
 		androidkeystorefile("../../../.android/debug.keystore")
 		androidstorepassword("android")
 		androidkeyalias("androiddebugkey")
 		androidkeypassword("android")
-		--androidversioncode("2")
-		--androidversionname("1.0")
+		apkoutputpath("../../../../../../../bin/apk-")
 		assetdirs({
 			"assets",
 		})
-	filter("options:uwp")
+	filter("options:target_platform=uwp")
 		files({
 			"Package.appxmanifest",
 		})
@@ -50,7 +51,7 @@ project("app")
 			"foo.lib",
 		})
 		---[[fix uwp end]]---
-	filter({ "options:uwp", "files:assets/*.png" })
+	filter({ "options:target_platform=uwp", "files:assets/*.png" })
 		deploy("true")
 	filter("platforms:wasm")
 		g_wkslight.wasmlinkoptions(g_wkslight.extras.wasm)

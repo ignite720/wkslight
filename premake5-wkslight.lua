@@ -33,6 +33,15 @@ g_wkslight.workspace = {
 				vslocaldebugenv = "PATH=%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
 			},
 			]]--
+			app_core = {
+				location = "libraries/app_core",
+				includedirs = {
+					"%{g_wkslight.librariesdir}/app_core/src",
+				},
+				links = {
+					"app_core",
+				},
+			},
 			bar = {
 				location = "libraries/bar",
 				includedirs = {
@@ -75,8 +84,9 @@ g_wkslight.extras = {
 			--"x86",
 			--"x86_64",
 		},
-		androidsdkversion = "29",
-		androidminsdkversion = "29",
+		androidsdkversion = "33",
+		androidminsdkversion = "24",
+		androidndkpath = os.getenv("ANDROID_NDK_ROOT"),
 		gradleversion = "com.android.tools.build:gradle:7.0.0",
 		gradlewrapper = {
 			"distributionUrl=https://services.gradle.org/distributions/gradle-7.5.1-bin.zip",
@@ -85,7 +95,6 @@ g_wkslight.extras = {
 			--"jcenter()",
 			--"maven { url 'http://maven.gameanalytics.com/release' }",
 		},
-		androidappid = "com.wkslight.example",
 	},
 	wasm = {
 		flags = (

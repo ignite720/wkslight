@@ -4,20 +4,19 @@ require("premake5-modules/vspropertysheets")
 require("premake5-modules/winrt")
 require("premake5-wkslight")
 newoption({
-	trigger = "android",
-	description = "Generate Android projects",
-})
-newoption({
-	trigger = "uwp",
-	description = "Generate Universal Windows Platform projects",
-})
-newoption({
-	trigger = "web",
-	description = "Generate Web projects",
+	trigger = "target_platform",
+	description = "Generate project files for the specified target platform",
+	value = "<TARGET_PLATFORM>",
+	allowed = {
+		{ "pc", "Generate `PC` projects" },
+		{ "android", "Generate `Android` projects" },
+		{ "uwp", "Generate `Universal Windows Platform` projects" },
+		{ "web", "Generate `Web` projects" },
+	},
+	default = "pc"
 })
 workspace(g_wkslight.workspace.name)
 	location(path.getbasename(g_wkslight.workspacedir))
-	platforms({ "x86", "x64" })
 	configurations({ "Debug", "Release" })
 	characterset("Default")
 	cppdialect(g_wkslight.workspace.cppdialect)
@@ -29,21 +28,23 @@ workspace(g_wkslight.workspace.name)
 		"__STDC_FORMAT_MACROS",
 		"__STDC_CONSTANT_MACROS",
 	})
-	filter("options:android")
+	filter("options:not target_platform=android")
+		platforms({ "x86", "x64" })
+	filter("options:target_platform=android")
 		androidabis(g_wkslight.extras.android.androidabis)
 		androidsdkversion(g_wkslight.extras.android.androidsdkversion)
 		androidminsdkversion(g_wkslight.extras.android.androidminsdkversion)
+		androidndkpath(g_wkslight.extras.android.androidndkpath)
 		gradleversion(g_wkslight.extras.android.gradleversion)
-		--gradlewrapper(g_wkslight.extras.android.gradlewrapper)
+		gradlewrapper(g_wkslight.extras.android.gradlewrapper)
 		androidrepositories(g_wkslight.extras.android.androidrepositories)
-		androidappid(g_wkslight.extras.android.androidappid)
-	filter("options:uwp")
+	filter("options:target_platform=uwp")
 		cppdialect("C++17")
 		system("windowsuniversal")
 		defaultlanguage("en-US")
 		generatewinmd("false")
 		consumewinrtextension2("false")
-	filter("options:web")
+	filter("options:target_platform=web")
 		platforms({ "wasm" })
 		toolset("emcc")
 		linkoptions({

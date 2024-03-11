@@ -1,3 +1,7 @@
+#include "app_core_web.h"
+
+#include "app_core.h"
+
 #ifdef TARGET_WEB
 #include <emscripten.h>
 #include <emscripten/html5.h>
@@ -239,5 +243,26 @@ void fill_rect(SDL_Renderer *renderer, const SDL_Rect *rect, Uint8 r, Uint8 g, U
 
 void fill_texture(SDL_Renderer *renderer, const SDL_Rect *rect, Texture *tex) {
     SDL_RenderCopy(renderer, tex->texture, nullptr, rect);
+}
+
+std::unique_ptr<App> g_app;
+
+static void main_loop(void *arg) {
+    App *app = (App *) arg;
+
+    app->update();
+    app->draw();
+}
+
+int app_core_web_init() {
+    g_app = std::make_unique<App>();
+    if (g_app->init(1920 / 4, 1080 / 4) != 0) {
+        return 1;
+    }
+
+    constexpr int fps = -1;
+    constexpr int simulate_infinite_loop = 1;
+    emscripten_set_main_loop_arg(main_loop, g_app.get(), fps, simulate_infinite_loop);
+    return 0;
 }
 #endif

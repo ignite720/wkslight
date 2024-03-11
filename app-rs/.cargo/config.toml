@@ -1,0 +1,11 @@
+[target.x86_64-unknown-linux-gnu]
+rustflags = [
+    "-l", "app_core",
+    "-L", "../bin/x64/Release",
+]
+
+[target.aarch64-linux-android]
+rustflags = [
+    "-l", "app_core",
+    "-L", "bin/ndroid/Release",
+]

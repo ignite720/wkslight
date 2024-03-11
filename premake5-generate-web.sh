@@ -1,1 +1,1 @@
-premake5 gmake --web
+premake5 gmake --target_platform=web

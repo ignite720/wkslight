@@ -1,1 +1,1 @@
-premake5 android-studio --android
+premake5 android-studio --target_platform=android

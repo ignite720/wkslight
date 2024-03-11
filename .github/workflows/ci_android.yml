@@ -27,3 +27,15 @@ jobs:
       - name: Build
         run: |
           source premake5-generate-android.sh
+          source cargo-apk.sh
+
+      - name: Create artifact
+        run: |
+          mkdir -p "temp/artifact/android/"
+          cp -r bin/* "temp/artifact/android/"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release-Artifact-android
+          path: temp
