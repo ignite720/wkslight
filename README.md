@@ -13,14 +13,14 @@
 ### How to build
 
 ```shell
-mkdir ~/work/work2
+mkdir -p ~/work/work2
 cd ~/work/work2/
 
 git clone --recursive https://github.com/ignite720/wkslight.git
 ```
 
 ## 1. Linux
-> 1.1 clean(**optional**)
+> 1.1 clean(***optional***)
 ```shell
 source premake5-clean.sh 
 ```
@@ -43,7 +43,7 @@ source cargo-run-pc.sh
 
 ## 2. macOS
 ```shell
-premake5-generate-macos.sh 
+source premake5-generate-macos.sh 
 source gmake-pc.sh 
 ```
 
