@@ -31,9 +31,7 @@ jobs:
         run: |
           emcc -v
 
-          # This is just to trigger emsdk to download and compile ports
-          echo -e '#include <SDL2/SDL.h>\nint main() { SDL_Init(SDL_INIT_VIDEO); SDL_Quit(); }' > main.c
-          emcc main.c -O2 -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -sSDL2_IMAGE_FORMATS='["bmp", "jpg", "png"]' -sUSE_SDL_MIXER=2 -sUSE_SDL_NET=2 -sUSE_SDL_TTF=2 -o main.js
+          source tool-emsdk-download-and-compile-ports.sh
 
       - name: Build
         run: |
