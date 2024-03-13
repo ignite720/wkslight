@@ -5,7 +5,7 @@
 #include <iostream>
 
 template<typename T>
-class Bar
+class BAR_API Bar
 {
 public:
 	void print(T value) {
@@ -14,8 +14,8 @@ public:
 };
 
 /* forward declaration for template */
-TEMPLATE_EXTERN template
-class BAR_API Bar<int>;
+//TEMPLATE_EXTERN template
+//class BAR_API Bar<int>;
 
-TEMPLATE_EXTERN template
-class BAR_API Bar<float>;
+//TEMPLATE_EXTERN template
+//class BAR_API Bar<float>;
