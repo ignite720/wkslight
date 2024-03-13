@@ -29,7 +29,10 @@ workspace(g_wkslight.workspace.name)
 		"__STDC_CONSTANT_MACROS",
 	})
 	filter("options:not target_platform=android")
-		platforms({ "x86", "x64" })
+		platforms({
+			--"x86",
+			"x64",
+		})
 	filter("options:target_platform=android")
 		androidabis(g_wkslight.extras.android.androidabis)
 		androidsdkversion(g_wkslight.extras.android.androidsdkversion)
