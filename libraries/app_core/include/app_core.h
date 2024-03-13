@@ -7,8 +7,6 @@
 
 #include <linmath.h>
 
-C_API_BEGIN
-
-APP_CORE_API void app_core();
-
-C_API_END
+extern "C" {
+    APP_CORE_API void app_core();
+}

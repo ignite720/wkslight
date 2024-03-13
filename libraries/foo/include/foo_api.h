@@ -11,25 +11,21 @@
         #define TEMPLATE_EXTERN                         extern
     #endif
 
-    #ifdef FOO_BUILD_DLL
-        #define FOO_API                                 __declspec(dllexport)
+    #ifdef FOO_STATIC
+        #define FOO_API                                 extern
     #else
-        #define FOO_API                                 __declspec(dllimport)
+        #ifdef FOO_BUILD_DLL
+            #define FOO_API                             __declspec(dllexport)
+        #else
+            #define FOO_API                             __declspec(dllimport)
+        #endif
     #endif
     
 #else
 
-    /* gcc */
+    /* gcc or clang */
     #define TEMPLATE_EXTERN                             extern
 
     #define FOO_API
 
-#endif
-
-#ifdef __cplusplus
-    #define C_API_BEGIN                                 extern "C" {
-#endif
-
-#ifdef __cplusplus
-    #define C_API_END                                   }
 #endif

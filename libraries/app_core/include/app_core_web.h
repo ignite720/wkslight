@@ -6,10 +6,8 @@
 #define TARGET_WEB
 //#define USE_ASSETS
 
-C_API_BEGIN
-
-APP_CORE_API int app_core_web_init();
-
-C_API_END
+extern "C" {
+    APP_CORE_API int app_core_web_init();
+}
 
 #endif

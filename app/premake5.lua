@@ -42,14 +42,16 @@ project("app")
 		files({
 			"Package.appxmanifest",
 		})
-		---[[fix uwp start]]---
+		--
+		---fix uwp dll start
 		libdirs({
 			"%{g_wkslight.targetdir}",
 		})
 		links({
 			"app_core.lib",
 		})
-		---[[fix uwp end]]---
+		---fix uwp dll end
+		--
 	filter({ "options:target_platform=uwp", "files:assets/*.png" })
 		deploy("true")
 	filter("platforms:wasm")

@@ -4,7 +4,7 @@ project("app_core")
 	kind("SharedLib")
 	language("C++")
 	files({
-		"src/**.h",
+		"include/**.h",
 		"src/**.cpp",
 	})
 	includedirs({
@@ -25,7 +25,8 @@ project("app_core")
 			"foo",
 		})
 	filter("options:target_platform=uwp")
-		---[[fix uwp start]]---
+		--
+		---fix uwp dll start
 		libdirs({
 			"%{g_wkslight.targetdir}",
 		})
@@ -33,4 +34,5 @@ project("app_core")
 			"bar.lib",
 			"foo.lib",
 		})
-		---[[fix uwp end]]---
+		---fix uwp dll end
+		--

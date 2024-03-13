@@ -169,6 +169,7 @@ App::~App() {
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
 
+    IMG_Quit();
     Mix_CloseAudio();
     SDL_Quit();
 }
@@ -188,6 +189,14 @@ int App::init(int width, int height, Uint32 flags) {
         printf("Failed to initialize audio: %s\n", Mix_GetError());
         return 1;
     }
+
+#if 0
+    constexpr int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
+    if (IMG_Init(img_loaders) != img_loaders) {
+        printf("Failed to initialize required image format support: %s\n", IMG_GetError());
+        return 1;
+    }
+#endif
     
 #ifdef USE_ASSETS
     this->click_sound = std::make_unique<Sound>();

@@ -41,6 +41,9 @@ g_wkslight.workspace = {
 				links = {
 					"app_core",
 				},
+				defines = {
+					--"APP_CORE_STATIC",
+				},
 			},
 			bar = {
 				location = "libraries/bar",
@@ -50,6 +53,9 @@ g_wkslight.workspace = {
 				links = {
 					"bar",
 				},
+				defines = {
+					--"BAR_STATIC",
+				},
 			},
 			foo = {
 				location = "libraries/foo",
@@ -58,6 +64,9 @@ g_wkslight.workspace = {
 				},
 				links = {
 					"foo",
+				},
+				defines = {
+					--"FOO_STATIC",
 				},
 			},
 			headeronly = {

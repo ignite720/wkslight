@@ -11,25 +11,21 @@
         #define TEMPLATE_EXTERN                         extern
     #endif
 
-    #ifdef APP_CORE_BUILD_DLL
-        #define APP_CORE_API                            __declspec(dllexport)
+    #ifdef APP_CORE_STATIC
+        #define APP_CORE_API                            extern
     #else
-        #define APP_CORE_API                            __declspec(dllimport)
+        #ifdef APP_CORE_BUILD_DLL
+            #define APP_CORE_API                        __declspec(dllexport)
+        #else
+            #define APP_CORE_API                        __declspec(dllimport)
+        #endif
     #endif
     
 #else
 
-    /* gcc */
+    /* gcc or clang */
     #define TEMPLATE_EXTERN                             extern
 
     #define APP_CORE_API
 
-#endif
-
-#ifdef __cplusplus
-    #define C_API_BEGIN                                 extern "C" {
-#endif
-
-#ifdef __cplusplus
-    #define C_API_END                                   }
 #endif
