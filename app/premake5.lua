@@ -42,6 +42,14 @@ project("app")
 		assetdirs({
 			"assets",
 		})
+		-- [[
+		--[[fix uwp dll start]]--
+		links({
+			"bar",
+			"foo",
+		})
+		--[[fix uwp dll end]]--
+		-- ]]
 	filter("options:target_platform=uwp")
 		files({
 			"Package.appxmanifest",

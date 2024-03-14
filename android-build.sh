@@ -8,5 +8,7 @@ pushd build
 #gradle :app_core:assembleDebug
 #gradle :app:assembleDebug
 
-gradle assembleDebug
+#gradle assembleDebug
+gradle assembleRelease
+
 popd
