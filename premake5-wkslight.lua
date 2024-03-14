@@ -81,6 +81,21 @@ g_wkslight.workspace = {
 					"%{g_wkslight.librariesdir}/linmath.h",
 				},
 			},
+			lua = {
+				location = "libraries/lua",
+				includedirs = {
+					"%{g_wkslight.librariesdir}/lua/src",
+				},
+				links = {
+					"lua",
+				},
+			},
+			sol2 = {
+				location = nil,
+				includedirs = {
+					"%{g_wkslight.librariesdir}/sol2",
+				},
+			},
 		},
 	},
 }

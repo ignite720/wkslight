@@ -18,14 +18,16 @@ project("app_core")
 		"foo",
 		"headeronly",
 		"linmath",
+		"lua",
+		"sol2",
 	})
 	filter("options:target_platform=android")
 		androidprojectdependencies({
-			"bar",
-			"foo",
+			--"bar",
+			--"foo",
 		})
 	filter("options:target_platform=uwp")
-		--
+		-- [[
 		---fix uwp dll start
 		libdirs({
 			"%{g_wkslight.targetdir}",
@@ -35,4 +37,4 @@ project("app_core")
 			"foo.lib",
 		})
 		---fix uwp dll end
-		--
+		-- ]]

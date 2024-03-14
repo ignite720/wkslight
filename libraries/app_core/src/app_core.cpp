@@ -3,14 +3,17 @@
 #include <bar.h>
 #include <foo.h>
 
-#include <tl/optional.hpp>
+//#define SOL_ALL_SAFETIES_ON 1
+#include <sol/sol.hpp>
+
+#include <optional/tl/optional.hpp>
 
 #include <thread>
 
 #include <chrono>
 using namespace std::chrono_literals;
 
-void app_core() {
+void app_core_init() {
     {
         foo_print(10.0);
         foo_printi(20);
@@ -51,5 +54,17 @@ void app_core() {
         if (opt1) {
             std::cout << "opt1: " << opt1.value() << std::endl;
         }
+    }
+
+    {
+        sol::state lua;
+        lua.open_libraries(/*sol::lib::base*/);
+
+        lua.script("print('bark bark bark!')");
+
+        lua.do_file("assets/hello.lua");
+//#ifndef __EMSCRIPTEN__
+        lua["hello"]("john");
+//#endif
     }
 }

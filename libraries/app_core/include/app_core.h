@@ -8,5 +8,5 @@
 #include <linmath.h>
 
 extern "C" {
-    APP_CORE_API void app_core();
+    APP_CORE_API void app_core_init();
 }

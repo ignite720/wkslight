@@ -16,8 +16,8 @@ project("app")
 	})
 	g_wkslight.uselibs({
 		"app_core",
-		"bar",
-		"foo",
+		--"bar",
+		--"foo",
 		"linmath",
 	})
 	filter("options:target_platform=android")
@@ -28,7 +28,7 @@ project("app")
 			"com.android.support:support-v4:27.1.0",
 		})
 		androidprojectdependencies({
-			"app_core",
+			--"app_core",
 		})
 		androidkeystorefile("../../../../.android/debug.keystore")
 		androidstorepassword("android")
@@ -42,7 +42,7 @@ project("app")
 		files({
 			"Package.appxmanifest",
 		})
-		--
+		-- [[
 		---fix uwp dll start
 		libdirs({
 			"%{g_wkslight.targetdir}",
@@ -51,7 +51,7 @@ project("app")
 			"app_core.lib",
 		})
 		---fix uwp dll end
-		--
+		-- ]]
 	filter({ "options:target_platform=uwp", "files:assets/*.png" })
 		deploy("true")
 	filter("platforms:wasm")

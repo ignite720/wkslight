@@ -20,25 +20,30 @@ git clone --recursive https://github.com/ignite720/wkslight.git
 ```
 
 ## 1. Linux
-> 1.1 clean(***optional***)
-```shell
-source premake5-clean.sh 
-```
-
-> 1.2 build
+> 1.1 build
 ```shell
 source premake5-generate-linux.sh 
 source gmake-pc.sh 
 ```
 
-> 1.3 run
+> 1.2 run
 ```shell
-bin/x64/Release/app 
+source tool-app-run-pc.sh 
 ```
 
->> 1.3.2 cargo run
+>> 1.2.2 cargo run
 ```shell
 source cargo-run-pc.sh 
+```
+
+> 1.3 clean(***optional***)
+```shell
+source premake5-clean.sh 
+```
+
+> 1.4 test(***optional***)
+```shell
+./tool-pytest.py
 ```
 
 ## 2. macOS

@@ -67,7 +67,7 @@ workspace(g_wkslight.workspace.name)
 			"_CRT_SECURE_NO_WARNINGS",
 			"_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS",
 			"_SILENCE_ALL_CXX20_DEPRECATION_WARNINGS",
-			"_HAS_STD_BYTE=0",
+			--"_HAS_STD_BYTE=0",
 		})
 		buildoptions({
 			"/utf-8",
