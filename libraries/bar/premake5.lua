@@ -1,7 +1,7 @@
 project("bar")
 	location(g_wkslight.workspacedir .. "/%{prj.name}")
 	targetdir(g_wkslight.targetdir)
-	kind("SharedLib")
+	kind("StaticLib")
 	language("C++")
 	files({
 		"include/**.h",
@@ -10,8 +10,3 @@ project("bar")
 	includedirs({
 		g_wkslight.workspace.libraries.projects.bar.includedirs,
 	})
-	defines({
-		"BAR_BUILD_DLL",
-	})
-	filter("options:target_platform=android or options:target_platform=web")
-		kind("StaticLib")

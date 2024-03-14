@@ -53,9 +53,6 @@ g_wkslight.workspace = {
 				links = {
 					"bar",
 				},
-				defines = {
-					--"BAR_STATIC",
-				},
 			},
 			foo = {
 				location = "libraries/foo",
