@@ -46,7 +46,7 @@ jobs:
 
           pushd build
           gradle wrapper
-          /gradlew build --info
+          ./gradlew build --info
           popd
 
       - name: Create artifact
