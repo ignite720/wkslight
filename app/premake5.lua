@@ -19,7 +19,7 @@ project("app")
 		--"bar",
 		--"foo",
 		"linmath",
-		--"lua",
+		"lua",
 	})
 	filter("options:target_platform=android")
 		links({
@@ -31,7 +31,7 @@ project("app")
 		androidprojectdependencies({
 			"app_core",
 			--"bar",
-			--"foo",
+			"foo",
 			"lua",
 		})
 		androidkeystorefile("../../../../.android/wkslight.keystore")
@@ -47,16 +47,23 @@ project("app")
 			"Package.appxmanifest",
 		})
 		-- [[
-		---fix uwp dll start
+		--[[fix uwp dll start]]--
 		libdirs({
 			"%{g_wkslight.targetdir}",
 		})
 		links({
 			"app_core.lib",
 		})
-		---fix uwp dll end
+		--[[fix uwp dll end]]--
 		-- ]]
 	filter({ "options:target_platform=uwp", "files:assets/*.png" })
 		deploy("true")
 	filter("platforms:wasm")
+		--[[
+		--[[fix web so start]]--
+		links({
+			"foo",
+		})
+		--[[fix web so end]]--
+		--]]
 		g_wkslight.wasmlinkoptions(g_wkslight.extras.wasm)

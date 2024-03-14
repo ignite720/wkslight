@@ -15,16 +15,13 @@ public class main_activity extends Activity {
 		System.loadLibrary("app_core");
 		System.loadLibrary("app");
 		*/
-		
+
 		System.loadLibrary("app");
-		System.loadLibrary("app_core");
-		System.loadLibrary("bar");
-		System.loadLibrary("foo");
 	}
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		Log.d("JAVA", "hello");
+		Log.d("TAG_JAVA", "1 => hello");
 		app_init();
 
 		super.onCreate(arg0);

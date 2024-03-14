@@ -1,5 +1,5 @@
 function hello(name)
-    print("LUA: hello " .. name)
+    print("LUA: 5 => hello " .. name)
 end
 
---print("LUA: hello")
+print("LUA: 4 => hello")

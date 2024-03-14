@@ -6,9 +6,14 @@
 #include <jni.h>
 #include <android/log.h>
 
+#define LOG_TAG "WKSLIGHT"
+#define LOGD(...) __android_log_write(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+#define LOGI(...) __android_log_write(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_write(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+
 extern "C" {
     JNIEXPORT void Java_com_wkslight_example_main_1activity_app_1init(void *args) {
-        __android_log_write(ANDROID_LOG_INFO, "CPP", "hello");
+        LOGI("2 => hello");
 
         app_core_init();
     }

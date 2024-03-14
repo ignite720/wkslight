@@ -28,8 +28,8 @@ project("app_core")
 			"lua",
 		})
 	filter("options:target_platform=uwp")
-		-- [[
-		---fix uwp dll start
+		--[[
+		--[[fix uwp dll start]]--
 		libdirs({
 			"%{g_wkslight.targetdir}",
 		})
@@ -37,5 +37,7 @@ project("app_core")
 			"bar.lib",
 			"foo.lib",
 		})
-		---fix uwp dll end
-		-- ]]
+		--[[fix uwp dll end]]--
+		--]]
+	filter("options:target_platform=android or options:target_platform=web")
+		kind("StaticLib")

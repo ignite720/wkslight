@@ -60,7 +60,7 @@ void app_core_init() {
         sol::state lua;
         lua.open_libraries(/*sol::lib::base*/);
 
-        lua.script("print('bark bark bark!')");
+        lua.script("print('LUA: 3 => hello')");
 
         lua.do_file("assets/hello.lua");
 #ifndef __EMSCRIPTEN__

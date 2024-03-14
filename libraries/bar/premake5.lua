@@ -13,3 +13,5 @@ project("bar")
 	defines({
 		"BAR_BUILD_DLL",
 	})
+	filter("options:target_platform=android or options:target_platform=web")
+		kind("StaticLib")
