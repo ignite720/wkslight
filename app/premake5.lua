@@ -19,6 +19,7 @@ project("app")
 		--"bar",
 		--"foo",
 		"linmath",
+		--"lua",
 	})
 	filter("options:target_platform=android")
 		links({
@@ -28,11 +29,14 @@ project("app")
 			"com.android.support:support-v4:27.1.0",
 		})
 		androidprojectdependencies({
-			--"app_core",
+			"app_core",
+			--"bar",
+			--"foo",
+			"lua",
 		})
-		androidkeystorefile("../../../../.android/debug.keystore")
+		androidkeystorefile("../../../../.android/wkslight.keystore")
 		androidstorepassword("android")
-		androidkeyalias("androiddebugkey")
+		androidkeyalias("wkslightkey")
 		androidkeypassword("android")
 		apkoutputpath("../../../../../../../bin/apk-")
 		assetdirs({

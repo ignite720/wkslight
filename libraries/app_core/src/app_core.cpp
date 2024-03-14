@@ -63,8 +63,8 @@ void app_core_init() {
         lua.script("print('bark bark bark!')");
 
         lua.do_file("assets/hello.lua");
-//#ifndef __EMSCRIPTEN__
+#ifndef __EMSCRIPTEN__
         lua["hello"]("john");
-//#endif
+#endif
     }
 }

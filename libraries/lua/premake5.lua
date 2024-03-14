@@ -6,6 +6,9 @@ project("lua")
 	files({
 		"src/**.c",
 	})
+	removefiles({
+		"src/luac.c",
+	})
 	includedirs({
 		g_wkslight.workspace.libraries.projects.lua.includedirs,
 	})

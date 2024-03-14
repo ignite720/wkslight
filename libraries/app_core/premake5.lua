@@ -23,8 +23,9 @@ project("app_core")
 	})
 	filter("options:target_platform=android")
 		androidprojectdependencies({
-			--"bar",
-			--"foo",
+			"bar",
+			"foo",
+			"lua",
 		})
 	filter("options:target_platform=uwp")
 		-- [[

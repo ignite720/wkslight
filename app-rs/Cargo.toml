@@ -27,8 +27,8 @@ assets = "../app/assets"
 apk_name = "wkslight"
 strip = "strip"
 
-[package.metadata.android.signing.android-debug]
-path = "../../../../.android/debug.keystore"
+[package.metadata.android.signing.android-release]
+path = "../../../../.android/wkslight.keystore"
 keystore_password = "android"
 
 [package.metadata.android.sdk]

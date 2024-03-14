@@ -1,3 +1,3 @@
 pushd app-rs
-cargo apk build
+cargo apk build --profile android-release
 popd

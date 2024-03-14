@@ -53,6 +53,7 @@ workspace(g_wkslight.workspace.name)
 		linkoptions({
 			--"-sUSE_PTHREADS=1",
 			--"-sPTHREAD_POOL_SIZE=8",
+			"-sNO_DISABLE_EXCEPTION_CATCHING",
 		})
 	filter("system:windows")
 		systemversion("latest")

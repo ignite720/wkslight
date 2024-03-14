@@ -38,15 +38,15 @@ jobs:
           gradle -V
 
           mkdir $HOME/.android
-          keytool -genkey -v -keystore $HOME/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
+          keytool -genkey -v -keystore $HOME/.android/wkslight.keystore -storepass android -alias wkslightkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=wkslight"
 
           ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME
-
           source premake5-generate-android.sh
 
           pushd build
           gradle wrapper
-          ./gradlew build --info
+          #./gradlew build --info
+          ./gradlew assembleDebug
           popd
 
       - name: Create artifact
