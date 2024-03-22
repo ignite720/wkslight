@@ -18,7 +18,7 @@ cd ~/work/work2/
 git clone --recursive https://github.com/ignite720/wkslight.git
 ```
 
-[Download premake5](https://premake.github.io/)
+[Download premake](https://premake.github.io/)
 
 ## 1. Linux
 > 1.1 build
