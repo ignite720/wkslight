@@ -71,6 +71,7 @@ project("app")
 		--[[
 		--[[fix web so start]]--
 		links({
+			"foobar",
 			"foo",
 		})
 		--[[fix web so end]]--
