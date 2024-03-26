@@ -22,15 +22,15 @@ project("app_core")
 		"lua",
 		"sol2",
 	})
+	--[[
 	filter("options:target_platform=android")
-		--[[
 		androidprojectdependencies({
 			"bar",
 			"foobar",
 			"foo",
 			"lua",
 		})
-		]]--
+	]]--
 	filter("options:target_platform=uwp")
 		--[[
 		--[[fix uwp dll start]]--
