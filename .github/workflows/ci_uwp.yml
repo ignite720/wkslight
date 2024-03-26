@@ -29,7 +29,7 @@ jobs:
       - name: Build app for release
         run: |
           premake5 vs2022 --target_platform=uwp
-          msbuild build\workspace_name.sln -nologo -m -p:GenerateAppxPackageOnBuild=false -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
+          msbuild build\workspace_light.sln -nologo -m -p:GenerateAppxPackageOnBuild=false -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
 
       - name: Create artifact
         run: |

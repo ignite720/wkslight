@@ -14,6 +14,7 @@ project("app_core")
 		"APP_CORE_BUILD_DLL",
 	})
 	g_wkslight.uselibs({
+		"foobar",
 		"bar",
 		"foo",
 		"headeronly",

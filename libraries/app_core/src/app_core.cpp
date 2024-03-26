@@ -1,5 +1,7 @@
 #include "app_core.h"
 
+#include <foobar.h>
+
 #include <bar.h>
 #include <foo.h>
 
@@ -14,6 +16,11 @@
 using namespace std::chrono_literals;
 
 void app_core_init() {
+    {
+        FooBar fb;
+        fb.print();
+    }
+
     {
         foo_print(10.0);
         foo_printi(20);

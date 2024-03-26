@@ -1,6 +1,6 @@
 g_wkslight = require("premake5-modules/wkslight")
 g_wkslight.workspace = {
-	name = "workspace_name",
+	name = "workspace_light",
 	startproject = "",
 	cppdialect = "C++20",
 	projects = {
@@ -43,6 +43,15 @@ g_wkslight.workspace = {
 				},
 				defines = {
 					--"APP_CORE_STATIC",
+				},
+			},
+			foobar = {
+				location = "libraries/category1/foobar",
+				includedirs = {
+					"%{g_wkslight.librariesdir}/category1/foobar/include",
+				},
+				links = {
+					"foobar",
 				},
 			},
 			bar = {

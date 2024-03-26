@@ -3,8 +3,7 @@
 #include <iostream>
 
 template<typename T>
-class /*BAR_API*/ Bar
-{
+class /*BAR_API*/ Bar {
 public:
 	void print(T value) {
 		std::cout << "Bar.print: " << value << std::endl;
