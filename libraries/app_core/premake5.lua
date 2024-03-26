@@ -25,7 +25,7 @@ project("app_core")
 	filter("options:target_platform=android")
 		androidprojectdependencies({
 			"bar",
-			--"foobar",
+			"foobar",
 			"foo",
 			"lua",
 		})
