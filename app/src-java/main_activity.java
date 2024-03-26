@@ -10,6 +10,7 @@ public class main_activity extends Activity {
 	static {
 		/*
 		System.loadLibrary("bar");
+		System.loadLibrary("foobar");
 		System.loadLibrary("foo");
 
 		System.loadLibrary("app_core");
