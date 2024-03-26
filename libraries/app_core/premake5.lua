@@ -14,8 +14,8 @@ project("app_core")
 		"APP_CORE_BUILD_DLL",
 	})
 	g_wkslight.uselibs({
-		"foobar",
 		"bar",
+		"foobar",
 		"foo",
 		"headeronly",
 		"linmath",

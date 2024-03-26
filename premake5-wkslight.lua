@@ -45,15 +45,6 @@ g_wkslight.workspace = {
 					--"APP_CORE_STATIC",
 				},
 			},
-			foobar = {
-				location = "libraries/category1/foobar",
-				includedirs = {
-					"%{g_wkslight.librariesdir}/category1/foobar/include",
-				},
-				links = {
-					"foobar",
-				},
-			},
 			bar = {
 				location = "libraries/bar",
 				includedirs = {
@@ -61,6 +52,15 @@ g_wkslight.workspace = {
 				},
 				links = {
 					"bar",
+				},
+			},
+			foobar = {
+				location = "libraries/category1/foobar",
+				includedirs = {
+					"%{g_wkslight.librariesdir}/category1/foobar/include",
+				},
+				links = {
+					"foobar",
 				},
 			},
 			foo = {
