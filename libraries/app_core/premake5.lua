@@ -25,6 +25,7 @@ project("app_core")
 	filter("options:target_platform=android")
 		androidprojectdependencies({
 			"bar",
+			--"foobar",
 			"foo",
 			"lua",
 		})
@@ -36,6 +37,7 @@ project("app_core")
 		})
 		links({
 			"bar.lib",
+			--"foobar.lib",
 			"foo.lib",
 		})
 		--[[fix uwp dll end]]--

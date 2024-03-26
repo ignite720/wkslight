@@ -30,8 +30,8 @@ enum MOVE_STATE {
 struct App;
 struct Texture;
 
-void fill_rect(SDL_Renderer *renderer, const SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
-void fill_texture(SDL_Renderer *renderer, const SDL_Rect *rect, Texture *tex);
+void fill_rect_with_color(SDL_Renderer *renderer, const SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255);
+void fill_rect_with_texture(SDL_Renderer *renderer, const SDL_Rect *rect, Texture *tex);
 
 struct Sound {
     ~Sound();
@@ -156,9 +156,9 @@ void Player::update() {
 
 void Player::draw(App *app) {
     if (this->tex) {
-        fill_texture(app->renderer, &this->dst_rect, this->tex.get());
+        fill_rect_with_texture(app->renderer, &this->dst_rect, this->tex.get());
     } else {
-        fill_rect(app->renderer, &this->dst_rect, 0, 255, 255);
+        fill_rect_with_color(app->renderer, &this->dst_rect, 0, 255, 255);
     }
 }
 
@@ -238,19 +238,19 @@ void App::draw() {
 
     {
         const SDL_Rect dst_rect{ 0, 0, this->window_width, this->window_height };
-        fill_rect(this->renderer, &dst_rect, 25, 25, 25, 255);
+        fill_rect_with_color(this->renderer, &dst_rect, 25, 25, 25, 255);
     }
 
     this->player->draw(this);
     SDL_RenderPresent(this->renderer);
 }
 
-void fill_rect(SDL_Renderer *renderer, const SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+void fill_rect_with_color(SDL_Renderer *renderer, const SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     SDL_RenderFillRect(renderer, rect);
 }
 
-void fill_texture(SDL_Renderer *renderer, const SDL_Rect *rect, Texture *tex) {
+void fill_rect_with_texture(SDL_Renderer *renderer, const SDL_Rect *rect, Texture *tex) {
     SDL_RenderCopy(renderer, tex->texture, nullptr, rect);
 }
 
