@@ -31,6 +31,7 @@ project("app")
 		androidprojectdependencies({
 			"app_core",
 			"bar",
+			"foobar",
 			"foo",
 			"lua",
 		})
