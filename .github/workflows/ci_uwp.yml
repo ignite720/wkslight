@@ -1,0 +1,45 @@
+name: CI UWP
+
+on:    
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.2
+        with:
+          version: "5.0.0-beta2"
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: "latest"
+
+      - name: Build
+        shell: cmd
+        run: |
+          call premake5-generate-windows-uwp.bat
+          msbuild build\workspace_light.sln -nologo -m -p:GenerateAppxPackageOnBuild=false -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
+
+      - name: Create artifact
+        run: |
+          mkdir -p "temp/artifact/${{ runner.os }}-uwp/"
+          cp -r bin/* "temp/artifact/${{ runner.os }}-uwp/"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release-Artifact-${{ runner.os }}-uwp
+          path: temp
