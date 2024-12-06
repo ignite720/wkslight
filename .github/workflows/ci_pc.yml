@@ -1,0 +1,68 @@
+name: CI pc
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.2
+        with:
+          version: "5.0.0-beta2"
+
+      - name: Add msbuild to PATH
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: "latest"
+
+      - name: Build app for Windows
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          call premake5-generate-windows.bat
+          msbuild build\workspace_light.sln -nologo -m -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
+
+      - name: Generate project for Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          source premake5-generate-linux.sh
+
+      - name: Generate project for macOS
+        if: runner.os == 'macOS'
+        run: |
+          source premake5-generate-macos.sh
+        
+      - name: Build app for Linux & macOS
+        if: runner.os != 'Windows'
+        run: |
+          pushd build/
+          make config=release_x64
+          popd
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/${{ runner.os }}/
+          cp -r bin/* temp/artifact/${{ runner.os }}/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release-Artifact-${{ runner.os }}
+          path: temp

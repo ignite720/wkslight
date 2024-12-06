@@ -1,0 +1,61 @@
+name: CI android
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.2
+        with:
+          version: "5.0.0-beta2"
+
+      - name: Setup jdk
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 7.5.1
+
+      - name: Build
+        run: |
+          java --version
+          gradle -V
+
+          mkdir -p $HOME/.android/
+          keytool -genkey -v -keystore $HOME/.android/wkslight.keystore -storepass android -alias wkslightkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=wkslight"
+
+          ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME
+          source premake5-generate-android.sh
+
+          pushd build/
+          gradle wrapper
+          #./gradlew build --info
+          ./gradlew assembleDebug
+          popd
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/android/
+          cp -rv bin/* temp/artifact/android/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release-Artifact-android
+          path: temp

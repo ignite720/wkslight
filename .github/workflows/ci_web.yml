@@ -1,0 +1,67 @@
+name: CI web
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.2
+        with:
+          version: "5.0.0-beta2"
+
+      - name: Setup emsdk
+        uses: mymindstorm/setup-emsdk@v14
+
+      - name: Install Dependencies
+        run: |
+          emcc -v
+
+          set +e
+          emcc --generate-config $HOME/.emscripten
+          stat $HOME/.emscripten
+
+          mkdir -p $HOME/emsdk-tmp/
+          cp -fv $HOME/.emscripten $HOME/emsdk-tmp/dot-emscripten-dup
+          set -e
+
+          cp -fv $(realpath $(dirname $(realpath $(which emcc)))/../../.emscripten) $HOME/emsdk-tmp/dot-emscripten-dup
+          cat $HOME/emsdk-tmp/dot-emscripten-dup
+          
+          source tool-emsdk-download-and-compile-ports.sh
+
+      - name: Build
+        run: |
+          source premake5-generate-web.sh
+          source gmake-web.sh
+          rm -frv bin/wasm/
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/web/
+          cp -rv bin/* temp/artifact/web/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release-Artifact-web
+          path: temp
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./bin

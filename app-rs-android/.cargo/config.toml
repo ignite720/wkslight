@@ -1,0 +1,4 @@
+#[target.aarch64-linux-android]
+#rustflags = [
+#    "-L", "../build/app/app/.cxx/Debug/544xd5c4/arm64-v8a",
+#]

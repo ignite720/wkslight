@@ -1,0 +1,11 @@
+#include "app_core.h"
+
+struct AppCoreGfxVulkan final : public AppCoreGfx {
+    virtual void test() const override {
+        PRINT_FUNCTION_NAME();
+    }
+};
+
+std::unique_ptr<AppCoreGfx> AppCoreGfx::create_vulkan() {
+    return std::make_unique<AppCoreGfxVulkan>();
+}
