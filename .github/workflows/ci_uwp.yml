@@ -35,8 +35,8 @@ jobs:
 
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact/${{ runner.os }}-uwp/
-          cp -r bin/* temp/artifact/${{ runner.os }}-uwp/
+          mkdir -p temp/artifact/${{ runner.os }}-uwp
+          cp -r bin/* temp/artifact/${{ runner.os }}-uwp
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

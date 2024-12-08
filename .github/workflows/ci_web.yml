@@ -35,7 +35,7 @@ jobs:
           emcc --generate-config $HOME/.emscripten
           stat $HOME/.emscripten
 
-          mkdir -p $HOME/emsdk-tmp/
+          mkdir -p $HOME/emsdk-tmp
           cp -fv $HOME/.emscripten $HOME/emsdk-tmp/dot-emscripten-dup
           set -e
 
@@ -48,12 +48,12 @@ jobs:
         run: |
           source premake5-generate-web.sh
           source gmake-web.sh
-          rm -frv bin/wasm/
+          rm -frv bin/wasm
 
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact/web/
-          cp -rv bin/* temp/artifact/web/
+          mkdir -p temp/artifact/web
+          cp -rv bin/* temp/artifact/web
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

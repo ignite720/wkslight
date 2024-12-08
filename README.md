@@ -32,7 +32,7 @@
 > [Download premake](https://premake.github.io/)
 
 > ```shell
-> mkdir -p ~/work/work2/ && cd ~/work/work2/
+> mkdir -p ~/work/work2 && cd ~/work/work2
 > git clone --recursive https://github.com/ignite720/wkslight.git
 > ```
 <br />

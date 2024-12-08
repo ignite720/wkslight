@@ -1,4 +1,4 @@
-pushd build/
+pushd build
 
 #gradlew tasks --all
 

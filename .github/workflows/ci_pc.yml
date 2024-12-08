@@ -52,14 +52,14 @@ jobs:
       - name: Build app for Linux & macOS
         if: runner.os != 'Windows'
         run: |
-          pushd build/
+          pushd build
           make config=release_x64
           popd
 
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact/${{ runner.os }}/
-          cp -r bin/* temp/artifact/${{ runner.os }}/
+          mkdir -p temp/artifact/${{ runner.os }}
+          cp -r bin/* temp/artifact/${{ runner.os }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

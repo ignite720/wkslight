@@ -37,13 +37,13 @@ jobs:
           java --version
           gradle -V
 
-          mkdir -p $HOME/.android/
+          mkdir -p $HOME/.android
           keytool -genkey -v -keystore $HOME/.android/wkslight.keystore -storepass android -alias wkslightkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=wkslight"
 
           ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME
           source premake5-generate-android.sh
 
-          pushd build/
+          pushd build
           gradle wrapper
           #./gradlew build --info
           ./gradlew assembleDebug
@@ -51,8 +51,8 @@ jobs:
 
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact/android/
-          cp -rv bin/* temp/artifact/android/
+          mkdir -p temp/artifact/android
+          cp -rv bin/* temp/artifact/android
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
