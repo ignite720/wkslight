@@ -1,7 +1,5 @@
 #pragma once
 
-#include <stdio.h>
-
 typedef struct tag_foobar_t {
     int a;
     float b;
