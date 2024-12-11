@@ -31,7 +31,8 @@ jobs:
         shell: cmd
         run: |
           call premake5-generate-windows-uwp.bat
-          msbuild build\workspace_light.sln -nologo -m -p:GenerateAppxPackageOnBuild=false -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
+          call msbuild-windows-uwp.bat
+          call tool-run-pc.bat
 
       - name: Create artifact
         run: |

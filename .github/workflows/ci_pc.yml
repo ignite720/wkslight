@@ -36,7 +36,8 @@ jobs:
         shell: cmd
         run: |
           call premake5-generate-windows.bat
-          msbuild build\workspace_light.sln -nologo -m -p:Configuration=Release -p:Platform=x64 -p:Projects="build\app\app.vcxproj"
+          call msbuild-windows.bat
+          call tool-run-pc.bat
 
       - name: Generate project for Linux
         if: runner.os == 'Linux'
@@ -52,9 +53,8 @@ jobs:
       - name: Build app for Linux & macOS
         if: runner.os != 'Windows'
         run: |
-          pushd build
-          make config=release_x64
-          popd
+          source gmake-pc.sh
+          source tool-run-pc.sh
 
       - name: Create artifact
         run: |
