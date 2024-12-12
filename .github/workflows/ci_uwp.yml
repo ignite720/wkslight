@@ -30,9 +30,9 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          call premake5-generate-windows-uwp.bat
-          call msbuild-windows-uwp.bat
-          call tool-run-pc.bat
+          call scripts\premake5-generate-windows-uwp.bat
+          call scripts\msbuild-windows-uwp.bat
+          call scripts\tool-run-pc.bat
 
       - name: Create artifact
         run: |

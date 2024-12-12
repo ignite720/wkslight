@@ -38,7 +38,7 @@
 <br />
 
 #### Clean(***optional***)
-> Double click `premake5-clean.bat`
+> Double click `scripts\premake5-clean.bat`
 
 > ```shell
 > source scripts/premake5-clean.sh 
@@ -71,7 +71,7 @@
 <br />
 
 ### 3. Windows
-> Double click `premake5-generate-windows.bat`
+> Double click `scripts\premake5-generate-windows.bat`
 <br />
 
 ### 4. Android
@@ -94,7 +94,7 @@
 <br />
 
 ### 5. Windows UWP
-> Double click `premake5-generate-windows-uwp.bat`
+> Double click `scripts\premake5-generate-windows-uwp.bat`
 <br />
 
 ### 6. Web
