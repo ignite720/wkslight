@@ -4,7 +4,7 @@
 
 #if (TARGET_PLATFORM_WEB == 1)
 
-#include "app_core_web_concepts.h"
+#include "app_core_web_prelude.h"
 
 #include "app_core_web_audio.h"
 #include "app_core_web_texture.h"
