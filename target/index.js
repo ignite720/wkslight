@@ -35,7 +35,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp6yt0uh10.js
+// include: /tmp/tmpbcad820s.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -54,7 +54,7 @@ if (ENVIRONMENT_IS_NODE) {
         // web worker
         PACKAGE_PATH = encodeURIComponent(location.pathname.substring(0, location.pathname.lastIndexOf('/')) + '/');
       }
-      var PACKAGE_NAME = '../../bin/wasm/Release/../../index.data';
+      var PACKAGE_NAME = '../../bin/target/wasm/Release/../../index.data';
       var REMOTE_PACKAGE_BASE = 'index.data';
       var REMOTE_PACKAGE_NAME = Module['locateFile'] ? Module['locateFile'](REMOTE_PACKAGE_BASE, '') : REMOTE_PACKAGE_BASE;
 var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
@@ -189,10 +189,10 @@ Module['FS_createPath']("/", "assets", true, true);
           var files = metadata['files'];
           for (var i = 0; i < files.length; ++i) {
             DataRequest.prototype.requests[files[i].filename].onload();
-          }          Module['removeRunDependency']('datafile_../../bin/wasm/Release/../../index.data');
+          }          Module['removeRunDependency']('datafile_../../bin/target/wasm/Release/../../index.data');
 
       };
-      Module['addRunDependency']('datafile_../../bin/wasm/Release/../../index.data');
+      Module['addRunDependency']('datafile_../../bin/target/wasm/Release/../../index.data');
 
       Module['preloadResults'] ??= {};
 
@@ -216,21 +216,21 @@ Module['FS_createPath']("/", "assets", true, true);
 
   })();
 
-// end include: /tmp/tmp6yt0uh10.js
-// include: /tmp/tmph1zomjys.js
+// end include: /tmp/tmpbcad820s.js
+// include: /tmp/tmplwktf2l9.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmph1zomjys.js
-// include: /tmp/tmp3ivwf92x.js
+  // end include: /tmp/tmplwktf2l9.js
+// include: /tmp/tmpueo3rx1n.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmp3ivwf92x.js
+  // end include: /tmp/tmpueo3rx1n.js
 
 
 // Sometimes an existing Module object exists with properties
