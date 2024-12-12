@@ -42,12 +42,12 @@ jobs:
           cp -fv $(realpath $(dirname $(realpath $(which emcc)))/../../.emscripten) $HOME/emsdk-tmp/dot-emscripten-dup
           cat $HOME/emsdk-tmp/dot-emscripten-dup
           
-          source tool-emsdk-download-and-compile-ports.sh
+          source scripts/tool-emsdk-download-and-compile-ports.sh
 
       - name: Build
         run: |
-          source premake5-generate-web.sh
-          source gmake-web.sh
+          source scripts/premake5-generate-web.sh
+          source scripts/gmake-web.sh
           rm -frv bin/wasm
 
       - name: Create artifact

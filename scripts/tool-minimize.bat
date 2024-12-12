@@ -1,4 +1,5 @@
 @echo off
+cd ..
 
 rd /s /q .git
 rd /s /q bin

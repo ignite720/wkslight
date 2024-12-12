@@ -1,4 +1,4 @@
 @echo off
-pushd build
+pushd ..\..\build
 call "mingw32-make" config=release_wasm
 popd

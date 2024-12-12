@@ -1,4 +1,4 @@
 @echo off
-pushd build
+pushd ..\..\build
 mingw32-make config=release_x64
 popd

@@ -43,18 +43,18 @@ jobs:
         if: runner.os == 'Linux'
         shell: bash
         run: |
-          source premake5-generate-linux.sh
+          source scripts/premake5-generate-linux.sh
 
       - name: Generate project for macOS
         if: runner.os == 'macOS'
         run: |
-          source premake5-generate-macos.sh
+          source scripts/premake5-generate-macos.sh
         
       - name: Build app for Linux & macOS
         if: runner.os != 'Windows'
         run: |
-          source gmake-pc.sh
-          source tool-run-pc.sh
+          source scripts/gmake-pc.sh
+          source scripts/tool-run-pc.sh
 
       - name: Create artifact
         run: |

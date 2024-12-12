@@ -41,20 +41,20 @@
 > Double click `premake5-clean.bat`
 
 > ```shell
-> source premake5-clean.sh 
+> source scripts/premake5-clean.sh 
 > ```
 
 ### 1. Linux
 > 1.1 build
 > ```shell
-> source premake5-generate-linux.sh 
-> source gmake-pc.sh 
+> source scripts/premake5-generate-linux.sh 
+> source scripts/gmake-pc.sh 
 > ```
 
 > 1.2 run
 > ```shell
-> source tool-run-pc.sh 
-> source cargo-run-pc.sh 
+> source scripts/tool-run-pc.sh 
+> source scripts/cargo-run-pc.sh 
 > ```
 
 > 1.3 test(***optional***)
@@ -65,8 +65,8 @@
 
 ### 2. macOS
 > ```shell
-> source premake5-generate-macos.sh 
-> source gmake-pc.sh 
+> source scripts/premake5-generate-macos.sh 
+> source scripts/gmake-pc.sh 
 > ```
 <br />
 
@@ -79,8 +79,8 @@
 
 > 4.2 gradle => `bin/apk-debug/app.apk`
 > ```shell
-> source premake5-generate-android.sh 
-> source android-build.sh 
+> source scripts/premake5-generate-android.sh 
+> source scripts/android-build.sh 
 > ```
 
 > 4.3 cargo-apk => `bin/android-cargo-apk/app.apk`
@@ -89,7 +89,7 @@
 > ```shell
 > rustup target add aarch64-linux-android
 > cargo install cargo-apk
-> RUSTFLAGS="-L ../build/app/app/.cxx/Debug/544xd5c4/arm64-v8a" source cargo-apk.sh
+> RUSTFLAGS="-L ../build/app/app/.cxx/Debug/544xd5c4/arm64-v8a" source scripts/cargo-apk.sh
 > ```
 <br />
 
@@ -99,7 +99,7 @@
 
 ### 6. Web
 > ```shell
-> source premake5-generate-web.sh 
-> source tool-run-web.sh 
+> source scripts/premake5-generate-web.sh 
+> source scripts/tool-run-web.sh 
 > ```
 <br />
