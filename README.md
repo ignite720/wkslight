@@ -53,13 +53,13 @@
 
 > 1.2 run
 > ```shell
-> source scripts/3-tool-run-pc.sh 
+> source scripts/32-tool-run-pc.sh 
 > source scripts/cargo-run-pc.sh 
 > ```
 
 > 1.3 test(***optional***)
 > ```shell
-> scripts/4-tool-test.py
+> scripts/42-tool-test.py
 > ```
 <br />
 
@@ -67,7 +67,7 @@
 > ```shell
 > source scripts/12-premake5-generate-pc.sh 
 > source scripts/22-gmake-pc.sh 
-> source scripts/3-tool-run-pc.sh 
+> source scripts/32-tool-run-pc.sh 
 > ```
 <br />
 
@@ -101,6 +101,6 @@
 ### 6. Web
 > ```shell
 > source scripts/14-premake5-generate-web.sh 
-> source scripts/tool-run-web.sh 
+> source scripts/34-tool-run-web.sh 
 > ```
 <br />

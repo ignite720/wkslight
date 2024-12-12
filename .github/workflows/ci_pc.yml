@@ -62,7 +62,7 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           source scripts/22-gmake-pc.sh
-          source scripts/3-tool-run-pc.sh
+          source scripts/32-tool-run-pc.sh
 
       - name: Create artifact
         run: |
