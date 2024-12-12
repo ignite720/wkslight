@@ -35,9 +35,12 @@ jobs:
         if: runner.os == 'Windows'
         shell: cmd
         run: |
-          call scripts\premake5-generate-windows.bat
-          call scripts\msbuild-windows.bat
-          call scripts\tool-run-pc.bat
+          call scripts\tests\test1.bat
+          call scripts\tests\test2.bat
+
+          scripts\premake5-generate-windows.bat
+          scripts\msbuild-windows.bat
+          scripts\tool-run-pc.bat
 
       - name: Generate project for Linux
         if: runner.os == 'Linux'
