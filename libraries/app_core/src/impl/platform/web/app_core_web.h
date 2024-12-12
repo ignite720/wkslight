@@ -22,7 +22,7 @@ enum MOVE_STATE {
     MOVE_STATE_RIGHT = 1 << 3,
 };
 
-#include "app_core_web_sound.h"
+#include "app_core_web_audio.h"
 #include "app_core_web_texture.h"
 
 #include "app_core_web_actor.h"

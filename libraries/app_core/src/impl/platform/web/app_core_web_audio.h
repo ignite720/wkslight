@@ -1,8 +1,8 @@
 #pragma once
 
 template<typename T>
-struct Sound {
-    ~Sound();
+struct Audio {
+    ~Audio();
 
     static void global_pause();
     static void global_resume();
@@ -17,4 +17,7 @@ private:
     int m_channel = -1;
 };
 
-#include "app_core_web_sound.inl"
+using AudioBGM = Audio<Mix_Music>;
+using AudioClip = Audio<Mix_Chunk>;
+
+#include "app_core_web_audio.inl"
