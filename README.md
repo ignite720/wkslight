@@ -76,7 +76,7 @@
 <br />
 
 ### 4. Android
-> 4.1 install The Android SDK
+> 4.1 install The `Android SDK`
 
 > 4.2 gradle => `bin/apk-debug/app.apk`
 > ```shell
