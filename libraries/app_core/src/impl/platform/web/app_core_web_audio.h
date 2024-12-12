@@ -20,12 +20,4 @@ private:
 using AudioBGM = Audio<Mix_Music>;
 using AudioClip = Audio<Mix_Chunk>;
 
-namespace audio {
-    template<typename T>
-    concept is_music = std::is_same_v<T, Mix_Music>;
-
-    template<typename T>
-    concept is_clip = std::is_same_v<T, Mix_Chunk>;
-}
-
 #include "app_core_web_audio.inl"
