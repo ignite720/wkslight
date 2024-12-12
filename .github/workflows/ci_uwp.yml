@@ -35,11 +35,11 @@ jobs:
           popd
 
           pushd scripts
-          msbuild-windows-uwp.bat
+          call msbuild-windows-uwp.bat
           popd
 
           pushd scripts
-          "tool-run-pc.bat"
+          call "tool-run-pc.bat"
           popd
 
       - name: Create artifact
