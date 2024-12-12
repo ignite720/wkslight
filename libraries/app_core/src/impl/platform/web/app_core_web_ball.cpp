@@ -5,7 +5,7 @@
 Ball::Ball(SDL_Renderer *renderer)
     : Actor(renderer) {
     m_texture = std::make_unique<Texture>();
-    m_texture->load_from_file(renderer, "assets/player.png");
+    m_texture->load_from_file(renderer, "assets/ball.png");
 
     m_dst_rect.x = 0;
     m_dst_rect.y = 0;
@@ -36,7 +36,7 @@ void Ball::update() {
     m_dst_rect.y += m_velocity.y;
 }
 
-void Ball::render(SDL_Renderer *renderer) {
+void Ball::render() {
     utils::fill_rect_with_texture(renderer, &m_dst_rect, m_texture->get_raw_texture());
 }
 

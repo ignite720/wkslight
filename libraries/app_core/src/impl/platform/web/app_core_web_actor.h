@@ -4,6 +4,7 @@ struct Actor {
     Actor(SDL_Renderer *renderer);
     virtual ~Actor() = default;
 
+    virtual void update() = 0;
     virtual void render() = 0;
 
 protected:

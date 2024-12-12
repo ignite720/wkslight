@@ -5,7 +5,7 @@
 Player::Player(SDL_Renderer *renderer)
     : Actor(renderer) {
     m_texture = std::make_unique<Texture>();
-    m_texture->load_from_file(renderer, "assets/player.png");
+    m_texture->load_from_file(renderer, "assets/ball.png");
 
     m_dst_rect.x = 0;
     m_dst_rect.y = 0;

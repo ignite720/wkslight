@@ -8,7 +8,7 @@ struct Player final : public Actor {
     int get_move_state() const { return m_move_state; }
     void set_move_state(int value) { m_move_state = value; }
 
-    void update();
+    virtual void update() override;
     virtual void render() override;
 
 private:

@@ -5,7 +5,7 @@ struct Ball final : public Actor {
 
     Ball(SDL_Renderer *renderer);
 
-    void update();
+    virtual void update() override;
     virtual void render() override;
 
 private:
