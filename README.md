@@ -48,7 +48,7 @@
 > 1.1 build
 > ```shell
 > source scripts/12-premake5-generate-pc.sh 
-> source scripts/2-gmake-pc.sh 
+> source scripts/22-gmake-pc.sh 
 > ```
 
 > 1.2 run
@@ -66,7 +66,7 @@
 ### 2. macOS
 > ```shell
 > source scripts/12-premake5-generate-pc.sh 
-> source scripts/2-gmake-pc.sh 
+> source scripts/22-gmake-pc.sh 
 > source scripts/3-tool-run-pc.sh 
 > ```
 <br />
@@ -81,7 +81,7 @@
 > 4.2 gradle => `bin/apk-debug/app.apk`
 > ```shell
 > source scripts/11-premake5-generate-android.sh 
-> source scripts/android-build.sh 
+> source scripts/21-android-build.sh 
 > ```
 
 > 4.3 cargo-apk => `bin/android-cargo-apk/app.apk`

@@ -36,18 +36,11 @@ jobs:
         run: |
           java --version
           gradle -V
-
-          mkdir -p $HOME/.android
-          keytool -genkey -v -keystore $HOME/.android/wkslight.keystore -storepass android -alias wkslightkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=wkslight"
+          source scripts/tool-keygen.sh
 
           ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME
           source scripts/11-premake5-generate-android.sh
-
-          pushd build
-          gradle wrapper
-          #./gradlew build --info
-          ./gradlew assembleDebug
-          popd
+          source scripts/android-buildw.sh
 
       - name: Create artifact
         run: |

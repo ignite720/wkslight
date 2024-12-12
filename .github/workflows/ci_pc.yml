@@ -53,7 +53,7 @@ jobs:
       - name: Build app for Linux & macOS
         if: runner.os != 'Windows'
         run: |
-          source scripts/2-gmake-pc.sh
+          source scripts/22-gmake-pc.sh
           source scripts/3-tool-run-pc.sh
 
       - name: Create artifact
