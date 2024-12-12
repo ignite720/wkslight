@@ -35,7 +35,6 @@
 > mkdir -p ~/work/work2 && cd ~/work/work2
 > git clone --recursive https://github.com/ignite720/wkslight.git
 > ```
-<br />
 
 #### Clean
 > Double click `scripts\premake5-clean.bat`
@@ -61,7 +60,6 @@
 > ```shell
 > scripts/42-tool-test.py
 > ```
-<br />
 
 ### 2. macOS
 > ```shell
@@ -69,22 +67,21 @@
 > source scripts/22-gmake-pc.sh 
 > source scripts/32-tool-run-pc.sh 
 > ```
-<br />
 
 ### 3. Windows
 > Double click `scripts\premake5-generate-windows.bat`
-<br />
 
 ### 4. Android
 > 4.1 install The `Android SDK`
 
-> 4.2 gradle => `bin/apk-debug/app.apk`
+> 4.2 `gradle`
 > ```shell
 > source scripts/11-premake5-generate-android.sh 
 > source scripts/21-android-build.sh 
 > ```
+> => bin/apk-debug/app.apk
 
-> 4.3 cargo-apk => `bin/android-cargo-apk/app.apk`
+> 4.3 `cargo-apk`
 >
 > Note that folder `544xd5c4` may change, so pass it in as an argument.
 > ```shell
@@ -92,15 +89,13 @@
 > cargo install cargo-apk
 > RUSTFLAGS="-L ../build/app/app/.cxx/Debug/544xd5c4/arm64-v8a" source scripts/cargo-apk.sh
 > ```
-<br />
+> => bin/android-cargo-apk/app.apk
 
 ### 5. Windows UWP
 > Double click `scripts\premake5-generate-windows-uwp.bat`
-<br />
 
 ### 6. Web
 > ```shell
 > source scripts/14-premake5-generate-web.sh 
 > source scripts/34-tool-run-web.sh 
 > ```
-<br />
