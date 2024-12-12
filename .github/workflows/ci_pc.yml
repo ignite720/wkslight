@@ -37,7 +37,13 @@ jobs:
         run: |
           pushd scripts
           premake5-generate-windows.bat
+          popd
+
+          pushd scripts
           msbuild-windows.bat
+          popd
+
+          pushd scripts
           tool-run-pc.bat
           popd
 
