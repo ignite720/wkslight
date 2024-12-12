@@ -37,7 +37,7 @@ jobs:
         run: |
           source scripts/14-premake5-generate-web.sh
           source scripts/24-gmake-web.sh
-          rm -frv bin/target
+          rm -frv bin/target/wasm
 
       - name: Create artifact
         run: |
@@ -53,4 +53,4 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./bin
+          folder: ./bin/target
