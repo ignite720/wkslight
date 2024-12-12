@@ -65,7 +65,7 @@
 
 ### 2. macOS
 > ```shell
-> source scripts/premake5-generate-macos.sh 
+> source scripts/12-premake5-generate-pc.sh 
 > source scripts/2-gmake-pc.sh 
 > source scripts/3-tool-run-pc.sh 
 > ```
