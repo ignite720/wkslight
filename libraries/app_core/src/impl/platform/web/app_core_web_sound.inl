@@ -1,5 +1,3 @@
-#include <type_traits>
-
 template<typename T>
 void Sound<T>::global_pause() {
     Mix_PausedMusic();
