@@ -47,7 +47,7 @@ void Audio<T>::set_volume(float value) const {
 }
 
 template<typename T>
-void Audio<T>::play(int loops) const {
+void Audio<T>::play(int loops) {
     if constexpr (concepts::is_music<T>) {
         Mix_PlayMusic(m_data, loops);
     } else if constexpr (concepts::is_clip<T>) {

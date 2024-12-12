@@ -9,7 +9,7 @@ struct Audio {
 
     bool load_from_file(const char *path);
     void set_volume(float value) const;
-    void play(int loops = 0) const;
+    void play(int loops = 0);
     void stop() const;
 
 private:

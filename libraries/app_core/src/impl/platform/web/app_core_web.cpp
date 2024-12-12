@@ -129,7 +129,7 @@ void AppCoreWeb::render() {
         utils::fill_rect_with_color(m_renderer, &dst_rect, 95, 95, 95, 255);
     }
 
-    m_player->render(m_renderer);
+    m_player->render();
     SDL_RenderPresent(m_renderer);
 }
 
