@@ -1,0 +1,17 @@
+#pragma once
+
+struct Player final : public Actor {
+    static constexpr int MOVE_DELTA = 2;
+
+    Player(SDL_Renderer *renderer);
+
+    int get_move_state() const { return m_move_state; }
+    void set_move_state(int value) { m_move_state = value; }
+
+    void update();
+    virtual void render() override;
+
+private:
+    std::unique_ptr<Texture> m_texture;
+    int m_move_state = MOVE_STATE_NONE;
+};

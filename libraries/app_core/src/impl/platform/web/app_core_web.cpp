@@ -34,13 +34,14 @@ private:
     SDL_Window *m_window = nullptr;
     SDL_Renderer *m_renderer = nullptr;
 
-    std::unique_ptr<Sound> m_click_sound;
+    std::unique_ptr<AudioBGM> m_bgm;
+    std::unique_ptr<AudioClip> m_click_clip;
     std::unique_ptr<Player> m_player;
 };
 
 AppCoreWeb::~AppCoreWeb() {
     m_player.reset();
-    m_click_sound.reset();
+    m_click_clip.reset();
 
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
@@ -75,11 +76,11 @@ int AppCoreWeb::init(int width, int height) {
         return -3;
     }
     
-    m_click_sound = std::make_unique<Sound>();
-    m_click_sound->load_from_file("assets/click.wav");
+    m_bgm = std::make_unique<Sound>();
+    m_click_clip = std::make_unique<Sound>();
+    m_click_clip->load_from_file("assets/click.wav");
 
-    m_player = std::make_unique<Player>();
-    m_player->init(m_renderer);
+    m_player = std::make_unique<Player>(m_renderer);
 
     utils::web_fetch("example.json");
     utils::web_fetch("https://httpbin.org/xml");
@@ -99,7 +100,7 @@ void AppCoreWeb::update() {
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
-            m_click_sound->play();
+            m_click_clip->play();
             
             if (evt.button.button == SDL_BUTTON_LEFT) {
                 printf("Click: (%d, %d)\n", evt.button.x, evt.button.y);
