@@ -46,7 +46,7 @@ jobs:
 
       - name: Build
         run: |
-          source scripts/premake5-generate-web.sh
+          source scripts/14-premake5-generate-web.sh
           source scripts/gmake-web.sh
           rm -frv bin/target
 

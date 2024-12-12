@@ -43,12 +43,12 @@ jobs:
         if: runner.os == 'Linux'
         shell: bash
         run: |
-          source scripts/1-premake5-generate-linux.sh
+          source scripts/12-premake5-generate-pc.sh
 
       - name: Generate project for macOS
         if: runner.os == 'macOS'
         run: |
-          source scripts/premake5-generate-macos.sh
+          source scripts/12-premake5-generate-pc.sh
         
       - name: Build app for Linux & macOS
         if: runner.os != 'Windows'

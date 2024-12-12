@@ -47,7 +47,7 @@
 ### 1. Linux
 > 1.1 build
 > ```shell
-> source scripts/1-premake5-generate-linux.sh 
+> source scripts/12-premake5-generate-pc.sh 
 > source scripts/2-gmake-pc.sh 
 > ```
 
@@ -80,7 +80,7 @@
 
 > 4.2 gradle => `bin/apk-debug/app.apk`
 > ```shell
-> source scripts/premake5-generate-android.sh 
+> source scripts/11-premake5-generate-android.sh 
 > source scripts/android-build.sh 
 > ```
 
@@ -100,7 +100,7 @@
 
 ### 6. Web
 > ```shell
-> source scripts/premake5-generate-web.sh 
+> source scripts/14-premake5-generate-web.sh 
 > source scripts/tool-run-web.sh 
 > ```
 <br />
