@@ -37,7 +37,7 @@ void Ball::update() {
 }
 
 void Ball::render() {
-    utils::fill_rect_with_texture(renderer, &m_dst_rect, m_texture->get_raw_texture());
+    utils::fill_rect_with_texture(m_renderer, &m_dst_rect, m_texture->get_raw_texture());
 }
 
 #endif
