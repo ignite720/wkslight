@@ -3,4 +3,6 @@ cd ..
 
 premake5 vs2022
 start build
-timeout /t 2 > nul
+if "%~1"=="" (
+    timeout /t 2 > nul
+)

@@ -31,7 +31,7 @@ jobs:
         shell: cmd
         run: |
           pushd scripts
-          premake5-generate-windows-uwp.bat
+          premake5-generate-windows-uwp.bat "dummy"
           popd
 
           pushd scripts

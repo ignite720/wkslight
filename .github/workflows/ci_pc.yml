@@ -36,7 +36,7 @@ jobs:
         shell: cmd
         run: |
           pushd scripts
-          premake5-generate-windows.bat
+          premake5-generate-windows.bat dummy
           popd
 
           pushd scripts
