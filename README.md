@@ -37,36 +37,37 @@
 > ```
 <br />
 
-#### Clean(***optional***)
+#### Clean
 > Double click `scripts\premake5-clean.bat`
 
 > ```shell
-> source scripts/premake5-clean.sh 
+> source scripts/0-premake5-clean.sh 
 > ```
 
 ### 1. Linux
 > 1.1 build
 > ```shell
-> source scripts/premake5-generate-linux.sh 
-> source scripts/gmake-pc.sh 
+> source scripts/1-premake5-generate-linux.sh 
+> source scripts/2-gmake-pc.sh 
 > ```
 
 > 1.2 run
 > ```shell
-> source scripts/tool-run-pc.sh 
+> source scripts/3-tool-run-pc.sh 
 > source scripts/cargo-run-pc.sh 
 > ```
 
 > 1.3 test(***optional***)
 > ```shell
-> ./tool-py-test.py
+> scripts/4-tool-test.py
 > ```
 <br />
 
 ### 2. macOS
 > ```shell
 > source scripts/premake5-generate-macos.sh 
-> source scripts/gmake-pc.sh 
+> source scripts/2-gmake-pc.sh 
+> source scripts/3-tool-run-pc.sh 
 > ```
 <br />
 

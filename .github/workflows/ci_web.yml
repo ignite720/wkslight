@@ -48,7 +48,7 @@ jobs:
         run: |
           source scripts/premake5-generate-web.sh
           source scripts/gmake-web.sh
-          rm -frv bin/wasm
+          rm -frv bin/target
 
       - name: Create artifact
         run: |

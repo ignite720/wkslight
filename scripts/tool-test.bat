@@ -1,5 +1,5 @@
 @echo off
 cd ..
 
-python tool-py-test.py
+python 4-tool-test.py
 timeout /t 2 > nul
