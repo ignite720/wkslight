@@ -12,18 +12,18 @@ void Audio<T>::global_resume() {
 
 template<typename T>
 Audio<T>::~Audio() {
-    if constexpr (std::is_same_v<T, Mix_Music>) {
+    if constexpr (audio::is_music<T>) {
         Mix_FreeMusic(m_data);
-    } else if constexpr (std::is_same_v<T, Mix_Chunk>) {
+    } else if constexpr (audio::is_clip<T>) {
         Mix_FreeChunk(m_data);
     }
 }
 
 template<typename T>
 bool Audio<T>::load_from_file(const char *path) {
-    if constexpr (std::is_same_v<T, Mix_Music>) {
+    if constexpr (audio::is_music<T>) {
         m_data = Mix_LoadMUS(path);
-    } else if constexpr (std::is_same_v<T, Mix_Chunk>) {
+    } else if constexpr (audio::is_clip<T>) {
         m_data = Mix_LoadWAV(path);
     }
 
@@ -39,27 +39,27 @@ bool Audio<T>::load_from_file(const char *path) {
 template<typename T>
 void Audio<T>::set_volume(float value) const {
     auto volume = static_cast<int>(value * MIX_MAX_VOLUME);
-    if constexpr (std::is_same_v<T, Mix_Music>) {
+    if constexpr (audio::is_music<T>) {
         Mix_VolumeMusic(volume);
-    } else if constexpr (std::is_same_v<T, Mix_Chunk>) {
+    } else if constexpr (audio::is_clip<T>) {
         Mix_VolumeChunk(m_data, volume);
     }
 }
 
 template<typename T>
 void Audio<T>::play(int loops) const {
-    if constexpr (std::is_same_v<T, Mix_Music>) {
+    if constexpr (audio::is_music<T>) {
         Mix_PlayMusic(m_data, loops);
-    } else if constexpr (std::is_same_v<T, Mix_Chunk>) {
+    } else if constexpr (audio::is_clip<T>) {
         m_channel = Mix_PlayChannel(-1, m_data, loops);
     }
 }
 
 template<typename T>
 void Audio<T>::stop() const {
-    if constexpr (std::is_same_v<T, Mix_Music>) {
+    if constexpr (audio::is_music<T>) {
         Mix_HaltMusic();
-    } else if constexpr (std::is_same_v<T, Mix_Chunk>) {
+    } else if constexpr (audio::is_clip<T>) {
         Mix_HaltChannel(m_channel);
     }
 }
