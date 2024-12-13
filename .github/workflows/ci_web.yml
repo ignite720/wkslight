@@ -37,7 +37,7 @@ jobs:
         run: |
           source scripts/14-premake5-generate-web.sh
           source scripts/24-gmake-web.sh
-          rm -frv bin/target/wasm
+          source scripts/tool-web-post-build.sh
 
       - name: Create artifact
         run: |
