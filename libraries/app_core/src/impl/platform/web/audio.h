@@ -20,7 +20,7 @@ private:
     int m_channel = -1;
 };
 
-using AudioBGM = Audio<Mix_Music>;
+using AudioMusic = Audio<Mix_Music>;
 using AudioClip = Audio<Mix_Chunk>;
 
 #include "audio.inl"
