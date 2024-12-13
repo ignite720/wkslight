@@ -10,17 +10,18 @@ Ball::Ball(SDL_Renderer *renderer, float x, float y)
 }
 
 void Ball::update(const AppCore *app_core) {
-    if ((m_dst_rect.x <= 0.0f) || ((m_dst_rect.x + m_dst_rect.w) >= app_core->get_window_width())) {
+    if ((m_dst_rect.x < 0.0f) || ((m_dst_rect.x + m_dst_rect.w) > app_core->get_window_width())) {
         m_velocity.x = -m_velocity.x;
     }
-    if (m_dst_rect.y <= 0.0f) {
+    if (m_dst_rect.y < 0.0f) {
         m_velocity.y = -m_velocity.y;
     }
 
-    if ((m_dst_rect.y + m_dst_rect.h) >= app_core->get_window_height()) {
+    if ((m_dst_rect.y + m_dst_rect.h) > app_core->get_window_height()) {
         this->reset();
     }
     
+    this->set_velocity(m_velocity);
     Actor::update(app_core);
 }
 
@@ -29,8 +30,8 @@ void Ball::render() {
 }
 
 void Ball::reset() {
-    m_velocity.x = simplerand::gen_range(-0.6f, 0.6f);
-    m_velocity.y = simplerand::gen_range(1.5f, 2.0f);
+    m_velocity.x = (simplerand::gen() > 0.5f ? 2.0f : -2.0f);
+    m_velocity.y = simplerand::gen_range(2.0f, 3.0f);
 }
 
 void Ball::update_collision(const SDL_FRect *paddle_rect) {
