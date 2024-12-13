@@ -119,7 +119,7 @@ void AppCoreWeb::update() {
     {
         m_ball->update(this);
         m_ball->update_collision(m_paddle->get_rect());
-        
+
         m_paddle->update(this);
     }
 }

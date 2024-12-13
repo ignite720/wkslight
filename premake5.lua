@@ -67,6 +67,9 @@ workspace(g_wkslight.workspace.name)
         systemversion("latest")
     filter("system:linux")
         pic("On")
+        linkoptions({
+            "--no-undefined",
+        })
     filter("action:vs*")
         startproject(g_wkslight.workspace.startproject)
         staticruntime("Off")

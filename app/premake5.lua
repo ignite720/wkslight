@@ -33,9 +33,6 @@ project("app")
         links({
             "log",
         })
-        linkoptions({
-            "--no-undefined",
-        })
         androiddependencies({
             "com.android.support:support-v4:27.1.0",
         })
