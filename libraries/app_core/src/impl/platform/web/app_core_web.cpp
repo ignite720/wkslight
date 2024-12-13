@@ -29,8 +29,6 @@ struct AppCoreWeb final : public AppCore {
     virtual void render() override;
 
 private:
-    int m_window_width = 0;
-    int m_window_height = 0;
     SDL_Window *m_window = nullptr;
     SDL_Renderer *m_renderer = nullptr;
 
@@ -54,13 +52,10 @@ AppCoreWeb::~AppCoreWeb() {
 int AppCoreWeb::init(int width, int height) {
     PRINT_FUNCTION_NAME();
     
-    simplerand::from_seed();
+    AppCore::init(width, height);
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         return -1;
     }
-
-    m_window_width = width;
-    m_window_height = height;
 
     const Uint32 flags = SDL_RENDERER_PRESENTVSYNC;
     m_window = SDL_CreateWindow("AppCoreWeb", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);

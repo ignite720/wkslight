@@ -61,9 +61,17 @@ private:
 public:
     virtual ~AppCore() = default;
 
-    virtual int init(int width, int height) = 0;
+    virtual int init(int width, int height);
     virtual int run() = 0;
 
     virtual void update() {}
     virtual void render() {}
+
+public:
+    float get_window_width() const { return m_window_width; }
+    float get_window_height() const { return m_window_height; }
+
+protected:
+    float m_window_width = 0.0f;
+    float m_window_height = 0.0f;
 };

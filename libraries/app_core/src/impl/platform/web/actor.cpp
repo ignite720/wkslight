@@ -7,7 +7,7 @@ Actor::Actor(SDL_Renderer *renderer)
 
 }
 
-void Actor::update() {
+void Actor::update(const AppCore *app_core) {
     m_dst_rect.x += m_velocity.x;
     m_dst_rect.y += m_velocity.y;
 }

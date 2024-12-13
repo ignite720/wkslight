@@ -7,25 +7,17 @@ Player::Player(SDL_Renderer *renderer)
     m_dst_rect = { 0, 0, 60, 10 };
 }
 
-void Player::update() {
+void Player::update(const AppCore *app_core) {
     Vector2 v;
-    #if 0
-    if (m_move_state & MOVE_STATE_UP) {
-        v.y = -MOVE_DELTA;
-    }
-    if (m_move_state & MOVE_STATE_DOWN) {
-        v.y = +MOVE_DELTA;
-    }
-    #endif
-    if (m_move_state & MOVE_STATE_LEFT) {
+    if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - MOVE_DELTA) > 0)) {
         v.x = -MOVE_DELTA;
     }
-    if (m_move_state & MOVE_STATE_RIGHT) {
+    if ((m_move_state & MOVE_STATE_RIGHT) && (m_dst_rect.x < (app_core->get_window_width() - MOVE_DELTA))) {
         v.x = +MOVE_DELTA;
     }
     
     this->set_velocity(v);
-    Actor::update();
+    Actor::update(app_core);
 }
 
 void Player::render() {

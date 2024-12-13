@@ -11,8 +11,8 @@
 #include "texture.h"
 
 #include "actor.h"
-#include "ball.h"
-#include "player.h"
+#include "actor_ball.h"
+#include "actor_player.h"
 
 #include "utils.h"
 

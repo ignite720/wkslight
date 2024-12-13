@@ -1,14 +1,14 @@
 #pragma once
 
 struct Player final : public Actor {
-    static constexpr int MOVE_DELTA = 2;
+    static constexpr float MOVE_DELTA = 2.0f;
 
     Player(SDL_Renderer *renderer);
 
     int get_move_state() const { return m_move_state; }
     void set_move_state(int value) { m_move_state = value; }
 
-    virtual void update() override;
+    virtual void update(const AppCore *app_core) override;
     virtual void render() override;
 
 private:

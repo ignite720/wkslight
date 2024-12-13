@@ -11,12 +11,12 @@ Ball::Ball(SDL_Renderer *renderer)
     m_dst_rect.w = m_texture->get_width();
     m_dst_rect.h = m_texture->get_height();
 
-    m_velocity.x = simplerand::gen_range(-0.1f, 0.1f);
-    m_velocity.y = 0.1f;
+    m_velocity.x = simplerand::gen_range(-0.5f, 0.5f);
+    m_velocity.y = simplerand::gen_range(0.2f, 1.2f);
 }
 
-void Ball::update() {
-    Actor::update();
+void Ball::update(const AppCore *app_core) {
+    Actor::update(app_core);
 }
 
 void Ball::render() {

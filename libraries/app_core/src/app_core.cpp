@@ -83,6 +83,14 @@ std::unique_ptr<AppCore> AppCore::create() {
     #endif
 }
 
+int AppCore::init(int width, int height) {
+    m_window_width = width;
+    m_window_height = height;
+
+    simplerand::from_seed();
+    return 0;
+}
+
 std::unique_ptr<AppCoreGfx> AppCoreGfx::create(GfxApi api) {
     switch (api) {
         case GfxApi::D3D12: {

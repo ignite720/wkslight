@@ -4,7 +4,7 @@ struct Actor {
     Actor(SDL_Renderer *renderer);
     virtual ~Actor() = default;
 
-    virtual void update();
+    virtual void update(const AppCore *app_core);
     virtual void render() = 0;
 
     void set_velocity(const Vector2 &value);

@@ -1,11 +1,9 @@
 #pragma once
 
 struct Ball final : public Actor {
-    static constexpr int MOVE_DELTA = 2;
-
     Ball(SDL_Renderer *renderer);
 
-    virtual void update() override;
+    virtual void update(const AppCore *app_core) override;
     virtual void render() override;
 
 private:
