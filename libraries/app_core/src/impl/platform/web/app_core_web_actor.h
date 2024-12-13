@@ -7,7 +7,7 @@ struct Actor {
     virtual void update();
     virtual void render() = 0;
 
-    void set_velocity(float vx, float vy);
+    void set_velocity(const Vector2 &value);
 
 protected:
     SDL_Renderer *m_renderer = nullptr;
