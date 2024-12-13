@@ -61,7 +61,14 @@ private:
 public:
     virtual ~AppCore() = default;
 
-    virtual int init(int width, int height);
+    virtual int init(int width, int height) {
+        m_window_width = float(width);
+        m_window_height = float(height);
+
+        simplerand::from_seed();
+        return 0;
+    }
+
     virtual int run() = 0;
 
     virtual void update() {}
