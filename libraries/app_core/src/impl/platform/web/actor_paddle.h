@@ -1,11 +1,11 @@
 #pragma once
 
-struct Player final : public Actor {
+struct Paddle final : public Actor {
     static constexpr float WIDTH = 60.0f;
     static constexpr float HEIGHT = 10.0f;
     static constexpr float MOVE_DELTA = 2.0f;
 
-    Player(SDL_Renderer *renderer, float x, float y);
+    Paddle(SDL_Renderer *renderer, float x, float y);
 
     int get_move_state() const { return m_move_state; }
     void set_move_state(int value) { m_move_state = value; }

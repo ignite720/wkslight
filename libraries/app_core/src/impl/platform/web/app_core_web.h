@@ -12,7 +12,7 @@
 
 #include "actor.h"
 #include "actor_ball.h"
-#include "actor_player.h"
+#include "actor_paddle.h"
 
 #include "utils.h"
 

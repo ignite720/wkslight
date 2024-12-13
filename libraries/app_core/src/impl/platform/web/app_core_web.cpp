@@ -2,13 +2,13 @@
 
 #if TARGET_PLATFORM_WEB
 
-#define CASE_PLAYER_MOVE_STATE_FROM_KEYS(key1_, key2_, state_) \
+#define CASE_PADDLE_MOVE_STATE_FROM_KEYS(key1_, key2_, state_) \
 case key1_: \
 case key2_: { \
     if (evt.key.type == SDL_KEYDOWN) { \
-        m_player->set_move_state(m_player->get_move_state() | MOVE_STATE_##state_); \
+        m_paddle->set_move_state(m_paddle->get_move_state() | MOVE_STATE_##state_); \
     } else if (evt.key.type == SDL_KEYUP) { \
-        m_player->set_move_state(m_player->get_move_state() ^ MOVE_STATE_##state_); \
+        m_paddle->set_move_state(m_paddle->get_move_state() ^ MOVE_STATE_##state_); \
     } \
 } break
 
@@ -34,11 +34,11 @@ private:
 
     std::unique_ptr<AudioBundle> m_audio_bundle;
     std::unique_ptr<Ball> m_ball;
-    std::unique_ptr<Player> m_player;
+    std::unique_ptr<Paddle> m_paddle;
 };
 
 AppCoreWeb::~AppCoreWeb() {
-    m_player.reset();
+    m_paddle.reset();
     m_audio_bundle.reset();
 
     SDL_DestroyRenderer(m_renderer);
@@ -81,7 +81,7 @@ int AppCoreWeb::init(int width, int height) {
     m_audio_bundle->hit = std::make_unique<AudioClip>("assets/hit.wav");
 
     m_ball = std::make_unique<Ball>(m_renderer, simplerand::gen_range(0.0f, m_window_width - Ball::SIZE), 0.0f);
-    m_player = std::make_unique<Player>(m_renderer, 0.0f, m_window_height - Player::HEIGHT);
+    m_paddle = std::make_unique<Paddle>(m_renderer, 0.0f, m_window_height - Paddle::HEIGHT);
 
     utils::web_fetch("example.json");
     utils::web_fetch("https://httpbin.org/xml");
@@ -109,15 +109,15 @@ void AppCoreWeb::update() {
         }
 
         switch (evt.key.keysym.sym) {
-            CASE_PLAYER_MOVE_STATE_FROM_KEYS(SDLK_w, SDLK_UP, UP);
-            CASE_PLAYER_MOVE_STATE_FROM_KEYS(SDLK_s, SDLK_DOWN, DOWN);
-            CASE_PLAYER_MOVE_STATE_FROM_KEYS(SDLK_a, SDLK_LEFT, LEFT);
-            CASE_PLAYER_MOVE_STATE_FROM_KEYS(SDLK_d, SDLK_RIGHT, RIGHT);
+            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_w, SDLK_UP, UP);
+            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_s, SDLK_DOWN, DOWN);
+            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_a, SDLK_LEFT, LEFT);
+            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_d, SDLK_RIGHT, RIGHT);
         }
     }
 
     m_ball->update(this);
-    m_player->update(this);
+    m_paddle->update(this);
 }
 
 void AppCoreWeb::render() {
@@ -129,7 +129,7 @@ void AppCoreWeb::render() {
     }
 
     m_ball->render();
-    m_player->render();
+    m_paddle->render();
     SDL_RenderPresent(m_renderer);
 }
 
