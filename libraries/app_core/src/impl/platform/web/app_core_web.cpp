@@ -83,7 +83,7 @@ int AppCoreWeb::init(int width, int height) {
     m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/hit.wav");
 
     m_ball = std::make_unique<Ball>(m_renderer, this);
-    m_paddle = std::make_unique<Paddle>(m_renderer, 0.0f, m_window_height - Paddle::HEIGHT);
+    m_paddle = std::make_unique<Paddle>(m_renderer, this);
 
     utils::web_fetch("example.json");
     utils::web_fetch("https://httpbin.org/xml");

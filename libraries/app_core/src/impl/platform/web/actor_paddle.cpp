@@ -2,8 +2,8 @@
 
 #if TARGET_PLATFORM_WEB
 
-Paddle::Paddle(SDL_Renderer *renderer, float x, float y)
-    : Actor(renderer, x, y) {
+Paddle::Paddle(SDL_Renderer *renderer, const AppCore *app_core)
+    : Actor(renderer, 0.0f, app_core->get_window_height() - Paddle::HEIGHT) {
     this->set_rect_size(WIDTH, HEIGHT);
 }
 

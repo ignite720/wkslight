@@ -5,7 +5,7 @@ struct Paddle final : public Actor {
     static constexpr float HEIGHT = 10.0f;
     static constexpr float MOVE_DELTA = 12.0f;
 
-    Paddle(SDL_Renderer *renderer, float x, float y);
+    Paddle(SDL_Renderer *renderer, const AppCore *app_core);
 
     int get_move_state() const { return m_move_state; }
     void set_move_state(int value) { m_move_state = value; }
