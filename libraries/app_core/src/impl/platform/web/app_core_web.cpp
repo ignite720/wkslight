@@ -56,7 +56,7 @@ AppCoreWeb::~AppCoreWeb() {
 int AppCoreWeb::init(int width, int height) {
     PRINT_FUNCTION_NAME();
 
-    utils::random::init_seed();
+    utils::random::set_seed();
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         return -1;
