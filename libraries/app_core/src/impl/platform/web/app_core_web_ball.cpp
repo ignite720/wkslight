@@ -3,7 +3,7 @@
 #if TARGET_PLATFORM_WEB
 
 Ball::Ball(SDL_Renderer *renderer)
-    : Actor(renderer, x, y) {
+    : Actor(renderer) {
     m_texture = std::make_unique<Texture>(renderer, "assets/ball.png");
 
     m_dst_rect.x = 0;
