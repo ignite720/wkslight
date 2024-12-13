@@ -68,7 +68,7 @@ workspace(g_wkslight.workspace.name)
     filter("system:linux")
         pic("On")
         linkoptions({
-            "--no-undefined",
+            "-Wl,--no-undefined",
         })
     filter("action:vs*")
         startproject(g_wkslight.workspace.startproject)
