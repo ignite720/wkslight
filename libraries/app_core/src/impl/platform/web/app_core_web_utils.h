@@ -17,12 +17,12 @@ namespace utils {
 
         template<>
         inline int gen_range(int min_value, int max_value) {
-            return static_cast<int>(utils::random::gen() * (max_value - min_value) + min_value);
+            return static_cast<int>(gen() * (max_value - min_value) + min_value);
         }
 
         template<>
-        inline float gen_range(float min_value, f64 max_value) {
-            return utils::random::gen() * (max_value - min_value) + min_value;
+        inline float gen_range(float min_value, float max_value) {
+            return gen() * (max_value - min_value) + min_value;
         }
     }
 
