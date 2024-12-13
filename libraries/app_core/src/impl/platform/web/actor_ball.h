@@ -1,7 +1,9 @@
 #pragma once
 
 struct Ball final : public Actor {
-    Ball(SDL_Renderer *renderer);
+    static constexpr float SIZE = 32.0f;
+
+    Ball(SDL_Renderer *renderer, float x, float y);
 
     virtual void update(const AppCore *app_core) override;
     virtual void render() override;

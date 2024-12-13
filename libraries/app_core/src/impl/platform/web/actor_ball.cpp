@@ -2,12 +2,10 @@
 
 #if TARGET_PLATFORM_WEB
 
-Ball::Ball(SDL_Renderer *renderer)
-    : Actor(renderer) {
+Ball::Ball(SDL_Renderer *renderer, float x, float y)
+    : Actor(renderer, x, y) {
     m_texture = std::make_unique<Texture>(renderer, "assets/ball.png");
 
-    m_dst_rect.x = 0;
-    m_dst_rect.y = 0;
     m_dst_rect.w = m_texture->get_width();
     m_dst_rect.h = m_texture->get_height();
 

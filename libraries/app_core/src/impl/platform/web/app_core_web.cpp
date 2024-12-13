@@ -80,8 +80,8 @@ int AppCoreWeb::init(int width, int height) {
     m_audio_bundle->click = std::make_unique<AudioClip>("assets/click.wav");
     m_audio_bundle->hit = std::make_unique<AudioClip>("assets/hit.wav");
 
-    m_ball = std::make_unique<Ball>(m_renderer);
-    m_player = std::make_unique<Player>(m_renderer);
+    m_ball = std::make_unique<Ball>(m_renderer, simplerand::gen_range(0.0f, m_window_width - Ball::SIZE), 0.0f);
+    m_player = std::make_unique<Player>(m_renderer, 0.0f, m_window_height - Player::HEIGHT);
 
     utils::web_fetch("example.json");
     utils::web_fetch("https://httpbin.org/xml");

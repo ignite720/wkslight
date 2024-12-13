@@ -1,7 +1,7 @@
 #pragma once
 
 struct Actor {
-    Actor(SDL_Renderer *renderer);
+    Actor(SDL_Renderer *renderer, float x, float y);
     virtual ~Actor() = default;
 
     virtual void update(const AppCore *app_core);

@@ -56,6 +56,7 @@ project("app_core_d3d12")
     })
     g_wkslight.libs({
         "foo",
+        "headeronly",
     })
 project("app_core_vulkan")
     location(path.join(g_wkslight.workspacedir, "%{prj.name}"))
@@ -74,4 +75,5 @@ project("app_core_vulkan")
     })
     g_wkslight.libs({
         "foo",
+        "headeronly",
     })
