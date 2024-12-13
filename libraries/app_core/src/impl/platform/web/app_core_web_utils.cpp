@@ -28,7 +28,7 @@ String utils::str_repeats(const String &s, size_t times) {
 }
 
 SDL_Rect utils::to_rect(const SDL_FRect *rect) {
-    return SDL_Rect { rect->x, rect->y, rect->w, rect->h };
+    return { rect->x, rect->y, rect->w, rect->h };
 }
 
 void utils::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color) {
