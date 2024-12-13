@@ -116,8 +116,12 @@ void AppCoreWeb::update() {
         }
     }
 
-    m_ball->update(this);
-    m_paddle->update(this);
+    {
+        m_ball->update(this);
+        m_ball->update_collision(m_paddle->get_rect());
+        
+        m_paddle->update(this);
+    }
 }
 
 void AppCoreWeb::render() {
@@ -128,8 +132,11 @@ void AppCoreWeb::render() {
         utils::fill_rect_with_color(m_renderer, &dst_rect, SDL_Color { 95, 95, 95, 255 });
     }
 
-    m_ball->render();
-    m_paddle->render();
+    {
+        m_ball->render();
+        m_paddle->render();
+    }
+
     SDL_RenderPresent(m_renderer);
 }
 
