@@ -13,8 +13,4 @@ void Actor::update(const AppCore *app_core) {
     m_dst_rect.y += m_velocity.y;
 }
 
-void Actor::set_velocity(const Vector2 &value) {
-    m_velocity = Vector2::normalize(value);
-}
-
 #endif
