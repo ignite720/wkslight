@@ -26,6 +26,7 @@ project("app")
         "app_core",
         --"bar",
         "foo",
+        "headeronly",
         "lua",
     })
     filter("options:target_platform=android")

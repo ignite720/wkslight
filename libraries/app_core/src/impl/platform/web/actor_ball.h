@@ -9,6 +9,7 @@ struct Ball final : public Actor {
     virtual void render() override;
 
 public:
+    void reset();
     void update_collision(const SDL_FRect *paddle_rect);
 
 private:
