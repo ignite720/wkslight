@@ -8,7 +8,7 @@ struct AudioBundle {
         AUDIO_CLIP_COUNT,
     };
 
-    void play_audio_clip() {
+    void play_bgm() {
         this->bgm->play(-1);
     }
 

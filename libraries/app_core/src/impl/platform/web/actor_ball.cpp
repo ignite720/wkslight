@@ -33,7 +33,7 @@ void Ball::render() {
 }
 
 void Ball::reset(const AppCore *app_core) {
-    m_dst_rect.x = simplerand::gen_range(0.0f, m_window_width - Ball::SIZE);
+    m_dst_rect.x = simplerand::gen_range(0.0f, app_core->get_window_width() - Ball::SIZE);
     m_dst_rect.y = 0.0f;
 
     m_velocity.x = (simplerand::gen() > 0.5f ? 2.0f : -2.0f);

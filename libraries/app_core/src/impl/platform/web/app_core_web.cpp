@@ -28,7 +28,7 @@ struct AppCoreWeb final : public AppCore {
     virtual void update() override;
     virtual void render() override;
 
-    virtual void play_audio_clip(int index) override;
+    virtual void play_audio_clip(int index) const override;
 
 private:
     SDL_Window *m_window = nullptr;
@@ -142,8 +142,8 @@ void AppCoreWeb::render() {
     SDL_RenderPresent(m_renderer);
 }
 
-void AppCoreWeb::play_audio_clip(int index) {
-    m_audio_bundle->play_audio_clip(index);
+void AppCoreWeb::play_audio_clip(int index) const {
+    m_audio_bundle->play_audio_clip(static_cast<AudioBundle::AUDIO_CLIP>(index));
 }
 
 std::unique_ptr<AppCore> AppCore::create_web() {
