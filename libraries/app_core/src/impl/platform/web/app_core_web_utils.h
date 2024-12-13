@@ -12,17 +12,7 @@ namespace utils {
 
         template<typename T>
         T gen_range(T min_value, T max_value) {
-            return {};
-        }
-
-        template<>
-        inline int gen_range(int min_value, int max_value) {
-            return static_cast<int>(gen() * (max_value - min_value) + min_value);
-        }
-
-        template<>
-        inline float gen_range(float min_value, float max_value) {
-            return gen() * (max_value - min_value) + min_value;
+            return static_cast<T>(gen() * (max_value - min_value) + min_value);
         }
     }
 
