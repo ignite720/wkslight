@@ -23,4 +23,4 @@ private:
 using AudioBGM = Audio<Mix_Music>;
 using AudioClip = Audio<Mix_Chunk>;
 
-#include "app_core_web_audio.inl"
+#include "audio.inl"

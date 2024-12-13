@@ -6,13 +6,13 @@
 
 #include "app_core_web_prelude.h"
 
-#include "app_core_web_audio.h"
-#include "app_core_web_texture.h"
+#include "audio.h"
+#include "texture.h"
 
-#include "app_core_web_actor.h"
-#include "app_core_web_ball.h"
-#include "app_core_web_player.h"
+#include "actor.h"
+#include "ball.h"
+#include "player.h"
 
-#include "app_core_web_utils.h"
+#include "utils.h"
 
 #endif
