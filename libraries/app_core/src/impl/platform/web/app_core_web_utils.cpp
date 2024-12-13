@@ -27,13 +27,20 @@ String utils::str_repeats(const String &s, size_t times) {
     return result;
 }
 
-void utils::fill_rect_with_color(SDL_Renderer *renderer, const SDL_Rect *rect, const SDL_Color &color) {
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderFillRect(renderer, rect);
+SDL_Rect utils::to_rect(const SDL_FRect *rect) {
+    return SDL_Rect { rect->x, rect->y, rect->w, rect->h };
 }
 
-void utils::fill_rect_with_texture(SDL_Renderer *m_renderer, const SDL_Rect *rect, SDL_Texture *texture) {
-    SDL_RenderCopy(m_renderer, texture, nullptr, rect);
+void utils::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color) {
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+    auto tmp_rect = utils::to_rect(rect);
+    SDL_RenderFillRect(renderer, &tmp_rect);
+}
+
+void utils::fill_rect_with_texture(SDL_Renderer *m_renderer, const SDL_FRect *rect, SDL_Texture *texture) {
+    auto tmp_rect = utils::to_rect(rect);
+    SDL_RenderCopy(m_renderer, texture, nullptr, &tmp_rect);
 }
 
 void utils::web_fetch(const String &url) {

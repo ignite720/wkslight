@@ -56,6 +56,8 @@ AppCoreWeb::~AppCoreWeb() {
 int AppCoreWeb::init(int width, int height) {
     PRINT_FUNCTION_NAME();
 
+    utils::random::init_seed();
+
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         return -1;
     }
@@ -127,7 +129,7 @@ void AppCoreWeb::render() {
     SDL_RenderClear(m_renderer);
 
     {
-        const auto dst_rect = SDL_Rect { 0, 0, m_window_width, m_window_height };
+        const auto dst_rect = SDL_FRect { 0, 0, m_window_width, m_window_height };
         utils::fill_rect_with_color(m_renderer, &dst_rect, SDL_Color { 95, 95, 95, 255 });
     }
 

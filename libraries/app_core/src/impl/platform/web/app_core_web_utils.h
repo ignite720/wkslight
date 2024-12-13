@@ -1,10 +1,36 @@
 #pragma once
 
 namespace utils {
+    namespace random {
+        void init_seed(unsigned seed) {
+            srand(seed != 0 ? seed : static_cast<unsigned>(time(nullptr)));
+        }
+
+        inline float gen() {
+            return rand() / float(RAND_MAX);
+        }
+
+        template<typename T>
+        T gen_range(T min_value, T max_value) {
+            return {};
+        }
+
+        template<>
+        inline int gen_range(int min_value, int max_value) {
+            return static_cast<int>(utils::random::gen() * (max_value - min_value) + min_value);
+        }
+
+        template<>
+        inline float gen_range(float min_value, f64 max_value) {
+            return utils::random::gen() * (max_value - min_value) + min_value;
+        }
+    }
+
     String str_repeats(const String &s, size_t times);
 
-    void fill_rect_with_color(SDL_Renderer *renderer, const SDL_Rect *rect, const SDL_Color &color);
-    void fill_rect_with_texture(SDL_Renderer *m_renderer, const SDL_Rect *rect, SDL_Texture *texture);
+    SDL_Rect to_rect(const SDL_FRect *rect);
+    void fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color);
+    void fill_rect_with_texture(SDL_Renderer *m_renderer, const SDL_FRect *rect, SDL_Texture *texture);
 
     void web_fetch(const String &url);
 }
