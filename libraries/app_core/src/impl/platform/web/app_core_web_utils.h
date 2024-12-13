@@ -2,7 +2,7 @@
 
 namespace utils {
     namespace random {
-        void from_seed(unsigned seed = 0) {
+        inline void from_seed(unsigned seed = 0) {
             srand(seed != 0 ? seed : static_cast<unsigned>(time(nullptr)));
         }
 
