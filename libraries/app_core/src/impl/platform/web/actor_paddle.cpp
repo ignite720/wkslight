@@ -4,7 +4,7 @@
 
 Paddle::Paddle(SDL_Renderer *renderer, float x, float y)
     : Actor(renderer, x, y) {
-    m_dst_rect = { 0.0f, 0.0f, WIDTH, HEIGHT };
+    this->set_rect_size(WIDTH, HEIGHT);
 }
 
 void Paddle::update(const AppCore *app_core) {

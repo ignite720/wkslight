@@ -5,9 +5,7 @@
 Ball::Ball(SDL_Renderer *renderer, float x, float y)
     : Actor(renderer, x, y) {
     m_texture = std::make_unique<Texture>(renderer, "assets/ball.png");
-
-    m_dst_rect.w = m_texture->get_width();
-    m_dst_rect.h = m_texture->get_height();
+    this->set_rect_size(m_texture->get_width(), m_texture->get_height());
     this->reset();
 }
 
@@ -31,8 +29,8 @@ void Ball::render() {
 }
 
 void Ball::reset() {
-    m_velocity.x = simplerand::gen_range(-0.5f, 0.5f);
-    m_velocity.y = simplerand::gen_range(0.2f, 1.2f);
+    m_velocity.x = simplerand::gen_range(-0.6f, 0.6f);
+    m_velocity.y = simplerand::gen_range(1.5f, 2.0f);
 }
 
 void Ball::update_collision(const SDL_FRect *paddle_rect) {
