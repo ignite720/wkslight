@@ -11,8 +11,12 @@
 #include <memory>
 #include <string>
 #include <type_traits>
+#include <vector>
 
 using String = std::string;
+
+template<typename T>
+using Vec = std::vector<T>;
 
 #include "foo_api.h"
 

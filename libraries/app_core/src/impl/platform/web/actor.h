@@ -9,7 +9,8 @@ struct Actor {
 
     const SDL_FRect * get_rect() const { return &m_dst_rect; }
     void set_rect_size(float width, float height) { m_dst_rect.w = width; m_dst_rect.h = height; }
-    
+
+    const Vector2 & get_velocity() const { return m_velocity; }
     void set_velocity(const Vector2 &value);
 
 protected:

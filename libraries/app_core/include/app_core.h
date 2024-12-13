@@ -67,6 +67,8 @@ public:
     virtual void update() {}
     virtual void render() {}
 
+    virtual void play_audio_clip(int index) {}
+
 public:
     float get_window_width() const { return m_window_width; }
     float get_window_height() const { return m_window_height; }

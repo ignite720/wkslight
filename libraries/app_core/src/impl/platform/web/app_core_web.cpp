@@ -28,6 +28,8 @@ struct AppCoreWeb final : public AppCore {
     virtual void update() override;
     virtual void render() override;
 
+    virtual void play_audio_clip(int index) override;
+
 private:
     SDL_Window *m_window = nullptr;
     SDL_Renderer *m_renderer = nullptr;
@@ -74,13 +76,13 @@ int AppCoreWeb::init(int width, int height) {
     
     m_audio_bundle = std::make_unique<AudioBundle>();
     m_audio_bundle->bgm = std::make_unique<AudioMusic>("assets/Item Shop.ogg");
-    m_audio_bundle->bgm->play(-1);
+    m_audio_bundle->play_bgm();
 
-    m_audio_bundle->bounce = std::make_unique<AudioClip>("assets/bounce.wav");
-    m_audio_bundle->click = std::make_unique<AudioClip>("assets/click.wav");
-    m_audio_bundle->hit = std::make_unique<AudioClip>("assets/hit.wav");
+    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/bounce.wav");
+    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/click.wav");
+    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/hit.wav");
 
-    m_ball = std::make_unique<Ball>(m_renderer, simplerand::gen_range(0.0f, m_window_width - Ball::SIZE), 0.0f);
+    m_ball = std::make_unique<Ball>(m_renderer, this);
     m_paddle = std::make_unique<Paddle>(m_renderer, 0.0f, m_window_height - Paddle::HEIGHT);
 
     utils::web_fetch("example.json");
@@ -101,7 +103,7 @@ void AppCoreWeb::update() {
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
-            m_audio_bundle->click->play();
+            m_audio_bundle->play_audio_clip(AudioBundle::AUDIO_CLIP_CLICK);
             
             if (evt.button.button == SDL_BUTTON_LEFT) {
                 printf("Click: (%d, %d)\n", evt.button.x, evt.button.y);
@@ -118,7 +120,7 @@ void AppCoreWeb::update() {
 
     {
         m_ball->update(this);
-        m_ball->update_collision(m_paddle->get_rect());
+        m_ball->update_collision(this, m_paddle->get_rect());
 
         m_paddle->update(this);
     }
@@ -138,6 +140,10 @@ void AppCoreWeb::render() {
     }
 
     SDL_RenderPresent(m_renderer);
+}
+
+void AppCoreWeb::play_audio_clip(int index) {
+    m_audio_bundle->play_audio_clip(index);
 }
 
 std::unique_ptr<AppCore> AppCore::create_web() {
