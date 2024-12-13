@@ -76,12 +76,10 @@ int AppCoreWeb::init(int width, int height) {
         return -3;
     }
     
-    m_bgm = std::make_unique<AudioBGM>();
-    m_bgm->load_from_file("assets/bgm.wav");
+    m_bgm = std::make_unique<AudioBGM>("assets/Item Shop.ogg");
     m_bgm->play(-1);
 
-    m_click_clip = std::make_unique<AudioClip>();
-    m_click_clip->load_from_file("assets/click.wav");
+    m_click_clip = std::make_unique<AudioClip>("assets/click.wav");
 
     m_player = std::make_unique<Player>(m_renderer);
 

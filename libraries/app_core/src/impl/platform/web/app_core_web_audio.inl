@@ -11,29 +11,17 @@ void Audio<T>::global_resume() {
 }
 
 template<typename T>
+Audio<T>::Audio(const char *path) {
+    auto _ret = this->load_from_file(path);
+}
+
+template<typename T>
 Audio<T>::~Audio() {
     if constexpr (concepts::is_music<T>) {
         Mix_FreeMusic(m_data);
     } else if constexpr (concepts::is_clip<T>) {
         Mix_FreeChunk(m_data);
     }
-}
-
-template<typename T>
-bool Audio<T>::load_from_file(const char *path) {
-    if constexpr (concepts::is_music<T>) {
-        m_data = Mix_LoadMUS(path);
-    } else if constexpr (concepts::is_clip<T>) {
-        m_data = Mix_LoadWAV(path);
-    }
-
-    if (!m_data) {
-        printf("%s => Failed to load: %s\n", FUNCTION_NAME, Mix_GetError());
-        return false;
-    }
-
-    printf("%s => Audio loaded successfully: %s\n", FUNCTION_NAME, path);
-    return true;
 }
 
 template<typename T>
@@ -62,4 +50,21 @@ void Audio<T>::stop() const {
     } else if constexpr (concepts::is_clip<T>) {
         Mix_HaltChannel(m_channel);
     }
+}
+
+template<typename T>
+bool Audio<T>::load_from_file(const char *path) {
+    if constexpr (concepts::is_music<T>) {
+        m_data = Mix_LoadMUS(path);
+    } else if constexpr (concepts::is_clip<T>) {
+        m_data = Mix_LoadWAV(path);
+    }
+
+    if (!m_data) {
+        printf("%s => Failed to load: %s\n", FUNCTION_NAME, Mix_GetError());
+        return false;
+    }
+
+    printf("%s => Audio loaded successfully: %s\n", FUNCTION_NAME, path);
+    return true;
 }

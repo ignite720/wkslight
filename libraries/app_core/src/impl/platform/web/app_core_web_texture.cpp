@@ -2,6 +2,10 @@
 
 #if TARGET_PLATFORM_WEB
 
+Texture::Texture(SDL_Renderer *renderer, const char *path) {
+    auto _ret = this->load_from_file(renderer, path);
+}
+
 Texture::~Texture() {
     SDL_DestroyTexture(m_raw_texture);
 }
