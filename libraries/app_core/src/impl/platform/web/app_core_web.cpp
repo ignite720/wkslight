@@ -79,7 +79,7 @@ int AppCoreWeb::init(int width, int height) {
     }
     
     m_audio_bundle = std::make_unique<AudioBundle>();
-    m_audio_bundle->bgm = std::make_unique<AudioBGM>("assets/Item Shop.ogg");
+    m_audio_bundle->bgm = std::make_unique<AudioMusic>("assets/Item Shop.ogg");
     m_audio_bundle->bgm->play(-1);
 
     m_audio_bundle->bounce = std::make_unique<AudioClip>("assets/bounce.wav");
