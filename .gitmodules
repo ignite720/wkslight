@@ -17,3 +17,6 @@
 	path = premake5-modules/winrt
 	url = https://github.com/ignite720/premake-winrt.git
 	branch = win10
+[submodule "libraries/headeronly/simplerand"]
+	path = libraries/headeronly/simplerand
+	url = https://github.com/ignite720/simplerand.git

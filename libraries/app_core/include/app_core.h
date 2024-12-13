@@ -1,6 +1,7 @@
 #pragma once
 
 #include <foo.h>
+#include <simplerand/simplerand.hpp>
 
 #include "app_core_api.h"
 

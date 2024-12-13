@@ -11,7 +11,7 @@ Ball::Ball(SDL_Renderer *renderer)
     m_dst_rect.w = m_texture->get_width();
     m_dst_rect.h = m_texture->get_height();
 
-    m_velocity.x = utils::random::gen_range(-0.1f, 0.1f);
+    m_velocity.x = simplerand::gen_range(-0.1f, 0.1f);
     m_velocity.y = 0.1f;
 }
 
