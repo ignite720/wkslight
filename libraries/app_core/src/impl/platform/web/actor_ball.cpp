@@ -14,6 +14,13 @@ Ball::Ball(SDL_Renderer *renderer, float x, float y)
 }
 
 void Ball::update(const AppCore *app_core) {
+    if ((m_dst_rect.x <= 0.0f) || ((m_dst_rect.x + m_dst_rect.w) >= app_core->get_window_width())) {
+        v.x = -v.x;
+    }
+    if ((m_dst_rect.y <= 0.0f) || ((m_dst_rect.y + m_dst_rect.h) >= app_core->get_window_height())) {
+        v.y = -v.y;
+    }
+
     Actor::update(app_core);
 }
 

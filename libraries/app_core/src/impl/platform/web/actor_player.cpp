@@ -9,10 +9,10 @@ Player::Player(SDL_Renderer *renderer, float x, float y)
 
 void Player::update(const AppCore *app_core) {
     Vector2 v;
-    if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - MOVE_DELTA) > 0)) {
+    if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - MOVE_DELTA) > 0.0f)) {
         v.x = -MOVE_DELTA;
     }
-    if ((m_move_state & MOVE_STATE_RIGHT) && (m_dst_rect.x < (app_core->get_window_width() - MOVE_DELTA))) {
+    if ((m_move_state & MOVE_STATE_RIGHT) && ((m_dst_rect.x + m_dst_rect.w + MOVE_DELTA) < app_core->get_window_width())) {
         v.x = +MOVE_DELTA;
     }
     

@@ -116,8 +116,8 @@ void AppCoreWeb::update() {
         }
     }
 
-    m_ball->update();
-    m_player->update();
+    m_ball->update(this);
+    m_player->update(this);
 }
 
 void AppCoreWeb::render() {
