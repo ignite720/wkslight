@@ -8,15 +8,15 @@ extern "C" {
     APP_CORE_API int app_core_startup();
 }
 
-struct APP_CORE_API vec2 {
-    static float length(const vec2 &v) {
+struct APP_CORE_API Vector2 {
+    static float length(const Vector2 &v) {
         return sqrt(v.x * v.x + v.y * v.y);
     }
 
-    static vec2 normalize(const vec2 &v) {
-        const float len = vec2::length(v);
+    static Vector2 normalize(const Vector2 &v) {
+        const float len = Vector2::length(v);
 
-        vec2 ret = v;
+        Vector2 ret = v;
         if (len != 0.0f) {
             ret.x /= len;
             ret.y /= len;

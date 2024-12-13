@@ -27,8 +27,8 @@ String utils::str_repeats(const String &s, size_t times) {
     return result;
 }
 
-void utils::fill_rect_with_color(SDL_Renderer *renderer, const SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
-    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+void utils::fill_rect_with_color(SDL_Renderer *renderer, const SDL_Rect *rect, const SDL_Color &color) {
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(renderer, rect);
 }
 

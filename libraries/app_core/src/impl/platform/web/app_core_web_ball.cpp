@@ -10,27 +10,12 @@ Ball::Ball(SDL_Renderer *renderer)
     m_dst_rect.y = 0;
     m_dst_rect.w = m_texture->get_width();
     m_dst_rect.h = m_texture->get_height();
+
+    m_velocity.x = 0.1f;
+    m_velocity.y = 0.1f;
 }
 
 void Ball::update() {
-    m_velocity.x = m_velocity.y = 0.0f;
-    if (m_move_state & MOVE_STATE_UP) {
-        m_velocity.y = -MOVE_DELTA;
-    }
-    if (m_move_state & MOVE_STATE_DOWN) {
-        m_velocity.y = +MOVE_DELTA;
-    }
-    if (m_move_state & MOVE_STATE_LEFT) {
-        m_velocity.x = -MOVE_DELTA;
-    }
-    if (m_move_state & MOVE_STATE_RIGHT) {
-        m_velocity.x = +MOVE_DELTA;
-    }
-
-    if (m_velocity.x != 0.0f && m_velocity.y != 0.0f) {
-        m_velocity = vec2::normalize(m_velocity);
-    }
-
     m_dst_rect.x += m_velocity.x;
     m_dst_rect.y += m_velocity.y;
 }

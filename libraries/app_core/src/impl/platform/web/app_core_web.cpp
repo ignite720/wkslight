@@ -36,6 +36,8 @@ private:
 
     std::unique_ptr<AudioBGM> m_bgm;
     std::unique_ptr<AudioClip> m_click_clip;
+
+    std::unique_ptr<Ball> m_ball;
     std::unique_ptr<Player> m_player;
 };
 
@@ -81,6 +83,7 @@ int AppCoreWeb::init(int width, int height) {
 
     m_click_clip = std::make_unique<AudioClip>("assets/click.wav");
 
+    m_ball = std::make_unique<Ball>(m_renderer);
     m_player = std::make_unique<Player>(m_renderer);
 
     utils::web_fetch("example.json");
@@ -116,6 +119,7 @@ void AppCoreWeb::update() {
         }
     }
 
+    m_ball->update();
     m_player->update();
 }
 
@@ -124,9 +128,10 @@ void AppCoreWeb::render() {
 
     {
         const auto dst_rect = SDL_Rect { 0, 0, m_window_width, m_window_height };
-        utils::fill_rect_with_color(m_renderer, &dst_rect, 95, 95, 95, 255);
+        utils::fill_rect_with_color(m_renderer, &dst_rect, SDL_Color { 95, 95, 95, 255 });
     }
 
+    m_ball->render();
     m_player->render();
     SDL_RenderPresent(m_renderer);
 }

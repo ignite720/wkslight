@@ -10,5 +10,5 @@ struct Actor {
 protected:
     SDL_Renderer *m_renderer = nullptr;
     SDL_Rect m_dst_rect = {};
-    vec2 m_velocity;
+    Vector2 m_velocity;
 };
