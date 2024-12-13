@@ -129,7 +129,7 @@ void AppCoreWeb::render() {
     SDL_RenderClear(m_renderer);
 
     {
-        const auto dst_rect = SDL_FRect { 0, 0, m_window_width, m_window_height };
+        const auto dst_rect = SDL_FRect { 0, 0, float(m_window_width), float(m_window_height) };
         utils::fill_rect_with_color(m_renderer, &dst_rect, SDL_Color { 95, 95, 95, 255 });
     }
 

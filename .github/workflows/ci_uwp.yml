@@ -32,8 +32,14 @@ jobs:
         run: |
           pushd scripts
           call premake5-generate-windows-uwp.bat "dummy"
-          call msbuild-windows-uwp.bat
-          call "tool-run-pc.bat"
+          popd
+
+          pushd scripts
+          msbuild-windows-uwp.bat
+          popd
+
+          pushd scripts
+          "tool-run-pc.bat"
           popd
 
       - name: Create artifact
