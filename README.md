@@ -8,10 +8,12 @@
 <br />
 
 #### CI
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ignite720/wkslight/ci_android.yml?style=for-the-badge&label=Android)
+
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ignite720/wkslight/ci_pc.yml?style=for-the-badge&label=Linux%20macOS%20Windows)
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ignite720/wkslight/ci_android.yml?style=for-the-badge&label=Android)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ignite720/wkslight/ci_uwp.yml?style=for-the-badge&label=UWP)
+
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ignite720/wkslight/ci_web.yml?style=for-the-badge&label=Web)
 ---
 <br />
@@ -43,45 +45,17 @@
 > source scripts/0-premake5-clean.sh 
 > ```
 
-### 1. Linux
-> 1.1 build
-> ```shell
-> source scripts/12-premake5-generate-pc.sh 
-> source scripts/22-gmake-pc.sh 
-> ```
+### 1. Android
+> 1.1 install The `Android SDK`
 
-> 1.2 run
-> ```shell
-> source scripts/32-tool-run-pc.sh 
-> source scripts/cargo-run-pc.sh 
-> ```
-
-> 1.3 test(***optional***)
-> ```shell
-> scripts/42-tool-test.py
-> ```
-
-### 2. macOS
-> ```shell
-> source scripts/12-premake5-generate-pc.sh 
-> source scripts/22-gmake-pc.sh 
-> source scripts/32-tool-run-pc.sh 
-> ```
-
-### 3. Windows
-> Double click `scripts\premake5-generate-windows.bat`
-
-### 4. Android
-> 4.1 install The `Android SDK`
-
-> 4.2 `gradle`
+> 1.2 `gradle`
 > ```shell
 > source scripts/11-premake5-generate-android.sh 
 > source scripts/21-android-build.sh 
 > ```
 > => bin/apk-debug/app.apk
 
-> 4.3 `cargo-apk`
+> 1.3 `cargo-apk`
 >
 > Note that folder `544xd5c4` may change, so pass it in as an argument.
 > ```shell
@@ -91,10 +65,39 @@
 > ```
 > => bin/android-cargo-apk/app.apk
 
-### 5. Windows UWP
+### 2. PC
+#### 2.1 Linux
+> 2.1.1 build
+> ```shell
+> source scripts/12-premake5-generate-pc.sh 
+> source scripts/22-gmake-pc.sh 
+> ```
+
+> 2.1.2 run
+> ```shell
+> source scripts/32-tool-run-pc.sh 
+> source scripts/cargo-run-pc.sh 
+> ```
+
+> 2.1.3 test(***optional***)
+> ```shell
+> scripts/42-tool-test.py
+> ```
+
+#### 2.2 macOS
+> ```shell
+> source scripts/12-premake5-generate-pc.sh 
+> source scripts/22-gmake-pc.sh 
+> source scripts/32-tool-run-pc.sh 
+> ```
+
+#### 2.3 Windows
+> Double click `scripts\premake5-generate-windows.bat`
+
+### 3. Windows UWP
 > Double click `scripts\premake5-generate-windows-uwp.bat`
 
-### 6. Web
+### 4. Web
 > ```shell
 > source scripts/14-premake5-generate-web.sh 
 > source scripts/34-tool-run-web.sh 
