@@ -47,7 +47,7 @@ void Ball::update_collision(const AppCore *app_core, const SDL_FRect *paddle_rec
 
         auto p1 = utils::to_center_point(paddle_rect);
         auto p2 = utils::to_center_point(&m_dst_rect);
-        m_velocity.x = ((p2.x - p1.x) * 0.05f);
+        //m_velocity.x = ((p2.x - p1.x) * 0.05f);
     }
 }
 
