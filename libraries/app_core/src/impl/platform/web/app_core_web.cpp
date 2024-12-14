@@ -155,7 +155,9 @@ void AppCoreWeb::update() {
 
     {
         m_ball->update(this);
-        m_ball->update_collision(this, m_paddle->get_rect());
+        if (m_ball->update_collision(this, m_paddle->get_rect())) {
+            m_paddle->stats_as_mut().num_streaks++;
+        }
 
         m_paddle->update(this);
     }
