@@ -112,7 +112,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sounds/click.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
 
-        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P.ttf", 15);
+        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P.ttf", 20);
 
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(m_renderer);
     }

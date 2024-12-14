@@ -55,7 +55,7 @@ void Texture::render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect, float 
 }
 
 bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
-    printf("%s => %s[%s] loaded successfully\n", FUNCTION_NAME, tag, from);
+    //printf("%s => %s[%s] loaded successfully\n", FUNCTION_NAME, tag, from);
 
     if (set_color_key) {
         SDL_SetColorKey(surface, set_color_key, SDL_MapRGB(surface->format, color_key_r, color_key_g, color_key_b));

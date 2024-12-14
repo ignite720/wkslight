@@ -7,7 +7,7 @@ struct Texture {
     int get_width() const { return m_width; }
     int get_height() const { return m_height; }
 
-    bool load_from_file(const char *path, SDL_bool set_color_key = SDL_TRUE);
+    bool load_from_file(const char *path, SDL_bool set_color_key = SDL_FALSE);
     bool load_from_text(TTF_Font *font, const char *text, const SDL_Color &fg_color);
 
     void set_color_mod(Uint8 r, Uint8 g, Uint8 b);
