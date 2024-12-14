@@ -172,7 +172,7 @@ g_wkslight.extras = {
             g_wkslight.EWasmFlag.USE_SDL_IMAGE |
             g_wkslight.EWasmFlag.USE_SDL_MIXER |
             --g_wkslight.EWasmFlag.USE_SDL_NET |
-            --g_wkslight.EWasmFlag.USE_SDL_TTF |
+            g_wkslight.EWasmFlag.USE_SDL_TTF |
             g_wkslight.EWasmFlag.USE_WEBGL2 |
             g_wkslight.EWasmFlag.EXPLICIT_SWAP_CONTROL |
             --g_wkslight.EWasmFlag.ASYNCIFY |
