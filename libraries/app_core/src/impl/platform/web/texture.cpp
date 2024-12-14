@@ -45,7 +45,7 @@ void Texture::set_blend_mode(SDL_BlendMode value) {
     SDL_SetTextureBlendMode(m_raw_texture, value);
 }
 
-void Texture::render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE) {
+void Texture::render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect, float angle, SDL_RendererFlip flip) {
     auto tmp_dst_rect = utils::to_rect(dst_rect);
     if (src_rect) {
         tmp_dst_rect.w = src_rect.w;
