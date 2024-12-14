@@ -14,7 +14,7 @@ struct Texture {
     void set_alpha_mod(Uint8 value);
     void set_blend_mode(SDL_BlendMode value);
 
-    void render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect = nullptr, float angle = 0.0f, const SDL_Point *center = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 private:
     bool load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r = 0, Uint8 color_key_g = 0xff, Uint8 color_key_b = 0xff);
