@@ -23,7 +23,7 @@ struct ResourceBundle {
         TEXTURE_7,
         TEXTURE_8,
         TEXTURE_COUNT,
-    }
+    };
 
     void play_bgm() {
         this->bgm->play(-1);
