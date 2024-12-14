@@ -170,7 +170,7 @@ void AppCoreWeb::render() {
         m_paddle->render();
     }
     
-    {
+    if (false) {
         const auto dst_rect = SDL_FRect { 0.0f, 0.0f, m_window_width * 0.3f, 10.0f };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
