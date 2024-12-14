@@ -1,6 +1,7 @@
 # wkslight
 ### What's this
-> `wkslight` is the abbreviation of `workspace light`, a `lightweight` `project generation utility` based on [premake5](https://premake.github.io/).
+> `wkslight` is the abbreviation of `workspace light`, <br />
+a lightweight `project generation utility` based on [premake5](https://premake.github.io/).
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/ignite720/wkslight?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ignite720/wkslight?style=for-the-badge)
