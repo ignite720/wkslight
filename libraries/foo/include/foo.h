@@ -6,7 +6,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+
+#include <ctime>
 
 #include <iostream>
 #include <memory>
