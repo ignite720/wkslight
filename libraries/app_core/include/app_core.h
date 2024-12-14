@@ -61,7 +61,7 @@ private:
 public:
     virtual ~AppCore() = default;
 
-    virtual int init(int width, int height) {
+    virtual int init(int width, int height, bool linear_filter) {
         m_window_width = float(width);
         m_window_height = float(height);
 

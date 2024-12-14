@@ -3,8 +3,10 @@
 #if TARGET_PLATFORM_UWP
 
 struct AppCoreUWP final : public AppCore {
-    virtual int init(int width, int height) override {
+    virtual int init(int width, int height, bool linear_filter) override {
         PRINT_FUNCTION_NAME();
+        
+        AppCore::init(width, height, linear_filter);
         return 0;
     }
 

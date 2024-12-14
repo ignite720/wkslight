@@ -22,7 +22,7 @@ static void s_main_loop(void *arg) {
 struct AppCoreWeb final : public AppCore {
     ~AppCoreWeb();
 
-    virtual int init(int width, int height) override;
+    virtual int init(int width, int height, bool linear_filter) override;
     virtual int run() override;
 
     virtual void update() override;
@@ -53,46 +53,53 @@ AppCoreWeb::~AppCoreWeb() {
     SDL_Quit();
 }
 
-int AppCoreWeb::init(int width, int height) {
+int AppCoreWeb::init(int width, int height, bool linear_filter) {
     PRINT_FUNCTION_NAME();
     
-    AppCore::init(width, height);
+    AppCore::init(width, height, linear_filter);
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         printf("%s => Failed to initialize SDL: %s\n", FUNCTION_NAME, SDL_GetError());
         return -1;
     }
 
-    const Uint32 flags = SDL_RENDERER_PRESENTVSYNC;
+    if (linear_filter) {
+        if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
+            return -2;
+        }
+    }
+    
+    Uint32 flags = SDL_WINDOW_SHOWN;
     m_window = SDL_CreateWindow("AppCoreWeb", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
     if (!m_window) {
         printf("%s => Failed to create Window: %s\n", FUNCTION_NAME, SDL_GetError());
-        return -1;
+        return -3;
     }
 
+    flags = (SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     m_renderer = SDL_CreateRenderer(m_window, -1, flags);
     if (!m_renderer) {
         printf("%s => Failed to create Renderer: %s\n", FUNCTION_NAME, SDL_GetError());
-        return -1;
+        return -4;
     }
 
     if (SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND) != 0) {
-        return -1;
+        return -5;
     }
     
     const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
     if (IMG_Init(img_loaders) != img_loaders) {
         printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
-        return -2;
+        return -6;
     }
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
         printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
-        return -3;
+        return -7;
     }
 
     if (TTF_Init() != 0) {
         printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
-        return -4;
+        return -8;
     }
     
     {
