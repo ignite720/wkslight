@@ -75,12 +75,12 @@ int AppCoreWeb::init(int width, int height) {
     }
     
     m_audio_bundle = std::make_unique<AudioBundle>();
-    m_audio_bundle->bgm = std::make_unique<AudioMusic>("assets/Item Shop.ogg");
+    m_audio_bundle->bgm = std::make_unique<AudioMusic>("assets/sound/Item Shop.ogg");
     m_audio_bundle->play_bgm();
 
-    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/bounce.wav");
-    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/click.wav");
-    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/hit.wav");
+    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sound/bounce.wav");
+    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sound/click.wav");
+    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sound/hit.wav");
 
     m_ball = std::make_unique<Ball>(m_renderer, this);
     m_paddle = std::make_unique<Paddle>(m_renderer, this);

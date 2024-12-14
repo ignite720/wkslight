@@ -65,7 +65,7 @@ public:
         m_window_width = float(width);
         m_window_height = float(height);
 
-        simplerand::from_seed();
+        simplerand::from_seed(static_cast<unsigned>(std::time(nullptr)));
         return 0;
     }
 
