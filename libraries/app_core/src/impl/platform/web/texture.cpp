@@ -48,8 +48,8 @@ void Texture::set_blend_mode(SDL_BlendMode value) {
 void Texture::render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect, float angle, SDL_RendererFlip flip) {
     auto tmp_dst_rect = utils::to_rect(dst_rect);
     if (src_rect) {
-        tmp_dst_rect.w = src_rect.w;
-        tmp_dst_rect.h = src_rect.h;
+        tmp_dst_rect.w = src_rect->w;
+        tmp_dst_rect.h = src_rect->h;
     }
     SDL_RenderCopyEx(m_renderer, m_raw_texture, src_rect, &tmp_dst_rect);
 }
