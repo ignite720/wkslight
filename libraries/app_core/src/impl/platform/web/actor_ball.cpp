@@ -2,14 +2,13 @@
 
 #if TARGET_PLATFORM_WEB
 
-Ball::Ball(SDL_Renderer *renderer, const AppCore *app_core)
+Ball::Ball(SDL_Renderer *renderer, AppCore *app_core)
     : Actor(renderer, 0.0f, 0.0f) {
     m_texture = std::make_unique<Texture>(renderer);
     auto _ret = m_texture->load_from_file("assets/textures/ball.png");
     m_texture->set_blend_mode(SDL_BLENDMODE_BLEND);
 
     this->set_rect_size(m_texture->get_width(), m_texture->get_height());
-
     this->reset(app_core);
 }
 

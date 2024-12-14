@@ -3,7 +3,7 @@
 struct Ball final : public Actor {
     static constexpr float SIZE = 32.0f;
 
-    Ball(SDL_Renderer *renderer, const AppCore *app_core);
+    Ball(SDL_Renderer *renderer, AppCore *app_core);
 
     virtual void update(AppCore *app_core) override;
     virtual void render() override;
