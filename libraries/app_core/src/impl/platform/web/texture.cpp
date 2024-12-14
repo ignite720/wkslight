@@ -25,7 +25,7 @@ bool Texture::load_from_file(const char *path, SDL_bool set_color_key) {
 bool Texture::load_from_text(TTF_Font *font, const char *text, const SDL_Color &fg_color) {
     this->drop();
     
-    SDL_Surface *surface = TTF_RenderText_Solid(font, text, fg_color);
+    SDL_Surface *surface = TTF_RenderText_Blended(font, text, fg_color);
     if (!surface) {
         printf("%s => Failed to render text surface: %s\n", FUNCTION_NAME, TTF_GetError());
         return false;

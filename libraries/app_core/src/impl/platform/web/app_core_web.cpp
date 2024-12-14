@@ -41,6 +41,7 @@ private:
 
 AppCoreWeb::~AppCoreWeb() {
     m_paddle.reset();
+    m_ball.reset();
     m_resource_bundle.reset();
 
     SDL_DestroyRenderer(m_renderer);
