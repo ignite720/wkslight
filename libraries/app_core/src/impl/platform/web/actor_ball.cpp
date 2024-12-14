@@ -4,7 +4,7 @@
 
 Ball::Ball(SDL_Renderer *renderer, const AppCore *app_core)
     : Actor(renderer, 0.0f, 0.0f) {
-    m_texture = std::make_unique<Texture>(renderer, "assets/ball.png");
+    m_texture = std::make_unique<Texture>(renderer, "assets/textures/ball.png");
     this->set_rect_size(m_texture->get_width(), m_texture->get_height());
 
     this->reset(app_core);

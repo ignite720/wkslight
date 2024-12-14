@@ -50,7 +50,7 @@ int app_core_startup() {
         lua.open_libraries(/*sol::lib::base*/);
 
         auto result = lua.script("print('LUA: 3 => hello')");
-        auto result2 = lua.do_file("assets/hello.lua");
+        auto result2 = lua.do_file("assets/scripts/hello.lua");
         if (result2.valid()) {
             sol::function hi_func = lua["hi"];
             hi_func("john");
