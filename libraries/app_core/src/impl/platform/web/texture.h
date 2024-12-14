@@ -22,6 +22,7 @@ private:
     
 private:
     SDL_Renderer *m_renderer = nullptr;
+    
     SDL_Texture *m_raw_texture = nullptr;
     int m_width = 0;
     int m_height = 0;

@@ -92,7 +92,7 @@ int AppCoreWeb::init(int width, int height) {
 
         m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P.ttf", 24);
 
-        m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>();
+        m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(m_renderer);
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), "hello text", SDL_Color { 255, 255, 255 });
     }
 
