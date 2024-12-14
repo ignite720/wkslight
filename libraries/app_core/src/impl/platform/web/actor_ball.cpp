@@ -46,8 +46,8 @@ void Ball::update_collision(const AppCore *app_core, const SDL_FRect *paddle_rec
         app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_HIT);
         m_velocity.y = -m_velocity.y;
 
-        auto p1 = utils::to_center_point(paddle_rect);
-        auto p2 = utils::to_center_point(&m_dst_rect);
+        auto p1 = utils::sdl::to_center_point(paddle_rect);
+        auto p2 = utils::sdl::to_center_point(&m_dst_rect);
         //m_velocity.x = ((p2.x - p1.x) * 0.05f);
     }
 }

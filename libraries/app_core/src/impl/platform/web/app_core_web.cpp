@@ -156,12 +156,7 @@ void AppCoreWeb::update() {
 }
 
 void AppCoreWeb::render() {
-    SDL_RenderClear(m_renderer);
-
-    {
-        const auto dst_rect = SDL_FRect { 0.0f, 0.0f, float(m_window_width), float(m_window_height) };
-        utils::fill_rect_with_color(m_renderer, &dst_rect, SDL_Color { 95, 95, 95, 255 });
-    }
+    utils::sdl::clear_with_color(SDL_Color { 95, 95, 95, 255 });
 
     {
         m_ball->render();

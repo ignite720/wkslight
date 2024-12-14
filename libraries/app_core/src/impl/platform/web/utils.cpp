@@ -27,18 +27,23 @@ String utils::str_repeats(const String &s, size_t times) {
     return result;
 }
 
-SDL_FPoint utils::to_center_point(const SDL_FRect *rect) {
+SDL_FPoint utils::sdl::to_center_point(const SDL_FRect *rect) {
     return SDL_FPoint { rect->x + rect->w * 0.5f, rect->y + rect->h * 0.5f };
 }
 
-SDL_Rect utils::to_rect(const SDL_FRect *rect) {
+SDL_Rect utils::sdl::to_rect(const SDL_FRect *rect) {
     return SDL_Rect { int(rect->x), int(rect->y), int(rect->w), int(rect->h) };
 }
 
-void utils::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color) {
+void utils::sdl::clear_with_color(SDL_Renderer *renderer, const SDL_Color &color) {
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderClear(m_renderer);
+}
+
+void utils::sdl::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
-    auto tmp_rect = utils::to_rect(rect);
+    auto tmp_rect = utils::sdl::to_rect(rect);
     SDL_RenderFillRect(renderer, &tmp_rect);
 }
 

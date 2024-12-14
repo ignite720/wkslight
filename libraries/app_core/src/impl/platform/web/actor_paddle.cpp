@@ -21,7 +21,7 @@ void Paddle::update(const AppCore *app_core) {
 }
 
 void Paddle::render() {
-    utils::fill_rect_with_color(m_renderer, &m_dst_rect, SDL_Color { 205, 205, 205, 255 });
+    utils::sdl::fill_rect_with_color(m_renderer, &m_dst_rect, SDL_Color { 205, 205, 205, 255 });
 }
 
 #endif
