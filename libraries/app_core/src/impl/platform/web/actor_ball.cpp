@@ -13,7 +13,7 @@ Ball::Ball(SDL_Renderer *renderer, const AppCore *app_core)
     this->reset(app_core);
 }
 
-void Ball::update(const AppCore *app_core) {
+void Ball::update(AppCore *app_core) {
     if ((m_dst_rect.x < 0.0f) || ((m_dst_rect.x + m_dst_rect.w) > app_core->get_window_width())) {
         app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_BOUNCE);
         m_velocity.x = -m_velocity.x;
@@ -35,7 +35,7 @@ void Ball::render() {
     m_texture->render(&m_dst_rect);
 }
 
-void Ball::reset(const AppCore *app_core) {
+void Ball::reset(AppCore *app_core) {
     m_dst_rect.x = simplerand::gen_range(0.0f, app_core->get_window_width() - Ball::SIZE);
     m_dst_rect.y = 0.0f;
 

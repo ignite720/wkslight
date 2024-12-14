@@ -16,7 +16,7 @@ struct Paddle final : public Actor {
 
     Stats & stats_as_mut() { return m_stats; }
 
-    virtual void update(const AppCore *app_core) override;
+    virtual void update(AppCore *app_core) override;
     virtual void render() override;
 
 private:

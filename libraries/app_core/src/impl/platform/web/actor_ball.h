@@ -5,11 +5,11 @@ struct Ball final : public Actor {
 
     Ball(SDL_Renderer *renderer, const AppCore *app_core);
 
-    virtual void update(const AppCore *app_core) override;
+    virtual void update(AppCore *app_core) override;
     virtual void render() override;
 
 public:
-    void reset(const AppCore *app_core);
+    void reset(AppCore *app_core);
     bool update_collision(const AppCore *app_core, const SDL_FRect *paddle_rect);
 
 private:

@@ -7,7 +7,7 @@ Paddle::Paddle(SDL_Renderer *renderer, const AppCore *app_core)
     this->set_rect_size(WIDTH, HEIGHT);
 }
 
-void Paddle::update(const AppCore *app_core) {
+void Paddle::update(AppCore *app_core) {
     Vector2 v;
     if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - MOVE_DELTA) > 0.0f)) {
         v.x = -MOVE_DELTA;

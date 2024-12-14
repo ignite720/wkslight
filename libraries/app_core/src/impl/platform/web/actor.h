@@ -4,7 +4,7 @@ struct Actor {
     Actor(SDL_Renderer *renderer, float x, float y);
     virtual ~Actor() = default;
 
-    virtual void update(const AppCore *app_core);
+    virtual void update(AppCore *app_core);
     virtual void render() = 0;
 
     const SDL_FRect * get_rect() const { return &m_dst_rect; }
