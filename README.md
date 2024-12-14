@@ -47,8 +47,6 @@
 
 ### 1. Android
 ---
-<br />
-
 > 1.1 install The `Android SDK`
 
 > 1.2 `gradle`
@@ -70,8 +68,6 @@
 
 ### 2. PC
 ---
-<br />
-
 #### 2.1 Linux
 > 2.1.1 build
 > ```shell
@@ -102,14 +98,10 @@
 
 ### 3. Windows UWP
 ---
-<br />
-
 > Double click `scripts\premake5-generate-windows-uwp.bat`
 
 ### 4. Web
 ---
-<br />
-
 > ```shell
 > source scripts/14-premake5-generate-web.sh 
 > source scripts/34-tool-run-web.sh 
