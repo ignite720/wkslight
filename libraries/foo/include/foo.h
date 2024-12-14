@@ -1,12 +1,11 @@
 #pragma once
 
-#include <assert.h>
-#include <inttypes.h>
-#include <math.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-
+#include <cassert>
+#include <cinttypes>
+#include <cmath>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
 #include <ctime>
 
 #include <iostream>
