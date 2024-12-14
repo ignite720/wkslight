@@ -163,7 +163,7 @@ void AppCoreWeb::update() {
 }
 
 void AppCoreWeb::render() {
-    utils::sdl::clear_with_color(SDL_Color { 95, 95, 95, 255 });
+    utils::sdl::clear_with_color(m_renderer, SDL_Color { 95, 95, 95, 255 });
 
     {
         m_ball->render();
