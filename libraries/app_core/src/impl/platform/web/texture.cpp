@@ -2,27 +2,84 @@
 
 #if TARGET_PLATFORM_WEB
 
-Texture::Texture(SDL_Renderer *renderer, const char *path) {
-    auto _ret = this->load_from_file(renderer, path);
+Texture::Texture(SDL_Renderer *renderer)
+    : m_renderer(renderer) {
+
 }
 
 Texture::~Texture() {
-    SDL_DestroyTexture(m_raw_texture);
+    this->drop();
 }
 
-bool Texture::load_from_file(SDL_Renderer *renderer, const char *path) {
+bool Texture::load_from_file(const char *path, SDL_bool set_color_key) {
+    this->drop();
+
     SDL_Surface *surface = IMG_Load(path);
     if (!surface) {
-        printf("%s => Failed to load: %s\n", FUNCTION_NAME, IMG_GetError());
+        printf("%s => Failed to load Image[%s]: %s\n", FUNCTION_NAME, path, IMG_GetError());
+        return false;
+    }
+    return this->load_from_surface(surface, "Image", path, set_color_key);
+}
+
+bool Texture::load_from_text(TTF_Font *font, const char *text, const SDL_Color &fg_color) {
+    this->drop();
+    
+    SDL_Surface *surface = TTF_RenderText_Solid(font, text, fg_color);
+    if (!surface) {
+        printf("%s => Failed to render text surface: %s\n", FUNCTION_NAME, TTF_GetError());
+        return false;
+    }
+    return this->load_from_surface(surface, "Text", text, SDL_FALSE);
+}
+
+void Texture::set_color_mod(Uint8 r, Uint8 g, Uint8 b) {
+    SDL_SetTextureColorMod(m_raw_texture, r, g, b);
+}
+
+void Texture::set_alpha_mod(Uint8 value) {
+    SDL_SetTextureAlphaMod(m_raw_texture, value);
+}
+
+void Texture::set_blend_mode(SDL_BlendMode value) {
+    SDL_SetTextureBlendMode(m_raw_texture, value);
+}
+
+void Texture::render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE) {
+    auto tmp_dst_rect = utils::to_rect(dst_rect);
+    if (src_rect) {
+        tmp_dst_rect.w = src_rect.w;
+        tmp_dst_rect.h = src_rect.h;
+    }
+    SDL_RenderCopyEx(m_renderer, m_raw_texture, src_rect, &tmp_dst_rect);
+}
+
+bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
+    printf("%s => %s[%s] loaded successfully\n", FUNCTION_NAME, tag, from);
+
+    if (set_color_key) {
+        SDL_SetColorKey(surface, set_color_key, SDL_MapRGB(surface->format, color_key_r, color_key_g, color_key_b));
+    }
+
+    m_raw_texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    if (!m_raw_texture) {
+        printf("%s => Failed to create texture from %s[%s]: %s\n", FUNCTION_NAME, tag, from, SDL_GetError());
         return false;
     }
 
-    printf("%s => Image loaded successfully: %s\n", FUNCTION_NAME, path);
-    m_raw_texture = SDL_CreateTextureFromSurface(renderer, surface);
     m_width = surface->w;
     m_height = surface->h;
+
     SDL_FreeSurface(surface);
     return true;
+}
+
+void Texture::drop() {
+    if (m_raw_texture) {
+        SDL_DestroyTexture(m_raw_texture);
+
+        m_raw_texture = nullptr;
+    }
 }
 
 #endif

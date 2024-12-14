@@ -14,6 +14,5 @@ struct Paddle final : public Actor {
     virtual void render() override;
 
 private:
-    std::unique_ptr<Texture> m_texture;
     int m_move_state = MOVE_STATE_NONE;
 };

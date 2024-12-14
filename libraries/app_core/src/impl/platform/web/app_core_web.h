@@ -7,8 +7,9 @@
 #include "web_prelude.h"
 
 #include "audio.h"
-#include "audio_bundle.h"
+#include "font.h"
 #include "texture.h"
+#include "resource_bundle.h"
 
 #include "actor.h"
 #include "actor_ball.h"

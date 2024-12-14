@@ -34,20 +34,21 @@ private:
     SDL_Window *m_window = nullptr;
     SDL_Renderer *m_renderer = nullptr;
 
-    std::unique_ptr<AudioBundle> m_audio_bundle;
+    std::unique_ptr<ResourceBundle> m_resource_bundle;
     std::unique_ptr<Ball> m_ball;
     std::unique_ptr<Paddle> m_paddle;
 };
 
 AppCoreWeb::~AppCoreWeb() {
     m_paddle.reset();
-    m_audio_bundle.reset();
+    m_resource_bundle.reset();
 
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
 
-    IMG_Quit();
+    TTF_Quit();
     Mix_CloseAudio();
+    IMG_Quit();
     SDL_Quit();
 }
 
@@ -56,31 +57,43 @@ int AppCoreWeb::init(int width, int height) {
     
     AppCore::init(width, height);
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+        printf("%s => Failed to initialize SDL: %s\n", FUNCTION_NAME, SDL_GetError());
         return -1;
     }
 
     const Uint32 flags = SDL_RENDERER_PRESENTVSYNC;
     m_window = SDL_CreateWindow("AppCoreWeb", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
     m_renderer = SDL_CreateRenderer(m_window, -1, flags);
-
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        printf("%s => Failed to initialize audio: %s\n", FUNCTION_NAME, Mix_GetError());
+    
+    const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
+    if (IMG_Init(img_loaders) != img_loaders) {
+        printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
         return -2;
     }
 
-    const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
-    if (IMG_Init(img_loaders) != img_loaders) {
-        printf("%s => Failed to initialize required image format support: %s\n", FUNCTION_NAME, IMG_GetError());
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
         return -3;
     }
-    
-    m_audio_bundle = std::make_unique<AudioBundle>();
-    m_audio_bundle->bgm = std::make_unique<AudioMusic>("assets/sound/Item Shop.ogg");
-    m_audio_bundle->play_bgm();
 
-    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sound/bounce.wav");
-    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sound/click.wav");
-    m_audio_bundle->clips[AudioBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sound/hit.wav");
+    if (TTF_Init() != 0) {
+        printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
+        return -4;
+    }
+    
+    {
+        m_resource_bundle = std::make_unique<ResourceBundle>();
+        m_resource_bundle->bgm = std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg");
+        m_resource_bundle->play_bgm();
+
+        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sounds/bounce.wav");
+        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sounds/click.wav");
+        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
+
+        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P.ttf", 24);
+
+        m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>();
+    }
 
     m_ball = std::make_unique<Ball>(m_renderer, this);
     m_paddle = std::make_unique<Paddle>(m_renderer, this);
@@ -103,7 +116,7 @@ void AppCoreWeb::update() {
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
-            m_audio_bundle->play_audio_clip(AudioBundle::AUDIO_CLIP_CLICK);
+            m_resource_bundle->play_audio_clip(ResourceBundle::AUDIO_CLIP_CLICK);
             
             if (evt.button.button == SDL_BUTTON_LEFT) {
                 printf("Click: (%d, %d)\n", evt.button.x, evt.button.y);
@@ -130,7 +143,7 @@ void AppCoreWeb::render() {
     SDL_RenderClear(m_renderer);
 
     {
-        const auto dst_rect = SDL_FRect { 0, 0, float(m_window_width), float(m_window_height) };
+        const auto dst_rect = SDL_FRect { 0.0f, 0.0f, float(m_window_width), float(m_window_height) };
         utils::fill_rect_with_color(m_renderer, &dst_rect, SDL_Color { 95, 95, 95, 255 });
     }
 
@@ -138,12 +151,17 @@ void AppCoreWeb::render() {
         m_ball->render();
         m_paddle->render();
     }
+    
+    {
+        const auto dst_rect = SDL_FRect { 0.0f, 0.0f, m_window_width * 0.3f, 10.0f };
+        m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
+    }
 
     SDL_RenderPresent(m_renderer);
 }
 
 void AppCoreWeb::play_audio_clip(int index) const {
-    m_audio_bundle->play_audio_clip(static_cast<AudioBundle::AUDIO_CLIP>(index));
+    m_resource_bundle->play_audio_clip(static_cast<ResourceBundle::AUDIO_CLIP>(index));
 }
 
 std::unique_ptr<AppCore> AppCore::create_web() {

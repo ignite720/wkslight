@@ -42,11 +42,6 @@ void utils::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, 
     SDL_RenderFillRect(renderer, &tmp_rect);
 }
 
-void utils::fill_rect_with_texture(SDL_Renderer *m_renderer, const SDL_FRect *rect, SDL_Texture *texture) {
-    auto tmp_rect = utils::to_rect(rect);
-    SDL_RenderCopy(m_renderer, texture, nullptr, &tmp_rect);
-}
-
 void utils::web_fetch(const String &url) {
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);

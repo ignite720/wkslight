@@ -61,10 +61,10 @@ bool Audio<T>::load_from_file(const char *path) {
     }
 
     if (!m_data) {
-        printf("%s => Failed to load: %s\n", FUNCTION_NAME, Mix_GetError());
+        printf("%s => Failed to load Audio[%s]: %s\n", FUNCTION_NAME, path, Mix_GetError());
         return false;
     }
 
-    printf("%s => Audio loaded successfully: %s\n", FUNCTION_NAME, path);
+    printf("%s => Audio[%s] loaded successfully\n", FUNCTION_NAME, path);
     return true;
 }
