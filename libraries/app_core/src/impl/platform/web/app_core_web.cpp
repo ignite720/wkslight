@@ -63,7 +63,20 @@ int AppCoreWeb::init(int width, int height) {
 
     const Uint32 flags = SDL_RENDERER_PRESENTVSYNC;
     m_window = SDL_CreateWindow("AppCoreWeb", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+    if (!m_window) {
+        printf("%s => Failed to create Window: %s\n", FUNCTION_NAME, SDL_GetError());
+        return -1;
+    }
+
     m_renderer = SDL_CreateRenderer(m_window, -1, flags);
+    if (!m_renderer) {
+        printf("%s => Failed to create Renderer: %s\n", FUNCTION_NAME, SDL_GetError());
+        return -1;
+    }
+
+    if (SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND) != 0) {
+        return -1;
+    }
     
     const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
     if (IMG_Init(img_loaders) != img_loaders) {
