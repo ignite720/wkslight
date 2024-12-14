@@ -6,6 +6,8 @@ Ball::Ball(SDL_Renderer *renderer, const AppCore *app_core)
     : Actor(renderer, 0.0f, 0.0f) {
     m_texture = std::make_unique<Texture>(renderer);
     auto _ret = m_texture->load_from_file("assets/textures/ball.png");
+    m_texture->set_blend_mode(SDL_BLENDMODE_BLEND);
+
     this->set_rect_size(m_texture->get_width(), m_texture->get_height());
 
     this->reset(app_core);
@@ -39,9 +41,11 @@ void Ball::reset(const AppCore *app_core) {
 
     m_velocity.x = (simplerand::gen() > 0.5f ? 2.0f : -2.0f);
     m_velocity.y = simplerand::gen_range(2.0f, 3.0f);
+
+    app_core->reset_game();
 }
 
-void Ball::update_collision(const AppCore *app_core, const SDL_FRect *paddle_rect) {
+bool Ball::update_collision(const AppCore *app_core, const SDL_FRect *paddle_rect) {
     if (SDL_HasIntersectionF(&m_dst_rect, paddle_rect)) {
         app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_HIT);
         m_velocity.y = -m_velocity.y;
@@ -49,7 +53,9 @@ void Ball::update_collision(const AppCore *app_core, const SDL_FRect *paddle_rec
         auto p1 = utils::sdl::to_center_point(paddle_rect);
         auto p2 = utils::sdl::to_center_point(&m_dst_rect);
         //m_velocity.x = ((p2.x - p1.x) * 0.05f);
+        return true;
     }
+    return false;
 }
 
 #endif

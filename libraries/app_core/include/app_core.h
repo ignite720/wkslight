@@ -74,6 +74,7 @@ public:
     virtual void update() {}
     virtual void render() {}
 
+    virtual void reset_game() {}
     virtual void play_audio_clip(int index) const {}
 
 public:

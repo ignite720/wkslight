@@ -10,7 +10,7 @@ struct Ball final : public Actor {
 
 public:
     void reset(const AppCore *app_core);
-    void update_collision(const AppCore *app_core, const SDL_FRect *paddle_rect);
+    bool update_collision(const AppCore *app_core, const SDL_FRect *paddle_rect);
 
 private:
     std::unique_ptr<Texture> m_texture;

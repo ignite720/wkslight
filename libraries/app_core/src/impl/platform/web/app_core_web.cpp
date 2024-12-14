@@ -28,6 +28,7 @@ struct AppCoreWeb final : public AppCore {
     virtual void update() override;
     virtual void render() override;
 
+    virtual void reset_game() override;
     virtual void play_audio_clip(int index) const override;
 
 private:
@@ -114,8 +115,6 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P.ttf", 15);
 
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(m_renderer);
-        auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), "hello text", SDL_Color { 255, 0, 0 });
-        m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
     }
 
     m_ball = std::make_unique<Ball>(m_renderer, this);
@@ -170,12 +169,20 @@ void AppCoreWeb::render() {
         m_paddle->render();
     }
     
-    if (false) {
+    {
+        auto text = ("streaks: " + std::to_string(m_paddle->stats_as_mut().num_streaks));
+        auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), SDL_Color { 255, 0, 0 });
+        m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
+
         const auto dst_rect = SDL_FRect { 0.0f, 0.0f, m_window_width * 0.3f, 10.0f };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
 
     SDL_RenderPresent(m_renderer);
+}
+
+void AppCoreWeb::reset_game() {
+    m_paddle->stats_as_mut().num_streaks = 0;
 }
 
 void AppCoreWeb::play_audio_clip(int index) const {
