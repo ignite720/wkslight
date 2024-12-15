@@ -1,7 +1,7 @@
 #pragma once
 
-struct Texture {
-    explicit Texture(SDL_Renderer *renderer);
+struct Texture : public WebObject {
+    explicit Texture(AppCore *app_core);
     ~Texture();
 
     int get_width() const { return m_width; }
@@ -14,15 +14,13 @@ struct Texture {
     void set_alpha_mod(Uint8 value);
     void set_blend_mode(SDL_BlendMode value);
 
-    void render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect = nullptr, float angle = 0.0f, const SDL_Point *center = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect = nullptr, float angle = 0.0f, const SDL_Point *center = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 private:
     bool load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r = 0, Uint8 color_key_g = 0xff, Uint8 color_key_b = 0xff);
     void drop();
     
 private:
-    SDL_Renderer *m_renderer = nullptr;
-    
     SDL_Texture *m_raw_texture = nullptr;
     int m_width = 0;
     int m_height = 0;

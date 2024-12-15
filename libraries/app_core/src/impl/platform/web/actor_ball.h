@@ -3,14 +3,14 @@
 struct Ball final : public Actor {
     static constexpr float SIZE = 32.0f;
 
-    Ball(SDL_Renderer *renderer, AppCore *app_core);
+    Ball(AppCore *app_core);
 
-    virtual void update(AppCore *app_core) override;
+    virtual void update() override;
     virtual void render() override;
 
 public:
-    void reset(AppCore *app_core);
-    bool update_collision(const AppCore *app_core, const SDL_FRect *paddle_rect);
+    void reset();
+    bool update_collision(const SDL_FRect *paddle_rect);
 
 private:
     std::unique_ptr<Texture> m_texture;

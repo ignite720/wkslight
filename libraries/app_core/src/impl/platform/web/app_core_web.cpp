@@ -28,7 +28,8 @@ struct AppCoreWeb final : public AppCore {
     virtual void update() override;
     virtual void render() override;
 
-    virtual void reset_game() override;
+    virtual void restart() override;
+    virtual void * renderer_as_void_p() override { return m_renderer; }
     virtual void play_audio_clip(int index) const override;
 
 private:
@@ -112,13 +113,13 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sounds/click.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
 
-        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P.ttf", 20);
+        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 24);
 
-        m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(m_renderer);
+        m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(this);
     }
 
-    m_ball = std::make_unique<Ball>(m_renderer, this);
-    m_paddle = std::make_unique<Paddle>(m_renderer, this);
+    m_ball = std::make_unique<Ball>(this);
+    m_paddle = std::make_unique<Paddle>(this);
 
     utils::web_fetch("example.json");
     utils::web_fetch("https://httpbin.org/xml");
@@ -135,6 +136,21 @@ int AppCoreWeb::run() {
 }
 
 void AppCoreWeb::update() {
+    {
+        m_app_info.stats.now = utils::sdl::now();
+        m_app_info.stats.delta_time = (m_app_info.stats.now - m_app_info.stats.last_time);
+        m_app_info.stats.last_time = m_app_info.stats.now;
+
+        m_app_info.stats.staging.frames_accumulated++;
+        m_app_info.stats.staging.time_accumulated += m_app_info.stats.delta_time;
+        if (m_app_info.stats.staging.time_accumulated >= 1.0f) {
+            m_app_info.stats.staging.time_accumulated = 0.0f;
+            
+            m_app_info.stats.fps = m_app_info.stats.staging.frames_accumulated;
+            m_app_info.stats.staging.frames_accumulated = 0;
+        }
+    }
+
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
@@ -146,6 +162,11 @@ void AppCoreWeb::update() {
         }
 
         switch (evt.key.keysym.sym) {
+            case SDLK_f: {
+                if (evt.key.type == SDL_KEYDOWN) {
+                    m_app_info.game_info.paddle_friction = !m_app_info.game_info.paddle_friction;
+                }
+            } break;
             CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_w, SDLK_UP, UP);
             CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_s, SDLK_DOWN, DOWN);
             CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_a, SDLK_LEFT, LEFT);
@@ -154,12 +175,12 @@ void AppCoreWeb::update() {
     }
 
     {
-        m_ball->update(this);
-        if (m_ball->update_collision(this, m_paddle->get_rect())) {
-            m_paddle->stats_as_mut().num_streaks++;
+        m_ball->update();
+        if (m_ball->update_collision(m_paddle->get_rect())) {
+            m_app_info.game_info.stats.num_streaks++;
         }
 
-        m_paddle->update(this);
+        m_paddle->update();
     }
 }
 
@@ -172,19 +193,19 @@ void AppCoreWeb::render() {
     }
     
     {
-        auto text = ("streaks: " + std::to_string(m_paddle->stats_as_mut().num_streaks));
+        auto text = ("streaks: " + std::to_string(m_app_info.game_info.stats.num_streaks) + "\nfps: " + std::to_string(m_app_info.stats.fps));
         auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), SDL_Color { 255, 0, 0 });
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
 
-        const auto dst_rect = SDL_FRect { 0.0f, 0.0f, m_window_width * 0.3f, 10.0f };
+        const auto dst_rect = SDL_FRect { 0.0f, 0.0f, m_app_info.window_width * 0.3f, 10.0f };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
 
     SDL_RenderPresent(m_renderer);
 }
 
-void AppCoreWeb::reset_game() {
-    m_paddle->stats_as_mut().num_streaks = 0;
+void AppCoreWeb::restart() {
+    m_app_info.game_info.stats.num_streaks = 0;
 }
 
 void AppCoreWeb::play_audio_clip(int index) const {

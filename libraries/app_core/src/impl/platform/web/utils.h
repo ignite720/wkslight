@@ -4,6 +4,8 @@ namespace utils {
     String str_repeats(const String &s, size_t times);
 
     namespace sdl {
+        float now();
+        
         SDL_FPoint to_center_point(const SDL_FRect *rect);
         SDL_Rect to_rect(const SDL_FRect *rect);
 

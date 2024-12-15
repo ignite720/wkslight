@@ -27,6 +27,10 @@ String utils::str_repeats(const String &s, size_t times) {
     return result;
 }
 
+float utils::sdl::now() {
+    return SDL_GetTicks() * 0.001f;
+}
+
 SDL_FPoint utils::sdl::to_center_point(const SDL_FRect *rect) {
     return SDL_FPoint { rect->x + rect->w * 0.5f, rect->y + rect->h * 0.5f };
 }

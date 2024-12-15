@@ -104,6 +104,10 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > source scripts/14-premake5-generate-web.sh 
 > source scripts/34-tool-run-web.sh 
 > ```
+<br />
 
-### Sound
+## Assets
+#### Font
+- [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P)
+#### Sound
 - [Item Shop](https://opengameart.org/content/item-shop)

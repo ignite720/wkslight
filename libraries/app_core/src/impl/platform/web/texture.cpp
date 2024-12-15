@@ -2,8 +2,8 @@
 
 #if TARGET_PLATFORM_WEB
 
-Texture::Texture(SDL_Renderer *renderer)
-    : m_renderer(renderer) {
+Texture::Texture(AppCore *app_core)
+    : WebObject(app_core) {
 
 }
 
@@ -45,23 +45,28 @@ void Texture::set_blend_mode(SDL_BlendMode value) {
     SDL_SetTextureBlendMode(m_raw_texture, value);
 }
 
-void Texture::render(const SDL_FRect *dst_rect, const SDL_Rect *src_rect, float angle, const SDL_Point *center, SDL_RendererFlip flip) {
+void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float angle, const SDL_Point *center, SDL_RendererFlip flip) {
+    auto tmp_src_rect = SDL_Rect {};
     auto tmp_dst_rect = utils::sdl::to_rect(dst_rect);
     if (src_rect) {
+        tmp_src_rect = utils::sdl::to_rect(dst_rect);
+
         tmp_dst_rect.w = src_rect->w;
         tmp_dst_rect.h = src_rect->h;
     }
-    SDL_RenderCopyEx(m_renderer, m_raw_texture, src_rect, &tmp_dst_rect, angle, center, flip);
+    SDL_RenderCopyEx(WEB_OBJECT_GET_RENDERER, m_raw_texture, &tmp_src_rect, &tmp_dst_rect, angle, center, flip);
 }
 
 bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
-    //printf("%s => %s[%s] loaded successfully\n", FUNCTION_NAME, tag, from);
+    if () {
+        printf("%s => %s[%s] loaded successfully\n", FUNCTION_NAME, tag, from);
+    }
 
     if (set_color_key) {
         SDL_SetColorKey(surface, set_color_key, SDL_MapRGB(surface->format, color_key_r, color_key_g, color_key_b));
     }
 
-    m_raw_texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    m_raw_texture = SDL_CreateTextureFromSurface(WEB_OBJECT_GET_RENDERER, surface);
     if (!m_raw_texture) {
         printf("%s => Failed to create texture from %s[%s]: %s\n", FUNCTION_NAME, tag, from, SDL_GetError());
         return false;

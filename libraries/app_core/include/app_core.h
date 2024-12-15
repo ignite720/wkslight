@@ -50,6 +50,34 @@ public:
 };
 
 struct APP_CORE_API AppCore {
+    struct AppInfo {
+        float window_width = 0.0f;
+        float window_height = 0.0f;
+
+        struct Config {
+            bool logger_verbose = false;
+        } config;
+        struct Stats {
+            float now = 0.0f;
+            float last_time = 0.0f;
+
+            float delta_time = 0.0f;
+            int fps = 0;
+
+            struct Staging {
+                int frames_accumulated = 0;
+                float time_accumulated = 0.0f;
+            } staging;
+        } stats;
+        struct GameInfo {
+            bool paddle_friction = false;
+
+            struct Stats {
+                int num_streaks = 0;
+            } stats;
+        } game_info;
+    };
+
     static std::unique_ptr<AppCore> create();
     
 private:
@@ -62,8 +90,8 @@ public:
     virtual ~AppCore() = default;
 
     virtual int init(int width, int height, bool linear_filter) {
-        m_window_width = float(width);
-        m_window_height = float(height);
+        m_app_info.window_width = float(width);
+        m_app_info.window_height = float(height);
 
         simplerand::from_seed(static_cast<unsigned>(std::time(nullptr)));
         return 0;
@@ -74,14 +102,14 @@ public:
     virtual void update() {}
     virtual void render() {}
 
-    virtual void reset_game() {}
+    virtual void restart() {}
+    virtual void * renderer_as_void_p() { return nullptr; }
     virtual void play_audio_clip(int index) const {}
 
 public:
-    float get_window_width() const { return m_window_width; }
-    float get_window_height() const { return m_window_height; }
+    const AppInfo & app_info_as_ref() const { return m_app_info; }
+    AppInfo & app_info_as_mut() { return m_app_info; }
 
 protected:
-    float m_window_width = 0.0f;
-    float m_window_height = 0.0f;
+    AppInfo m_app_info;
 };
