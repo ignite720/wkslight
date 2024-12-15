@@ -198,9 +198,6 @@ void AppCoreWeb::render() {
     }
     
     {
-        auto lam_draw_text = [](const String &text) {
-
-        };
         auto text = ("fps: " + std::to_string(m_app_info.stats.fps)
             + "\ndelta time: " + std::to_string(m_app_info.stats.delta_time)
             + "\nlogger verbose(V): " + std::to_string(m_app_info.config.logger_verbose)
