@@ -209,10 +209,10 @@ void AppCoreWeb::render() {
     }
     
     {
+        const auto &app_info = this->app_info_as_ref();
+
         {
             const auto tex = ResourceBundle::TEXTURE_1;
-
-            const auto &app_info = this->app_info_as_ref();
             auto text = ("fps: " + std::to_string(app_info.stats.fps)
                 + "\ndelta time: " + std::to_string(app_info.stats.delta_time)
                 + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
@@ -224,36 +224,21 @@ void AppCoreWeb::render() {
 
         {
             const auto tex = ResourceBundle::TEXTURE_2;
-
-            const auto scale = 0.5f;
-            const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
-            const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
-            m_resource_bundle->draw_texture(tex, scale, w, 0.0f, consts::anchor_point::RIGHT_TOP);
+            m_resource_bundle->draw_texture(tex, 0.75f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP);
         }
 
         {
             const auto tex = ResourceBundle::TEXTURE_3;
-
-            const auto scale = 0.75f;
-            const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
-            const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
-            m_resource_bundle->draw_texture(tex, scale, w, 0.0f, consts::anchor_point::RIGHT_BOTTOM);
+            m_resource_bundle->draw_texture(tex, 0.5f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM);
         }
 
         {
             const auto tex = ResourceBundle::TEXTURE_4;
-
-            const auto scale = 1.0f;
-            const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
-            const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
-            m_resource_bundle->draw_texture(tex, scale, w, 0.0f, consts::anchor_point::LEFT_BOTTOM);
+            m_resource_bundle->draw_texture(tex, 0.25f, 0.0f, app_info.window_height, consts::anchor_point::LEFT_BOTTOM);
         }
 
         if (m_ball->get_dead()) {
-            const auto scale = 2.0f;
-            const auto w = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_width() * scale);
-            const auto h = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_height() * scale);
-            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, scale, w * 0.5f, h * 0.5f, consts::anchor_point::CENTER);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, 2.0f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER);
         }
     }
 

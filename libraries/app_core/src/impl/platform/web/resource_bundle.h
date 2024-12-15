@@ -48,8 +48,8 @@ struct ResourceBundle {
     void draw_texture(TEXTURE which, float scale, float x, float y, const SDL_FPoint &anchor) {
         const auto w = (this->textures[which]->get_width() * scale);
         const auto h = (this->textures[which]->get_height() * scale);
-        x = (x + anchor.x * w);
-        y = (y + anchor.y * h);
+        x = (x - anchor.x * w);
+        y = (y - anchor.y * h);
 
         const auto dst_rect = SDL_FRect { x, y, w, h };
         this->textures[which]->render(&dst_rect);
