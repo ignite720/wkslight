@@ -199,7 +199,7 @@ void AppCoreWeb::render() {
         auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), consts::colors::WHITE);
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
 
-        const auto h = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_height();
+        const auto h = static_cast<float>(m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_height());
         const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, h };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
