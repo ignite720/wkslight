@@ -125,8 +125,14 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         }
 
         {
+            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, "RIGHT TOP", consts::colors::PURPLE);
+            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_3, ResourceBundle::FONT_PRESS_START_2P, "RIGHT BOTTOM", consts::colors::TEAL);
+            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_4, ResourceBundle::FONT_PRESS_START_2P, "LEFT BOTTOM", consts::colors::GOLD);
+        }
+
+        {
             auto text = String("PRESS I OR CLICK\nINSERT COIN TO CONTINUE!");
-            m_resource_bundle->draw_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, text);
+            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_5, ResourceBundle::FONT_PRESS_START_2P, text, consts::colors::ORANGE);
         }
     }
 
@@ -203,19 +209,51 @@ void AppCoreWeb::render() {
     }
     
     {
-        const auto &app_info = this->app_info_as_ref();
-        auto text = ("fps: " + std::to_string(app_info.stats.fps)
-            + "\ndelta time: " + std::to_string(app_info.stats.delta_time)
-            + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
-            + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
-            + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
-            + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks));
-        m_resource_bundle->draw_text(ResourceBundle::TEXTURE_1, ResourceBundle::FONT_PRESS_START_2P, text, 0.6f, 5.0f, 5.0f);
+        {
+            const auto tex = ResourceBundle::TEXTURE_1;
+
+            const auto &app_info = this->app_info_as_ref();
+            auto text = ("fps: " + std::to_string(app_info.stats.fps)
+                + "\ndelta time: " + std::to_string(app_info.stats.delta_time)
+                + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
+                + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
+                + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
+                + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks));
+            m_resource_bundle->draw_text(tex, ResourceBundle::FONT_PRESS_START_2P, text, 0.6f, 5.0f, 5.0f);
+        }
+
+        {
+            const auto tex = ResourceBundle::TEXTURE_2;
+
+            const auto scale = 0.5f;
+            const auto w = (m_resource_bundle->textures[tex]->get_width() * s);
+            const auto h = (m_resource_bundle->textures[tex]->get_height() * s);
+            m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::RIGHT_TOP);
+        }
+
+        {
+            const auto tex = ResourceBundle::TEXTURE_3;
+
+            const auto scale = 0.75f;
+            const auto w = (m_resource_bundle->textures[tex]->get_width() * s);
+            const auto h = (m_resource_bundle->textures[tex]->get_height() * s);
+            m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::RIGHT_BOTTOM);
+        }
+
+        {
+            const auto tex = ResourceBundle::TEXTURE_4;
+
+            const auto scale = 1.0f;
+            const auto w = (m_resource_bundle->textures[tex]->get_width() * s);
+            const auto h = (m_resource_bundle->textures[tex]->get_height() * s);
+            m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::LEFT_BOTTOM);
+        }
 
         if (m_ball->get_dead()) {
-            const auto w = m_resource_bundle->textures[ResourceBundle::TEXTURE_2]->get_width();
-            const auto h = m_resource_bundle->textures[ResourceBundle::TEXTURE_2]->get_height();
-            m_resource_bundle->draw_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, "", 2.0f, w * 0.5f, h * 0.5f, consts::anchor_point::CENTER, consts::colors::ORANGE);
+            const auto scale = 2.0f;
+            const auto w = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_width() * s);
+            const auto h = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_height() * s);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, s, w * 0.5f, h * 0.5f, consts::anchor_point::CENTER);
         }
     }
 
