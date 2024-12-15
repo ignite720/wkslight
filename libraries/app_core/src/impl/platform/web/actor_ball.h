@@ -9,6 +9,8 @@ struct Ball final : public Actor {
     virtual void update(float dt) override;
     virtual void render() override;
 
+    virtual void on_spawn(float dt) override;
+
 public:
     bool update_collision(float dt, const SDL_FRect *paddle_rect);
 
@@ -17,5 +19,4 @@ private:
 
 private:
     std::unique_ptr<Texture> m_texture;
-    int m_move_state = MOVE_STATE_NONE;
 };

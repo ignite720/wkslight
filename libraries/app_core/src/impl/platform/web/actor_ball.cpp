@@ -25,8 +25,12 @@ void Ball::update(float dt) {
         m_velocity.y = -m_velocity.y;
     }
 
-    if ((m_dst_rect.y + m_dst_rect.h) > m_app_core->app_info_as_ref().window_height) {
-        this->reset(dt);
+    if (!this->get_dead() && (m_dst_rect.y + m_dst_rect.h) > m_app_core->app_info_as_ref().window_height) {
+        m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_LOSE);
+        m_app_core->play_bgm(ResourceBundle::BGM_INSERT_COIN);
+        printf("YOU LOSE!\n");
+
+        this->set_dead();
     }
     
     Actor::update(dt);
@@ -34,6 +38,12 @@ void Ball::update(float dt) {
 
 void Ball::render() {
     m_texture->render(&m_dst_rect);
+}
+
+void Ball::on_spawn(float dt) {
+    this->reset(dt);
+
+    m_app_core->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
 }
 
 bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {

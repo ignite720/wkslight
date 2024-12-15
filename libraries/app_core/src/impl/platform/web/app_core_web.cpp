@@ -31,6 +31,8 @@ struct AppCoreWeb final : public AppCore {
     virtual void restart() override;
     virtual void * renderer_as_void_p() override { return m_renderer; }
     virtual void update_app_info() override;
+
+    virtual void play_bgm(int index) const override;
     virtual void play_audio_clip(int index) const override;
 
 private:
@@ -107,12 +109,14 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
     
     {
         m_resource_bundle = std::make_unique<ResourceBundle>();
-        m_resource_bundle->bgm = std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg");
-        m_resource_bundle->play_bgm();
+        m_resource_bundle->bgms[ResourceBundle::BGM_INSERT_COIN] = std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg");
+        m_resource_bundle->bgms[ResourceBundle::BGM_ITEM_SHOP] = std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg");
+        this->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
 
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sounds/bounce.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sounds/click.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
+        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_LOSE] = std::make_unique<AudioClip>("assets/sounds/lose.wav");
 
         m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 20);
 
@@ -140,7 +144,7 @@ void AppCoreWeb::update() {
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
-            m_resource_bundle->play_audio_clip(ResourceBundle::AUDIO_CLIP_CLICK);
+            this->play_audio_clip(ResourceBundle::AUDIO_CLIP_CLICK);
             
             if (evt.button.button == SDL_BUTTON_LEFT) {
                 printf("Click: (%d, %d)\n", evt.button.x, evt.button.y);
@@ -226,6 +230,10 @@ void AppCoreWeb::update_app_info() {
             stats.staging.frames_accumulated = 0;
         }
     }
+}
+
+void AppCoreWeb::play_bgm(int index) const {
+    m_resource_bundle->play_bgm(static_cast<ResourceBundle::BGM>(index));
 }
 
 void AppCoreWeb::play_audio_clip(int index) const {

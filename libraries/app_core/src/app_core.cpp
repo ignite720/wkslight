@@ -8,6 +8,10 @@ using JSON = nlohmann::json;
 //#define SOL_ALL_SAFETIES_ON 1
 #include <sol/sol.hpp>
 
+static constexpr int RESOLUTION_SCALE_FACTOR = 2;
+static constexpr auto WINDOW_WIDTH = int(1920 / RESOLUTION_SCALE_FACTOR);
+static constexpr auto WINDOW_HEIGHT = int(1080 / RESOLUTION_SCALE_FACTOR);
+
 int app_core_startup() {
     PRINT_FUNCTION_NAME();
 
@@ -62,7 +66,7 @@ int app_core_startup() {
     
     auto app_core = AppCore::create();
     int ret = 0;
-    if ((ret = app_core->init(960, 540, false)) != 0) {
+    if ((ret = app_core->init(WINDOW_WIDTH, WINDOW_HEIGHT, false)) != 0) {
         return ret;
     }
     ret = app_core->run();
