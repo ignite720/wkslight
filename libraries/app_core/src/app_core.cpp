@@ -62,7 +62,7 @@ int app_core_startup() {
     
     auto app_core = AppCore::create();
     int ret = 0;
-    if ((ret = app_core->init(1920 / 2, 1080 / 2, false)) != 0) {
+    if ((ret = app_core->init(1920 / 4, 1080 / 4, false)) != 0) {
         return ret;
     }
     ret = app_core->run();
