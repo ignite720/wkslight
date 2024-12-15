@@ -17,7 +17,7 @@ void Paddle::update(float dt) {
     }
     
     this->set_velocity(v);
-    Actor::update();
+    Actor::update(dt);
 }
 
 void Paddle::render() {

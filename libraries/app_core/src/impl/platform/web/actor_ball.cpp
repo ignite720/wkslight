@@ -27,7 +27,7 @@ void Ball::update(float dt) {
     }
     
     this->set_velocity(m_velocity);
-    Actor::update();
+    Actor::update(dt);
 }
 
 void Ball::render() {
