@@ -114,7 +114,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         this->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
 
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sounds/bounce.wav");
-        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sounds/click.wav");
+        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_COIN] = std::make_unique<AudioClip>("assets/sounds/coin.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_LOSE] = std::make_unique<AudioClip>("assets/sounds/lose.wav");
 
@@ -125,7 +125,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         }
 
         {
-            auto text = String("PRESS I\nINSERT COIN TO CONTINUE!");
+            auto text = String("PRESS I OR CLICK\nINSERT COIN TO CONTINUE!");
             m_resource_bundle->draw_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, text);
         }
     }
@@ -151,10 +151,10 @@ void AppCoreWeb::update() {
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
-            this->play_audio_clip(ResourceBundle::AUDIO_CLIP_CLICK);
-            
             if (evt.button.button == SDL_BUTTON_LEFT) {
                 printf("Click: (%d, %d)\n", evt.button.x, evt.button.y);
+
+                m_ball->respawn();
             }
         }
 
@@ -162,6 +162,11 @@ void AppCoreWeb::update() {
             case SDLK_f: {
                 if (evt.key.type == SDL_KEYDOWN) {
                     m_app_info.game_info.paddle_friction = !m_app_info.game_info.paddle_friction;
+                }
+            } break;
+            case SDLK_i: {
+                if (evt.key.type == SDL_KEYDOWN) {
+                    m_ball->respawn();
                 }
             } break;
             case SDLK_v: {

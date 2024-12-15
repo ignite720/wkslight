@@ -9,7 +9,7 @@ struct ResourceBundle {
 
     enum AUDIO_CLIP {
         AUDIO_CLIP_BOUNCE = 0,
-        AUDIO_CLIP_CLICK,
+        AUDIO_CLIP_COIN,
         AUDIO_CLIP_HIT,
         AUDIO_CLIP_LOSE,
         AUDIO_CLIP_COUNT,
