@@ -6,7 +6,7 @@ struct Ball final : public Actor {
 
     Ball(AppCore *app_core);
 
-    virtual void update() override;
+    virtual void update(float dt) override;
     virtual void render() override;
 
 public:

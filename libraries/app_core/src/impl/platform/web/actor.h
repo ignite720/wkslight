@@ -4,7 +4,7 @@ struct Actor : public WebObject {
     Actor(AppCore *app_core, float x, float y);
     virtual ~Actor() = default;
 
-    virtual void update();
+    virtual void update(float dt);
     virtual void render() = 0;
 
     const SDL_FRect * get_rect() const { return &m_dst_rect; }

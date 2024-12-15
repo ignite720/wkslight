@@ -10,7 +10,7 @@ struct Paddle final : public Actor {
     int get_move_state() const { return m_move_state; }
     void set_move_state(int value) { m_move_state = value; }
 
-    virtual void update() override;
+    virtual void update(float dt) override;
     virtual void render() override;
 
 private:

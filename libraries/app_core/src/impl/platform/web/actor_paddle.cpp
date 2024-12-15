@@ -7,7 +7,7 @@ Paddle::Paddle(AppCore *app_core)
     this->set_rect_size(WIDTH, HEIGHT);
 }
 
-void Paddle::update() {
+void Paddle::update(float dt) {
     Vector2 v;
     if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - MOVE_DELTA) > 0.0f)) {
         v.x = -MOVE_DELTA;
