@@ -113,7 +113,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sounds/click.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
 
-        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 24);
+        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 30);
 
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(this);
     }
@@ -199,7 +199,7 @@ void AppCoreWeb::render() {
         auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), SDL_Color { 255, 0, 0 });
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
 
-        const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, 10.0f };
+        const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, 30.0f };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
 
