@@ -22,10 +22,10 @@ bool Texture::load_from_file(const char *path, SDL_bool set_color_key) {
     return this->load_from_surface(surface, "Image", path, set_color_key);
 }
 
-bool Texture::load_from_text(TTF_Font *font, const char *text, const SDL_Color &fg_color) {
+bool Texture::load_from_text(TTF_Font *font, const char *text, const SDL_Color &fg_color, Uint32 wrap_length) {
     this->drop();
     
-    SDL_Surface *surface = TTF_RenderUTF8_Blended(font, text, fg_color);
+    SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(font, text, fg_color, wrap_length);
     if (!surface) {
         printf("%s => Failed to render text surface: %s\n", FUNCTION_NAME, TTF_GetError());
         return false;
