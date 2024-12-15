@@ -32,7 +32,7 @@ struct SDL_FRect {
     float h;
 };
 
-SDL_bool SDL_HasIntersectionF(const SDL_FRect * A, const SDL_FRect * B) {
+inline SDL_bool SDL_HasIntersectionF(const SDL_FRect * A, const SDL_FRect * B) {
     auto a = SDL_Rect { int(A->x), int(A->y), int(A->w), int(A->h) };
     auto b = SDL_Rect { int(B->x), int(B->y), int(B->w), int(B->h) };
     return SDL_HasIntersection(&a, &b);
@@ -41,6 +41,18 @@ SDL_bool SDL_HasIntersectionF(const SDL_FRect * A, const SDL_FRect * B) {
 enum SDL_RendererFlip {
     SDL_FLIP_NONE = 0,
 };
+
+inline auto SDL_RenderCopyEx(
+    SDL_Renderer *renderer,
+    SDL_Texture *texture,
+    const SDL_Rect *srcrect,
+    const SDL_Rect *dstrect,
+    const double angle,
+    const SDL_Point *center,
+    const SDL_RendererFlip flip
+) -> int {
+    return SDL_RenderCopy(renderer, texture, srcrect, dstrect);
+}
 #endif
 
 enum MOVE_STATE {

@@ -58,7 +58,7 @@ void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float
 }
 
 bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
-    if () {
+    if (m_app_core->app_info_as_ref().config.logger_verbose) {
         printf("%s => %s[%s] loaded successfully\n", FUNCTION_NAME, tag, from);
     }
 
