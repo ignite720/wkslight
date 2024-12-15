@@ -41,8 +41,9 @@ void Ball::render() {
 }
 
 void Ball::on_spawn(float dt) {
+    Actor::on_spawn(dt);
+    
     this->reset(dt);
-
     m_app_core->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
 }
 

@@ -7,7 +7,7 @@ struct Actor : public WebObject {
     virtual void update(float dt);
     virtual void render() = 0;
 
-    virtual void on_spawn(float dt) {}
+    virtual void on_spawn(float dt);
 
 public:
     const SDL_FRect * get_rect() const { return &m_dst_rect; }
