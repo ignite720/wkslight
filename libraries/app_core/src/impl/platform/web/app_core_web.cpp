@@ -238,7 +238,7 @@ void AppCoreWeb::render() {
         }
 
         if (m_ball->get_dead()) {
-            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, 2.0f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, 1.25f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER);
         }
     }
 
