@@ -167,6 +167,11 @@ void AppCoreWeb::update() {
                     m_app_info.game_info.paddle_friction = !m_app_info.game_info.paddle_friction;
                 }
             } break;
+            case SDLK_v: {
+                if (evt.key.type == SDL_KEYDOWN) {
+                    m_app_info.config.logger_verbose = !m_app_info.config.logger_verbose;
+                }
+            } break;
             CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_w, SDLK_UP, UP);
             CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_s, SDLK_DOWN, DOWN);
             CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_a, SDLK_LEFT, LEFT);
@@ -194,13 +199,14 @@ void AppCoreWeb::render() {
     
     {
         auto text = ("fps: " + std::to_string(m_app_info.stats.fps)
-            + "\npaddle friction(press f to toggle): " + std::to_string(m_app_info.game_info.paddle_friction)
+            + "\nlogger verbose(press V to toggle): " + std::to_string(m_app_info.config.logger_verbose)
+            + "\npaddle friction(press F to toggle): " + std::to_string(m_app_info.game_info.paddle_friction)
             + "\nstreaks: " + std::to_string(m_app_info.game_info.stats.num_streaks));
         auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), consts::colors::WHITE);
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
 
         const auto h = static_cast<float>(m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_height());
-        const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, /*h*/ 50.0f };
+        const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, h * 0.6f };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
 
