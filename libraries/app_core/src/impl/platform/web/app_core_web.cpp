@@ -118,7 +118,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_LOSE] = std::make_unique<AudioClip>("assets/sounds/lose.wav");
 
-        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 20);
+        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 12);
         
         for (int i = 0; i < ResourceBundle::TEXTURE_COUNT; ++i) {
             m_resource_bundle->textures[i] = std::make_unique<Texture>(this);
@@ -219,26 +219,26 @@ void AppCoreWeb::render() {
                 + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
                 + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
                 + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks));
-            m_resource_bundle->draw_text(tex, ResourceBundle::FONT_PRESS_START_2P, text, 0.6f, 5.0f, 5.0f);
+            m_resource_bundle->draw_text(tex, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
         }
 
         {
             const auto tex = ResourceBundle::TEXTURE_2;
-            m_resource_bundle->draw_texture(tex, 0.5f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP);
+            m_resource_bundle->draw_texture(tex, 0.75f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP);
         }
 
         {
             const auto tex = ResourceBundle::TEXTURE_3;
-            m_resource_bundle->draw_texture(tex, 0.25f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM);
+            m_resource_bundle->draw_texture(tex, 0.5f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM);
         }
 
         {
             const auto tex = ResourceBundle::TEXTURE_4;
-            m_resource_bundle->draw_texture(tex, 0.25f, 0.0f, app_info.window_height, consts::anchor_point::LEFT_BOTTOM);
+            m_resource_bundle->draw_texture(tex, 0.5f, 0.0f, app_info.window_height, consts::anchor_point::LEFT_BOTTOM);
         }
 
         if (m_ball->get_dead()) {
-            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, 1.25f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, 2.0f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER);
         }
     }
 
