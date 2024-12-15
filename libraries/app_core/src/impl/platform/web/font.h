@@ -1,6 +1,6 @@
 #pragma once
 
-struct Font {
+struct Font final {
     explicit Font(const char *path, int pt_size);
     ~Font();
 

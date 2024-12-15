@@ -1,6 +1,6 @@
 #pragma once
 
-struct Texture : public WebObject {
+struct Texture final : public WebObject {
     explicit Texture(AppCore *app_core);
     ~Texture();
 

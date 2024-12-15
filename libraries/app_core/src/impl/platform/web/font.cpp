@@ -18,6 +18,8 @@ bool Font::load_from_file(const char *path, int pt_size) {
         printf("%s => Failed to load Font[%s][%d]: %s\n", FUNCTION_NAME, path, pt_size, TTF_GetError());
         return false;
     }
+    
+    printf("%s => Font[%s][%d] loaded successfully\n", FUNCTION_NAME, path, pt_size);
     return true;
 }
 

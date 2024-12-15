@@ -1,7 +1,7 @@
 #pragma once
 
 template<typename T>
-struct Audio {
+struct Audio final {
     explicit Audio(const char *path);
     ~Audio();
 

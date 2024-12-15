@@ -193,7 +193,9 @@ void AppCoreWeb::render() {
     }
     
     {
-        auto text = ("streaks: " + std::to_string(m_app_info.game_info.stats.num_streaks) + "\nfps: " + std::to_string(m_app_info.stats.fps));
+        auto text = ("\nfps: " + std::to_string(m_app_info.stats.fps)
+            + "\npaddle friction(press f to toggle): " + std::to_string(m_app_info.game_info.paddle_friction)
+            + "\nstreaks: " + std::to_string(m_app_info.game_info.stats.num_streaks));
         auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), SDL_Color { 255, 0, 0 });
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
 
