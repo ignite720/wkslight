@@ -224,12 +224,12 @@ void AppCoreWeb::render() {
 
         {
             const auto tex = ResourceBundle::TEXTURE_2;
-            m_resource_bundle->draw_texture(tex, 0.75f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP);
+            m_resource_bundle->draw_texture(tex, 0.5f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP);
         }
 
         {
             const auto tex = ResourceBundle::TEXTURE_3;
-            m_resource_bundle->draw_texture(tex, 0.5f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM);
+            m_resource_bundle->draw_texture(tex, 0.25f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM);
         }
 
         {
