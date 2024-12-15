@@ -26,6 +26,7 @@ void Ball::update(float dt) {
     }
 
     if (!this->get_dead() && (m_dst_rect.y + m_dst_rect.h) > m_app_core->app_info_as_ref().window_height) {
+        m_app_core->app_info_as_mut().game_info.game_over = true;
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_LOSE);
         m_app_core->play_bgm(ResourceBundle::BGM_INSERT_COIN);
         printf("YOU LOSE!\n");

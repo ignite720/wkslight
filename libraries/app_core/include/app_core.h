@@ -70,6 +70,7 @@ struct APP_CORE_API AppCore {
             } staging;
         } stats;
         struct GameInfo {
+            bool game_over = false;
             bool paddle_friction = false;
 
             struct Stats {
@@ -103,7 +104,7 @@ public:
     virtual void update() {}
     virtual void render() {}
 
-    virtual void restart() {}
+    virtual void restart() { m_app_info.game_info.game_over = false; }
     virtual void * renderer_as_void_p() { return nullptr; }
     virtual void update_app_info() {}
 
@@ -114,6 +115,6 @@ public:
     const AppInfo & app_info_as_ref() const { return m_app_info; }
     AppInfo & app_info_as_mut() { return m_app_info; }
 
-protected:
+private:
     AppInfo m_app_info;
 };

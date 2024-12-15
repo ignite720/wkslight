@@ -21,6 +21,11 @@ void Actor::on_spawn(float dt) {
     m_dead = false;
 }
 
+void Actor::set_dead() {
+    m_dead = true;
+    m_respawn_time = std::numeric_limits<float>::max();
+}
+
 void Actor::respawn() {
     if (!m_dead) {
         return;

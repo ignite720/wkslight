@@ -17,7 +17,7 @@ public:
     }
 
     bool get_dead() const { return m_dead; }
-    void set_dead() { m_dead = true; }
+    void set_dead();
 
 public:
     void respawn();

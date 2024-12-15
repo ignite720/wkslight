@@ -161,7 +161,7 @@ void AppCoreWeb::update() {
         switch (evt.key.keysym.sym) {
             case SDLK_f: {
                 if (evt.key.type == SDL_KEYDOWN) {
-                    m_app_info.game_info.paddle_friction = !m_app_info.game_info.paddle_friction;
+                    this->app_info_as_mut().game_info.paddle_friction = !this->app_info_as_mut().game_info.paddle_friction;
                 }
             } break;
             case SDLK_i: {
@@ -171,7 +171,7 @@ void AppCoreWeb::update() {
             } break;
             case SDLK_v: {
                 if (evt.key.type == SDL_KEYDOWN) {
-                    m_app_info.config.logger_verbose = !m_app_info.config.logger_verbose;
+                    this->app_info_as_mut().config.logger_verbose = !this->app_info_as_mut().config.logger_verbose;
                 }
             } break;
             CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_w, SDLK_UP, UP);
@@ -183,11 +183,11 @@ void AppCoreWeb::update() {
 
     this->update_app_info();
     {
-        const auto dt = m_app_info.stats.delta_time;
+        const auto dt = this->app_info_as_ref().stats.delta_time;
 
         m_ball->update(dt);
         if (m_ball->update_collision(dt, m_paddle->get_rect())) {
-            m_app_info.game_info.stats.num_streaks++;
+            this->app_info_as_mut().game_info.stats.num_streaks++;
         }
 
         m_paddle->update(dt);
@@ -203,12 +203,13 @@ void AppCoreWeb::render() {
     }
     
     {
-        auto text = ("fps: " + std::to_string(m_app_info.stats.fps)
-            + "\ndelta time: " + std::to_string(m_app_info.stats.delta_time)
-            + "\nlogger verbose(V): " + std::to_string(m_app_info.config.logger_verbose)
-            + "\npaddle friction(F): " + std::to_string(m_app_info.game_info.paddle_friction)
-            + "\nrounds: " + std::to_string(m_app_info.game_info.stats.num_rounds)
-            + "\nstreaks: " + std::to_string(m_app_info.game_info.stats.num_streaks));
+        const auto &app_info = this->app_info_as_ref();
+        auto text = ("fps: " + std::to_string(app_info.stats.fps)
+            + "\ndelta time: " + std::to_string(app_info.stats.delta_time)
+            + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
+            + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
+            + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
+            + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks));
         m_resource_bundle->draw_text(ResourceBundle::TEXTURE_1, ResourceBundle::FONT_PRESS_START_2P, text, 0.6f, 5.0f, 5.0f);
 
         if (m_ball->get_dead()) {
@@ -222,13 +223,16 @@ void AppCoreWeb::render() {
 }
 
 void AppCoreWeb::restart() {
-    m_app_info.game_info.stats.num_rounds++;
-    m_app_info.game_info.stats.num_streaks = 0;
+    AppCore::restart();
+
+    auto &app_info = this->app_info_as_mut();
+    app_info.game_info.stats.num_rounds++;
+    app_info.game_info.stats.num_streaks = 0;
 }
 
 void AppCoreWeb::update_app_info() {
     {
-        auto &stats = m_app_info.stats;
+        auto &stats = this->app_info_as_mut().stats;
 
         stats.now = utils::sdl::now();
         stats.delta_time = (stats.now - stats.last_time);
