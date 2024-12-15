@@ -37,8 +37,7 @@ void Audio<T>::set_volume(float value) const {
 template<typename T>
 void Audio<T>::play(int loops) {
     if constexpr (concepts::is_audio_music<T>) {
-        Mix_FadeOutMusic(300);
-        Mix_PlayMusic(m_data, loops);
+        Mix_FadeInMusic(m_data, loops, 500);
     } else if constexpr (concepts::is_audio_clip<T>) {
         m_channel = Mix_PlayChannel(-1, m_data, loops);
     }
