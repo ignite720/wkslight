@@ -3,7 +3,7 @@
 struct Paddle final : public Actor {
     static constexpr float WIDTH = 60.0f;
     static constexpr float HEIGHT = 10.0f;
-    static constexpr float MOVE_DELTA = 50.0f;
+    static constexpr float MOVE_DELTA = 20.0f;
 
     Paddle(AppCore *app_core);
 

@@ -2,7 +2,7 @@
 
 struct Ball final : public Actor {
     static constexpr float SIZE = 32.0f;
-    static constexpr float SPEED = 5.0f;
+    static constexpr float SPEED = 15.0f;
 
     Ball(AppCore *app_core);
 
