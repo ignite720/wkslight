@@ -1,8 +1,8 @@
 #pragma once
 
 struct Ball final : public Actor {
-    static constexpr float SIZE = 32.0f;
-    static constexpr float MOVE_DELTA = 50.0f;
+    static constexpr auto SIZE = 32.0f;
+    static constexpr auto MOVE_DELTA = 50.0f;
 
     Ball(AppCore *app_core);
 

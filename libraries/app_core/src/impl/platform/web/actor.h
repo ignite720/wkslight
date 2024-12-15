@@ -1,6 +1,8 @@
 #pragma once
 
 struct Actor : public WebObject {
+    static constexpr auto RESPAWN_DELAY = 1.0f;
+
     Actor(AppCore *app_core, float x, float y);
     virtual ~Actor() = default;
 

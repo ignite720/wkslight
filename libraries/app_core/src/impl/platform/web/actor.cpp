@@ -31,7 +31,7 @@ void Actor::respawn() {
         return;
     }
     
-    m_respawn_time = (utils::sdl::now() + 2.0f);
+    m_respawn_time = (utils::sdl::now() + RESPAWN_DELAY);
 }
 
 #endif
