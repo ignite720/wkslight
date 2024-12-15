@@ -185,7 +185,7 @@ void AppCoreWeb::update() {
 }
 
 void AppCoreWeb::render() {
-    utils::sdl::clear_with_color(m_renderer, SDL_Color { 95, 95, 95, 255 });
+    utils::sdl::clear_with_color(m_renderer, consts::colors::GRAY);
 
     {
         m_ball->render();
@@ -196,7 +196,7 @@ void AppCoreWeb::render() {
         auto text = ("fps: " + std::to_string(m_app_info.stats.fps)
             + "\npaddle friction(press f to toggle): " + std::to_string(m_app_info.game_info.paddle_friction)
             + "\nstreaks: " + std::to_string(m_app_info.game_info.stats.num_streaks));
-        auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), SDL_Color { 255, 0, 0 });
+        auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), consts::colors::TEAL);
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
 
         const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, 30.0f };

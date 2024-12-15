@@ -21,7 +21,7 @@ void Paddle::update() {
 }
 
 void Paddle::render() {
-    auto color = (m_app_core->app_info_as_ref().game_info.paddle_friction ? SDL_Color { 205, 105, 105, 255 } : SDL_Color { 205, 205, 205, 255 });
+    auto color = (m_app_core->app_info_as_ref().game_info.paddle_friction ? consts::colors::RED : consts::colors::SILVER );
     utils::sdl::fill_rect_with_color(WEB_OBJECT_GET_RENDERER, &m_dst_rect, color);
 }
 
