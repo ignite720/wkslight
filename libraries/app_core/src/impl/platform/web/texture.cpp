@@ -54,7 +54,7 @@ void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float
         tmp_dst_rect.w = src_rect->w;
         tmp_dst_rect.h = src_rect->h;
     }
-    SDL_RenderCopyEx(WEB_OBJECT_GET_RENDERER, m_raw_texture, &tmp_src_rect, &tmp_dst_rect, angle, center, flip);
+    SDL_RenderCopyEx(WEB_OBJECT_GET_RENDERER, m_raw_texture, src_rect ? &tmp_src_rect : nullptr, &tmp_dst_rect, angle, center, flip);
 }
 
 bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
