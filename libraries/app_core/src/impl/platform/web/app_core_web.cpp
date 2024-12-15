@@ -228,7 +228,7 @@ void AppCoreWeb::render() {
             const auto scale = 0.5f;
             const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
             const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
-            m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::RIGHT_TOP);
+            m_resource_bundle->draw_texture(tex, scale, w, 0.0f, consts::anchor_point::RIGHT_TOP);
         }
 
         {
@@ -237,7 +237,7 @@ void AppCoreWeb::render() {
             const auto scale = 0.75f;
             const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
             const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
-            m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::RIGHT_BOTTOM);
+            m_resource_bundle->draw_texture(tex, scale, w, 0.0f, consts::anchor_point::RIGHT_BOTTOM);
         }
 
         {
@@ -246,7 +246,7 @@ void AppCoreWeb::render() {
             const auto scale = 1.0f;
             const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
             const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
-            m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::LEFT_BOTTOM);
+            m_resource_bundle->draw_texture(tex, scale, w, 0.0f, consts::anchor_point::LEFT_BOTTOM);
         }
 
         if (m_ball->get_dead()) {
