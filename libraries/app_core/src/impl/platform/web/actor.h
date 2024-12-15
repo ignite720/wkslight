@@ -17,7 +17,10 @@ public:
     }
 
     bool get_dead() const { return m_dead; }
-    void set_dead();
+    void set_dead() { m_dead = true; }
+
+public:
+    void respawn();
 
 protected:
     SDL_FRect m_dst_rect = {};

@@ -64,6 +64,14 @@ enum MOVE_STATE {
 };
 
 namespace consts {
+    namespace anchor_point {
+        static const auto LEFT_TOP = SDL_FPoint { 0.0f, 0.0f };
+        static const auto RIGHT_TOP = SDL_FPoint { 1.0f, 0.0f };
+        static const auto LEFT_BOTTOM = SDL_FPoint { 0.0f, 1.0f };
+        static const auto RIGHT_BOTTOM = SDL_FPoint { 1.0f, 1.0f };
+        static const auto CENTER = SDL_FPoint { 0.5f, 0.5f };
+    }
+
     namespace colors {
         static const auto WHITE = SDL_Color { 255, 255, 255, 255 };
         static const auto BLACK = SDL_Color { 0, 0, 0, 255 };

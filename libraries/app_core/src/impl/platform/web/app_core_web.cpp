@@ -119,8 +119,15 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_LOSE] = std::make_unique<AudioClip>("assets/sounds/lose.wav");
 
         m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 20);
+        
+        for (int i = 0; i < ResourceBundle::TEXTURE_COUNT; ++i) {
+            m_resource_bundle->textures[i] = std::make_unique<Texture>(this);
+        }
 
-        m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(this);
+        {
+            auto text = String("PRESS I\nINSERT COIN TO CONTINUE!");
+            m_resource_bundle->draw_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, text);
+        }
     }
 
     m_ball = std::make_unique<Ball>(this);
@@ -191,25 +198,29 @@ void AppCoreWeb::render() {
     }
     
     {
+        auto lam_draw_text = [](const String &text) {
+
+        };
         auto text = ("fps: " + std::to_string(m_app_info.stats.fps)
             + "\ndelta time: " + std::to_string(m_app_info.stats.delta_time)
-            + "\nlogger verbose(press V to toggle): " + std::to_string(m_app_info.config.logger_verbose)
-            + "\npaddle friction(press F to toggle): " + std::to_string(m_app_info.game_info.paddle_friction)
+            + "\nlogger verbose(V): " + std::to_string(m_app_info.config.logger_verbose)
+            + "\npaddle friction(F): " + std::to_string(m_app_info.game_info.paddle_friction)
+            + "\nrounds: " + std::to_string(m_app_info.game_info.stats.num_rounds)
             + "\nstreaks: " + std::to_string(m_app_info.game_info.stats.num_streaks));
-        auto _ret = m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->load_from_text(m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P]->get_raw_handle(), text.c_str(), consts::colors::WHITE);
-        m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
+        m_resource_bundle->draw_text(ResourceBundle::TEXTURE_1, ResourceBundle::FONT_PRESS_START_2P, text, 0.6f, 5.0f, 5.0f);
 
-        const auto w = static_cast<float>(m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_width());
-        const auto h = static_cast<float>(m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_height());
-        const float scale = 0.6f;
-        const auto dst_rect = SDL_FRect { 5.0f, 5.0f, w * scale, h * scale };
-        m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
+        if (m_ball->get_dead()) {
+            const auto w = m_resource_bundle->textures[ResourceBundle::TEXTURE_2]->get_width();
+            const auto h = m_resource_bundle->textures[ResourceBundle::TEXTURE_2]->get_height();
+            m_resource_bundle->draw_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, "", 2.0f, w * 0.5f, h * 0.5f, consts::anchor_point::CENTER, consts::colors::ORANGE);
+        }
     }
 
     SDL_RenderPresent(m_renderer);
 }
 
 void AppCoreWeb::restart() {
+    m_app_info.game_info.stats.num_rounds++;
     m_app_info.game_info.stats.num_streaks = 0;
 }
 

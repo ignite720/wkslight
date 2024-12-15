@@ -40,6 +40,21 @@ struct ResourceBundle {
         this->clips[which]->play();
     }
 
+    void draw_text(TEXTURE which, FONT font, const String &text, float scale = 1.0f, float x = 0.0f, float y = 0.0f, const SDL_FPoint &anchor = consts::anchor_point::LEFT_TOP, const SDL_Color &color = consts::colors::WHITE) {
+        if (!text.empty()) {
+            auto _ret = this->textures[which]->load_from_text(this->fonts[font]->get_raw_handle(), text.c_str(), color);
+            this->textures[which]->set_blend_mode(SDL_BLENDMODE_BLEND);
+        }
+
+        const auto w = (this->textures[which]->get_width() * scale);
+        const auto h = (this->textures[which]->get_height() * scale);
+        x = (x + anchor.x * w);
+        y = (y + anchor.y * h);
+
+        const auto dst_rect = SDL_FRect { x, y, w, h };
+        this->textures[which]->render(&dst_rect);
+    }
+
     std::unique_ptr<AudioMusic> bgms[BGM_COUNT];
     std::unique_ptr<AudioClip> clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font> fonts[FONT_COUNT];

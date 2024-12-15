@@ -21,9 +21,12 @@ void Actor::on_spawn(float dt) {
     m_dead = false;
 }
 
-void Actor::set_dead() {
-    m_dead = true;
-    m_respawn_time = (utils::sdl::now() + 5.0f);
+void Actor::respawn() {
+    if (!m_dead) {
+        return;
+    }
+    
+    m_respawn_time = (utils::sdl::now() + 2.0f);
 }
 
 #endif
