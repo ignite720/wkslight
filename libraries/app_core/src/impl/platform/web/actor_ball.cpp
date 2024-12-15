@@ -55,8 +55,8 @@ void Ball::reset(float dt) {
     m_dst_rect.x = simplerand::gen_range(0.0f, m_app_core->app_info_as_ref().window_width - Ball::SIZE);
     m_dst_rect.y = 0.0f;
 
-    m_velocity.x = ((simplerand::gen() > 0.5f ? 5.0f : -5.0f) * SPEED * dt);
-    m_velocity.y = (simplerand::gen_range(4.0f, 6.0f) * SPEED * dt);
+    m_velocity.x = ((simplerand::gen() > 0.5f ? 5.0f : -5.0f) * MOVE_DELTA * dt);
+    m_velocity.y = (simplerand::gen_range(4.0f, 6.0f) * MOVE_DELTA * dt);
 
     m_app_core->restart();
 }

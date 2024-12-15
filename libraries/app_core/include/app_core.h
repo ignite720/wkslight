@@ -104,6 +104,7 @@ public:
 
     virtual void restart() {}
     virtual void * renderer_as_void_p() { return nullptr; }
+    virtual void update_app_info() {}
     virtual void play_audio_clip(int index) const {}
 
 public:

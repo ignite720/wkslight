@@ -30,6 +30,7 @@ struct AppCoreWeb final : public AppCore {
 
     virtual void restart() override;
     virtual void * renderer_as_void_p() override { return m_renderer; }
+    virtual void update_app_info() override;
     virtual void play_audio_clip(int index) const override;
 
 private:
@@ -136,21 +137,6 @@ int AppCoreWeb::run() {
 }
 
 void AppCoreWeb::update() {
-    {
-        m_app_info.stats.now = utils::sdl::now();
-        m_app_info.stats.delta_time = (m_app_info.stats.now - m_app_info.stats.last_time);
-        m_app_info.stats.last_time = m_app_info.stats.now;
-
-        m_app_info.stats.staging.frames_accumulated++;
-        m_app_info.stats.staging.time_accumulated += m_app_info.stats.delta_time;
-        if (m_app_info.stats.staging.time_accumulated >= 1.0f) {
-            m_app_info.stats.staging.time_accumulated = 0.0f;
-            
-            m_app_info.stats.fps = m_app_info.stats.staging.frames_accumulated;
-            m_app_info.stats.staging.frames_accumulated = 0;
-        }
-    }
-
     SDL_Event evt = {0};
     while (SDL_PollEvent(&evt)) {
         if (evt.type == SDL_MOUSEBUTTONDOWN) {
@@ -179,6 +165,7 @@ void AppCoreWeb::update() {
         }
     }
 
+    this->update_app_info();
     {
         const auto dt = m_app_info.stats.delta_time;
 
@@ -220,6 +207,25 @@ void AppCoreWeb::render() {
 
 void AppCoreWeb::restart() {
     m_app_info.game_info.stats.num_streaks = 0;
+}
+
+void AppCoreWeb::update_app_info() {
+    {
+        auto &stats = m_app_info.stats;
+
+        stats.now = utils::sdl::now();
+        stats.delta_time = (stats.now - stats.last_time);
+        stats.last_time = stats.now;
+
+        stats.staging.frames_accumulated++;
+        stats.staging.time_accumulated += stats.delta_time;
+        if (stats.staging.time_accumulated >= 1.0f) {
+            stats.staging.time_accumulated = 0.0f;
+
+            stats.fps = stats.staging.frames_accumulated;
+            stats.staging.frames_accumulated = 0;
+        }
+    }
 }
 
 void AppCoreWeb::play_audio_clip(int index) const {
