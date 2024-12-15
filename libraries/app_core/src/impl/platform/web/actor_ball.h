@@ -2,7 +2,7 @@
 
 struct Ball final : public Actor {
     static constexpr float SIZE = 32.0f;
-    static constexpr float SPEED = 1.0f;
+    static constexpr float SPEED = 100.0f;
 
     Ball(AppCore *app_core);
 
@@ -10,8 +10,10 @@ struct Ball final : public Actor {
     virtual void render() override;
 
 public:
-    void reset();
-    bool update_collision(const SDL_FRect *paddle_rect);
+    bool update_collision(float dt, const SDL_FRect *paddle_rect);
+
+private:
+    void reset(float dt);
 
 private:
     std::unique_ptr<Texture> m_texture;

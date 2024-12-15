@@ -13,11 +13,6 @@ struct Actor : public WebObject {
         m_dst_rect.h = height;
     }
 
-    const Vector2 & get_velocity() const { return m_velocity; }
-    void set_velocity(const Vector2 &value) {
-        m_velocity = Vector2::normalize(value);
-    }
-
 protected:
     SDL_FRect m_dst_rect = {};
     Vector2 m_velocity;

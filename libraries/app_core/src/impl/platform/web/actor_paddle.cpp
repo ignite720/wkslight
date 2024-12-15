@@ -8,15 +8,17 @@ Paddle::Paddle(AppCore *app_core)
 }
 
 void Paddle::update(float dt) {
+    const auto move_delta = (MOVE_DELTA * dt);
+
     Vector2 v;
-    if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - MOVE_DELTA) > 0.0f)) {
-        v.x = -MOVE_DELTA;
+    if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - move_delta) > 0.0f)) {
+        v.x = -move_delta;
     }
-    if ((m_move_state & MOVE_STATE_RIGHT) && ((m_dst_rect.x + m_dst_rect.w + MOVE_DELTA) < m_app_core->app_info_as_ref().window_width)) {
-        v.x = +MOVE_DELTA;
+    if ((m_move_state & MOVE_STATE_RIGHT) && ((m_dst_rect.x + m_dst_rect.w + move_delta) < m_app_core->app_info_as_ref().window_width)) {
+        v.x = +move_delta;
     }
-    
-    this->set_velocity(v);
+
+    m_velocity = v;
     Actor::update(dt);
 }
 

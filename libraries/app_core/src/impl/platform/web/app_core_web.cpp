@@ -113,7 +113,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_CLICK] = std::make_unique<AudioClip>("assets/sounds/click.wav");
         m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
 
-        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 12);
+        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 20);
 
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1] = std::make_unique<Texture>(this);
     }
@@ -183,7 +183,7 @@ void AppCoreWeb::update() {
         const auto dt = m_app_info.stats.delta_time;
 
         m_ball->update(dt);
-        if (m_ball->update_collision(m_paddle->get_rect())) {
+        if (m_ball->update_collision(dt, m_paddle->get_rect())) {
             m_app_info.game_info.stats.num_streaks++;
         }
 
@@ -201,7 +201,7 @@ void AppCoreWeb::render() {
     
     {
         auto text = ("fps: " + std::to_string(m_app_info.stats.fps)
-            + "delta time: " + std::to_string(m_app_info.stats.delta_time)
+            + "\ndelta time: " + std::to_string(m_app_info.stats.delta_time)
             + "\nlogger verbose(press V to toggle): " + std::to_string(m_app_info.config.logger_verbose)
             + "\npaddle friction(press F to toggle): " + std::to_string(m_app_info.game_info.paddle_friction)
             + "\nstreaks: " + std::to_string(m_app_info.game_info.stats.num_streaks));
@@ -210,7 +210,7 @@ void AppCoreWeb::render() {
 
         const auto w = static_cast<float>(m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_width());
         const auto h = static_cast<float>(m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_height());
-        const float scale = 0.5f;
+        const float scale = 0.6f;
         const auto dst_rect = SDL_FRect { 5.0f, 5.0f, w * scale, h * scale };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
