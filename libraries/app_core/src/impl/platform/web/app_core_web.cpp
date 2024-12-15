@@ -200,7 +200,7 @@ void AppCoreWeb::render() {
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->set_blend_mode(SDL_BLENDMODE_BLEND);
 
         const auto h = static_cast<float>(m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->get_height());
-        const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, h };
+        const auto dst_rect = SDL_FRect { 5.0f, 5.0f, m_app_info.window_width * 0.3f, /*h*/ 50.0f };
         m_resource_bundle->textures[ResourceBundle::TEXTURE_1]->render(&dst_rect);
     }
 

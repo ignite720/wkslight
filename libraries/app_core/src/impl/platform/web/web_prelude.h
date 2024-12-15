@@ -69,19 +69,19 @@ namespace consts {
         static const auto BLACK = SDL_Color { 0, 0, 0, 255 };
         static const auto GRAY = SDL_Color { 128, 128, 128, 255 };
 
-        static const auto RED = SDL_Color { 255, 0, 0 };
-        static const auto GREEN = SDL_Color { 0, 255, 0 };
-        static const auto BLUE = SDL_Color { 0, 0, 255 };
+        static const auto RED = SDL_Color { 255, 0, 0, 0xff };
+        static const auto GREEN = SDL_Color { 0, 255, 0, 0xff };
+        static const auto BLUE = SDL_Color { 0, 0, 255, 0xff };
 
-        static const auto YELLOW = SDL_Color { 255, 255, 0 };
-        static const auto PURPLE = SDL_Color { 128, 0, 128 };
-        static const auto ORANGE = SDL_Color { 255, 165, 0 };
-        static const auto PINK = SDL_Color { 255, 192, 203 };
-        static const auto CYAN = SDL_Color { 0, 255, 255 };
-        static const auto BROWN = SDL_Color { 165, 42, 42 };
-        static const auto TEAL = SDL_Color { 0, 128, 128 };
-        static const auto SILVER = SDL_Color { 192, 192, 192 };
-        static const auto GOLD = SDL_Color { 255, 215, 0 };
+        static const auto YELLOW = SDL_Color { 255, 255, 0, 0xff };
+        static const auto PURPLE = SDL_Color { 128, 0, 128, 0xff };
+        static const auto ORANGE = SDL_Color { 255, 165, 0, 0xff };
+        static const auto PINK = SDL_Color { 255, 192, 203, 0xff };
+        static const auto CYAN = SDL_Color { 0, 255, 255, 0xff };
+        static const auto BROWN = SDL_Color { 165, 42, 42, 0xff };
+        static const auto TEAL = SDL_Color { 0, 128, 128, 0xff };
+        static const auto SILVER = SDL_Color { 192, 192, 192, 0xff };
+        static const auto GOLD = SDL_Color { 255, 215, 0, 0xff };
     }
 }
 
