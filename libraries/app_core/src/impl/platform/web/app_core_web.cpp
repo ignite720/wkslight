@@ -226,8 +226,8 @@ void AppCoreWeb::render() {
             const auto tex = ResourceBundle::TEXTURE_2;
 
             const auto scale = 0.5f;
-            const auto w = (m_resource_bundle->textures[tex]->get_width() * s);
-            const auto h = (m_resource_bundle->textures[tex]->get_height() * s);
+            const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
+            const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
             m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::RIGHT_TOP);
         }
 
@@ -235,8 +235,8 @@ void AppCoreWeb::render() {
             const auto tex = ResourceBundle::TEXTURE_3;
 
             const auto scale = 0.75f;
-            const auto w = (m_resource_bundle->textures[tex]->get_width() * s);
-            const auto h = (m_resource_bundle->textures[tex]->get_height() * s);
+            const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
+            const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
             m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::RIGHT_BOTTOM);
         }
 
@@ -244,16 +244,16 @@ void AppCoreWeb::render() {
             const auto tex = ResourceBundle::TEXTURE_4;
 
             const auto scale = 1.0f;
-            const auto w = (m_resource_bundle->textures[tex]->get_width() * s);
-            const auto h = (m_resource_bundle->textures[tex]->get_height() * s);
+            const auto w = (m_resource_bundle->textures[tex]->get_width() * scale);
+            const auto h = (m_resource_bundle->textures[tex]->get_height() * scale);
             m_resource_bundle->draw_texture(tex, s, w, 0.0f, consts::anchor_point::LEFT_BOTTOM);
         }
 
         if (m_ball->get_dead()) {
             const auto scale = 2.0f;
-            const auto w = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_width() * s);
-            const auto h = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_height() * s);
-            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, s, w * 0.5f, h * 0.5f, consts::anchor_point::CENTER);
+            const auto w = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_width() * scale);
+            const auto h = (m_resource_bundle->textures[ResourceBundle::TEXTURE_5]->get_height() * scale);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_5, scale, w * 0.5f, h * 0.5f, consts::anchor_point::CENTER);
         }
     }
 
