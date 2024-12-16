@@ -57,7 +57,7 @@ bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {
         if (m_app_core->app_info_as_ref().game_info.paddle_friction) {
             auto p1 = utils::sdl::to_center_point(paddle_rect);
             auto p2 = utils::sdl::to_center_point(&m_dst_rect);
-            m_velocity.x = ((p2.x - p1.x) * MOVE_DELTA * dt);
+            m_velocity.x = ((p2.x - p1.x) * 0.1f * MOVE_DELTA * dt);
         }
         return true;
     }
