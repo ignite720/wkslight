@@ -25,3 +25,4 @@
 #endif
 
 #define PRINT_FUNCTION_NAME()                                   printf("%s\n", FUNCTION_NAME)
+#define COUNT_OF(arr)                                           (sizeof(arr) / sizeof(arr[0]))

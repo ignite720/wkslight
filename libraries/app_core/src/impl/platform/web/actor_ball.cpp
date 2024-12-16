@@ -52,8 +52,9 @@ void Ball::on_spawn(float dt) {
 bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {
     if (SDL_HasIntersectionF(&m_dst_rect, paddle_rect)) {
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_HIT);
-        m_velocity.y = -m_velocity.y;
+        printf("%s\n", consts::text::CONGRATULATIONS[simplerand::gen_range(0, static_cast<int>(COUNT_OF(consts::text::CONGRATULATIONS)))]);
 
+        m_velocity.y = -m_velocity.y;
         if (m_app_core->app_info_as_ref().game_info.paddle_friction) {
             auto p1 = utils::sdl::to_center_point(paddle_rect);
             auto p2 = utils::sdl::to_center_point(&m_dst_rect);

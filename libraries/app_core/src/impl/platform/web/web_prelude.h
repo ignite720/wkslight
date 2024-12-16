@@ -91,6 +91,28 @@ namespace consts {
         static const auto SILVER = SDL_Color { 192, 192, 192, 0xff };
         static const auto GOLD = SDL_Color { 255, 215, 0, 0xff };
     }
+
+    namespace text {
+        static constexpr const char *const CONGRATULATIONS[] = {
+            "AMAZING!",
+            "BRAVO!",
+            "EXCELLENT!",
+            "FANTASTIC!",
+            "GOOD JOB!",
+            "GREAT JOB!",
+            "GREAT WORK!",
+            "IMPRESSIVE!",
+            "INCREDIBLE!",
+            "MARVELOUS!",
+            "NICE!",
+            "NICE JOB!",
+            "OUTSTANDING!",
+            "PHENOMENAL!",
+            "SUPERB!",
+            "WELL DONE!",
+            "WELL PLAYED!",
+        };
+    }
 }
 
 struct WebObject {

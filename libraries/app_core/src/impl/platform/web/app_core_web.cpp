@@ -212,29 +212,19 @@ void AppCoreWeb::render() {
         const auto &app_info = this->app_info_as_ref();
 
         {
-            const auto tex = ResourceBundle::TEXTURE_1;
             auto text = ("fps: " + std::to_string(app_info.stats.fps)
                 + "\ndelta time: " + std::to_string(app_info.stats.delta_time)
                 + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
                 + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
                 + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
                 + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks));
-            m_resource_bundle->draw_text(tex, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
+            m_resource_bundle->draw_text(ResourceBundle::TEXTURE_1, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
         }
 
         {
-            const auto tex = ResourceBundle::TEXTURE_2;
-            m_resource_bundle->draw_texture(tex, 0.75f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP);
-        }
-
-        {
-            const auto tex = ResourceBundle::TEXTURE_3;
-            m_resource_bundle->draw_texture(tex, 0.5f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM);
-        }
-
-        {
-            const auto tex = ResourceBundle::TEXTURE_4;
-            m_resource_bundle->draw_texture(tex, 0.5f, 0.0f, app_info.window_height, consts::anchor_point::LEFT_BOTTOM);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_2, 0.75f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_3, 0.5f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM);
+            m_resource_bundle->draw_texture(ResourceBundle::TEXTURE_4, 0.5f, 0.0f, app_info.window_height, consts::anchor_point::LEFT_BOTTOM);
         }
 
         if (m_ball->get_dead()) {
@@ -254,9 +244,7 @@ void AppCoreWeb::restart() {
 }
 
 void AppCoreWeb::update_app_info() {
-    {
-        auto &stats = this->app_info_as_mut().stats;
-
+    auto lam_update_app_info_stats = [](AppInfo::Stats &stats) {
         stats.now = utils::sdl::now();
         stats.delta_time = (stats.now - stats.last_time);
         stats.last_time = stats.now;
@@ -269,7 +257,9 @@ void AppCoreWeb::update_app_info() {
             stats.fps = stats.staging.frames_accumulated;
             stats.staging.frames_accumulated = 0;
         }
-    }
+    };
+
+    lam_update_app_info_stats(this->app_info_as_mut().stats);
 }
 
 void AppCoreWeb::play_bgm(int index) const {
