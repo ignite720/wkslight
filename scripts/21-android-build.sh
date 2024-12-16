@@ -1,3 +1,5 @@
+[[ "$(pwd)" != "$(git rev-parse --show-toplevel)" ]] && { return 1; }
+
 pushd build
 
 #gradlew tasks --all
