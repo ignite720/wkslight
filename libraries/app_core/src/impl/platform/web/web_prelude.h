@@ -122,7 +122,7 @@ namespace consts {
             "WELL PLAYED!",
         };
 
-        static constexpr const char *const GAME_OVER_HINT = "PRESS I OR SPACE OR CLICK\nINSERT COIN TO CONTINUE!";
+        static constexpr const char *const GAME_OVER_HINT = "PRESS [I] OR [SPACE] OR CLICK\nINSERT COIN TO CONTINUE!";
     }
 }
 
