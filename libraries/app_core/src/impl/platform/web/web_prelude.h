@@ -53,6 +53,15 @@ inline auto SDL_RenderCopyEx(
 ) -> int {
     return SDL_RenderCopy(renderer, texture, srcrect, dstrect);
 }
+
+inline auto TTF_RenderUTF8_Blended_Wrapped(
+    TTF_Font *font,
+    const char *text,
+    SDL_Color fg,
+    Uint32 wrapLength
+) -> SDL_Surface * {
+    return nullptr;
+}
 #endif
 
 enum MOVE_STATE {
@@ -112,6 +121,8 @@ namespace consts {
             "WELL DONE!",
             "WELL PLAYED!",
         };
+
+        static constexpr const char *const GAME_OVER_HINT = "PRESS I OR SPACE OR CLICK\nINSERT COIN TO CONTINUE!";
     }
 }
 

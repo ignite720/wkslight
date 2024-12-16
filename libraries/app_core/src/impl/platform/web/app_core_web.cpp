@@ -129,11 +129,8 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
             m_resource_bundle->bake_text(ResourceBundle::TEXTURE_3, ResourceBundle::FONT_PRESS_START_2P, "RIGHT BOTTOM", consts::colors::TEAL);
             m_resource_bundle->bake_text(ResourceBundle::TEXTURE_4, ResourceBundle::FONT_PRESS_START_2P, "LEFT BOTTOM", consts::colors::GOLD);
         }
-
-        {
-            auto text = String("PRESS I OR CLICK\nINSERT COIN TO CONTINUE!");
-            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_5, ResourceBundle::FONT_PRESS_START_2P, text, consts::colors::ORANGE);
-        }
+        
+        m_resource_bundle->bake_text(ResourceBundle::TEXTURE_5, ResourceBundle::FONT_PRESS_START_2P, consts::text::GAME_OVER_HINT, consts::colors::ORANGE);
     }
 
     m_ball = std::make_unique<Ball>(this);
@@ -170,7 +167,8 @@ void AppCoreWeb::update() {
                     this->app_info_as_mut().game_info.paddle_friction = !this->app_info_as_mut().game_info.paddle_friction;
                 }
             } break;
-            case SDLK_i: {
+            case SDLK_i:
+            case SDLK_SPACE: {
                 if (evt.key.type == SDL_KEYDOWN) {
                     m_ball->respawn();
                 }
