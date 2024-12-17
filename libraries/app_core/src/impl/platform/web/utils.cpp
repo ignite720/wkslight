@@ -19,7 +19,7 @@ static void s_web_fetch_failed(emscripten_fetch_t *fetch) {
     emscripten_fetch_close(fetch);
 }
 
-String utils::str_repeats(const String &s, size_t times) {
+String utils::string::str_repeats(const String &s, size_t times) {
     String result;
     for (size_t i = 0; i < times; ++i) {
         result += s;
@@ -51,7 +51,7 @@ void utils::sdl::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *r
     SDL_RenderFillRect(renderer, &tmp_rect);
 }
 
-void utils::web_fetch(const String &url) {
+void utils::web::web_fetch(const String &url) {
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     

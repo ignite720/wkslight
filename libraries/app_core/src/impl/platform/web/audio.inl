@@ -65,6 +65,6 @@ bool Audio<T>::load_from_file(const char *path) {
         return false;
     }
 
-    printf("%s => Audio[%s] loaded successfully\n", FUNCTION_NAME, path);
+    printf("%s => Audio[%s] loaded successfully.\n", FUNCTION_NAME, path);
     return true;
 }

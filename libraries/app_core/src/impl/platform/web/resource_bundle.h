@@ -20,18 +20,6 @@ struct ResourceBundle {
         FONT_COUNT,
     };
 
-    enum TEXTURE {
-        TEXTURE_1 = 0,
-        TEXTURE_2,
-        TEXTURE_3,
-        TEXTURE_4,
-        TEXTURE_5,
-        TEXTURE_6,
-        TEXTURE_7,
-        TEXTURE_8,
-        TEXTURE_COUNT,
-    };
-
     void play_bgm(BGM index) {
         this->bgms[index]->play(-1);
     }
@@ -40,28 +28,56 @@ struct ResourceBundle {
         this->clips[index]->play();
     }
 
-    void bake_text(TEXTURE index, FONT font, const String &text, const SDL_Color &color) {
-        auto _ret = this->textures[index]->load_from_text(this->fonts[font]->get_raw_handle(), text.c_str(), color);
-        this->textures[index]->set_blend_mode(SDL_BLENDMODE_BLEND);
+    size_t text_texture_hash(FONT font, const String &text, const SDL_Color &color) const noexcept {
+        size_t hash = 0;
+        utils::hash_combine(hash, font);
+        utils::hash_combine(hash, text);
+        utils::hash_combine(hash, color.r);
+        utils::hash_combine(hash, color.g);
+        utils::hash_combine(hash, color.b);
+        utils::hash_combine(hash, color.a);
+        return hash;
     }
 
-    void draw_texture(TEXTURE index, float scale, float x, float y, const SDL_FPoint &anchor) {
-        const auto w = (this->textures[index]->get_width() * scale);
-        const auto h = (this->textures[index]->get_height() * scale);
+    Texture * try_bake_text(AppCore *app_core, FONT font, const String &text, const SDL_Color &color) {
+        Texture *ptr = nullptr;
+        const auto hash = text_texture_hash(font, text, color);
+
+        auto iter = m_textures.find(hash);
+        if (iter == m_textures.end()) {
+            ptr = iter->second.get();
+        } else {
+            auto &texture = m_textures[hash];
+            texture = std::make_unique<Texture>(app_core);
+
+            auto _ret = texture->load_from_text(this->fonts[font]->get_raw_handle(), text.c_str(), color);
+            texture->set_blend_mode(SDL_BLENDMODE_BLEND);
+
+            printf("Text texture[%zu] baked successfully.\n", m_textures.size());
+            ptr = texture.get();
+        }
+        return ptr;
+    }
+
+    void draw_texture(const Texture *texture, float scale, float x, float y, const SDL_FPoint &anchor) const {
+        const auto w = (texture->get_width() * scale);
+        const auto h = (texture->get_height() * scale);
         x = (x - anchor.x * w);
         y = (y - anchor.y * h);
 
         const auto dst_rect = SDL_FRect { x, y, w, h };
-        this->textures[index]->render(&dst_rect);
+        texture->render(&dst_rect);
     }
 
-    void draw_text(TEXTURE index, FONT font, const String &text, float scale = 1.0f, float x = 0.0f, float y = 0.0f, const SDL_FPoint &anchor = consts::anchor_point::LEFT_TOP, const SDL_Color &color = consts::colors::WHITE) {
-        this->bake_text(index, font, text, color);
-        this->draw_texture(index, scale, x, y, anchor);
+    void draw_text(AppCore *app_core, FONT font, const String &text, float scale = 1.0f, float x = 0.0f, float y = 0.0f, const SDL_FPoint &anchor = consts::anchor_point::LEFT_TOP, const SDL_Color &color = consts::colors::WHITE) {
+        auto *texture = this->try_bake_text(app_core, font, text, color);
+        this->draw_texture(texture, scale, x, y, anchor);
     }
 
     std::unique_ptr<AudioMusic> bgms[BGM_COUNT];
     std::unique_ptr<AudioClip> clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font> fonts[FONT_COUNT];
-    std::unique_ptr<Texture> textures[TEXTURE_COUNT];
+
+private:
+    collections::HashMap<size_t, std::unique_ptr<Texture>> m_textures;
 };

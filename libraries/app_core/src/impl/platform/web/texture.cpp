@@ -45,7 +45,7 @@ void Texture::set_blend_mode(SDL_BlendMode value) {
     SDL_SetTextureBlendMode(m_raw_texture, value);
 }
 
-void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float angle, const SDL_Point *center, SDL_RendererFlip flip) {
+void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float angle, const SDL_Point *center, SDL_RendererFlip flip) const {
     auto tmp_src_rect = SDL_Rect {};
     auto tmp_dst_rect = utils::sdl::to_rect(dst_rect);
     if (src_rect) {
@@ -59,7 +59,7 @@ void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float
 
 bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
     if (m_app_core->app_info_as_ref().config.logger_verbose) {
-        printf("%s => %s[%s] loaded successfully\n", FUNCTION_NAME, tag, from);
+        printf("%s => %s[%s] loaded successfully.\n", FUNCTION_NAME, tag, from);
     }
 
     if (set_color_key) {

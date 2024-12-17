@@ -7,5 +7,5 @@ echo $EMSDK_TMP_CACHE_SYSROOT_INC_PATH
 #export CPLUS_INCLUDE_PATH=${EMSDK_TMP_CACHE_SYSROOT_INC_PATH}
 source scripts/24-gmake-web.sh
 
-#emrun --no_browser --port=8000 ./bin
-scripts/tool-emrun
+#emrun --no_browser --port=8000 ./bin/target
+scripts/tool-emrun bin/target

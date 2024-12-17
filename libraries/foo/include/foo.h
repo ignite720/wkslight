@@ -8,14 +8,15 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <functional>
 #include <iostream>
 #include <limits>
 #include <map>
 #include <memory>
 #include <string>
 #include <type_traits>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
 namespace rs {
     namespace string {
@@ -36,6 +37,7 @@ namespace rs {
     }
 }
 
+using namespace rs;
 using namespace rs::string;
 using namespace rs::vec;
 
