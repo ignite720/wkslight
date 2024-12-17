@@ -32,7 +32,7 @@ struct AppCoreWeb final : public AppCore {
     virtual void * renderer_as_mut_void_p() override { return m_renderer; }
     virtual void update_app_info() override;
 
-    virtual void play_bgm(int index) const override;
+    virtual void play_audio_music(int index) const override;
     virtual void play_audio_clip(int index) const override;
 
 private:
@@ -112,9 +112,9 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
     
         {
             m_resource_bundle = std::make_unique<ResourceBundle>();
-            m_resource_bundle->put(ResourceBundle::BGM_INSERT_COIN, std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg"));
-            m_resource_bundle->put(ResourceBundle::BGM_ITEM_SHOP, std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg"));
-            this->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
+            m_resource_bundle->put(ResourceBundle::AUDIO_MUSIC_INSERT_COIN, std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg"));
+            m_resource_bundle->put(ResourceBundle::AUDIO_MUSIC_ITEM_SHOP, std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg"));
+            this->play_audio_music(ResourceBundle::AUDIO_MUSIC_ITEM_SHOP);
 
             m_resource_bundle->put(ResourceBundle::AUDIO_CLIP_BOUNCE, std::make_unique<AudioClip>("assets/sounds/bounce.wav"));
             m_resource_bundle->put(ResourceBundle::AUDIO_CLIP_COIN, std::make_unique<AudioClip>("assets/sounds/coin.wav"));
@@ -254,8 +254,8 @@ void AppCoreWeb::update_app_info() {
     lam_update_app_info_stats(this->app_info_as_mut().stats);
 }
 
-void AppCoreWeb::play_bgm(int index) const {
-    m_resource_bundle->play_bgm(static_cast<ResourceBundle::BGM>(index));
+void AppCoreWeb::play_audio_music(int index) const {
+    m_resource_bundle->play_audio_music(static_cast<ResourceBundle::AUDIO_MUSIC>(index));
 }
 
 void AppCoreWeb::play_audio_clip(int index) const {

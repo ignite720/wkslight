@@ -11,6 +11,12 @@ struct Font;
 namespace utils {
     namespace concepts {
         template<typename T>
+        concept is_mix_music = std::is_same_v<T, Mix_Music>;
+
+        template<typename T>
+        concept is_mix_chunk = std::is_same_v<T, Mix_Chunk>;
+
+        template<typename T>
         concept is_audio_music = std::is_same_v<T, AudioMusic>;
 
         template<typename T>
@@ -18,16 +24,6 @@ namespace utils {
 
         template<typename T>
         concept is_font = std::is_same_v<T, Font>;
-    }
-}
-
-namespace utils {
-    namespace concepts {
-        template<typename T>
-        concept is_mix_music = std::is_same_v<T, Mix_Music>;
-
-        template<typename T>
-        concept is_mix_chunk = std::is_same_v<T, Mix_Chunk>;
     }
 
     namespace hash {

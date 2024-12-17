@@ -89,7 +89,7 @@ public:
     virtual void * renderer_as_mut_void_p() { return nullptr; }
     virtual void update_app_info() {}
 
-    virtual void play_bgm(int index) const {}
+    virtual void play_audio_music(int index) const {}
     virtual void play_audio_clip(int index) const {}
 
 public:

@@ -9,6 +9,7 @@ Ball::Ball(AppCore *app_core)
     m_texture->set_blend_mode(SDL_BLENDMODE_BLEND);
 
     this->set_rect_size(m_texture->get_width(), m_texture->get_height());
+    this->set_dead();
 }
 
 void Ball::update(float dt) {
@@ -16,9 +17,11 @@ void Ball::update(float dt) {
         return;
     }
     
+    #if 0
     if (m_velocity.x == 0.0f && m_velocity.y == 0.0f) {
         this->reset(dt);
     }
+    #endif
 
     if ((m_dst_rect.x < 0.0f) || ((m_dst_rect.x + m_dst_rect.w) > m_app_core->app_info_as_ref().window_width)) {
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_BOUNCE);
@@ -32,7 +35,7 @@ void Ball::update(float dt) {
     if (!this->get_dead() && (m_dst_rect.y + m_dst_rect.h) > m_app_core->app_info_as_ref().window_height) {
         m_app_core->app_info_as_mut().game_info.game_over = true;
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_LOSE);
-        m_app_core->play_bgm(ResourceBundle::BGM_INSERT_COIN);
+        m_app_core->play_audio_music(ResourceBundle::AUDIO_MUSIC_INSERT_COIN);
         printf("YOU LOSE!\n");
 
         this->set_dead();
@@ -50,7 +53,7 @@ void Ball::on_spawn(float dt) {
     
     this->reset(dt);
     m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_COIN);
-    m_app_core->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
+    m_app_core->play_audio_music(ResourceBundle::AUDIO_MUSIC_ITEM_SHOP);
 }
 
 bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {

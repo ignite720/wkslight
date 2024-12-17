@@ -1,25 +1,10 @@
 #pragma once
 
-#if 0
-namespace utils {
-    namespace concepts {
-        template<typename T>
-        concept is_audio_music = std::is_same_v<T, AudioMusic>;
-
-        template<typename T>
-        concept is_audio_clip = std::is_same_v<T, AudioClip>;
-
-        template<typename T>
-        concept is_font = std::is_same_v<T, Font>;
-    }
-}
-#endif
-
 struct ResourceBundle {
-    enum BGM {
-        BGM_INSERT_COIN = 0,
-        BGM_ITEM_SHOP,
-        BGM_COUNT,
+    enum AUDIO_MUSIC {
+        AUDIO_MUSIC_INSERT_COIN = 0,
+        AUDIO_MUSIC_ITEM_SHOP,
+        AUDIO_MUSIC_COUNT,
     };
 
     enum AUDIO_CLIP {
@@ -35,19 +20,25 @@ struct ResourceBundle {
         FONT_COUNT,
     };
 
-    template<typename T>
-    void put(int index, std::unique_ptr<T> value) {
+    template<typename E, typename T>
+    std::enable_if_t<std::is_enum_v<E>, void> put(E index, std::unique_ptr<T> value) {
         if constexpr (utils::concepts::is_audio_music<T>) {
-            m_bgms[index] = std::move(value);
+            static_assert(std::is_same_v<E, AUDIO_MUSIC>);
+
+            m_musics[index] = std::move(value);
         } else if constexpr (utils::concepts::is_audio_clip<T>) {
+            static_assert(std::is_same_v<E, AUDIO_CLIP>);
+
             m_clips[index] = std::move(value);
         } else if constexpr (utils::concepts::is_font<T>) {
+            static_assert(std::is_same_v<E, FONT>);
+
             m_fonts[index] = std::move(value);
         }
     }
 
-    void play_bgm(BGM index) {
-        m_bgms[index]->play(-1);
+    void play_audio_music(AUDIO_MUSIC index) {
+        m_musics[index]->play(-1);
     }
 
     void play_audio_clip(AUDIO_CLIP index) {
@@ -102,7 +93,7 @@ private:
     }
 
 private:
-    std::unique_ptr<AudioMusic> m_bgms[BGM_COUNT];
+    std::unique_ptr<AudioMusic> m_musics[AUDIO_MUSIC_COUNT];
     std::unique_ptr<AudioClip> m_clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font> m_fonts[FONT_COUNT];
     collections::HashMap<size_t, std::unique_ptr<Texture>> m_text_textures;
