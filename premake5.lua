@@ -104,7 +104,7 @@ workspace(g_wkslight.workspace.name)
         defines({ "NDEBUG" })
         optimize("Speed")
         symbols("Off")
-    filter({ "options:target_platform=pc", "action:gmake*", "toolset:gcc or toolset:clang" })
+    filter({ "options:target_platform=pc", "action:gmake*", "system:linux", "toolset:gcc or toolset:clang" })
         buildoptions({
             "-fsanitize=address",
         })
