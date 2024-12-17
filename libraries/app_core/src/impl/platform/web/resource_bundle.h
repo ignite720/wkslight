@@ -73,10 +73,12 @@ private:
             auto &texture = m_text_textures[hash];
             texture = std::make_unique<Texture>(app_core);
 
-            auto _ret = texture->load_from_text(m_fonts[font]->get_raw_handle(), text.c_str(), color);
+            auto ret = texture->load_from_text(m_fonts[font]->get_raw_handle(), text.c_str(), color);
             texture->set_blend_mode(SDL_BLENDMODE_BLEND);
-
-            printf("Text texture[%zu] baked successfully.\n", m_text_textures.size());
+            
+            if (app_core->app_info_as_ref().config.logger_verbose) {
+                printf("Text texture[%zu] baked %ssuccessfully.\n", m_text_textures.size(), ret ? "" : "un");
+            }
             ptr = texture.get();
         }
         return ptr;
