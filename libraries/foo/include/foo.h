@@ -10,15 +10,34 @@
 
 #include <iostream>
 #include <limits>
+#include <map>
 #include <memory>
 #include <string>
 #include <type_traits>
 #include <vector>
+#include <unordered_map>
 
-using String = std::string;
+namespace rs {
+    namespace string {
+        using String = std::string;
+    }
 
-template<typename T>
-using Vec = std::vector<T>;
+    namespace vec {
+        template<typename T>
+        using Vec = std::vector<T>;
+    }
+
+    namespace collections {
+        template<typename K, typename V>
+        using BTreeMap = std::map<K, V>;
+
+        template<typename K, typename V>
+        using HashMap = std::unordered_map<K, V>;
+    }
+}
+
+using namespace rs::string;
+using namespace rs::vec;
 
 #include "foo_api.h"
 

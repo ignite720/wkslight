@@ -1,6 +1,7 @@
 #pragma once
 
 #include <foo.h>
+#include <rtm/math.h>
 #include <simplerand/simplerand.hpp>
 
 #include "app_core_api.h"
@@ -8,26 +9,6 @@
 extern "C" {
     APP_CORE_API int app_core_startup();
 }
-
-struct APP_CORE_API Vector2 {
-    static float length(const Vector2 &v) {
-        return sqrt(v.x * v.x + v.y * v.y);
-    }
-
-    static Vector2 normalize(const Vector2 &v) {
-        const float len = Vector2::length(v);
-
-        Vector2 ret = v;
-        if (len != 0.0f) {
-            ret.x /= len;
-            ret.y /= len;
-        }
-        return ret;
-    }
-
-    float x = 0.0f;
-    float y = 0.0f;
-};
 
 enum class GfxApi {
     Unknown = 0,
@@ -70,7 +51,7 @@ struct APP_CORE_API AppCore {
             } staging;
         } stats;
         struct GameInfo {
-            bool game_over = false;
+            bool game_over = true;
             bool paddle_friction = false;
 
             struct Stats {

@@ -14,7 +14,7 @@ void Paddle::update(float dt) {
 
     const auto move_delta = (MOVE_DELTA * dt);
 
-    Vector2 v;
+    rtm::float2f v;
     if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - move_delta) > 0.0f)) {
         v.x = -move_delta;
     }

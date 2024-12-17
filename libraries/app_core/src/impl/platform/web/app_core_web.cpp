@@ -61,84 +61,90 @@ AppCoreWeb::~AppCoreWeb() {
 int AppCoreWeb::init(int width, int height, bool linear_filter) {
     PRINT_FUNCTION_NAME();
     
-    AppCore::init(width, height, linear_filter);
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
-        printf("%s => Failed to initialize SDL: %s\n", FUNCTION_NAME, SDL_GetError());
-        return -1;
-    }
-
-    if (linear_filter) {
-        if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
-            return -2;
+    do {
+        if (AppCore::init(width, height, linear_filter) != 0) {
+            break;
         }
-    }
-    
-    Uint32 flags = SDL_WINDOW_SHOWN;
-    m_window = SDL_CreateWindow("AppCoreWeb", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
-    if (!m_window) {
-        printf("%s => Failed to create Window: %s\n", FUNCTION_NAME, SDL_GetError());
-        return -3;
-    }
+        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
+            printf("%s => Failed to initialize SDL: %s\n", FUNCTION_NAME, SDL_GetError());
+            break;
+        }
 
-    flags = (SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-    m_renderer = SDL_CreateRenderer(m_window, -1, flags);
-    if (!m_renderer) {
-        printf("%s => Failed to create Renderer: %s\n", FUNCTION_NAME, SDL_GetError());
-        return -4;
-    }
-
-    if (SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND) != 0) {
-        return -5;
-    }
-    
-    const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
-    if (IMG_Init(img_loaders) != img_loaders) {
-        printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
-        return -6;
-    }
-
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
-        return -7;
-    }
-
-    if (TTF_Init() != 0) {
-        printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
-        return -8;
-    }
-    
-    {
-        m_resource_bundle = std::make_unique<ResourceBundle>();
-        m_resource_bundle->bgms[ResourceBundle::BGM_INSERT_COIN] = std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg");
-        m_resource_bundle->bgms[ResourceBundle::BGM_ITEM_SHOP] = std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg");
-        this->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
-
-        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sounds/bounce.wav");
-        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_COIN] = std::make_unique<AudioClip>("assets/sounds/coin.wav");
-        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
-        m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_LOSE] = std::make_unique<AudioClip>("assets/sounds/lose.wav");
-
-        m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 12);
+        if (linear_filter) {
+            if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
+                break;
+            }
+        }
         
-        for (int i = 0; i < ResourceBundle::TEXTURE_COUNT; ++i) {
-            m_resource_bundle->textures[i] = std::make_unique<Texture>(this);
+        Uint32 flags = SDL_WINDOW_SHOWN;
+        m_window = SDL_CreateWindow("AppCoreWeb", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+        if (!m_window) {
+            printf("%s => Failed to create Window: %s\n", FUNCTION_NAME, SDL_GetError());
+            break;
         }
 
+        flags = (SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+        m_renderer = SDL_CreateRenderer(m_window, -1, flags);
+        if (!m_renderer) {
+            printf("%s => Failed to create Renderer: %s\n", FUNCTION_NAME, SDL_GetError());
+            break;
+        }
+
+        if (SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND) != 0) {
+            break;
+        }
+        
+        const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
+        if (IMG_Init(img_loaders) != img_loaders) {
+            printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
+            break;
+        }
+
+        if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+            printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
+            break;
+        }
+
+        if (TTF_Init() != 0) {
+            printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
+            break;
+        }
+    
         {
-            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, "RIGHT TOP", consts::colors::PURPLE);
-            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_3, ResourceBundle::FONT_PRESS_START_2P, "RIGHT BOTTOM", consts::colors::TEAL);
-            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_4, ResourceBundle::FONT_PRESS_START_2P, "LEFT BOTTOM", consts::colors::GOLD);
+            m_resource_bundle = std::make_unique<ResourceBundle>();
+            m_resource_bundle->bgms[ResourceBundle::BGM_INSERT_COIN] = std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg");
+            m_resource_bundle->bgms[ResourceBundle::BGM_ITEM_SHOP] = std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg");
+            this->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
+
+            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sounds/bounce.wav");
+            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_COIN] = std::make_unique<AudioClip>("assets/sounds/coin.wav");
+            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
+            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_LOSE] = std::make_unique<AudioClip>("assets/sounds/lose.wav");
+
+            m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 12);
+            
+            for (int i = 0; i < ResourceBundle::TEXTURE_COUNT; ++i) {
+                m_resource_bundle->textures[i] = std::make_unique<Texture>(this);
+            }
+
+            {
+                m_resource_bundle->bake_text(ResourceBundle::TEXTURE_2, ResourceBundle::FONT_PRESS_START_2P, "RIGHT TOP", consts::colors::PURPLE);
+                m_resource_bundle->bake_text(ResourceBundle::TEXTURE_3, ResourceBundle::FONT_PRESS_START_2P, "RIGHT BOTTOM", consts::colors::TEAL);
+                m_resource_bundle->bake_text(ResourceBundle::TEXTURE_4, ResourceBundle::FONT_PRESS_START_2P, "LEFT BOTTOM", consts::colors::GOLD);
+            }
+            
+            m_resource_bundle->bake_text(ResourceBundle::TEXTURE_5, ResourceBundle::FONT_PRESS_START_2P, consts::text::GAME_OVER_HINT, consts::colors::ORANGE);
         }
-        
-        m_resource_bundle->bake_text(ResourceBundle::TEXTURE_5, ResourceBundle::FONT_PRESS_START_2P, consts::text::GAME_OVER_HINT, consts::colors::ORANGE);
-    }
 
-    m_ball = std::make_unique<Ball>(this);
-    m_paddle = std::make_unique<Paddle>(this);
+        m_ball = std::make_unique<Ball>(this);
+        m_paddle = std::make_unique<Paddle>(this);
 
-    utils::web_fetch("example.json");
-    utils::web_fetch("https://httpbin.org/xml");
-    return 0;
+        utils::web_fetch("example.json");
+        utils::web_fetch("https://httpbin.org/xml");
+        return 0;
+    } while(false);
+    
+    return -1;
 }
 
 int AppCoreWeb::run() {

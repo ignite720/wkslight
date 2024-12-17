@@ -26,7 +26,7 @@ public:
 
 protected:
     SDL_FRect m_dst_rect = {};
-    Vector2 m_velocity;
+    rtm::float2f m_velocity;
 
 private:
     bool m_dead = false;
