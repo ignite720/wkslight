@@ -4,6 +4,10 @@ require("premake5-modules/vspropertysheets")
 require("premake5-modules/winrt")
 require("premake5-wkslight")
 newoption({
+    trigger = "asan",
+    description = "Enable AddressSanitizer.",
+})
+newoption({
     trigger = "target_platform",
     description = "Generate project files for the specified target platform",
     value = "<TARGET_PLATFORM>",
@@ -13,11 +17,7 @@ newoption({
         { "uwp", "Generate `Universal Windows Platform` projects" },
         { "web", "Generate `Web` projects" },
     },
-    default = "pc"
-})
-newoption({
-    trigger = "asan",
-    description = "Enable AddressSanitizer.",
+    default = "pc",
 })
 workspace(g_wkslight.workspace.name)
     location(path.getbasename(g_wkslight.workspacedir))
@@ -108,7 +108,7 @@ workspace(g_wkslight.workspace.name)
         defines({ "NDEBUG" })
         optimize("Speed")
         symbols("Off")
-    filter({ "options:target_platform=pc", "options:asan", "configurations:Debug", "action:gmake*", "system:linux", "toolset:gcc or toolset:clang" })
+    filter({ "options:asan", "options:target_platform=pc", "configurations:Debug", "action:gmake*", "system:linux", "toolset:gcc or toolset:clang" })
         buildoptions({ "-fsanitize=address" })
         linkoptions({ "-fsanitize=address" })
 group(g_wkslight.workspace.libraries.group)
