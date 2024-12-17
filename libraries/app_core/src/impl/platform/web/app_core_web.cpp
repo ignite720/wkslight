@@ -112,16 +112,16 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
     
         {
             m_resource_bundle = std::make_unique<ResourceBundle>();
-            m_resource_bundle->bgms[ResourceBundle::BGM_INSERT_COIN] = std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg");
-            m_resource_bundle->bgms[ResourceBundle::BGM_ITEM_SHOP] = std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg");
+            m_resource_bundle->put(ResourceBundle::BGM_INSERT_COIN, std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg"));
+            m_resource_bundle->put(ResourceBundle::BGM_ITEM_SHOP, std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg"));
             this->play_bgm(ResourceBundle::BGM_ITEM_SHOP);
 
-            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_BOUNCE] = std::make_unique<AudioClip>("assets/sounds/bounce.wav");
-            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_COIN] = std::make_unique<AudioClip>("assets/sounds/coin.wav");
-            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_HIT] = std::make_unique<AudioClip>("assets/sounds/hit.wav");
-            m_resource_bundle->clips[ResourceBundle::AUDIO_CLIP_LOSE] = std::make_unique<AudioClip>("assets/sounds/lose.wav");
+            m_resource_bundle->put(ResourceBundle::AUDIO_CLIP_BOUNCE, std::make_unique<AudioClip>("assets/sounds/bounce.wav"));
+            m_resource_bundle->put(ResourceBundle::AUDIO_CLIP_COIN, std::make_unique<AudioClip>("assets/sounds/coin.wav"));
+            m_resource_bundle->put(ResourceBundle::AUDIO_CLIP_HIT, std::make_unique<AudioClip>("assets/sounds/hit.wav"));
+            m_resource_bundle->put(ResourceBundle::AUDIO_CLIP_LOSE, std::make_unique<AudioClip>("assets/sounds/lose.wav"));
 
-            m_resource_bundle->fonts[ResourceBundle::FONT_PRESS_START_2P] = std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 12);
+            m_resource_bundle->put(ResourceBundle::FONT_PRESS_START_2P, std::make_unique<Font>("assets/fonts/PressStart2P/PressStart2P.ttf", 12));
         }
 
         m_ball = std::make_unique<Ball>(this);

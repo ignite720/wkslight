@@ -134,12 +134,4 @@ protected:
     AppCore *m_app_core = nullptr;
 };
 
-namespace concepts {
-    template<typename T>
-    concept is_audio_music = std::is_same_v<T, Mix_Music>;
-
-    template<typename T>
-    concept is_audio_clip = std::is_same_v<T, Mix_Chunk>;
-}
-
 #define WEB_OBJECT_GET_RENDERER                                 reinterpret_cast<SDL_Renderer *>(m_app_core->renderer_as_void_p())

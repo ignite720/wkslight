@@ -1,10 +1,41 @@
 #pragma once
 
+template<typename T>
+struct Audio;
+
+using AudioMusic = Audio<Mix_Music>;
+using AudioClip = Audio<Mix_Chunk>;
+
+struct Font;
+
 namespace utils {
-    template<typename T>
-    void hash_combine(size_t &seed, const T &value) noexcept {
-        std::hash<T> hasher;
-        seed ^= (hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2));
+    namespace concepts {
+        template<typename T>
+        concept is_audio_music = std::is_same_v<T, AudioMusic>;
+
+        template<typename T>
+        concept is_audio_clip = std::is_same_v<T, AudioClip>;
+
+        template<typename T>
+        concept is_font = std::is_same_v<T, Font>;
+    }
+}
+
+namespace utils {
+    namespace concepts {
+        template<typename T>
+        concept is_mix_music = std::is_same_v<T, Mix_Music>;
+
+        template<typename T>
+        concept is_mix_chunk = std::is_same_v<T, Mix_Chunk>;
+    }
+
+    namespace hash {
+        template<typename T>
+        void hash_combine(size_t &seed, const T &value) noexcept {
+            std::hash<T> hasher;
+            seed ^= (hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2));
+        }
     }
 
     namespace string {

@@ -17,9 +17,9 @@ Audio<T>::Audio(const char *path) {
 
 template<typename T>
 Audio<T>::~Audio() {
-    if constexpr (concepts::is_audio_music<T>) {
+    if constexpr (utils::concepts::is_mix_music<T>) {
         Mix_FreeMusic(m_data);
-    } else if constexpr (concepts::is_audio_clip<T>) {
+    } else if constexpr (utils::concepts::is_mix_chunk<T>) {
         Mix_FreeChunk(m_data);
     }
 }
@@ -27,36 +27,36 @@ Audio<T>::~Audio() {
 template<typename T>
 void Audio<T>::set_volume(float value) const {
     auto volume = static_cast<int>(value * MIX_MAX_VOLUME);
-    if constexpr (concepts::is_audio_music<T>) {
+    if constexpr (utils::concepts::is_mix_music<T>) {
         Mix_VolumeMusic(volume);
-    } else if constexpr (concepts::is_audio_clip<T>) {
+    } else if constexpr (utils::concepts::is_mix_chunk<T>) {
         Mix_VolumeChunk(m_data, volume);
     }
 }
 
 template<typename T>
 void Audio<T>::play(int loops) {
-    if constexpr (concepts::is_audio_music<T>) {
+    if constexpr (utils::concepts::is_mix_music<T>) {
         Mix_FadeInMusic(m_data, loops, 1000);
-    } else if constexpr (concepts::is_audio_clip<T>) {
+    } else if constexpr (utils::concepts::is_mix_chunk<T>) {
         m_channel = Mix_PlayChannel(-1, m_data, loops);
     }
 }
 
 template<typename T>
 void Audio<T>::stop() const {
-    if constexpr (concepts::is_audio_music<T>) {
+    if constexpr (utils::concepts::is_mix_music<T>) {
         Mix_HaltMusic();
-    } else if constexpr (concepts::is_audio_clip<T>) {
+    } else if constexpr (utils::concepts::is_mix_chunk<T>) {
         Mix_HaltChannel(m_channel);
     }
 }
 
 template<typename T>
 bool Audio<T>::load_from_file(const char *path) {
-    if constexpr (concepts::is_audio_music<T>) {
+    if constexpr (utils::concepts::is_mix_music<T>) {
         m_data = Mix_LoadMUS(path);
-    } else if constexpr (concepts::is_audio_clip<T>) {
+    } else if constexpr (utils::concepts::is_mix_chunk<T>) {
         m_data = Mix_LoadWAV(path);
     }
 
