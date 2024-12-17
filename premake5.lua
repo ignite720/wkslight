@@ -15,6 +15,10 @@ newoption({
     },
     default = "pc"
 })
+newoption({
+    trigger = "asan",
+    description = "Enable AddressSanitizer.",
+})
 workspace(g_wkslight.workspace.name)
     location(path.getbasename(g_wkslight.workspacedir))
     configurations({ "Debug", "Release" })
@@ -104,13 +108,9 @@ workspace(g_wkslight.workspace.name)
         defines({ "NDEBUG" })
         optimize("Speed")
         symbols("Off")
-    filter({ "options:target_platform=pc", "action:gmake*", "system:linux", "toolset:gcc or toolset:clang" })
-        buildoptions({
-            "-fsanitize=address",
-        })
-        linkoptions({
-            "-fsanitize=address",
-        })
+    filter({ "options:target_platform=pc", "options:asan", "configurations:Debug", "action:gmake*", "system:linux", "toolset:gcc or toolset:clang" })
+        buildoptions({ "-fsanitize=address" })
+        linkoptions({ "-fsanitize=address" })
 group(g_wkslight.workspace.libraries.group)
     for k, v in pairs(g_wkslight.workspace.libraries.projects) do
         if v.location ~= nil then
