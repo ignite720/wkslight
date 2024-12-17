@@ -12,6 +12,10 @@ Ball::Ball(AppCore *app_core)
 }
 
 void Ball::update(float dt) {
+    if (m_app_core->app_info_as_ref().game_info.game_over) {
+        return;
+    }
+    
     if (m_velocity.x == 0.0f && m_velocity.y == 0.0f) {
         this->reset(dt);
     }

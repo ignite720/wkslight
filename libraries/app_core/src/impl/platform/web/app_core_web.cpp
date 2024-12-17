@@ -29,7 +29,7 @@ struct AppCoreWeb final : public AppCore {
     virtual void render() override;
 
     virtual void restart() override;
-    virtual void * renderer_as_void_p() override { return m_renderer; }
+    virtual void * renderer_as_mut_void_p() override { return m_renderer; }
     virtual void update_app_info() override;
 
     virtual void play_bgm(int index) const override;

@@ -134,4 +134,4 @@ protected:
     AppCore *m_app_core = nullptr;
 };
 
-#define WEB_OBJECT_GET_RENDERER                                 reinterpret_cast<SDL_Renderer *>(m_app_core->renderer_as_void_p())
+#define WEB_OBJECT_GET_RENDERER                                 reinterpret_cast<SDL_Renderer *>(m_app_core->renderer_as_mut_void_p())
