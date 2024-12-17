@@ -11,7 +11,7 @@ void Paddle::update(float dt) {
     if (m_app_core->app_info_as_ref().game_info.game_over) {
         return;
     }
-
+    
     const auto move_delta = (MOVE_DELTA * dt);
 
     rtm::float2f v;
