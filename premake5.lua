@@ -108,6 +108,9 @@ workspace(g_wkslight.workspace.name)
         buildoptions({
             "-fsanitize=address",
         })
+        linkoptions({
+            "-fsanitize=address",
+        })
 group(g_wkslight.workspace.libraries.group)
     for k, v in pairs(g_wkslight.workspace.libraries.projects) do
         if v.location ~= nil then
