@@ -209,8 +209,9 @@ void AppCoreWeb::render() {
                 + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
                 + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
                 + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
-                + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks));
-            //m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
+                + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks)
+            );
+            m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
         }
 
         {

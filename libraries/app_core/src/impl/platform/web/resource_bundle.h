@@ -67,7 +67,7 @@ private:
         const auto hash = this->text_texture_hash(font, text, color);
 
         auto iter = m_text_textures.find(hash);
-        if (iter == m_text_textures.end()) {
+        if (iter != m_text_textures.end()) {
             ptr = iter->second.get();
         } else {
             auto &texture = m_text_textures[hash];
@@ -96,6 +96,6 @@ private:
     std::unique_ptr<AudioMusic> m_musics[AUDIO_MUSIC_COUNT];
     std::unique_ptr<AudioClip> m_clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font> m_fonts[FONT_COUNT];
-    
+
     collections::HashMap<size_t, std::unique_ptr<Texture>> m_text_textures;
 };
