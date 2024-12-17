@@ -29,7 +29,7 @@ struct AppCoreWeb final : public AppCore {
     virtual void render() override;
 
     virtual void restart() override;
-    virtual void * renderer_as_mut_void_p() override { return m_renderer; }
+    virtual void * renderer_as_mut_ptr() override { return m_renderer; }
     virtual void update_app_info() override;
 
     virtual void play_audio_music(int index) const override;
@@ -210,7 +210,7 @@ void AppCoreWeb::render() {
                 + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
                 + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
                 + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks));
-            m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
+            //m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
         }
 
         {

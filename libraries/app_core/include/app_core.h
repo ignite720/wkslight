@@ -86,7 +86,7 @@ public:
     virtual void render() {}
 
     virtual void restart() { m_app_info.game_info.game_over = false; }
-    virtual void * renderer_as_mut_void_p() { return nullptr; }
+    virtual void * renderer_as_mut_ptr() { return nullptr; }
     virtual void update_app_info() {}
 
     virtual void play_audio_music(int index) const {}

@@ -96,5 +96,6 @@ private:
     std::unique_ptr<AudioMusic> m_musics[AUDIO_MUSIC_COUNT];
     std::unique_ptr<AudioClip> m_clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font> m_fonts[FONT_COUNT];
+    
     collections::HashMap<size_t, std::unique_ptr<Texture>> m_text_textures;
 };
