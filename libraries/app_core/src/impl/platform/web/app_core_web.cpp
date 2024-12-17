@@ -127,8 +127,8 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         m_ball = std::make_unique<Ball>(this);
         m_paddle = std::make_unique<Paddle>(this);
 
-        utils::web_fetch("example.json");
-        utils::web_fetch("https://httpbin.org/xml");
+        utils::web::web_fetch("example.json");
+        utils::web::web_fetch("https://httpbin.org/xml");
         return 0;
     } while(false);
     
