@@ -13,10 +13,12 @@ Ball::Ball(AppCore *app_core)
 }
 
 void Ball::update(float dt) {
+    Actor::update(dt);
+
     if (m_app_core->app_info_as_ref().game_info.game_over) {
         return;
     }
-    
+
     #if 0
     if (m_velocity.x == 0.0f && m_velocity.y == 0.0f) {
         this->reset(dt);
@@ -40,8 +42,6 @@ void Ball::update(float dt) {
 
         this->set_dead();
     }
-    
-    Actor::update(dt);
 }
 
 void Ball::render() {

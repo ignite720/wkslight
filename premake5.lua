@@ -93,7 +93,9 @@ workspace(g_wkslight.workspace.name)
             "/Zc:__cplusplus",
         })
     filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
-        buildoptions({ "-static" })
+        buildoptions({
+            "-static",
+        })
     filter("configurations:Debug")
         defines({ "_DEBUG" })
         optimize("Off")
@@ -102,6 +104,10 @@ workspace(g_wkslight.workspace.name)
         defines({ "NDEBUG" })
         optimize("Speed")
         symbols("Off")
+    filter({ "options:target_platform=pc", "action:gmake*", "toolset:gcc or toolset:clang" })
+        buildoptions({
+            "-fsanitize=address",
+        })
 group(g_wkslight.workspace.libraries.group)
     for k, v in pairs(g_wkslight.workspace.libraries.projects) do
         if v.location ~= nil then
