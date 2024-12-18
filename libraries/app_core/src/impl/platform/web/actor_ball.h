@@ -15,8 +15,5 @@ public:
     bool update_collision(float dt, const SDL_FRect *paddle_rect);
 
 private:
-    void reset(float dt);
-
-private:
     std::unique_ptr<Texture> m_texture;
 };

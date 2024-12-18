@@ -236,6 +236,7 @@ void AppCoreWeb::restart() {
     app_info.game_info.stats.num_streaks = 0;
 
     m_ball->respawn();
+    m_paddle->respawn();
 }
 
 void AppCoreWeb::update_app_info() {

@@ -13,6 +13,8 @@ struct Paddle final : public Actor {
     virtual void update(float dt) override;
     virtual void render() override;
 
+    virtual void on_spawn(float dt) override;
+
 private:
     int m_move_state = MOVE_STATE_NONE;
 };

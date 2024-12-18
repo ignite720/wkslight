@@ -21,12 +21,6 @@ void Ball::update(float dt) {
         return;
     }
 
-    #if 0
-    if (m_velocity.x == 0.0f && m_velocity.y == 0.0f) {
-        this->reset(dt);
-    }
-    #endif
-
     if ((m_dst_rect.x < 0.0f) || ((m_dst_rect.x + m_dst_rect.w) > m_app_core->app_info_as_ref().window_width)) {
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_BOUNCE);
         m_velocity.x = -m_velocity.x;
@@ -53,7 +47,14 @@ void Ball::render() {
 void Ball::on_spawn(float dt) {
     Actor::on_spawn(dt);
     
-    this->reset(dt);
+    {
+        m_dst_rect.x = simplerand::gen_range(0.0f, m_app_core->app_info_as_ref().window_width - Ball::SIZE);
+        m_dst_rect.y = 0.0f;
+
+        m_velocity.x = ((simplerand::gen() > 0.5f ? 5.0f : -5.0f) * MOVE_DELTA * dt);
+        m_velocity.y = (simplerand::gen_range(4.0f, 6.0f) * MOVE_DELTA * dt);
+    }
+
     m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_COIN);
     m_app_core->play_audio_music(ResourceBundle::AUDIO_MUSIC_ITEM_SHOP);
 }
@@ -72,14 +73,6 @@ bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {
         return true;
     }
     return false;
-}
-
-void Ball::reset(float dt) {
-    m_dst_rect.x = simplerand::gen_range(0.0f, m_app_core->app_info_as_ref().window_width - Ball::SIZE);
-    m_dst_rect.y = 0.0f;
-
-    m_velocity.x = ((simplerand::gen() > 0.5f ? 5.0f : -5.0f) * MOVE_DELTA * dt);
-    m_velocity.y = (simplerand::gen_range(4.0f, 6.0f) * MOVE_DELTA * dt);
 }
 
 #endif
