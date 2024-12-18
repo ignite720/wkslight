@@ -3,7 +3,7 @@
 #if TARGET_PLATFORM_WEB
 
 Paddle::Paddle(AppCore *app_core)
-    : Actor(app_core, 0.0f, 0.0f) {
+    : Actor(app_core, 0.0f, app_core->app_info_as_ref().window_height - HEIGHT) {
     this->set_rect_size(WIDTH, HEIGHT);
     this->set_dead();
 }

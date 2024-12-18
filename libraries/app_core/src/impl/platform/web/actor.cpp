@@ -4,8 +4,7 @@
 
 Actor::Actor(AppCore *app_core, float x, float y)
     : WebObject(app_core) {
-    m_dst_rect.x = x;
-    m_dst_rect.y = y;
+    this->set_rect_left_top(x, y);
 }
 
 void Actor::update(float dt) {
