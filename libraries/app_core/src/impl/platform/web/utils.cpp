@@ -77,19 +77,12 @@ void utils::web::web_fetch_persist_file_store(const char *url, const void *data,
     emscripten_fetch(&attr, url);
 }
 
-void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size, bool async) {
+void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size) {
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     
     strcpy(attr.requestMethod, "GET");
-    attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
-    if (async) {
-        attr.onsuccess = s_web_fetch_succeeded;
-        attr.onerror = s_web_fetch_failed;
-    } else {
-        attr.attributes |= EMSCRIPTEN_FETCH_SYNCHRONOUS;
-    }
-    
+    attr.attributes = (EMSCRIPTEN_FETCH_LOAD_TO_MEMORY | EMSCRIPTEN_FETCH_SYNCHRONOUS);
     auto *fetch = emscripten_fetch(&attr, url);
     if (fetch) {
         if (fetch->status == 200) {
