@@ -12,11 +12,18 @@ struct Actor : public WebObject {
     virtual void on_spawn(float dt);
 
 public:
-    const SDL_FRect * get_rect() const { return &m_dst_rect; }
+    const SDL_FRect & rect_as_ref() const { return m_dst_rect; }
+    void set_rect_left_top(float x, float y) {
+        m_dst_rect.x = x;
+        m_dst_rect.y = y;
+    }
     void set_rect_size(float width, float height) {
         m_dst_rect.w = width;
         m_dst_rect.h = height;
     }
+
+    rtm::float2f & velocity_as_mut() { return m_velocity; }
+    void set_velocity(const rtm::float2f &value) { m_velocity = value; }
 
     bool get_dead() const { return m_dead; }
     void set_dead();
@@ -24,7 +31,7 @@ public:
 public:
     void respawn();
 
-protected:
+private:
     SDL_FRect m_dst_rect = {};
     rtm::float2f m_velocity = {};
 

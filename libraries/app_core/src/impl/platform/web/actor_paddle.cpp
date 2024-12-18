@@ -18,30 +18,26 @@ void Paddle::update(float dt) {
     const auto move_delta = (MOVE_DELTA * dt);
 
     rtm::float2f v = {};
-    if ((m_move_state & MOVE_STATE_LEFT) && ((m_dst_rect.x - move_delta) > 0.0f)) {
+    if ((m_move_state & MOVE_STATE_LEFT) && ((this->rect_as_ref().x - move_delta) > 0.0f)) {
         v.x = -move_delta;
     }
-    if ((m_move_state & MOVE_STATE_RIGHT) && ((m_dst_rect.x + m_dst_rect.w + move_delta) < m_app_core->app_info_as_ref().window_width)) {
+    if ((m_move_state & MOVE_STATE_RIGHT) && ((this->rect_as_ref().x + this->rect_as_ref().w + move_delta) < m_app_core->app_info_as_ref().window_width)) {
         v.x = +move_delta;
     }
 
-    m_velocity = v;
+    this->set_velocity(v);
 }
 
 void Paddle::render() {
     const auto color = (m_app_core->app_info_as_ref().game_info.paddle_friction ? consts::colors::RED : consts::colors::SILVER );
-    utils::sdl::fill_rect_with_color(WEB_OBJECT_GET_RENDERER, &m_dst_rect, color);
+    utils::sdl::fill_rect_with_color(WEB_OBJECT_GET_RENDERER, &this->rect_as_ref(), color);
 }
 
 void Paddle::on_spawn(float dt) {
     Actor::on_spawn(dt);
 
-    {
-        m_dst_rect.x = 0.0f;
-        m_dst_rect.y = (m_app_core->app_info_as_ref().window_height - Paddle::HEIGHT);
-
-        m_velocity = {};
-    }
+    this->set_rect_left_top(0.0f, m_app_core->app_info_as_ref().window_height - HEIGHT);
+    this->set_velocity({});
 }
 
 #endif

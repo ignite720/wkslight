@@ -21,16 +21,16 @@ void Ball::update(float dt) {
         return;
     }
 
-    if ((m_dst_rect.x < 0.0f) || ((m_dst_rect.x + m_dst_rect.w) > m_app_core->app_info_as_ref().window_width)) {
+    if ((this->rect_as_ref().x < 0.0f) || ((this->rect_as_ref().x + this->rect_as_ref().w) > m_app_core->app_info_as_ref().window_width)) {
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_BOUNCE);
-        m_velocity.x = -m_velocity.x;
+        this->velocity_as_mut().x = -this->velocity_as_mut().x;
     }
-    if (m_dst_rect.y < 0.0f) {
+    if (this->rect_as_ref().y < 0.0f) {
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_BOUNCE);
-        m_velocity.y = -m_velocity.y;
+        this->velocity_as_mut().y = -this->velocity_as_mut().y;
     }
 
-    if (!this->get_dead() && (m_dst_rect.y + m_dst_rect.h) > m_app_core->app_info_as_ref().window_height) {
+    if (!this->get_dead() && (this->rect_as_ref().y + this->rect_as_ref().h) > m_app_core->app_info_as_ref().window_height) {
         m_app_core->app_info_as_mut().game_info.game_over = true;
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_LOSE);
         m_app_core->play_audio_music(ResourceBundle::AUDIO_MUSIC_INSERT_COIN);
@@ -41,19 +41,14 @@ void Ball::update(float dt) {
 }
 
 void Ball::render() {
-    m_texture->render(&m_dst_rect);
+    m_texture->render(&this->rect_as_ref());
 }
 
 void Ball::on_spawn(float dt) {
     Actor::on_spawn(dt);
     
-    {
-        m_dst_rect.x = simplerand::gen_range(0.0f, m_app_core->app_info_as_ref().window_width - Ball::SIZE);
-        m_dst_rect.y = 0.0f;
-
-        m_velocity.x = ((simplerand::gen() > 0.5f ? 5.0f : -5.0f) * MOVE_DELTA * dt);
-        m_velocity.y = (simplerand::gen_range(4.0f, 6.0f) * MOVE_DELTA * dt);
-    }
+    this->set_rect_left_top(simplerand::gen_range(0.0f, m_app_core->app_info_as_ref().window_width - Ball::SIZE), 0.0f);
+    this->set_velocity({ (simplerand::gen() > 0.5f ? 5.0f : -5.0f) * MOVE_DELTA * dt, simplerand::gen_range(4.0f, 6.0f) * MOVE_DELTA * dt });
 
     m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_COIN);
     m_app_core->play_audio_music(ResourceBundle::AUDIO_MUSIC_ITEM_SHOP);
@@ -64,15 +59,15 @@ bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {
         return false;
     }
 
-    if (SDL_HasIntersectionF(&m_dst_rect, paddle_rect)) {
+    if (SDL_HasIntersectionF(&this->rect_as_ref(), paddle_rect)) {
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_HIT);
         printf("%s\n", consts::text::CONGRATULATIONS[simplerand::gen_range(0, static_cast<int>(COUNT_OF(consts::text::CONGRATULATIONS)))]);
 
-        m_velocity.y = -m_velocity.y;
+        this->velocity_as_mut().y = -this->velocity_as_mut().y;
         if (m_app_core->app_info_as_ref().game_info.paddle_friction) {
             auto p1 = utils::sdl::to_center_point(paddle_rect);
-            auto p2 = utils::sdl::to_center_point(&m_dst_rect);
-            m_velocity.x = ((p2.x - p1.x) * 0.1f * MOVE_DELTA * dt);
+            auto p2 = utils::sdl::to_center_point(&this->rect_as_ref());
+            this->velocity_as_mut().x = ((p2.x - p1.x) * 0.1f * MOVE_DELTA * dt);
         }
         return true;
     }

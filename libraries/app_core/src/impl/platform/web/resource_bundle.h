@@ -58,7 +58,7 @@ private:
         utils::hash::hash_combine(hash, color.r);
         utils::hash::hash_combine(hash, color.g);
         utils::hash::hash_combine(hash, color.b);
-        utils::hash::hash_combine(hash, color.a);
+        //utils::hash::hash_combine(hash, color.a);
         return hash;
     }
 

@@ -184,13 +184,12 @@ void AppCoreWeb::update() {
         const auto dt = this->app_info_as_ref().stats.delta_time;
 
         m_ball->update(dt);
-        if (m_ball->update_collision(dt, m_paddle->get_rect())) {
+        if (m_ball->update_collision(dt, &m_paddle->rect_as_ref())) {
             this->app_info_as_mut().game_info.stats.num_streaks++;
         }
 
         m_paddle->update(dt);
     }
-    
     {
         if (m_ball->get_dead()) {
             m_paddle->set_dead();
