@@ -8,4 +8,4 @@ echo $EMSDK_TMP_CACHE_SYSROOT_INC_PATH
 source scripts/24-gmake-web.sh
 
 #emrun --no_browser --port=8000 ./bin/target
-scripts/tool-emrun bin/target
+scripts/tool-run-web-server bin/target

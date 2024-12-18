@@ -151,7 +151,7 @@ void AppCoreWeb::update() {
             if (evt.button.button == SDL_BUTTON_LEFT) {
                 printf("Click: (%d, %d)\n", evt.button.x, evt.button.y);
 
-                m_ball->respawn();
+                this->restart();
             }
         }
 
@@ -164,7 +164,7 @@ void AppCoreWeb::update() {
             case SDLK_i:
             case SDLK_SPACE: {
                 if (evt.key.type == SDL_KEYDOWN) {
-                    m_ball->respawn();
+                    this->restart();
                 }
             } break;
             case SDLK_v: {
@@ -234,6 +234,8 @@ void AppCoreWeb::restart() {
     auto &app_info = this->app_info_as_mut();
     app_info.game_info.stats.num_rounds++;
     app_info.game_info.stats.num_streaks = 0;
+
+    m_ball->respawn();
 }
 
 void AppCoreWeb::update_app_info() {

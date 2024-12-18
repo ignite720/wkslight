@@ -3,6 +3,7 @@ project("app")
     targetdir(g_wkslight.targetdir)
     kind("ConsoleApp")
     language("C++")
+    uuid("BE2461B7-236F-4278-81D3-F0D476F9A4C0")
     debugdir("")
     debugargs({
         "--foobar",
@@ -15,6 +16,14 @@ project("app")
         "src/**.cpp",
         "src-java/**.*",
     })
+    -- [[
+    vpaths({
+        --["*"] = "src",
+        ["VHeaders/*"] = { "src/**.h", "src/**.hpp", "src/**.inl" },
+        ["VSources/*"] = { "**.c", "**.cpp" },
+        ["VDocs/*"] = "**.txt",
+    })
+    --]]
     includedirs({
         "%{g_wkslight.location}/foobar/include",
         "src",

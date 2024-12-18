@@ -5,8 +5,10 @@
 Ball::Ball(AppCore *app_core)
     : Actor(app_core, 0.0f, 0.0f) {
     m_texture = std::make_unique<Texture>(app_core);
-    auto _ret = m_texture->load_from_file("assets/textures/ball.png");
-    m_texture->set_blend_mode(SDL_BLENDMODE_BLEND);
+    auto ret = m_texture->load_from_file("assets/textures/ball.png");
+    if (ret) {
+        m_texture->set_blend_mode(SDL_BLENDMODE_BLEND);
+    }
 
     this->set_rect_size(m_texture->get_width(), m_texture->get_height());
     this->set_dead();
@@ -78,8 +80,6 @@ void Ball::reset(float dt) {
 
     m_velocity.x = ((simplerand::gen() > 0.5f ? 5.0f : -5.0f) * MOVE_DELTA * dt);
     m_velocity.y = (simplerand::gen_range(4.0f, 6.0f) * MOVE_DELTA * dt);
-
-    m_app_core->restart();
 }
 
 #endif

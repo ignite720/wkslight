@@ -46,7 +46,7 @@ struct ResourceBundle {
     }
 
     void draw_text(AppCore *app_core, FONT font, const String &text, float scale = 1.0f, float x = 0.0f, float y = 0.0f, const SDL_FPoint &anchor = consts::anchor_point::LEFT_TOP, const SDL_Color &color = consts::colors::WHITE) {
-        auto *texture = this->try_bake_text_texture(app_core, font, text, color);
+        auto *texture = this->get_or_bake_text_texture(app_core, font, text, color);
         this->draw_texture(texture, scale, x, y, anchor);
     }
 
@@ -62,22 +62,24 @@ private:
         return hash;
     }
 
-    Texture * try_bake_text_texture(AppCore *app_core, FONT font, const String &text, const SDL_Color &color) {
+    Texture * get_or_bake_text_texture(AppCore *app_core, FONT font, const String &text, const SDL_Color &color) {
         Texture *ptr = nullptr;
         const auto hash = this->text_texture_hash(font, text, color);
 
-        auto iter = m_text_textures.find(hash);
-        if (iter != m_text_textures.end()) {
+        auto iter = m_text_texture_cache.find(hash);
+        if (iter != m_text_texture_cache.end()) {
             ptr = iter->second.get();
         } else {
-            auto &texture = m_text_textures[hash];
+            auto &texture = m_text_texture_cache[hash];
             texture = std::make_unique<Texture>(app_core);
 
             auto ret = texture->load_from_text(m_fonts[font]->get_raw_handle(), text.c_str(), color);
-            texture->set_blend_mode(SDL_BLENDMODE_BLEND);
+            if (ret) {
+                texture->set_blend_mode(SDL_BLENDMODE_BLEND);
+            }
             
             if (app_core->app_info_as_ref().config.logger_verbose) {
-                printf("Text texture[%zu] baked %ssuccessfully.\n", m_text_textures.size(), ret ? "" : "un");
+                printf("Text texture[%zu] baked %ssuccessfully.\n", m_text_texture_cache.size(), ret ? "" : "un");
             }
             ptr = texture.get();
         }
@@ -99,5 +101,5 @@ private:
     std::unique_ptr<AudioClip> m_clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font> m_fonts[FONT_COUNT];
 
-    collections::HashMap<size_t, std::unique_ptr<Texture>> m_text_textures;
+    collections::HashMap<size_t, std::unique_ptr<Texture>> m_text_texture_cache;
 };

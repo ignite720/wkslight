@@ -58,6 +58,7 @@ void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float
 }
 
 bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
+    auto ret = true;
     if (m_app_core->app_info_as_ref().config.logger_verbose) {
         printf("%s => %s[%s] loaded successfully.\n", FUNCTION_NAME, tag, from);
     }
@@ -69,14 +70,14 @@ bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const cha
     m_raw_texture = SDL_CreateTextureFromSurface(WEB_OBJECT_GET_RENDERER, surface);
     if (!m_raw_texture) {
         printf("%s => Failed to create texture from %s[%s]: %s\n", FUNCTION_NAME, tag, from, SDL_GetError());
-        return false;
+        ret = false;
     }
 
     m_width = surface->w;
     m_height = surface->h;
 
     SDL_FreeSurface(surface);
-    return true;
+    return ret;
 }
 
 void Texture::drop() {

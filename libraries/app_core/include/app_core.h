@@ -1,6 +1,7 @@
 #pragma once
 
 #include <foo.h>
+
 #include <rtm/math.h>
 #include <simplerand/simplerand.hpp>
 
@@ -55,7 +56,7 @@ struct APP_CORE_API AppCore {
             bool paddle_friction = false;
 
             struct Stats {
-                int num_rounds = 1;
+                int num_rounds = 0;
                 int num_streaks = 0;
             } stats;
         } game_info;
