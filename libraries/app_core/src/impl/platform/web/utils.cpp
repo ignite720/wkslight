@@ -52,6 +52,8 @@ void utils::sdl::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *r
 }
 
 void utils::web::web_fetch(const char *url) {
+    PRINT_FUNCTION_NAME();
+
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     
@@ -65,6 +67,8 @@ void utils::web::web_fetch(const char *url) {
 }
 
 void utils::web::web_fetch_persist_file_store(const char *url, const void *data, size_t size) {
+    PRINT_FUNCTION_NAME();
+
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     
@@ -78,6 +82,8 @@ void utils::web::web_fetch_persist_file_store(const char *url, const void *data,
 }
 
 void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size) {
+    PRINT_FUNCTION_NAME();
+
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     
@@ -95,6 +101,8 @@ void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
 }
 
 void utils::web::web_fetch_persist_file_delete(const char *url) {
+    PRINT_FUNCTION_NAME();
+    
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     
