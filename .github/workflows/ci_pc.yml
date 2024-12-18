@@ -70,7 +70,7 @@ jobs:
           cp -r bin/* temp/artifact/${{ runner.os }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Release-Artifact-${{ runner.os }}
           path: temp

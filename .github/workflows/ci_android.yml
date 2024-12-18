@@ -48,7 +48,7 @@ jobs:
           cp -rv bin/* temp/artifact/android
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Release-Artifact-android
           path: temp
