@@ -9,8 +9,8 @@ static constexpr const char *const REQUEST_HEADERS[] = {
 
 static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
     if (fetch->data && (fetch->numBytes > 0)) {
-        auto symbol = utils::string::str_repeats("=", 98);
-        auto text = String { fetch->data, fetch->data + fetch->numBytes };
+        const auto symbol = utils::string::str_repeats("=", 98);
+        const auto text = String { fetch->data, fetch->data + fetch->numBytes };
         printf("%s>>\nweb_fetch: %s\n%s\n<<%s\n\n", symbol.c_str(), fetch->url, text.c_str(), symbol.c_str());
     }
     
