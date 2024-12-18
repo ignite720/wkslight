@@ -56,8 +56,10 @@ struct APP_CORE_API AppCore {
             bool paddle_friction = false;
 
             struct Stats {
+                int high_score = 0;
+                
                 int num_rounds = 0;
-                int num_streaks = 0;
+                int score = 0;
             } stats;
         } game_info;
     };

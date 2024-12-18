@@ -22,6 +22,7 @@ public:
         m_dst_rect.h = height;
     }
 
+    const rtm::float2f & velocity_as_ref() const { return m_velocity; }
     rtm::float2f & velocity_as_mut() { return m_velocity; }
     void set_velocity(const rtm::float2f &value) { m_velocity = value; }
 

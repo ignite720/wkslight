@@ -123,6 +123,7 @@ namespace consts {
         };
 
         static constexpr const char *const GAME_OVER_HINT = "PRESS [I] OR [SPACE] OR CLICK\nINSERT COIN TO CONTINUE!";
+        static constexpr const char *const GAME_SAVE_FILE_NAME = "game_save.dat";
     }
 }
 
@@ -130,8 +131,11 @@ struct WebObject {
     WebObject(AppCore *app_core) : m_app_core(app_core) {}
     virtual ~WebObject() = default;
 
-protected:
+    const AppCore * app_core_as_ptr() const { return m_app_core; }
+    AppCore * app_core_as_mut_ptr() { return m_app_core; }
+
+private:
     AppCore *m_app_core = nullptr;
 };
 
-#define WEB_OBJECT_GET_RENDERER                                 reinterpret_cast<SDL_Renderer *>(m_app_core->renderer_as_mut_ptr())
+#define WEB_OBJECT_GET_RENDERER                                 reinterpret_cast<SDL_Renderer *>(this->app_core_as_mut_ptr()->renderer_as_mut_ptr())

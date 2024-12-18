@@ -16,7 +16,7 @@ void Paddle::update(float dt) {
     if ((m_move_state & MOVE_STATE_LEFT) && ((this->rect_as_ref().x - move_delta) > 0.0f)) {
         v.x = -move_delta;
     }
-    if ((m_move_state & MOVE_STATE_RIGHT) && ((this->rect_as_ref().x + this->rect_as_ref().w + move_delta) < m_app_core->app_info_as_ref().window_width)) {
+    if ((m_move_state & MOVE_STATE_RIGHT) && ((this->rect_as_ref().x + this->rect_as_ref().w + move_delta) < this->app_core_as_mut_ptr()->app_info_as_ref().window_width)) {
         v.x = +move_delta;
     }
 
@@ -24,7 +24,7 @@ void Paddle::update(float dt) {
 }
 
 void Paddle::render() {
-    const auto color = (m_app_core->app_info_as_ref().game_info.paddle_friction ? consts::colors::RED : consts::colors::SILVER );
+    const auto color = (this->app_core_as_mut_ptr()->app_info_as_ref().game_info.paddle_friction ? consts::colors::RED : consts::colors::SILVER );
     utils::sdl::fill_rect_with_color(WEB_OBJECT_GET_RENDERER, &this->rect_as_ref(), color);
 }
 

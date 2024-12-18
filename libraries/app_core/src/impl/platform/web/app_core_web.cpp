@@ -129,6 +129,9 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
 
         utils::web::web_fetch("example.json");
         utils::web::web_fetch("https://httpbin.org/xml");
+
+        auto &game_info_stats = this->app_info_as_mut().game_info.stats;
+        utils::web::web_fetch_persist_file_load(consts::text::GAME_SAVE_FILE_NAME, &game_info_stats, sizeof(game_info_stats));
         return 0;
     } while(false);
     
@@ -184,10 +187,8 @@ void AppCoreWeb::update() {
         const auto dt = this->app_info_as_ref().stats.delta_time;
 
         m_ball->update(dt);
-        if (m_ball->update_collision(dt, &m_paddle->rect_as_ref())) {
-            this->app_info_as_mut().game_info.stats.num_streaks++;
-        }
-
+        m_ball->update_collision(dt, &m_paddle->rect_as_ref());
+        
         m_paddle->update(dt);
     }
 }
@@ -208,8 +209,9 @@ void AppCoreWeb::render() {
                 + "\ndelta time: " + std::to_string(app_info.stats.delta_time)
                 + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
                 + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
+                + "\nhigh score: " + std::to_string(app_info.game_info.stats.high_score)
                 + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
-                + "\nstreaks: " + std::to_string(app_info.game_info.stats.num_streaks)
+                + "\nscore: " + std::to_string(app_info.game_info.stats.score)
             );
             m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
         }
@@ -233,7 +235,7 @@ void AppCoreWeb::restart() {
 
     auto &app_info = this->app_info_as_mut();
     app_info.game_info.stats.num_rounds++;
-    app_info.game_info.stats.num_streaks = 0;
+    app_info.game_info.stats.score = 0;
 
     m_ball->respawn();
 }

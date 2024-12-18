@@ -3,6 +3,8 @@
 struct Ball final : public Actor {
     static constexpr auto SIZE = 32.0f;
     static constexpr auto MOVE_DELTA = 50.0f;
+    static constexpr auto BASE_SPEED = 5.0f;
+    static constexpr auto SPEED_BIAS = 0.5f;
 
     Ball(AppCore *app_core);
 

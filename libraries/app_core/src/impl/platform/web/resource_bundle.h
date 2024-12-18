@@ -1,5 +1,18 @@
 #pragma once
 
+namespace utils {
+    namespace concepts {
+        template<typename T>
+        concept is_audio_music = std::is_same_v<T, AudioMusic>;
+
+        template<typename T>
+        concept is_audio_clip = std::is_same_v<T, AudioClip>;
+
+        template<typename T>
+        concept is_font = std::is_same_v<T, Font>;
+    }
+}
+
 struct ResourceBundle {
     enum AUDIO_MUSIC {
         AUDIO_MUSIC_INSERT_COIN = 0,
@@ -86,7 +99,7 @@ private:
         return ptr;
     }
 
-    void draw_texture(const Texture *texture, float scale, float x, float y, const SDL_FPoint &anchor) const {
+    void draw_texture(Texture *texture, float scale, float x, float y, const SDL_FPoint &anchor) const {
         const auto w = (texture->get_width() * scale);
         const auto h = (texture->get_height() * scale);
         x = (x - anchor.x * w);

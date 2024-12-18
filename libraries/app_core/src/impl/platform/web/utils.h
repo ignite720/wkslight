@@ -1,13 +1,5 @@
 #pragma once
 
-template<typename T>
-struct Audio;
-
-using AudioMusic = Audio<Mix_Music>;
-using AudioClip = Audio<Mix_Chunk>;
-
-struct Font;
-
 namespace utils {
     namespace concepts {
         template<typename T>
@@ -15,15 +7,6 @@ namespace utils {
 
         template<typename T>
         concept is_mix_chunk = std::is_same_v<T, Mix_Chunk>;
-
-        template<typename T>
-        concept is_audio_music = std::is_same_v<T, AudioMusic>;
-
-        template<typename T>
-        concept is_audio_clip = std::is_same_v<T, AudioClip>;
-
-        template<typename T>
-        concept is_font = std::is_same_v<T, Font>;
     }
 
     namespace hash {
@@ -49,6 +32,8 @@ namespace utils {
     }
 
     namespace web {
-        void web_fetch(const String &url);
+        void web_fetch(const char *url);
+        void web_fetch_persist_file_store(const char *url, const void *data, size_t size);
+        void web_fetch_persist_file_load(const char *url, void *data, size_t size);
     }
 }
