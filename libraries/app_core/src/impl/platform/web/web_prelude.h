@@ -123,7 +123,7 @@ namespace consts {
         };
 
         static constexpr const char *const GAME_OVER_HINT = "PRESS [I] OR [SPACE] OR CLICK\nINSERT COIN TO CONTINUE!";
-        static constexpr const char *const GAME_SAVE_FILE_NAME = "game_save.dat";
+        static constexpr const char *const GAME_SAVE_FILE_NAME = "gamesave01.dat";
     }
 }
 
