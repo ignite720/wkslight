@@ -189,6 +189,9 @@ void AppCoreWeb::update() {
         }
 
         m_paddle->update(dt);
+        if (m_ball->get_dead()) {
+            m_paddle->set_dead();
+        }
     }
 }
 
