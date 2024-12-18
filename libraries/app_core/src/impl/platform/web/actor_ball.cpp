@@ -59,7 +59,7 @@ bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {
         return false;
     }
 
-    if (SDL_HasIntersectionF(&this->rect_as_ref(), paddle_rect)) {
+    if (!this->get_dead() && SDL_HasIntersectionF(&this->rect_as_ref(), paddle_rect)) {
         m_app_core->play_audio_clip(ResourceBundle::AUDIO_CLIP_HIT);
         printf("%s\n", consts::text::CONGRATULATIONS[simplerand::gen_range(0, static_cast<int>(COUNT_OF(consts::text::CONGRATULATIONS)))]);
 
