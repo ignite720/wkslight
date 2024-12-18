@@ -237,6 +237,10 @@ void AppCoreWeb::render() {
 }
 
 void AppCoreWeb::restart() {
+    if (!this->app_info_as_ref().game_info.game_over) {
+        return;
+    }
+
     AppCore::restart();
 
     auto &app_info = this->app_info_as_mut();
