@@ -13,10 +13,11 @@ void Actor::update(float dt) {
         if (utils::sdl::now() >= m_respawn_time) {
             this->on_spawn(dt);
         }
-    } else {
-        m_dst_rect.x += m_velocity.x;
-        m_dst_rect.y += m_velocity.y;
+        return;
     }
+
+    m_dst_rect.x += m_velocity.x;
+    m_dst_rect.y += m_velocity.y;
 }
 
 void Actor::on_spawn(float dt) {
