@@ -170,6 +170,11 @@ void AppCoreWeb::update() {
                     this->restart();
                 }
             } break;
+            case SDLK_u: {
+                if (evt.key.type == SDL_KEYDOWN) {
+                    utils::web::web_fetch_persist_file_delete(consts::text::GAME_SAVE_FILE_NAME);
+                }
+            } break;
             case SDLK_v: {
                 if (evt.key.type == SDL_KEYDOWN) {
                     this->app_info_as_mut().config.logger_verbose = !this->app_info_as_mut().config.logger_verbose;
@@ -209,6 +214,7 @@ void AppCoreWeb::render() {
                 + "\ndelta time: " + std::to_string(app_info.stats.delta_time)
                 + "\nlogger verbose(V): " + std::to_string(app_info.config.logger_verbose)
                 + "\npaddle friction(F): " + std::to_string(app_info.game_info.paddle_friction)
+                + "\nreset score(U): "
                 + "\nhigh score: " + std::to_string(app_info.game_info.stats.high_score)
                 + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
                 + "\nscore: " + std::to_string(app_info.game_info.stats.score)

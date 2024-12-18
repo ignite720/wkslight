@@ -94,4 +94,12 @@ void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
     emscripten_fetch_close(fetch);
 }
 
+void utils::web::web_fetch_persist_file_delete(const char *url) {
+    emscripten_fetch_attr_t attr;
+    emscripten_fetch_attr_init(&attr);
+    
+    strcpy(attr.requestMethod, "EM_IDB_DELETE");
+    emscripten_fetch(&attr, url);
+}
+
 #endif
