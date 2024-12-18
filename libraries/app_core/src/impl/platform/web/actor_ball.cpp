@@ -82,7 +82,7 @@ bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {
             }
 
             {
-                const auto v_scale = (std::log(this->app_core_as_mut_ptr()->app_info_as_ref().game_info.stats.score + 1.0f) + 1.0f);
+                const auto v_scale = (std::log10f(this->app_core_as_mut_ptr()->app_info_as_ref().game_info.stats.score + 1.0f) * 0.3f + 1.0f);
                 this->velocity_as_mut().x *= v_scale;
                 this->velocity_as_mut().y *= v_scale;
 
