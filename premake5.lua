@@ -62,6 +62,9 @@ workspace(g_wkslight.workspace.name)
         defines({ "TARGET_PLATFORM_WEB=1" })
         platforms({ "wasm" })
         toolset("emcc")
+        buildoptions({
+            "-pthread",
+        })
         linkoptions({
             "-sNO_DISABLE_EXCEPTION_CATCHING",
             "-sUSE_PTHREADS=1",
