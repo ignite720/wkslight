@@ -237,7 +237,9 @@ void AppCoreWeb::render() {
 }
 
 void AppCoreWeb::restart() {
-    if (!(this->app_info_as_ref().game_info.game_over && this->app_info_as_ref().game_info.stats_ready)) {
+    if (!(this->app_info_as_ref().game_info.game_over
+        //&& this->app_info_as_ref().game_info.stats_ready
+    )) {
         return;
     }
 
