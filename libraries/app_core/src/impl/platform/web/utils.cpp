@@ -9,7 +9,7 @@ static constexpr const char *const REQUEST_HEADERS[] = {
 
 static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
     const auto symbol = utils::string::str_repeats("=", 98);
-    printf("%s>>\nweb_fetch: %s\nfetch status => %d\n", symbol.c_str(), fetch->url, fetch->status);
+    printf("%s>>\n>>> web_fetch: %s, fetch status => %d\n", symbol.c_str(), fetch->url, fetch->status);
     
     auto *user_data = static_cast<utils::web::WebFetchUserData *>(fetch->userData);
     if (user_data) {
