@@ -63,14 +63,15 @@ workspace(g_wkslight.workspace.name)
         platforms({ "wasm" })
         toolset("emcc")
         buildoptions({
-            "--proxy-to-worker",
-            "-pthread",
+            --"-pthread",
         })
         linkoptions({
+            "--proxy-to-worker",
+            "-pthread",
             "-sNO_DISABLE_EXCEPTION_CATCHING",
+            --"-sPROXY_TO_WORKER=1",
             --"-sUSE_PTHREADS=1",
             --"-sPTHREAD_POOL_SIZE=8",
-            --"-sPROXY_TO_PTHREAD=1",
         })
     filter("system:windows")
         systemversion("latest")
