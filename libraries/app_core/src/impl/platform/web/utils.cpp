@@ -93,7 +93,7 @@ bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
     emscripten_fetch_attr_init(&attr);
     
     strcpy(attr.requestMethod, "GET");
-    attr.attributes = (EMSCRIPTEN_FETCH_LOAD_TO_MEMORY | EMSCRIPTEN_FETCH_SYNCHRONOUS);
+    attr.attributes = (EMSCRIPTEN_FETCH_LOAD_TO_MEMORY | EMSCRIPTEN_FETCH_PERSIST_FILE | EMSCRIPTEN_FETCH_SYNCHRONOUS);
 
     auto ret = false;
     auto *fetch = emscripten_fetch(&attr, url);
