@@ -1,5 +1,5 @@
-#!/bin/bash
-[[ "$(git rev-parse --is-inside-work-tree 2>/dev/null || echo false)" == true && "$(pwd)" != "$(git rev-parse --show-toplevel 2>/dev/null)" ]] && { return 1; }
+source scripts/tool-path-checker.sh
+tool_path_checker
 
 # deprecated, this is just for prebuilt.
 #cp --update -v libraries/bar/lib/linux/x64/Release/libbar.so bin/target/x64/Release

@@ -1,4 +1,5 @@
-[[ "$(git rev-parse --is-inside-work-tree 2>/dev/null || echo false)" == true && "$(pwd)" != "$(git rev-parse --show-toplevel 2>/dev/null)" ]] && { return 1; }
+source scripts/tool-path-checker.sh
+tool_path_checker
 
 pushd build
 make config=release_x64
