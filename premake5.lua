@@ -118,8 +118,8 @@ workspace(g_wkslight.workspace.name)
         buildoptions({ "-pthread" })
         linkoptions({
             --"--proxy-to-worker",
-            --"-sPROXY_TO_WORKER=1",
-            "-sPROXY_TO_PTHREAD=1",
+            "-sPROXY_TO_WORKER=1",
+            --"-sPROXY_TO_PTHREAD=1",
             "-sUSE_PTHREADS=1",
             "-sPTHREAD_POOL_SIZE=8",
         })
