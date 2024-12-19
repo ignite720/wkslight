@@ -19,7 +19,7 @@ static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
         }
 
         switch (user_data->usage) {
-            case WebFetchUserData::USAGE_GAME_INFO_STATS: {
+            case utils::web::WebFetchUserData::USAGE_GAME_INFO_STATS: {
                 user_data->app_core->app_info_as_mut().game_info.stats_ready = true;
             } break;
         }
