@@ -101,7 +101,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpw2iea0rq.js
+// include: /tmp/tmpk4cx22d1.js
 Module["expectedDataFileDownloads"] ??= 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -321,23 +321,23 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: /tmp/tmpw2iea0rq.js
-// include: /tmp/tmpx2xifkgp.js
+// end include: /tmp/tmpk4cx22d1.js
+// include: /tmp/tmppxeh2v1s.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if (Module["$ww"] || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: /tmp/tmpx2xifkgp.js
-// include: /tmp/tmpm0c4vts_.js
+// end include: /tmp/tmppxeh2v1s.js
+// include: /tmp/tmp3ln0g9u3.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: /tmp/tmpm0c4vts_.js
+// end include: /tmp/tmp3ln0g9u3.js
 // Sometimes an existing Module object exists with properties
 // meant to overwrite the default module functionality. Here
 // we collect those properties and reapply _after_ we configure
@@ -1389,7 +1389,7 @@ function dbg(...args) {
 // end include: runtime_debug.js
 // === Body ===
 var ASM_CONSTS = {
-  671720: $0 => {
+  671752: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -1397,7 +1397,7 @@ var ASM_CONSTS = {
     }
     return allocate(intArrayFromString(reply), "i8", ALLOC_NORMAL);
   },
-  671945: () => {
+  671977: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -1405,7 +1405,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  672092: () => {
+  672124: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -1413,7 +1413,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  672326: $0 => {
+  672358: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -1437,11 +1437,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  672878: () => {
+  672910: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  672946: ($0, $1, $2, $3) => {
+  672978: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -1483,7 +1483,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  674639: ($0, $1, $2, $3) => {
+  674671: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1515,7 +1515,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  675814: ($0, $1) => {
+  675846: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -1534,7 +1534,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  676419: ($0, $1) => {
+  676451: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -1548,7 +1548,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  676908: $0 => {
+  676940: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -1582,7 +1582,7 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  677914: ($0, $1, $2) => {
+  677946: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -1653,7 +1653,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  679382: ($0, $1, $2, $3, $4) => {
+  679414: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -1690,39 +1690,21 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  680370: $0 => {
+  680402: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  680453: () => {
+  680485: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  680522: () => window.innerWidth,
-  680552: () => window.innerHeight
+  680554: () => window.innerWidth,
+  680584: () => window.innerHeight
 };
 
 // end include: preamble.js
-var handleException = e => {
-  // Certain exception types we do not treat as errors since they are used for
-  // internal control flow.
-  // 1. ExitStatus, which is thrown by exit()
-  // 2. "unwind", which is thrown by emscripten_unwind_to_js_event_loop() and others
-  //    that wish to return to JS event loop.
-  if (e instanceof ExitStatus || e == "unwind") {
-    return EXITSTATUS;
-  }
-  checkStackCookie();
-  if (e instanceof WebAssembly.RuntimeError) {
-    if (_emscripten_stack_get_current() <= 0) {
-      err("Stack overflow detected.  You can try increasing -sSTACK_SIZE (currently set to 65536)");
-    }
-  }
-  quit_(1, e);
-};
-
 class ExitStatus {
   name="ExitStatus";
   constructor(status) {
@@ -1730,24 +1712,6 @@ class ExitStatus {
     this.status = status;
   }
 }
-
-var runtimeKeepaliveCounter = 0;
-
-var keepRuntimeAlive = () => noExitRuntime || runtimeKeepaliveCounter > 0;
-
-var stackSave = () => _emscripten_stack_get_current();
-
-var stackRestore = val => __emscripten_stack_restore(val);
-
-var stackAlloc = sz => __emscripten_stack_alloc(sz);
-
-var convertI32PairToI53Checked = (lo, hi) => {
-  assert(lo == (lo >>> 0) || lo == (lo | 0));
-  // lo should either be a i32 or a u32
-  assert(hi === (hi | 0));
-  // hi should be a i32
-  return ((hi + 2097152) >>> 0 < 4194305 - !!lo) ? (lo >>> 0) + hi * 4294967296 : NaN;
-};
 
 var terminateWorker = worker => {
   worker.terminate();
@@ -1804,6 +1768,117 @@ var spawnThread = threadParams => {
   worker.postMessage(msg, threadParams.transferList);
   return 0;
 };
+
+var runtimeKeepaliveCounter = 0;
+
+var keepRuntimeAlive = () => noExitRuntime || runtimeKeepaliveCounter > 0;
+
+var stackSave = () => _emscripten_stack_get_current();
+
+var stackRestore = val => __emscripten_stack_restore(val);
+
+var stackAlloc = sz => __emscripten_stack_alloc(sz);
+
+var convertI32PairToI53Checked = (lo, hi) => {
+  assert(lo == (lo >>> 0) || lo == (lo | 0));
+  // lo should either be a i32 or a u32
+  assert(hi === (hi | 0));
+  // hi should be a i32
+  return ((hi + 2097152) >>> 0 < 4194305 - !!lo) ? (lo >>> 0) + hi * 4294967296 : NaN;
+};
+
+/** @type{function(number, (number|boolean), ...number)} */ var proxyToMainThread = (funcIndex, emAsmAddr, sync, ...callArgs) => {
+  // EM_ASM proxying is done by passing a pointer to the address of the EM_ASM
+  // content as `emAsmAddr`.  JS library proxying is done by passing an index
+  // into `proxiedJSCallArgs` as `funcIndex`. If `emAsmAddr` is non-zero then
+  // `funcIndex` will be ignored.
+  // Additional arguments are passed after the first three are the actual
+  // function arguments.
+  // The serialization buffer contains the number of call params, and then
+  // all the args here.
+  // We also pass 'sync' to C separately, since C needs to look at it.
+  // Allocate a buffer, which will be copied by the C code.
+  // First passed parameter specifies the number of arguments to the function.
+  // When BigInt support is enabled, we must handle types in a more complex
+  // way, detecting at runtime if a value is a BigInt or not (as we have no
+  // type info here). To do that, add a "prefix" before each value that
+  // indicates if it is a BigInt, which effectively doubles the number of
+  // values we serialize for proxying. TODO: pack this?
+  var serializedNumCallArgs = callArgs.length;
+  var sp = stackSave();
+  var args = stackAlloc(serializedNumCallArgs * 8);
+  var b = ((args) >> 3);
+  for (var i = 0; i < callArgs.length; i++) {
+    var arg = callArgs[i];
+    GROWABLE_HEAP_F64()[b + i] = arg;
+  }
+  var rtn = __emscripten_run_on_main_thread_js(funcIndex, emAsmAddr, serializedNumCallArgs, args, sync);
+  stackRestore(sp);
+  return rtn;
+};
+
+function _proc_exit(code) {
+  if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(0, 0, 1, code);
+  EXITSTATUS = code;
+  if (!keepRuntimeAlive()) {
+    PThread.terminateAllThreads();
+    Module["onExit"]?.(code);
+    ABORT = true;
+  }
+  quit_(code, new ExitStatus(code));
+}
+
+var handleException = e => {
+  // Certain exception types we do not treat as errors since they are used for
+  // internal control flow.
+  // 1. ExitStatus, which is thrown by exit()
+  // 2. "unwind", which is thrown by emscripten_unwind_to_js_event_loop() and others
+  //    that wish to return to JS event loop.
+  if (e instanceof ExitStatus || e == "unwind") {
+    return EXITSTATUS;
+  }
+  checkStackCookie();
+  if (e instanceof WebAssembly.RuntimeError) {
+    if (_emscripten_stack_get_current() <= 0) {
+      err("Stack overflow detected.  You can try increasing -sSTACK_SIZE (currently set to 65536)");
+    }
+  }
+  quit_(1, e);
+};
+
+var runtimeKeepalivePop = () => {
+  assert(runtimeKeepaliveCounter > 0);
+  runtimeKeepaliveCounter -= 1;
+};
+
+function exitOnMainThread(returnCode) {
+  if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(1, 0, 0, returnCode);
+  runtimeKeepalivePop();
+  _exit(returnCode);
+}
+
+/** @suppress {duplicate } */ /** @param {boolean|number=} implicit */ var exitJS = (status, implicit) => {
+  EXITSTATUS = status;
+  checkUnflushedContent();
+  if (ENVIRONMENT_IS_PTHREAD) {
+    // implicit exit can never happen on a pthread
+    assert(!implicit);
+    // When running in a pthread we propagate the exit back to the main thread
+    // where it can decide if the whole process should be shut down or not.
+    // The pthread may have decided not to exit its own runtime, for example
+    // because it runs a main loop, but that doesn't affect the main thread.
+    exitOnMainThread(status);
+    throw "unwind";
+  }
+  // if exit() was called explicitly, warn the user if the runtime isn't actually being shut down
+  if (keepRuntimeAlive() && !implicit) {
+    var msg = `program exited (with status: ${status}), but keepRuntimeAlive() is set (counter=${runtimeKeepaliveCounter}) due to an async operation, so halting execution but not exiting the runtime or preventing further async execution (you can use emscripten_force_exit, if you want to force a true shutdown)`;
+    err(msg);
+  }
+  _proc_exit(status);
+};
+
+var _exit = exitJS;
 
 var ptrToString = ptr => {
   assert(typeof ptr === "number");
@@ -1884,6 +1959,13 @@ var PThread = {
     // Detach the worker from the pthread object, and return it to the
     // worker pool as an unused worker.
     worker.pthread_ptr = 0;
+    if (ENVIRONMENT_IS_NODE) {
+      // Once the proxied main thread has finished, mark it as weakly
+      // referenced so that its existence does not prevent Node.js from
+      // exiting.  This has no effect if the worker is already weakly
+      // referenced.
+      worker.unref();
+    }
     // Finally, free the underlying (and now-unused) pthread structure in
     // linear memory.
     __emscripten_thread_free_data(pthread_ptr);
@@ -2016,611 +2098,10 @@ var PThread = {
   getNewWorker() {
     if (PThread.unusedWorkers.length == 0) {
       // PTHREAD_POOL_SIZE_STRICT should show a warning and, if set to level `2`, return from the function.
-      // However, if we're in Node.js, then we can create new workers on the fly and PTHREAD_POOL_SIZE_STRICT
-      // should be ignored altogether.
-      if (!ENVIRONMENT_IS_NODE) {
-        err("Tried to spawn a new thread, but the thread pool is exhausted.\n" + "This might result in a deadlock unless some threads eventually exit or the code explicitly breaks out to the event loop.\n" + "If you want to increase the pool size, use setting `-sPTHREAD_POOL_SIZE=...`." + "\nIf you want to throw an explicit error instead of the risk of deadlocking in those cases, use setting `-sPTHREAD_POOL_SIZE_STRICT=2`.");
-      }
       PThread.allocateUnusedWorker();
       PThread.loadWasmModuleToWorker(PThread.unusedWorkers[0]);
     }
     return PThread.unusedWorkers.pop();
-  }
-};
-
-/** @type{function(number, (number|boolean), ...number)} */ var proxyToMainThread = (funcIndex, emAsmAddr, sync, ...callArgs) => {
-  // EM_ASM proxying is done by passing a pointer to the address of the EM_ASM
-  // content as `emAsmAddr`.  JS library proxying is done by passing an index
-  // into `proxiedJSCallArgs` as `funcIndex`. If `emAsmAddr` is non-zero then
-  // `funcIndex` will be ignored.
-  // Additional arguments are passed after the first three are the actual
-  // function arguments.
-  // The serialization buffer contains the number of call params, and then
-  // all the args here.
-  // We also pass 'sync' to C separately, since C needs to look at it.
-  // Allocate a buffer, which will be copied by the C code.
-  // First passed parameter specifies the number of arguments to the function.
-  // When BigInt support is enabled, we must handle types in a more complex
-  // way, detecting at runtime if a value is a BigInt or not (as we have no
-  // type info here). To do that, add a "prefix" before each value that
-  // indicates if it is a BigInt, which effectively doubles the number of
-  // values we serialize for proxying. TODO: pack this?
-  var serializedNumCallArgs = callArgs.length;
-  var sp = stackSave();
-  var args = stackAlloc(serializedNumCallArgs * 8);
-  var b = ((args) >> 3);
-  for (var i = 0; i < callArgs.length; i++) {
-    var arg = callArgs[i];
-    GROWABLE_HEAP_F64()[b + i] = arg;
-  }
-  var rtn = __emscripten_run_on_main_thread_js(funcIndex, emAsmAddr, serializedNumCallArgs, args, sync);
-  stackRestore(sp);
-  return rtn;
-};
-
-function _proc_exit(code) {
-  if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(0, 0, 1, code);
-  EXITSTATUS = code;
-  if (!keepRuntimeAlive()) {
-    PThread.terminateAllThreads();
-    Module["onExit"]?.(code);
-    ABORT = true;
-  }
-  quit_(code, new ExitStatus(code));
-}
-
-function exitOnMainThread(returnCode) {
-  if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(1, 0, 0, returnCode);
-  _exit(returnCode);
-}
-
-/** @suppress {duplicate } */ /** @param {boolean|number=} implicit */ var exitJS = (status, implicit) => {
-  EXITSTATUS = status;
-  checkUnflushedContent();
-  if (ENVIRONMENT_IS_PTHREAD) {
-    // implicit exit can never happen on a pthread
-    assert(!implicit);
-    // When running in a pthread we propagate the exit back to the main thread
-    // where it can decide if the whole process should be shut down or not.
-    // The pthread may have decided not to exit its own runtime, for example
-    // because it runs a main loop, but that doesn't affect the main thread.
-    exitOnMainThread(status);
-    throw "unwind";
-  }
-  // if exit() was called explicitly, warn the user if the runtime isn't actually being shut down
-  if (keepRuntimeAlive() && !implicit) {
-    var msg = `program exited (with status: ${status}), but keepRuntimeAlive() is set (counter=${runtimeKeepaliveCounter}) due to an async operation, so halting execution but not exiting the runtime or preventing further async execution (you can use emscripten_force_exit, if you want to force a true shutdown)`;
-    err(msg);
-  }
-  _proc_exit(status);
-};
-
-var _exit = exitJS;
-
-var maybeExit = () => {
-  if (!keepRuntimeAlive()) {
-    try {
-      if (ENVIRONMENT_IS_PTHREAD) __emscripten_thread_exit(EXITSTATUS); else _exit(EXITSTATUS);
-    } catch (e) {
-      handleException(e);
-    }
-  }
-};
-
-var callUserCallback = func => {
-  if (ABORT) {
-    err("user callback triggered after runtime exited or application aborted.  Ignoring.");
-    return;
-  }
-  try {
-    func();
-    maybeExit();
-  } catch (e) {
-    handleException(e);
-  }
-};
-
-var runtimeKeepalivePush = () => {
-  runtimeKeepaliveCounter += 1;
-};
-
-var runtimeKeepalivePop = () => {
-  assert(runtimeKeepaliveCounter > 0);
-  runtimeKeepaliveCounter -= 1;
-};
-
-/** @param {number=} timeout */ var safeSetTimeout = (func, timeout) => {
-  runtimeKeepalivePush();
-  return setTimeout(() => {
-    runtimeKeepalivePop();
-    callUserCallback(func);
-  }, timeout);
-};
-
-var warnOnce = text => {
-  warnOnce.shown ||= {};
-  if (!warnOnce.shown[text]) {
-    warnOnce.shown[text] = 1;
-    if (ENVIRONMENT_IS_NODE) text = "warning: " + text;
-    err(text);
-  }
-};
-
-var preloadPlugins = Module["preloadPlugins"] || [];
-
-var Browser = {
-  useWebGL: false,
-  isFullscreen: false,
-  pointerLock: false,
-  moduleContextCreatedCallbacks: [],
-  workers: [],
-  preloadedImages: {},
-  preloadedAudios: {},
-  init() {
-    if (Browser.initted) return;
-    Browser.initted = true;
-    // Support for plugins that can process preloaded files. You can add more of these to
-    // your app by creating and appending to preloadPlugins.
-    // Each plugin is asked if it can handle a file based on the file's name. If it can,
-    // it is given the file's raw data. When it is done, it calls a callback with the file's
-    // (possibly modified) data. For example, a plugin might decompress a file, or it
-    // might create some side data structure for use later (like an Image element, etc.).
-    var imagePlugin = {};
-    imagePlugin["canHandle"] = function imagePlugin_canHandle(name) {
-      return !Module["noImageDecoding"] && /\.(jpg|jpeg|png|bmp|webp)$/i.test(name);
-    };
-    imagePlugin["handle"] = function imagePlugin_handle(byteArray, name, onload, onerror) {
-      var b = new Blob([ byteArray ], {
-        type: Browser.getMimetype(name)
-      });
-      if (b.size !== byteArray.length) {
-        // Safari bug #118630
-        // Safari's Blob can only take an ArrayBuffer
-        b = new Blob([ (new Uint8Array(byteArray)).buffer ], {
-          type: Browser.getMimetype(name)
-        });
-      }
-      var url = URL.createObjectURL(b);
-      assert(typeof url == "string", "createObjectURL must return a url as a string");
-      var img = new Image;
-      img.onload = () => {
-        assert(img.complete, `Image ${name} could not be decoded`);
-        var canvas = /** @type {!HTMLCanvasElement} */ (document.createElement("canvas"));
-        canvas.width = img.width;
-        canvas.height = img.height;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-        Browser.preloadedImages[name] = canvas;
-        URL.revokeObjectURL(url);
-        onload?.(byteArray);
-      };
-      img.onerror = event => {
-        err(`Image ${url} could not be decoded`);
-        onerror?.();
-      };
-      img.src = url;
-    };
-    preloadPlugins.push(imagePlugin);
-    var audioPlugin = {};
-    audioPlugin["canHandle"] = function audioPlugin_canHandle(name) {
-      return !Module["noAudioDecoding"] && name.substr(-4) in {
-        ".ogg": 1,
-        ".wav": 1,
-        ".mp3": 1
-      };
-    };
-    audioPlugin["handle"] = function audioPlugin_handle(byteArray, name, onload, onerror) {
-      var done = false;
-      function finish(audio) {
-        if (done) return;
-        done = true;
-        Browser.preloadedAudios[name] = audio;
-        onload?.(byteArray);
-      }
-      function fail() {
-        if (done) return;
-        done = true;
-        Browser.preloadedAudios[name] = new Audio;
-        // empty shim
-        onerror?.();
-      }
-      var b = new Blob([ byteArray ], {
-        type: Browser.getMimetype(name)
-      });
-      var url = URL.createObjectURL(b);
-      // XXX we never revoke this!
-      assert(typeof url == "string", "createObjectURL must return a url as a string");
-      var audio = new Audio;
-      audio.addEventListener("canplaythrough", () => finish(audio), false);
-      // use addEventListener due to chromium bug 124926
-      audio.onerror = function audio_onerror(event) {
-        if (done) return;
-        err(`warning: browser could not fully decode audio ${name}, trying slower base64 approach`);
-        function encode64(data) {
-          var BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-          var PAD = "=";
-          var ret = "";
-          var leftchar = 0;
-          var leftbits = 0;
-          for (var i = 0; i < data.length; i++) {
-            leftchar = (leftchar << 8) | data[i];
-            leftbits += 8;
-            while (leftbits >= 6) {
-              var curr = (leftchar >> (leftbits - 6)) & 63;
-              leftbits -= 6;
-              ret += BASE[curr];
-            }
-          }
-          if (leftbits == 2) {
-            ret += BASE[(leftchar & 3) << 4];
-            ret += PAD + PAD;
-          } else if (leftbits == 4) {
-            ret += BASE[(leftchar & 15) << 2];
-            ret += PAD;
-          }
-          return ret;
-        }
-        audio.src = "data:audio/x-" + name.substr(-3) + ";base64," + encode64(byteArray);
-        finish(audio);
-      };
-      // we don't wait for confirmation this worked - but it's worth trying
-      audio.src = url;
-      // workaround for chrome bug 124926 - we do not always get oncanplaythrough or onerror
-      safeSetTimeout(() => {
-        finish(audio);
-      }, // try to use it even though it is not necessarily ready to play
-      1e4);
-    };
-    preloadPlugins.push(audioPlugin);
-    // Canvas event setup
-    function pointerLockChange() {
-      Browser.pointerLock = document["pointerLockElement"] === Module["canvas"] || document["mozPointerLockElement"] === Module["canvas"] || document["webkitPointerLockElement"] === Module["canvas"] || document["msPointerLockElement"] === Module["canvas"];
-    }
-    var canvas = Module["canvas"];
-    if (canvas) {
-      // forced aspect ratio can be enabled by defining 'forcedAspectRatio' on Module
-      // Module['forcedAspectRatio'] = 4 / 3;
-      canvas.requestPointerLock = canvas["requestPointerLock"] || canvas["mozRequestPointerLock"] || canvas["webkitRequestPointerLock"] || canvas["msRequestPointerLock"] || (() => {});
-      canvas.exitPointerLock = document["exitPointerLock"] || document["mozExitPointerLock"] || document["webkitExitPointerLock"] || document["msExitPointerLock"] || (() => {});
-      // no-op if function does not exist
-      canvas.exitPointerLock = canvas.exitPointerLock.bind(document);
-      document.addEventListener("pointerlockchange", pointerLockChange, false);
-      document.addEventListener("mozpointerlockchange", pointerLockChange, false);
-      document.addEventListener("webkitpointerlockchange", pointerLockChange, false);
-      document.addEventListener("mspointerlockchange", pointerLockChange, false);
-      if (Module["elementPointerLock"]) {
-        canvas.addEventListener("click", ev => {
-          if (!Browser.pointerLock && Module["canvas"].requestPointerLock) {
-            Module["canvas"].requestPointerLock();
-            ev.preventDefault();
-          }
-        }, false);
-      }
-    }
-  },
-  createContext(/** @type {HTMLCanvasElement} */ canvas, useWebGL, setInModule, webGLContextAttributes) {
-    if (useWebGL && Module["ctx"] && canvas == Module["canvas"]) return Module["ctx"];
-    // no need to recreate GL context if it's already been created for this canvas.
-    var ctx;
-    var contextHandle;
-    if (useWebGL) {
-      // For GLES2/desktop GL compatibility, adjust a few defaults to be different to WebGL defaults, so that they align better with the desktop defaults.
-      var contextAttributes = {
-        antialias: false,
-        alpha: false,
-        majorVersion: 2
-      };
-      if (webGLContextAttributes) {
-        for (var attribute in webGLContextAttributes) {
-          contextAttributes[attribute] = webGLContextAttributes[attribute];
-        }
-      }
-      // This check of existence of GL is here to satisfy Closure compiler, which yells if variable GL is referenced below but GL object is not
-      // actually compiled in because application is not doing any GL operations. TODO: Ideally if GL is not being used, this function
-      // Browser.createContext() should not even be emitted.
-      if (typeof GL != "undefined") {
-        contextHandle = GL.createContext(canvas, contextAttributes);
-        if (contextHandle) {
-          ctx = GL.getContext(contextHandle).GLctx;
-        }
-      }
-    } else {
-      ctx = canvas.getContext("2d");
-    }
-    if (!ctx) return null;
-    if (setInModule) {
-      if (!useWebGL) assert(typeof GLctx == "undefined", "cannot set in module if GLctx is used, but we are a non-GL context that would replace it");
-      Module["ctx"] = ctx;
-      if (useWebGL) GL.makeContextCurrent(contextHandle);
-      Browser.useWebGL = useWebGL;
-      Browser.moduleContextCreatedCallbacks.forEach(callback => callback());
-      Browser.init();
-    }
-    return ctx;
-  },
-  fullscreenHandlersInstalled: false,
-  lockPointer: undefined,
-  resizeCanvas: undefined,
-  requestFullscreen(lockPointer, resizeCanvas) {
-    Browser.lockPointer = lockPointer;
-    Browser.resizeCanvas = resizeCanvas;
-    if (typeof Browser.lockPointer == "undefined") Browser.lockPointer = true;
-    if (typeof Browser.resizeCanvas == "undefined") Browser.resizeCanvas = false;
-    var canvas = Module["canvas"];
-    function fullscreenChange() {
-      Browser.isFullscreen = false;
-      var canvasContainer = canvas.parentNode;
-      if ((document["fullscreenElement"] || document["mozFullScreenElement"] || document["msFullscreenElement"] || document["webkitFullscreenElement"] || document["webkitCurrentFullScreenElement"]) === canvasContainer) {
-        canvas.exitFullscreen = Browser.exitFullscreen;
-        if (Browser.lockPointer) canvas.requestPointerLock();
-        Browser.isFullscreen = true;
-        if (Browser.resizeCanvas) {
-          Browser.setFullscreenCanvasSize();
-        } else {
-          Browser.updateCanvasDimensions(canvas);
-        }
-      } else {
-        // remove the full screen specific parent of the canvas again to restore the HTML structure from before going full screen
-        canvasContainer.parentNode.insertBefore(canvas, canvasContainer);
-        canvasContainer.parentNode.removeChild(canvasContainer);
-        if (Browser.resizeCanvas) {
-          Browser.setWindowedCanvasSize();
-        } else {
-          Browser.updateCanvasDimensions(canvas);
-        }
-      }
-      Module["onFullScreen"]?.(Browser.isFullscreen);
-      Module["onFullscreen"]?.(Browser.isFullscreen);
-    }
-    if (!Browser.fullscreenHandlersInstalled) {
-      Browser.fullscreenHandlersInstalled = true;
-      document.addEventListener("fullscreenchange", fullscreenChange, false);
-      document.addEventListener("mozfullscreenchange", fullscreenChange, false);
-      document.addEventListener("webkitfullscreenchange", fullscreenChange, false);
-      document.addEventListener("MSFullscreenChange", fullscreenChange, false);
-    }
-    // create a new parent to ensure the canvas has no siblings. this allows browsers to optimize full screen performance when its parent is the full screen root
-    var canvasContainer = document.createElement("div");
-    canvas.parentNode.insertBefore(canvasContainer, canvas);
-    canvasContainer.appendChild(canvas);
-    // use parent of canvas as full screen root to allow aspect ratio correction (Firefox stretches the root to screen size)
-    canvasContainer.requestFullscreen = canvasContainer["requestFullscreen"] || canvasContainer["mozRequestFullScreen"] || canvasContainer["msRequestFullscreen"] || (canvasContainer["webkitRequestFullscreen"] ? () => canvasContainer["webkitRequestFullscreen"](Element["ALLOW_KEYBOARD_INPUT"]) : null) || (canvasContainer["webkitRequestFullScreen"] ? () => canvasContainer["webkitRequestFullScreen"](Element["ALLOW_KEYBOARD_INPUT"]) : null);
-    canvasContainer.requestFullscreen();
-  },
-  requestFullScreen() {
-    abort("Module.requestFullScreen has been replaced by Module.requestFullscreen (without a capital S)");
-  },
-  exitFullscreen() {
-    // This is workaround for chrome. Trying to exit from fullscreen
-    // not in fullscreen state will cause "TypeError: Document not active"
-    // in chrome. See https://github.com/emscripten-core/emscripten/pull/8236
-    if (!Browser.isFullscreen) {
-      return false;
-    }
-    var CFS = document["exitFullscreen"] || document["cancelFullScreen"] || document["mozCancelFullScreen"] || document["msExitFullscreen"] || document["webkitCancelFullScreen"] || (() => {});
-    CFS.apply(document, []);
-    return true;
-  },
-  safeSetTimeout(func, timeout) {
-    // Legacy function, this is used by the SDL2 port so we need to keep it
-    // around at least until that is updated.
-    // See https://github.com/libsdl-org/SDL/pull/6304
-    return safeSetTimeout(func, timeout);
-  },
-  getMimetype(name) {
-    return {
-      "jpg": "image/jpeg",
-      "jpeg": "image/jpeg",
-      "png": "image/png",
-      "bmp": "image/bmp",
-      "ogg": "audio/ogg",
-      "wav": "audio/wav",
-      "mp3": "audio/mpeg"
-    }[name.substr(name.lastIndexOf(".") + 1)];
-  },
-  getUserMedia(func) {
-    window.getUserMedia ||= navigator["getUserMedia"] || navigator["mozGetUserMedia"];
-    window.getUserMedia(func);
-  },
-  getMovementX(event) {
-    return event["movementX"] || event["mozMovementX"] || event["webkitMovementX"] || 0;
-  },
-  getMovementY(event) {
-    return event["movementY"] || event["mozMovementY"] || event["webkitMovementY"] || 0;
-  },
-  getMouseWheelDelta(event) {
-    var delta = 0;
-    switch (event.type) {
-     case "DOMMouseScroll":
-      // 3 lines make up a step
-      delta = event.detail / 3;
-      break;
-
-     case "mousewheel":
-      // 120 units make up a step
-      delta = event.wheelDelta / 120;
-      break;
-
-     case "wheel":
-      delta = event.deltaY;
-      switch (event.deltaMode) {
-       case 0:
-        // DOM_DELTA_PIXEL: 100 pixels make up a step
-        delta /= 100;
-        break;
-
-       case 1:
-        // DOM_DELTA_LINE: 3 lines make up a step
-        delta /= 3;
-        break;
-
-       case 2:
-        // DOM_DELTA_PAGE: A page makes up 80 steps
-        delta *= 80;
-        break;
-
-       default:
-        throw "unrecognized mouse wheel delta mode: " + event.deltaMode;
-      }
-      break;
-
-     default:
-      throw "unrecognized mouse wheel event: " + event.type;
-    }
-    return delta;
-  },
-  mouseX: 0,
-  mouseY: 0,
-  mouseMovementX: 0,
-  mouseMovementY: 0,
-  touches: {},
-  lastTouches: {},
-  calculateMouseCoords(pageX, pageY) {
-    // Calculate the movement based on the changes
-    // in the coordinates.
-    var rect = Module["canvas"].getBoundingClientRect();
-    var cw = Module["canvas"].width;
-    var ch = Module["canvas"].height;
-    // Neither .scrollX or .pageXOffset are defined in a spec, but
-    // we prefer .scrollX because it is currently in a spec draft.
-    // (see: http://www.w3.org/TR/2013/WD-cssom-view-20131217/)
-    var scrollX = ((typeof window.scrollX != "undefined") ? window.scrollX : window.pageXOffset);
-    var scrollY = ((typeof window.scrollY != "undefined") ? window.scrollY : window.pageYOffset);
-    // If this assert lands, it's likely because the browser doesn't support scrollX or pageXOffset
-    // and we have no viable fallback.
-    assert((typeof scrollX != "undefined") && (typeof scrollY != "undefined"), "Unable to retrieve scroll position, mouse positions likely broken.");
-    var adjustedX = pageX - (scrollX + rect.left);
-    var adjustedY = pageY - (scrollY + rect.top);
-    // the canvas might be CSS-scaled compared to its backbuffer;
-    // SDL-using content will want mouse coordinates in terms
-    // of backbuffer units.
-    adjustedX = adjustedX * (cw / rect.width);
-    adjustedY = adjustedY * (ch / rect.height);
-    return {
-      x: adjustedX,
-      y: adjustedY
-    };
-  },
-  setMouseCoords(pageX, pageY) {
-    const {x, y} = Browser.calculateMouseCoords(pageX, pageY);
-    Browser.mouseMovementX = x - Browser.mouseX;
-    Browser.mouseMovementY = y - Browser.mouseY;
-    Browser.mouseX = x;
-    Browser.mouseY = y;
-  },
-  calculateMouseEvent(event) {
-    // event should be mousemove, mousedown or mouseup
-    if (Browser.pointerLock) {
-      // When the pointer is locked, calculate the coordinates
-      // based on the movement of the mouse.
-      // Workaround for Firefox bug 764498
-      if (event.type != "mousemove" && ("mozMovementX" in event)) {
-        Browser.mouseMovementX = Browser.mouseMovementY = 0;
-      } else {
-        Browser.mouseMovementX = Browser.getMovementX(event);
-        Browser.mouseMovementY = Browser.getMovementY(event);
-      }
-      // add the mouse delta to the current absolute mouse position
-      Browser.mouseX += Browser.mouseMovementX;
-      Browser.mouseY += Browser.mouseMovementY;
-    } else {
-      if (event.type === "touchstart" || event.type === "touchend" || event.type === "touchmove") {
-        var touch = event.touch;
-        if (touch === undefined) {
-          return;
-        }
-        // the "touch" property is only defined in SDL
-        var coords = Browser.calculateMouseCoords(touch.pageX, touch.pageY);
-        if (event.type === "touchstart") {
-          Browser.lastTouches[touch.identifier] = coords;
-          Browser.touches[touch.identifier] = coords;
-        } else if (event.type === "touchend" || event.type === "touchmove") {
-          var last = Browser.touches[touch.identifier];
-          last ||= coords;
-          Browser.lastTouches[touch.identifier] = last;
-          Browser.touches[touch.identifier] = coords;
-        }
-        return;
-      }
-      Browser.setMouseCoords(event.pageX, event.pageY);
-    }
-  },
-  resizeListeners: [],
-  updateResizeListeners() {
-    var canvas = Module["canvas"];
-    Browser.resizeListeners.forEach(listener => listener(canvas.width, canvas.height));
-  },
-  setCanvasSize(width, height, noUpdates) {
-    var canvas = Module["canvas"];
-    Browser.updateCanvasDimensions(canvas, width, height);
-    if (!noUpdates) Browser.updateResizeListeners();
-  },
-  windowedWidth: 0,
-  windowedHeight: 0,
-  setFullscreenCanvasSize() {
-    // check if SDL is available
-    if (typeof SDL != "undefined") {
-      var flags = GROWABLE_HEAP_U32()[((SDL.screen) >> 2)];
-      flags = flags | 8388608;
-      // set SDL_FULLSCREEN flag
-      GROWABLE_HEAP_I32()[((SDL.screen) >> 2)] = flags;
-    }
-    Browser.updateCanvasDimensions(Module["canvas"]);
-    Browser.updateResizeListeners();
-  },
-  setWindowedCanvasSize() {
-    // check if SDL is available
-    if (typeof SDL != "undefined") {
-      var flags = GROWABLE_HEAP_U32()[((SDL.screen) >> 2)];
-      flags = flags & ~8388608;
-      // clear SDL_FULLSCREEN flag
-      GROWABLE_HEAP_I32()[((SDL.screen) >> 2)] = flags;
-    }
-    Browser.updateCanvasDimensions(Module["canvas"]);
-    Browser.updateResizeListeners();
-  },
-  updateCanvasDimensions(canvas, wNative, hNative) {
-    if (wNative && hNative) {
-      canvas.widthNative = wNative;
-      canvas.heightNative = hNative;
-    } else {
-      wNative = canvas.widthNative;
-      hNative = canvas.heightNative;
-    }
-    var w = wNative;
-    var h = hNative;
-    if (Module["forcedAspectRatio"] && Module["forcedAspectRatio"] > 0) {
-      if (w / h < Module["forcedAspectRatio"]) {
-        w = Math.round(h * Module["forcedAspectRatio"]);
-      } else {
-        h = Math.round(w / Module["forcedAspectRatio"]);
-      }
-    }
-    if (((document["fullscreenElement"] || document["mozFullScreenElement"] || document["msFullscreenElement"] || document["webkitFullscreenElement"] || document["webkitCurrentFullScreenElement"]) === canvas.parentNode) && (typeof screen != "undefined")) {
-      var factor = Math.min(screen.width / w, screen.height / h);
-      w = Math.round(w * factor);
-      h = Math.round(h * factor);
-    }
-    if (Browser.resizeCanvas) {
-      if (canvas.width != w) canvas.width = w;
-      if (canvas.height != h) canvas.height = h;
-      if (typeof canvas.style != "undefined") {
-        canvas.style.removeProperty("width");
-        canvas.style.removeProperty("height");
-      }
-    } else {
-      if (canvas.width != wNative) canvas.width = wNative;
-      if (canvas.height != hNative) canvas.height = hNative;
-      if (typeof canvas.style != "undefined") {
-        if (w != wNative || h != hNative) {
-          canvas.style.setProperty("width", w + "px", "important");
-          canvas.style.setProperty("height", h + "px", "important");
-        } else {
-          canvas.style.removeProperty("width");
-          canvas.style.removeProperty("height");
-        }
-      }
-    }
   }
 };
 
@@ -2737,6 +2218,10 @@ var noExitRuntime = Module["noExitRuntime"] || true;
 
 var registerTLSInit = tlsInitFunc => PThread.tlsInitFunctions.push(tlsInitFunc);
 
+var runtimeKeepalivePush = () => {
+  runtimeKeepaliveCounter += 1;
+};
+
 /**
      * @param {number} ptr
      * @param {number} value
@@ -2779,6 +2264,15 @@ var registerTLSInit = tlsInitFunc => PThread.tlsInitFunctions.push(tlsInitFunc);
     abort(`invalid type for setValue: ${type}`);
   }
 }
+
+var warnOnce = text => {
+  warnOnce.shown ||= {};
+  if (!warnOnce.shown[text]) {
+    warnOnce.shown[text] = 1;
+    if (ENVIRONMENT_IS_NODE) text = "warning: " + text;
+    err(text);
+  }
+};
 
 var UTF8Decoder = typeof TextDecoder != "undefined" ? new TextDecoder : undefined;
 
@@ -3928,6 +3422,8 @@ var asyncLoad = async url => {
 var FS_createDataFile = (parent, name, fileData, canRead, canWrite, canOwn) => {
   FS.createDataFile(parent, name, fileData, canRead, canWrite, canOwn);
 };
+
+var preloadPlugins = Module["preloadPlugins"] || [];
 
 var FS_handledByPreloadPlugin = (byteArray, fullname, finish, onerror) => {
   // Ensure plugins are ready.
@@ -6558,6 +6054,29 @@ var __emscripten_init_main_thread_js = tb => {
   PThread.threadInitTLS();
 };
 
+var maybeExit = () => {
+  if (!keepRuntimeAlive()) {
+    try {
+      if (ENVIRONMENT_IS_PTHREAD) __emscripten_thread_exit(EXITSTATUS); else _exit(EXITSTATUS);
+    } catch (e) {
+      handleException(e);
+    }
+  }
+};
+
+var callUserCallback = func => {
+  if (ABORT) {
+    err("user callback triggered after runtime exited or application aborted.  Ignoring.");
+    return;
+  }
+  try {
+    func();
+    maybeExit();
+  } catch (e) {
+    handleException(e);
+  }
+};
+
 var __emscripten_thread_mailbox_await = pthread_ptr => {
   if (typeof Atomics.waitAsync === "function") {
     // Wait on the pthread's initial self-pointer field because it is easy and
@@ -7480,6 +6999,490 @@ function _clock_time_get(clk_id, ignored_precision_low, ignored_precision_high, 
   return 0;
 }
 
+/** @param {number=} timeout */ var safeSetTimeout = (func, timeout) => {
+  runtimeKeepalivePush();
+  return setTimeout(() => {
+    runtimeKeepalivePop();
+    callUserCallback(func);
+  }, timeout);
+};
+
+var Browser = {
+  useWebGL: false,
+  isFullscreen: false,
+  pointerLock: false,
+  moduleContextCreatedCallbacks: [],
+  workers: [],
+  preloadedImages: {},
+  preloadedAudios: {},
+  init() {
+    if (Browser.initted) return;
+    Browser.initted = true;
+    // Support for plugins that can process preloaded files. You can add more of these to
+    // your app by creating and appending to preloadPlugins.
+    // Each plugin is asked if it can handle a file based on the file's name. If it can,
+    // it is given the file's raw data. When it is done, it calls a callback with the file's
+    // (possibly modified) data. For example, a plugin might decompress a file, or it
+    // might create some side data structure for use later (like an Image element, etc.).
+    var imagePlugin = {};
+    imagePlugin["canHandle"] = function imagePlugin_canHandle(name) {
+      return !Module["noImageDecoding"] && /\.(jpg|jpeg|png|bmp|webp)$/i.test(name);
+    };
+    imagePlugin["handle"] = function imagePlugin_handle(byteArray, name, onload, onerror) {
+      var b = new Blob([ byteArray ], {
+        type: Browser.getMimetype(name)
+      });
+      if (b.size !== byteArray.length) {
+        // Safari bug #118630
+        // Safari's Blob can only take an ArrayBuffer
+        b = new Blob([ (new Uint8Array(byteArray)).buffer ], {
+          type: Browser.getMimetype(name)
+        });
+      }
+      var url = URL.createObjectURL(b);
+      assert(typeof url == "string", "createObjectURL must return a url as a string");
+      var img = new Image;
+      img.onload = () => {
+        assert(img.complete, `Image ${name} could not be decoded`);
+        var canvas = /** @type {!HTMLCanvasElement} */ (document.createElement("canvas"));
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        Browser.preloadedImages[name] = canvas;
+        URL.revokeObjectURL(url);
+        onload?.(byteArray);
+      };
+      img.onerror = event => {
+        err(`Image ${url} could not be decoded`);
+        onerror?.();
+      };
+      img.src = url;
+    };
+    preloadPlugins.push(imagePlugin);
+    var audioPlugin = {};
+    audioPlugin["canHandle"] = function audioPlugin_canHandle(name) {
+      return !Module["noAudioDecoding"] && name.substr(-4) in {
+        ".ogg": 1,
+        ".wav": 1,
+        ".mp3": 1
+      };
+    };
+    audioPlugin["handle"] = function audioPlugin_handle(byteArray, name, onload, onerror) {
+      var done = false;
+      function finish(audio) {
+        if (done) return;
+        done = true;
+        Browser.preloadedAudios[name] = audio;
+        onload?.(byteArray);
+      }
+      function fail() {
+        if (done) return;
+        done = true;
+        Browser.preloadedAudios[name] = new Audio;
+        // empty shim
+        onerror?.();
+      }
+      var b = new Blob([ byteArray ], {
+        type: Browser.getMimetype(name)
+      });
+      var url = URL.createObjectURL(b);
+      // XXX we never revoke this!
+      assert(typeof url == "string", "createObjectURL must return a url as a string");
+      var audio = new Audio;
+      audio.addEventListener("canplaythrough", () => finish(audio), false);
+      // use addEventListener due to chromium bug 124926
+      audio.onerror = function audio_onerror(event) {
+        if (done) return;
+        err(`warning: browser could not fully decode audio ${name}, trying slower base64 approach`);
+        function encode64(data) {
+          var BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+          var PAD = "=";
+          var ret = "";
+          var leftchar = 0;
+          var leftbits = 0;
+          for (var i = 0; i < data.length; i++) {
+            leftchar = (leftchar << 8) | data[i];
+            leftbits += 8;
+            while (leftbits >= 6) {
+              var curr = (leftchar >> (leftbits - 6)) & 63;
+              leftbits -= 6;
+              ret += BASE[curr];
+            }
+          }
+          if (leftbits == 2) {
+            ret += BASE[(leftchar & 3) << 4];
+            ret += PAD + PAD;
+          } else if (leftbits == 4) {
+            ret += BASE[(leftchar & 15) << 2];
+            ret += PAD;
+          }
+          return ret;
+        }
+        audio.src = "data:audio/x-" + name.substr(-3) + ";base64," + encode64(byteArray);
+        finish(audio);
+      };
+      // we don't wait for confirmation this worked - but it's worth trying
+      audio.src = url;
+      // workaround for chrome bug 124926 - we do not always get oncanplaythrough or onerror
+      safeSetTimeout(() => {
+        finish(audio);
+      }, // try to use it even though it is not necessarily ready to play
+      1e4);
+    };
+    preloadPlugins.push(audioPlugin);
+    // Canvas event setup
+    function pointerLockChange() {
+      Browser.pointerLock = document["pointerLockElement"] === Module["canvas"] || document["mozPointerLockElement"] === Module["canvas"] || document["webkitPointerLockElement"] === Module["canvas"] || document["msPointerLockElement"] === Module["canvas"];
+    }
+    var canvas = Module["canvas"];
+    if (canvas) {
+      // forced aspect ratio can be enabled by defining 'forcedAspectRatio' on Module
+      // Module['forcedAspectRatio'] = 4 / 3;
+      canvas.requestPointerLock = canvas["requestPointerLock"] || canvas["mozRequestPointerLock"] || canvas["webkitRequestPointerLock"] || canvas["msRequestPointerLock"] || (() => {});
+      canvas.exitPointerLock = document["exitPointerLock"] || document["mozExitPointerLock"] || document["webkitExitPointerLock"] || document["msExitPointerLock"] || (() => {});
+      // no-op if function does not exist
+      canvas.exitPointerLock = canvas.exitPointerLock.bind(document);
+      document.addEventListener("pointerlockchange", pointerLockChange, false);
+      document.addEventListener("mozpointerlockchange", pointerLockChange, false);
+      document.addEventListener("webkitpointerlockchange", pointerLockChange, false);
+      document.addEventListener("mspointerlockchange", pointerLockChange, false);
+      if (Module["elementPointerLock"]) {
+        canvas.addEventListener("click", ev => {
+          if (!Browser.pointerLock && Module["canvas"].requestPointerLock) {
+            Module["canvas"].requestPointerLock();
+            ev.preventDefault();
+          }
+        }, false);
+      }
+    }
+  },
+  createContext(/** @type {HTMLCanvasElement} */ canvas, useWebGL, setInModule, webGLContextAttributes) {
+    if (useWebGL && Module["ctx"] && canvas == Module["canvas"]) return Module["ctx"];
+    // no need to recreate GL context if it's already been created for this canvas.
+    var ctx;
+    var contextHandle;
+    if (useWebGL) {
+      // For GLES2/desktop GL compatibility, adjust a few defaults to be different to WebGL defaults, so that they align better with the desktop defaults.
+      var contextAttributes = {
+        antialias: false,
+        alpha: false,
+        majorVersion: 2
+      };
+      if (webGLContextAttributes) {
+        for (var attribute in webGLContextAttributes) {
+          contextAttributes[attribute] = webGLContextAttributes[attribute];
+        }
+      }
+      // This check of existence of GL is here to satisfy Closure compiler, which yells if variable GL is referenced below but GL object is not
+      // actually compiled in because application is not doing any GL operations. TODO: Ideally if GL is not being used, this function
+      // Browser.createContext() should not even be emitted.
+      if (typeof GL != "undefined") {
+        contextHandle = GL.createContext(canvas, contextAttributes);
+        if (contextHandle) {
+          ctx = GL.getContext(contextHandle).GLctx;
+        }
+      }
+    } else {
+      ctx = canvas.getContext("2d");
+    }
+    if (!ctx) return null;
+    if (setInModule) {
+      if (!useWebGL) assert(typeof GLctx == "undefined", "cannot set in module if GLctx is used, but we are a non-GL context that would replace it");
+      Module["ctx"] = ctx;
+      if (useWebGL) GL.makeContextCurrent(contextHandle);
+      Browser.useWebGL = useWebGL;
+      Browser.moduleContextCreatedCallbacks.forEach(callback => callback());
+      Browser.init();
+    }
+    return ctx;
+  },
+  fullscreenHandlersInstalled: false,
+  lockPointer: undefined,
+  resizeCanvas: undefined,
+  requestFullscreen(lockPointer, resizeCanvas) {
+    Browser.lockPointer = lockPointer;
+    Browser.resizeCanvas = resizeCanvas;
+    if (typeof Browser.lockPointer == "undefined") Browser.lockPointer = true;
+    if (typeof Browser.resizeCanvas == "undefined") Browser.resizeCanvas = false;
+    var canvas = Module["canvas"];
+    function fullscreenChange() {
+      Browser.isFullscreen = false;
+      var canvasContainer = canvas.parentNode;
+      if ((document["fullscreenElement"] || document["mozFullScreenElement"] || document["msFullscreenElement"] || document["webkitFullscreenElement"] || document["webkitCurrentFullScreenElement"]) === canvasContainer) {
+        canvas.exitFullscreen = Browser.exitFullscreen;
+        if (Browser.lockPointer) canvas.requestPointerLock();
+        Browser.isFullscreen = true;
+        if (Browser.resizeCanvas) {
+          Browser.setFullscreenCanvasSize();
+        } else {
+          Browser.updateCanvasDimensions(canvas);
+        }
+      } else {
+        // remove the full screen specific parent of the canvas again to restore the HTML structure from before going full screen
+        canvasContainer.parentNode.insertBefore(canvas, canvasContainer);
+        canvasContainer.parentNode.removeChild(canvasContainer);
+        if (Browser.resizeCanvas) {
+          Browser.setWindowedCanvasSize();
+        } else {
+          Browser.updateCanvasDimensions(canvas);
+        }
+      }
+      Module["onFullScreen"]?.(Browser.isFullscreen);
+      Module["onFullscreen"]?.(Browser.isFullscreen);
+    }
+    if (!Browser.fullscreenHandlersInstalled) {
+      Browser.fullscreenHandlersInstalled = true;
+      document.addEventListener("fullscreenchange", fullscreenChange, false);
+      document.addEventListener("mozfullscreenchange", fullscreenChange, false);
+      document.addEventListener("webkitfullscreenchange", fullscreenChange, false);
+      document.addEventListener("MSFullscreenChange", fullscreenChange, false);
+    }
+    // create a new parent to ensure the canvas has no siblings. this allows browsers to optimize full screen performance when its parent is the full screen root
+    var canvasContainer = document.createElement("div");
+    canvas.parentNode.insertBefore(canvasContainer, canvas);
+    canvasContainer.appendChild(canvas);
+    // use parent of canvas as full screen root to allow aspect ratio correction (Firefox stretches the root to screen size)
+    canvasContainer.requestFullscreen = canvasContainer["requestFullscreen"] || canvasContainer["mozRequestFullScreen"] || canvasContainer["msRequestFullscreen"] || (canvasContainer["webkitRequestFullscreen"] ? () => canvasContainer["webkitRequestFullscreen"](Element["ALLOW_KEYBOARD_INPUT"]) : null) || (canvasContainer["webkitRequestFullScreen"] ? () => canvasContainer["webkitRequestFullScreen"](Element["ALLOW_KEYBOARD_INPUT"]) : null);
+    canvasContainer.requestFullscreen();
+  },
+  requestFullScreen() {
+    abort("Module.requestFullScreen has been replaced by Module.requestFullscreen (without a capital S)");
+  },
+  exitFullscreen() {
+    // This is workaround for chrome. Trying to exit from fullscreen
+    // not in fullscreen state will cause "TypeError: Document not active"
+    // in chrome. See https://github.com/emscripten-core/emscripten/pull/8236
+    if (!Browser.isFullscreen) {
+      return false;
+    }
+    var CFS = document["exitFullscreen"] || document["cancelFullScreen"] || document["mozCancelFullScreen"] || document["msExitFullscreen"] || document["webkitCancelFullScreen"] || (() => {});
+    CFS.apply(document, []);
+    return true;
+  },
+  safeSetTimeout(func, timeout) {
+    // Legacy function, this is used by the SDL2 port so we need to keep it
+    // around at least until that is updated.
+    // See https://github.com/libsdl-org/SDL/pull/6304
+    return safeSetTimeout(func, timeout);
+  },
+  getMimetype(name) {
+    return {
+      "jpg": "image/jpeg",
+      "jpeg": "image/jpeg",
+      "png": "image/png",
+      "bmp": "image/bmp",
+      "ogg": "audio/ogg",
+      "wav": "audio/wav",
+      "mp3": "audio/mpeg"
+    }[name.substr(name.lastIndexOf(".") + 1)];
+  },
+  getUserMedia(func) {
+    window.getUserMedia ||= navigator["getUserMedia"] || navigator["mozGetUserMedia"];
+    window.getUserMedia(func);
+  },
+  getMovementX(event) {
+    return event["movementX"] || event["mozMovementX"] || event["webkitMovementX"] || 0;
+  },
+  getMovementY(event) {
+    return event["movementY"] || event["mozMovementY"] || event["webkitMovementY"] || 0;
+  },
+  getMouseWheelDelta(event) {
+    var delta = 0;
+    switch (event.type) {
+     case "DOMMouseScroll":
+      // 3 lines make up a step
+      delta = event.detail / 3;
+      break;
+
+     case "mousewheel":
+      // 120 units make up a step
+      delta = event.wheelDelta / 120;
+      break;
+
+     case "wheel":
+      delta = event.deltaY;
+      switch (event.deltaMode) {
+       case 0:
+        // DOM_DELTA_PIXEL: 100 pixels make up a step
+        delta /= 100;
+        break;
+
+       case 1:
+        // DOM_DELTA_LINE: 3 lines make up a step
+        delta /= 3;
+        break;
+
+       case 2:
+        // DOM_DELTA_PAGE: A page makes up 80 steps
+        delta *= 80;
+        break;
+
+       default:
+        throw "unrecognized mouse wheel delta mode: " + event.deltaMode;
+      }
+      break;
+
+     default:
+      throw "unrecognized mouse wheel event: " + event.type;
+    }
+    return delta;
+  },
+  mouseX: 0,
+  mouseY: 0,
+  mouseMovementX: 0,
+  mouseMovementY: 0,
+  touches: {},
+  lastTouches: {},
+  calculateMouseCoords(pageX, pageY) {
+    // Calculate the movement based on the changes
+    // in the coordinates.
+    var rect = Module["canvas"].getBoundingClientRect();
+    var cw = Module["canvas"].width;
+    var ch = Module["canvas"].height;
+    // Neither .scrollX or .pageXOffset are defined in a spec, but
+    // we prefer .scrollX because it is currently in a spec draft.
+    // (see: http://www.w3.org/TR/2013/WD-cssom-view-20131217/)
+    var scrollX = ((typeof window.scrollX != "undefined") ? window.scrollX : window.pageXOffset);
+    var scrollY = ((typeof window.scrollY != "undefined") ? window.scrollY : window.pageYOffset);
+    // If this assert lands, it's likely because the browser doesn't support scrollX or pageXOffset
+    // and we have no viable fallback.
+    assert((typeof scrollX != "undefined") && (typeof scrollY != "undefined"), "Unable to retrieve scroll position, mouse positions likely broken.");
+    var adjustedX = pageX - (scrollX + rect.left);
+    var adjustedY = pageY - (scrollY + rect.top);
+    // the canvas might be CSS-scaled compared to its backbuffer;
+    // SDL-using content will want mouse coordinates in terms
+    // of backbuffer units.
+    adjustedX = adjustedX * (cw / rect.width);
+    adjustedY = adjustedY * (ch / rect.height);
+    return {
+      x: adjustedX,
+      y: adjustedY
+    };
+  },
+  setMouseCoords(pageX, pageY) {
+    const {x, y} = Browser.calculateMouseCoords(pageX, pageY);
+    Browser.mouseMovementX = x - Browser.mouseX;
+    Browser.mouseMovementY = y - Browser.mouseY;
+    Browser.mouseX = x;
+    Browser.mouseY = y;
+  },
+  calculateMouseEvent(event) {
+    // event should be mousemove, mousedown or mouseup
+    if (Browser.pointerLock) {
+      // When the pointer is locked, calculate the coordinates
+      // based on the movement of the mouse.
+      // Workaround for Firefox bug 764498
+      if (event.type != "mousemove" && ("mozMovementX" in event)) {
+        Browser.mouseMovementX = Browser.mouseMovementY = 0;
+      } else {
+        Browser.mouseMovementX = Browser.getMovementX(event);
+        Browser.mouseMovementY = Browser.getMovementY(event);
+      }
+      // add the mouse delta to the current absolute mouse position
+      Browser.mouseX += Browser.mouseMovementX;
+      Browser.mouseY += Browser.mouseMovementY;
+    } else {
+      if (event.type === "touchstart" || event.type === "touchend" || event.type === "touchmove") {
+        var touch = event.touch;
+        if (touch === undefined) {
+          return;
+        }
+        // the "touch" property is only defined in SDL
+        var coords = Browser.calculateMouseCoords(touch.pageX, touch.pageY);
+        if (event.type === "touchstart") {
+          Browser.lastTouches[touch.identifier] = coords;
+          Browser.touches[touch.identifier] = coords;
+        } else if (event.type === "touchend" || event.type === "touchmove") {
+          var last = Browser.touches[touch.identifier];
+          last ||= coords;
+          Browser.lastTouches[touch.identifier] = last;
+          Browser.touches[touch.identifier] = coords;
+        }
+        return;
+      }
+      Browser.setMouseCoords(event.pageX, event.pageY);
+    }
+  },
+  resizeListeners: [],
+  updateResizeListeners() {
+    var canvas = Module["canvas"];
+    Browser.resizeListeners.forEach(listener => listener(canvas.width, canvas.height));
+  },
+  setCanvasSize(width, height, noUpdates) {
+    var canvas = Module["canvas"];
+    Browser.updateCanvasDimensions(canvas, width, height);
+    if (!noUpdates) Browser.updateResizeListeners();
+  },
+  windowedWidth: 0,
+  windowedHeight: 0,
+  setFullscreenCanvasSize() {
+    // check if SDL is available
+    if (typeof SDL != "undefined") {
+      var flags = GROWABLE_HEAP_U32()[((SDL.screen) >> 2)];
+      flags = flags | 8388608;
+      // set SDL_FULLSCREEN flag
+      GROWABLE_HEAP_I32()[((SDL.screen) >> 2)] = flags;
+    }
+    Browser.updateCanvasDimensions(Module["canvas"]);
+    Browser.updateResizeListeners();
+  },
+  setWindowedCanvasSize() {
+    // check if SDL is available
+    if (typeof SDL != "undefined") {
+      var flags = GROWABLE_HEAP_U32()[((SDL.screen) >> 2)];
+      flags = flags & ~8388608;
+      // clear SDL_FULLSCREEN flag
+      GROWABLE_HEAP_I32()[((SDL.screen) >> 2)] = flags;
+    }
+    Browser.updateCanvasDimensions(Module["canvas"]);
+    Browser.updateResizeListeners();
+  },
+  updateCanvasDimensions(canvas, wNative, hNative) {
+    if (wNative && hNative) {
+      canvas.widthNative = wNative;
+      canvas.heightNative = hNative;
+    } else {
+      wNative = canvas.widthNative;
+      hNative = canvas.heightNative;
+    }
+    var w = wNative;
+    var h = hNative;
+    if (Module["forcedAspectRatio"] && Module["forcedAspectRatio"] > 0) {
+      if (w / h < Module["forcedAspectRatio"]) {
+        w = Math.round(h * Module["forcedAspectRatio"]);
+      } else {
+        h = Math.round(w / Module["forcedAspectRatio"]);
+      }
+    }
+    if (((document["fullscreenElement"] || document["mozFullScreenElement"] || document["msFullscreenElement"] || document["webkitFullscreenElement"] || document["webkitCurrentFullScreenElement"]) === canvas.parentNode) && (typeof screen != "undefined")) {
+      var factor = Math.min(screen.width / w, screen.height / h);
+      w = Math.round(w * factor);
+      h = Math.round(h * factor);
+    }
+    if (Browser.resizeCanvas) {
+      if (canvas.width != w) canvas.width = w;
+      if (canvas.height != h) canvas.height = h;
+      if (typeof canvas.style != "undefined") {
+        canvas.style.removeProperty("width");
+        canvas.style.removeProperty("height");
+      }
+    } else {
+      if (canvas.width != wNative) canvas.width = wNative;
+      if (canvas.height != hNative) canvas.height = hNative;
+      if (typeof canvas.style != "undefined") {
+        if (w != wNative || h != hNative) {
+          canvas.style.setProperty("width", w + "px", "important");
+          canvas.style.setProperty("height", h + "px", "important");
+        } else {
+          canvas.style.removeProperty("width");
+          canvas.style.removeProperty("height");
+        }
+      }
+    }
+  }
+};
+
 var EGL = {
   errorCode: 12288,
   defaultDisplayInitialized: false,
@@ -7936,7 +7939,6 @@ function _eglQueryString(display, name) {
 
 function _eglSwapBuffers(dpy, surface) {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(30, 0, 1, dpy, surface);
-  if (Browser.doSwapBuffers) Browser.doSwapBuffers();
   if (!EGL.defaultDisplayInitialized) {
     EGL.setErrorCode(12289);
   } else /* EGL_NOT_INITIALIZED */ if (!GLctx) {
@@ -11773,6 +11775,8 @@ var _emscripten_resize_heap = requestedSize => {
   return false;
 };
 
+var _emscripten_runtime_keepalive_check = keepRuntimeAlive;
+
 /** @suppress {checkTypes} */ function _emscripten_sample_gamepad_data() {
   if (ENVIRONMENT_IS_PTHREAD) return proxyToMainThread(48, 0, 1);
   try {
@@ -13059,17 +13063,6 @@ var getExceptionMessage = ptr => getExceptionMessageCommon(ptr);
 
 Module["getExceptionMessage"] = getExceptionMessage;
 
-// exports
-Module["requestFullscreen"] = Browser.requestFullscreen;
-
-Module["requestFullScreen"] = Browser.requestFullScreen;
-
-Module["setCanvasSize"] = Browser.setCanvasSize;
-
-Module["getUserMedia"] = Browser.getUserMedia;
-
-Module["createContext"] = Browser.createContext;
-
 PThread.init();
 
 FS.createPreloadedFile = FS_createPreloadedFile;
@@ -13092,6 +13085,17 @@ Module["FS_createDevice"] = FS.createDevice;
 // Signal GL rendering layer that processing of a new frame is about to
 // start. This helps it optimize VBO double-buffering and reduce GPU stalls.
 registerPreMainLoop(() => GL.newRenderingFrameStarted());
+
+// exports
+Module["requestFullscreen"] = Browser.requestFullscreen;
+
+Module["requestFullScreen"] = Browser.requestFullScreen;
+
+Module["setCanvasSize"] = Browser.setCanvasSize;
+
+Module["getUserMedia"] = Browser.getUserMedia;
+
+Module["createContext"] = Browser.createContext;
 
 Module["requestAnimationFrame"] = MainLoop.requestAnimationFrame;
 
@@ -13481,6 +13485,7 @@ function assignWasmImports() {
     /** @export */ emscripten_request_fullscreen_strategy: _emscripten_request_fullscreen_strategy,
     /** @export */ emscripten_request_pointerlock: _emscripten_request_pointerlock,
     /** @export */ emscripten_resize_heap: _emscripten_resize_heap,
+    /** @export */ emscripten_runtime_keepalive_check: _emscripten_runtime_keepalive_check,
     /** @export */ emscripten_sample_gamepad_data: _emscripten_sample_gamepad_data,
     /** @export */ emscripten_set_beforeunload_callback_on_thread: _emscripten_set_beforeunload_callback_on_thread,
     /** @export */ emscripten_set_blur_callback_on_thread: _emscripten_set_blur_callback_on_thread,
@@ -13574,6 +13579,12 @@ var __emscripten_tls_init = createExportWrapper("_emscripten_tls_init", 0);
 
 var _emscripten_builtin_memalign = createExportWrapper("emscripten_builtin_memalign", 2);
 
+var __emscripten_proxy_main = Module["__emscripten_proxy_main"] = createExportWrapper("_emscripten_proxy_main", 2);
+
+var _emscripten_stack_get_base = () => (_emscripten_stack_get_base = wasmExports["emscripten_stack_get_base"])();
+
+var _emscripten_stack_get_end = () => (_emscripten_stack_get_end = wasmExports["emscripten_stack_get_end"])();
+
 var __emscripten_run_callback_on_thread = createExportWrapper("_emscripten_run_callback_on_thread", 5);
 
 var __emscripten_set_offscreencanvas_size_on_thread = createExportWrapper("_emscripten_set_offscreencanvas_size_on_thread", 4);
@@ -13581,10 +13592,6 @@ var __emscripten_set_offscreencanvas_size_on_thread = createExportWrapper("_emsc
 var __emscripten_thread_init = createExportWrapper("_emscripten_thread_init", 6);
 
 var __emscripten_thread_crashed = createExportWrapper("_emscripten_thread_crashed", 0);
-
-var _emscripten_stack_get_base = () => (_emscripten_stack_get_base = wasmExports["emscripten_stack_get_base"])();
-
-var _emscripten_stack_get_end = () => (_emscripten_stack_get_end = wasmExports["emscripten_stack_get_end"])();
 
 var __emscripten_run_on_main_thread_js = createExportWrapper("_emscripten_run_on_main_thread_js", 5);
 
@@ -13948,1697 +13955,6 @@ function invoke_jiiii(index, a1, a2, a3, a4) {
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===
-if (ENVIRONMENT_IS_WORKER) {
-  // include: webGLWorker.js
-  // WebGLWorker worker code
-  function WebGLBuffer(id) {
-    this.what = "buffer";
-    this.id = id;
-  }
-  function WebGLProgram(id) {
-    this.what = "program";
-    this.id = id;
-    this.shaders = [];
-    this.attributes = {};
-    this.attributeVec = [];
-    this.nextAttributes = {};
-    this.nextAttributeVec = [];
-  }
-  function WebGLFramebuffer(id) {
-    this.what = "frameBuffer";
-    this.id = id;
-  }
-  function WebGLRenderbuffer(id) {
-    this.what = "renderBuffer";
-    this.id = id;
-  }
-  function WebGLTexture(id) {
-    this.what = "texture";
-    this.id = id;
-    this.binding = 0;
-  }
-  function WebGLWorker() {
-    //===========
-    // Constants
-    //===========
-    /* ClearBufferMask */ this.DEPTH_BUFFER_BIT = 256;
-    this.STENCIL_BUFFER_BIT = 1024;
-    this.COLOR_BUFFER_BIT = 16384;
-    /* BeginMode */ this.POINTS = 0;
-    this.LINES = 1;
-    this.LINE_LOOP = 2;
-    this.LINE_STRIP = 3;
-    this.TRIANGLES = 4;
-    this.TRIANGLE_STRIP = 5;
-    this.TRIANGLE_FAN = 6;
-    /* AlphaFunction (not supported in ES20) */ /*      NEVER */ /*      LESS */ /*      EQUAL */ /*      LEQUAL */ /*      GREATER */ /*      NOTEQUAL */ /*      GEQUAL */ /*      ALWAYS */ /* BlendingFactorDest */ this.ZERO = 0;
-    this.ONE = 1;
-    this.SRC_COLOR = 768;
-    this.ONE_MINUS_SRC_COLOR = 769;
-    this.SRC_ALPHA = 770;
-    this.ONE_MINUS_SRC_ALPHA = 771;
-    this.DST_ALPHA = 772;
-    this.ONE_MINUS_DST_ALPHA = 773;
-    /* BlendingFactorSrc */ /*      ZERO */ /*      ONE */ this.DST_COLOR = 774;
-    this.ONE_MINUS_DST_COLOR = 775;
-    this.SRC_ALPHA_SATURATE = 776;
-    /*      SRC_ALPHA */ /*      ONE_MINUS_SRC_ALPHA */ /*      DST_ALPHA */ /*      ONE_MINUS_DST_ALPHA */ /* BlendEquationSeparate */ this.FUNC_ADD = 32774;
-    this.BLEND_EQUATION = 32777;
-    this.BLEND_EQUATION_RGB = 32777;
-    /* same as BLEND_EQUATION */ this.BLEND_EQUATION_ALPHA = 34877;
-    /* BlendSubtract */ this.FUNC_SUBTRACT = 32778;
-    this.FUNC_REVERSE_SUBTRACT = 32779;
-    /* Separate Blend Functions */ this.BLEND_DST_RGB = 32968;
-    this.BLEND_SRC_RGB = 32969;
-    this.BLEND_DST_ALPHA = 32970;
-    this.BLEND_SRC_ALPHA = 32971;
-    this.CONSTANT_COLOR = 32769;
-    this.ONE_MINUS_CONSTANT_COLOR = 32770;
-    this.CONSTANT_ALPHA = 32771;
-    this.ONE_MINUS_CONSTANT_ALPHA = 32772;
-    this.BLEND_COLOR = 32773;
-    /* Buffer Objects */ this.ARRAY_BUFFER = 34962;
-    this.ELEMENT_ARRAY_BUFFER = 34963;
-    this.ARRAY_BUFFER_BINDING = 34964;
-    this.ELEMENT_ARRAY_BUFFER_BINDING = 34965;
-    this.STREAM_DRAW = 35040;
-    this.STATIC_DRAW = 35044;
-    this.DYNAMIC_DRAW = 35048;
-    this.BUFFER_SIZE = 34660;
-    this.BUFFER_USAGE = 34661;
-    this.CURRENT_VERTEX_ATTRIB = 34342;
-    /* CullFaceMode */ this.FRONT = 1028;
-    this.BACK = 1029;
-    this.FRONT_AND_BACK = 1032;
-    /* DepthFunction */ /*      NEVER */ /*      LESS */ /*      EQUAL */ /*      LEQUAL */ /*      GREATER */ /*      NOTEQUAL */ /*      GEQUAL */ /*      ALWAYS */ /* EnableCap */ /* TEXTURE_2D */ this.CULL_FACE = 2884;
-    this.BLEND = 3042;
-    this.DITHER = 3024;
-    this.STENCIL_TEST = 2960;
-    this.DEPTH_TEST = 2929;
-    this.SCISSOR_TEST = 3089;
-    this.POLYGON_OFFSET_FILL = 32823;
-    this.SAMPLE_ALPHA_TO_COVERAGE = 32926;
-    this.SAMPLE_COVERAGE = 32928;
-    /* ErrorCode */ this.NO_ERROR = 0;
-    this.INVALID_ENUM = 1280;
-    this.INVALID_VALUE = 1281;
-    this.INVALID_OPERATION = 1282;
-    this.OUT_OF_MEMORY = 1285;
-    /* FrontFaceDirection */ this.CW = 2304;
-    this.CCW = 2305;
-    /* GetPName */ this.LINE_WIDTH = 2849;
-    this.ALIASED_POINT_SIZE_RANGE = 33901;
-    this.ALIASED_LINE_WIDTH_RANGE = 33902;
-    this.CULL_FACE_MODE = 2885;
-    this.FRONT_FACE = 2886;
-    this.DEPTH_RANGE = 2928;
-    this.DEPTH_WRITEMASK = 2930;
-    this.DEPTH_CLEAR_VALUE = 2931;
-    this.DEPTH_FUNC = 2932;
-    this.STENCIL_CLEAR_VALUE = 2961;
-    this.STENCIL_FUNC = 2962;
-    this.STENCIL_FAIL = 2964;
-    this.STENCIL_PASS_DEPTH_FAIL = 2965;
-    this.STENCIL_PASS_DEPTH_PASS = 2966;
-    this.STENCIL_REF = 2967;
-    this.STENCIL_VALUE_MASK = 2963;
-    this.STENCIL_WRITEMASK = 2968;
-    this.STENCIL_BACK_FUNC = 34816;
-    this.STENCIL_BACK_FAIL = 34817;
-    this.STENCIL_BACK_PASS_DEPTH_FAIL = 34818;
-    this.STENCIL_BACK_PASS_DEPTH_PASS = 34819;
-    this.STENCIL_BACK_REF = 36003;
-    this.STENCIL_BACK_VALUE_MASK = 36004;
-    this.STENCIL_BACK_WRITEMASK = 36005;
-    this.VIEWPORT = 2978;
-    this.SCISSOR_BOX = 3088;
-    /*      SCISSOR_TEST */ this.COLOR_CLEAR_VALUE = 3106;
-    this.COLOR_WRITEMASK = 3107;
-    this.UNPACK_ALIGNMENT = 3317;
-    this.PACK_ALIGNMENT = 3333;
-    this.MAX_TEXTURE_SIZE = 3379;
-    this.MAX_VIEWPORT_DIMS = 3386;
-    this.SUBPIXEL_BITS = 3408;
-    this.RED_BITS = 3410;
-    this.GREEN_BITS = 3411;
-    this.BLUE_BITS = 3412;
-    this.ALPHA_BITS = 3413;
-    this.DEPTH_BITS = 3414;
-    this.STENCIL_BITS = 3415;
-    this.POLYGON_OFFSET_UNITS = 10752;
-    /*      POLYGON_OFFSET_FILL */ this.POLYGON_OFFSET_FACTOR = 32824;
-    this.TEXTURE_BINDING_2D = 32873;
-    this.SAMPLE_BUFFERS = 32936;
-    this.SAMPLES = 32937;
-    this.SAMPLE_COVERAGE_VALUE = 32938;
-    this.SAMPLE_COVERAGE_INVERT = 32939;
-    /* GetTextureParameter */ /*      TEXTURE_MAG_FILTER */ /*      TEXTURE_MIN_FILTER */ /*      TEXTURE_WRAP_S */ /*      TEXTURE_WRAP_T */ this.COMPRESSED_TEXTURE_FORMATS = 34467;
-    /* HintMode */ this.DONT_CARE = 4352;
-    this.FASTEST = 4353;
-    this.NICEST = 4354;
-    /* HintTarget */ this.GENERATE_MIPMAP_HINT = 33170;
-    /* DataType */ this.BYTE = 5120;
-    this.UNSIGNED_BYTE = 5121;
-    this.SHORT = 5122;
-    this.UNSIGNED_SHORT = 5123;
-    this.INT = 5124;
-    this.UNSIGNED_INT = 5125;
-    this.FLOAT = 5126;
-    /* PixelFormat */ this.DEPTH_COMPONENT = 6402;
-    this.ALPHA = 6406;
-    this.RGB = 6407;
-    this.RGBA = 6408;
-    this.LUMINANCE = 6409;
-    this.LUMINANCE_ALPHA = 6410;
-    /* PixelType */ /*      UNSIGNED_BYTE */ this.UNSIGNED_SHORT_4_4_4_4 = 32819;
-    this.UNSIGNED_SHORT_5_5_5_1 = 32820;
-    this.UNSIGNED_SHORT_5_6_5 = 33635;
-    /* Shaders */ this.FRAGMENT_SHADER = 35632;
-    this.VERTEX_SHADER = 35633;
-    this.MAX_VERTEX_ATTRIBS = 34921;
-    this.MAX_VERTEX_UNIFORM_VECTORS = 36347;
-    this.MAX_VARYING_VECTORS = 36348;
-    this.MAX_COMBINED_TEXTURE_IMAGE_UNITS = 35661;
-    this.MAX_VERTEX_TEXTURE_IMAGE_UNITS = 35660;
-    this.MAX_TEXTURE_IMAGE_UNITS = 34930;
-    this.MAX_FRAGMENT_UNIFORM_VECTORS = 36349;
-    this.SHADER_TYPE = 35663;
-    this.DELETE_STATUS = 35712;
-    this.LINK_STATUS = 35714;
-    this.VALIDATE_STATUS = 35715;
-    this.ATTACHED_SHADERS = 35717;
-    this.ACTIVE_UNIFORMS = 35718;
-    this.ACTIVE_ATTRIBUTES = 35721;
-    this.SHADING_LANGUAGE_VERSION = 35724;
-    this.CURRENT_PROGRAM = 35725;
-    /* StencilFunction */ this.NEVER = 512;
-    this.LESS = 513;
-    this.EQUAL = 514;
-    this.LEQUAL = 515;
-    this.GREATER = 516;
-    this.NOTEQUAL = 517;
-    this.GEQUAL = 518;
-    this.ALWAYS = 519;
-    /* StencilOp */ /*      ZERO */ this.KEEP = 7680;
-    this.REPLACE = 7681;
-    this.INCR = 7682;
-    this.DECR = 7683;
-    this.INVERT = 5386;
-    this.INCR_WRAP = 34055;
-    this.DECR_WRAP = 34056;
-    /* StringName */ this.VENDOR = 7936;
-    this.RENDERER = 7937;
-    this.VERSION = 7938;
-    /* TextureMagFilter */ this.NEAREST = 9728;
-    this.LINEAR = 9729;
-    /* TextureMinFilter */ /*      NEAREST */ /*      LINEAR */ this.NEAREST_MIPMAP_NEAREST = 9984;
-    this.LINEAR_MIPMAP_NEAREST = 9985;
-    this.NEAREST_MIPMAP_LINEAR = 9986;
-    this.LINEAR_MIPMAP_LINEAR = 9987;
-    /* TextureParameterName */ this.TEXTURE_MAG_FILTER = 10240;
-    this.TEXTURE_MIN_FILTER = 10241;
-    this.TEXTURE_WRAP_S = 10242;
-    this.TEXTURE_WRAP_T = 10243;
-    /* TextureTarget */ this.TEXTURE_2D = 3553;
-    this.TEXTURE = 5890;
-    this.TEXTURE_CUBE_MAP = 34067;
-    this.TEXTURE_BINDING_CUBE_MAP = 34068;
-    this.TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
-    this.TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
-    this.TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
-    this.TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
-    this.TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
-    this.TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
-    this.MAX_CUBE_MAP_TEXTURE_SIZE = 34076;
-    /* TextureUnit */ this.TEXTURE0 = 33984;
-    this.TEXTURE1 = 33985;
-    this.TEXTURE2 = 33986;
-    this.TEXTURE3 = 33987;
-    this.TEXTURE4 = 33988;
-    this.TEXTURE5 = 33989;
-    this.TEXTURE6 = 33990;
-    this.TEXTURE7 = 33991;
-    this.TEXTURE8 = 33992;
-    this.TEXTURE9 = 33993;
-    this.TEXTURE10 = 33994;
-    this.TEXTURE11 = 33995;
-    this.TEXTURE12 = 33996;
-    this.TEXTURE13 = 33997;
-    this.TEXTURE14 = 33998;
-    this.TEXTURE15 = 33999;
-    this.TEXTURE16 = 34e3;
-    this.TEXTURE17 = 34001;
-    this.TEXTURE18 = 34002;
-    this.TEXTURE19 = 34003;
-    this.TEXTURE20 = 34004;
-    this.TEXTURE21 = 34005;
-    this.TEXTURE22 = 34006;
-    this.TEXTURE23 = 34007;
-    this.TEXTURE24 = 34008;
-    this.TEXTURE25 = 34009;
-    this.TEXTURE26 = 34010;
-    this.TEXTURE27 = 34011;
-    this.TEXTURE28 = 34012;
-    this.TEXTURE29 = 34013;
-    this.TEXTURE30 = 34014;
-    this.TEXTURE31 = 34015;
-    this.ACTIVE_TEXTURE = 34016;
-    /* TextureWrapMode */ this.REPEAT = 10497;
-    this.CLAMP_TO_EDGE = 33071;
-    this.MIRRORED_REPEAT = 33648;
-    /* Uniform Types */ this.FLOAT_VEC2 = 35664;
-    this.FLOAT_VEC3 = 35665;
-    this.FLOAT_VEC4 = 35666;
-    this.INT_VEC2 = 35667;
-    this.INT_VEC3 = 35668;
-    this.INT_VEC4 = 35669;
-    this.BOOL = 35670;
-    this.BOOL_VEC2 = 35671;
-    this.BOOL_VEC3 = 35672;
-    this.BOOL_VEC4 = 35673;
-    this.FLOAT_MAT2 = 35674;
-    this.FLOAT_MAT3 = 35675;
-    this.FLOAT_MAT4 = 35676;
-    this.SAMPLER_2D = 35678;
-    this.SAMPLER_3D = 35679;
-    this.SAMPLER_CUBE = 35680;
-    /* Vertex Arrays */ this.VERTEX_ATTRIB_ARRAY_ENABLED = 34338;
-    this.VERTEX_ATTRIB_ARRAY_SIZE = 34339;
-    this.VERTEX_ATTRIB_ARRAY_STRIDE = 34340;
-    this.VERTEX_ATTRIB_ARRAY_TYPE = 34341;
-    this.VERTEX_ATTRIB_ARRAY_NORMALIZED = 34922;
-    this.VERTEX_ATTRIB_ARRAY_POINTER = 34373;
-    this.VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 34975;
-    /* Read Format */ this.IMPLEMENTATION_COLOR_READ_TYPE = 35738;
-    this.IMPLEMENTATION_COLOR_READ_FORMAT = 35739;
-    /* Shader Source */ this.COMPILE_STATUS = 35713;
-    /* Shader Precision-Specified Types */ this.LOW_FLOAT = 36336;
-    this.MEDIUM_FLOAT = 36337;
-    this.HIGH_FLOAT = 36338;
-    this.LOW_INT = 36339;
-    this.MEDIUM_INT = 36340;
-    this.HIGH_INT = 36341;
-    /* Framebuffer Object. */ this.FRAMEBUFFER = 36160;
-    this.RENDERBUFFER = 36161;
-    this.RGBA4 = 32854;
-    this.RGB5_A1 = 32855;
-    this.RGB565 = 36194;
-    this.DEPTH_COMPONENT16 = 33189;
-    this.STENCIL_INDEX = 6401;
-    this.STENCIL_INDEX8 = 36168;
-    this.DEPTH_STENCIL = 34041;
-    this.RENDERBUFFER_WIDTH = 36162;
-    this.RENDERBUFFER_HEIGHT = 36163;
-    this.RENDERBUFFER_INTERNAL_FORMAT = 36164;
-    this.RENDERBUFFER_RED_SIZE = 36176;
-    this.RENDERBUFFER_GREEN_SIZE = 36177;
-    this.RENDERBUFFER_BLUE_SIZE = 36178;
-    this.RENDERBUFFER_ALPHA_SIZE = 36179;
-    this.RENDERBUFFER_DEPTH_SIZE = 36180;
-    this.RENDERBUFFER_STENCIL_SIZE = 36181;
-    this.FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = 36048;
-    this.FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = 36049;
-    this.FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL = 36050;
-    this.FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 36051;
-    this.COLOR_ATTACHMENT0 = 36064;
-    this.DEPTH_ATTACHMENT = 36096;
-    this.STENCIL_ATTACHMENT = 36128;
-    this.DEPTH_STENCIL_ATTACHMENT = 33306;
-    this.NONE = 0;
-    this.FRAMEBUFFER_COMPLETE = 36053;
-    this.FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 36054;
-    this.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = 36055;
-    this.FRAMEBUFFER_INCOMPLETE_DIMENSIONS = 36057;
-    this.FRAMEBUFFER_UNSUPPORTED = 36061;
-    this.ACTIVE_TEXTURE = 34016;
-    this.FRAMEBUFFER_BINDING = 36006;
-    this.RENDERBUFFER_BINDING = 36007;
-    this.MAX_RENDERBUFFER_SIZE = 34024;
-    this.INVALID_FRAMEBUFFER_OPERATION = 1286;
-    /* WebGL-specific enums */ this.UNPACK_FLIP_Y_WEBGL = 37440;
-    this.UNPACK_PREMULTIPLY_ALPHA_WEBGL = 37441;
-    this.CONTEXT_LOST_WEBGL = 37442;
-    this.UNPACK_COLORSPACE_CONVERSION_WEBGL = 37443;
-    this.BROWSER_DEFAULT_WEBGL = 37444;
-    //=======
-    // State
-    //=======
-    var commandBuffer = [];
-    var nextId = 1;
-    // valid ids are > 0
-    var bindings = {
-      texture2D: null,
-      arrayBuffer: null,
-      elementArrayBuffer: null,
-      program: null,
-      framebuffer: null,
-      activeTexture: this.TEXTURE0,
-      generateMipmapHint: this.DONT_CARE,
-      blendSrcRGB: this.ONE,
-      blendSrcAlpha: this.ONE,
-      blendDstRGB: this.ZERO,
-      blendDstAlpha: this.ZERO,
-      blendEquationRGB: this.FUNC_ADD,
-      blendEquationAlpha: this.FUNC_ADD,
-      enabledState: {}
-    };
-    // Stores whether various GL state via glEnable/glDisable/glIsEnabled/getParameter are enabled.
-    var stateDisabledByDefault = [ this.BLEND, this.CULL_FACE, this.DEPTH_TEST, this.DITHER, this.POLYGON_OFFSET_FILL, this.SAMPLE_ALPHA_TO_COVERAGE, this.SAMPLE_COVERAGE, this.SCISSOR_TEST, this.STENCIL_TEST ];
-    for (var i in stateDisabledByDefault) {
-      bindings.enabledState[stateDisabledByDefault[i]] = false;
-    }
-    //==========
-    // Functions
-    //==========
-    var that = this;
-    // Helpers
-    this.onmessage = function(msg) {
-      //dump('worker GL got ' + JSON.stringify(msg) + '\n');
-      switch (msg.op) {
-       case "setPrefetched":
-        {
-          WebGLWorker.prototype.prefetchedParameters = msg.parameters;
-          WebGLWorker.prototype.prefetchedExtensions = msg.extensions;
-          WebGLWorker.prototype.prefetchedPrecisions = msg.precisions;
-          removeRunDependency("gl-prefetch");
-          break;
-        }
-
-       default:
-        throw "weird gl onmessage " + JSON.stringify(msg);
-      }
-    };
-    function revname(name) {
-      for (var x in that) if (that[x] === name) return x;
-      return null;
-    }
-    // GL
-    this.getParameter = function(name) {
-      assert(name);
-      if (name in this.prefetchedParameters) return this.prefetchedParameters[name];
-      switch (name) {
-       case this.TEXTURE_BINDING_2D:
-        {
-          return bindings.texture2D;
-        }
-
-       case this.ARRAY_BUFFER_BINDING:
-        {
-          return bindings.arrayBuffer;
-        }
-
-       case this.ELEMENT_ARRAY_BUFFER_BINDING:
-        {
-          return bindings.elementArrayBuffer;
-        }
-
-       case this.CURRENT_PROGRAM:
-        {
-          return bindings.program;
-        }
-
-       case this.FRAMEBUFFER_BINDING:
-        {
-          return bindings.framebuffer;
-        }
-
-       case this.ACTIVE_TEXTURE:
-        {
-          return bindings.activeTexture;
-        }
-
-       case this.GENERATE_MIPMAP_HINT:
-        {
-          return bindings.generateMipmapHint;
-        }
-
-       case this.BLEND_SRC_RGB:
-        {
-          return bindings.blendSrcRGB;
-        }
-
-       case this.BLEND_SRC_ALPHA:
-        {
-          return bindings.blendSrcAlpha;
-        }
-
-       case this.BLEND_DST_RGB:
-        {
-          return bindings.blendDstRGB;
-        }
-
-       case this.BLEND_DST_ALPHA:
-        {
-          return bindings.blendDstAlpha;
-        }
-
-       case this.BLEND_EQUATION_RGB:
-        {
-          return bindings.blendEquationRGB;
-        }
-
-       case this.BLEND_EQUATION_ALPHA:
-        {
-          return bindings.blendEquationAlpha;
-        }
-
-       default:
-        {
-          if (bindings.enabledState[name] !== undefined) return bindings.enabledState[name];
-          throw "TODO: get parameter " + name + " : " + revname(name);
-        }
-      }
-    };
-    this.getExtension = function(name) {
-      var i = this.prefetchedExtensions.indexOf(name);
-      if (i < 0) return null;
-      commandBuffer.push(1, name);
-      switch (name) {
-       case "EXT_texture_filter_anisotropic":
-        {
-          return {
-            TEXTURE_MAX_ANISOTROPY_EXT: 34046,
-            MAX_TEXTURE_MAX_ANISOTROPY_EXT: 34047
-          };
-        }
-
-       case "WEBGL_draw_buffers":
-        {
-          return {
-            COLOR_ATTACHMENT0_WEBGL: 36064,
-            COLOR_ATTACHMENT1_WEBGL: 36065,
-            COLOR_ATTACHMENT2_WEBGL: 36066,
-            COLOR_ATTACHMENT3_WEBGL: 36067,
-            COLOR_ATTACHMENT4_WEBGL: 36068,
-            COLOR_ATTACHMENT5_WEBGL: 36069,
-            COLOR_ATTACHMENT6_WEBGL: 36070,
-            COLOR_ATTACHMENT7_WEBGL: 36071,
-            COLOR_ATTACHMENT8_WEBGL: 36072,
-            COLOR_ATTACHMENT9_WEBGL: 36073,
-            COLOR_ATTACHMENT10_WEBGL: 36074,
-            COLOR_ATTACHMENT11_WEBGL: 36075,
-            COLOR_ATTACHMENT12_WEBGL: 36076,
-            COLOR_ATTACHMENT13_WEBGL: 36077,
-            COLOR_ATTACHMENT14_WEBGL: 36078,
-            COLOR_ATTACHMENT15_WEBGL: 36079,
-            DRAW_BUFFER0_WEBGL: 34853,
-            DRAW_BUFFER1_WEBGL: 34854,
-            DRAW_BUFFER2_WEBGL: 34855,
-            DRAW_BUFFER3_WEBGL: 34856,
-            DRAW_BUFFER4_WEBGL: 34857,
-            DRAW_BUFFER5_WEBGL: 34858,
-            DRAW_BUFFER6_WEBGL: 34859,
-            DRAW_BUFFER7_WEBGL: 34860,
-            DRAW_BUFFER8_WEBGL: 34861,
-            DRAW_BUFFER9_WEBGL: 34862,
-            DRAW_BUFFER10_WEBGL: 34863,
-            DRAW_BUFFER11_WEBGL: 34864,
-            DRAW_BUFFER12_WEBGL: 34865,
-            DRAW_BUFFER13_WEBGL: 34866,
-            DRAW_BUFFER14_WEBGL: 34867,
-            DRAW_BUFFER15_WEBGL: 34868,
-            MAX_COLOR_ATTACHMENTS_WEBGL: 36063,
-            MAX_DRAW_BUFFERS_WEBGL: 34852,
-            drawBuffersWEBGL: function(buffers) {
-              that.drawBuffersWEBGL(buffers);
-            }
-          };
-        }
-
-       case "OES_standard_derivatives":
-        {
-          return {
-            FRAGMENT_SHADER_DERIVATIVE_HINT_OES: 35723
-          };
-        }
-      }
-      return true;
-    };
-    // TODO: return an object here
-    this.getSupportedExtensions = function() {
-      return this.prefetchedExtensions;
-    };
-    this.getShaderPrecisionFormat = function(shaderType, precisionType) {
-      return this.prefetchedPrecisions[shaderType][precisionType];
-    };
-    this.enable = function(cap) {
-      commandBuffer.push(2, cap);
-      bindings.enabledState[cap] = true;
-    };
-    this.isEnabled = function(cap) {
-      return bindings.enabledState[cap];
-    };
-    this.disable = function(cap) {
-      commandBuffer.push(3, cap);
-      bindings.enabledState[cap] = false;
-    };
-    this.clear = function(mask) {
-      commandBuffer.push(4, mask);
-    };
-    this.clearColor = function(r, g, b, a) {
-      commandBuffer.push(5, r, g, b, a);
-    };
-    this.createShader = function(type) {
-      var id = nextId++;
-      commandBuffer.push(6, type, id);
-      return {
-        id,
-        what: "shader",
-        type
-      };
-    };
-    this.deleteShader = function(shader) {
-      if (!shader) return;
-      commandBuffer.push(7, shader.id);
-    };
-    this.shaderSource = function(shader, source) {
-      shader.source = source;
-      commandBuffer.push(8, shader.id, source);
-    };
-    this.compileShader = function(shader) {
-      commandBuffer.push(9, shader.id);
-    };
-    this.getShaderInfoLog = function(shader) {
-      return "";
-    };
-    // optimistic assumption of success; no proxying
-    this.createProgram = function() {
-      var id = nextId++;
-      commandBuffer.push(10, id);
-      return new WebGLProgram(id);
-    };
-    this.deleteProgram = function(program) {
-      if (!program) return;
-      commandBuffer.push(11, program.id);
-    };
-    this.attachShader = function(program, shader) {
-      program.shaders.push(shader);
-      commandBuffer.push(12, program.id, shader.id);
-    };
-    this.bindAttribLocation = function(program, index, name) {
-      program.nextAttributes[name] = {
-        what: "attribute",
-        name,
-        size: -1,
-        location: index,
-        type: "?"
-      };
-      // fill in size, type later
-      program.nextAttributeVec[index] = name;
-      commandBuffer.push(13, program.id, index, name);
-    };
-    this.getAttribLocation = function(program, name) {
-      // all existing attribs are cached locally
-      if (name in program.attributes) return program.attributes[name].location;
-      return -1;
-    };
-    this.linkProgram = function(program) {
-      // parse shader sources
-      function getTypeId(text) {
-        switch (text) {
-         case "bool":
-          return that.BOOL;
-
-         case "int":
-          return that.INT;
-
-         case "uint":
-          return that.UNSIGNED_INT;
-
-         case "float":
-          return that.FLOAT;
-
-         case "vec2":
-          return that.FLOAT_VEC2;
-
-         case "vec3":
-          return that.FLOAT_VEC3;
-
-         case "vec4":
-          return that.FLOAT_VEC4;
-
-         case "ivec2":
-          return that.INT_VEC2;
-
-         case "ivec3":
-          return that.INT_VEC3;
-
-         case "ivec4":
-          return that.INT_VEC4;
-
-         case "bvec2":
-          return that.BOOL_VEC2;
-
-         case "bvec3":
-          return that.BOOL_VEC3;
-
-         case "bvec4":
-          return that.BOOL_VEC4;
-
-         case "mat2":
-          return that.FLOAT_MAT2;
-
-         case "mat3":
-          return that.FLOAT_MAT3;
-
-         case "mat4":
-          return that.FLOAT_MAT4;
-
-         case "sampler2D":
-          return that.SAMPLER_2D;
-
-         case "sampler3D":
-          return that.SAMPLER_3D;
-
-         case "samplerCube":
-          return that.SAMPLER_CUBE;
-
-         default:
-          throw "not yet recognized type text: " + text;
-        }
-      }
-      function parseElementType(shader, type, obj, vec) {
-        var source = shader.source;
-        source = source.replace(/\n/g, "|\n");
-        // barrier between lines, to make regexing easier
-        var newItems = source.match(new RegExp(type + "\\s+\\w+\\s+[\\w,\\s[\\]]+;", "g"));
-        if (!newItems) return;
-        newItems.forEach(item => {
-          var m = new RegExp(type + "\\s+(\\w+)\\s+([\\w,\\s[\\]]+);").exec(item);
-          assert(m);
-          m[2].split(",").map(name => {
-            name = name.trim();
-            return name.search(/\s/) >= 0 ? "" : name;
-          }).filter(name => !!name).forEach(name => {
-            var size = 1;
-            var open = name.indexOf("[");
-            var fullname = name;
-            if (open >= 0) {
-              var close = name.indexOf("]");
-              size = parseInt(name.substring(open + 1, close));
-              name = name.substr(0, open);
-              fullname = name + "[0]";
-            }
-            if (!obj[name]) {
-              obj[name] = {
-                what: type,
-                name: fullname,
-                size,
-                location: -1,
-                type: getTypeId(m[1])
-              };
-              vec?.push(name);
-            }
-          });
-        });
-      }
-      program.uniforms = {};
-      program.uniformVec = [];
-      program.attributes = program.nextAttributes;
-      program.attributeVec = program.nextAttributeVec;
-      program.nextAttributes = {};
-      program.nextAttributeVec = [];
-      var existingAttributes = {};
-      program.shaders.forEach(shader => {
-        parseElementType(shader, "uniform", program.uniforms, program.uniformVec);
-        parseElementType(shader, "attribute", existingAttributes, null);
-      });
-      // bind not-yet bound attributes
-      for (var attr in existingAttributes) {
-        if (!(attr in program.attributes)) {
-          var index = program.attributeVec.length;
-          program.attributes[attr] = {
-            what: "attribute",
-            name: attr,
-            size: -1,
-            location: index,
-            type: "?"
-          };
-          // fill in size, type later
-          program.attributeVec[index] = attr;
-          commandBuffer.push(13, program.id, index, attr);
-        }
-        // do a bindAttribLocation as well, so this takes effect in the link we are about to do
-        program.attributes[attr].size = existingAttributes[attr].size;
-        program.attributes[attr].type = existingAttributes[attr].type;
-      }
-      commandBuffer.push(14, program.id);
-    };
-    this.getProgramParameter = function(program, name) {
-      switch (name) {
-       case this.ACTIVE_UNIFORMS:
-        return program.uniformVec.length;
-
-       case this.ACTIVE_ATTRIBUTES:
-        return program.attributeVec.length;
-
-       case this.LINK_STATUS:
-        {
-          // optimisticaly return success; client will abort on an actual error. we assume an error-free async workflow
-          commandBuffer.push(15, program.id, name);
-          return true;
-        }
-
-       default:
-        throw "bad getProgramParameter " + revname(name);
-      }
-    };
-    this.getActiveAttrib = function(program, index) {
-      var name = program.attributeVec[index];
-      if (!name) return null;
-      return program.attributes[name];
-    };
-    this.getActiveUniform = function(program, index) {
-      var name = program.uniformVec[index];
-      if (!name) return null;
-      return program.uniforms[name];
-    };
-    this.getUniformLocation = function(program, name) {
-      var fullname = name;
-      var index = -1;
-      var open = name.indexOf("[");
-      if (open >= 0) {
-        var close = name.indexOf("]");
-        index = parseInt(name.substring(open + 1, close));
-        name = name.substr(0, open);
-      }
-      if (!(name in program.uniforms)) return null;
-      var id = nextId++;
-      commandBuffer.push(16, program.id, fullname, id);
-      return {
-        what: "location",
-        uniform: program.uniforms[name],
-        id,
-        index
-      };
-    };
-    this.getProgramInfoLog = function(shader) {
-      return "";
-    };
-    // optimistic assumption of success; no proxying
-    this.useProgram = function(program) {
-      commandBuffer.push(17, program ? program.id : 0);
-      bindings.program = program;
-    };
-    this.uniform1i = function(location, data) {
-      if (!location) return;
-      commandBuffer.push(18, location.id, data);
-    };
-    this.uniform1f = function(location, data) {
-      if (!location) return;
-      commandBuffer.push(19, location.id, data);
-    };
-    this.uniform3fv = function(location, data) {
-      if (!location) return;
-      commandBuffer.push(20, location.id, new Float32Array(data));
-    };
-    this.uniform4f = function(location, x, y, z, w) {
-      if (!location) return;
-      commandBuffer.push(21, location.id, new Float32Array([ x, y, z, w ]));
-    };
-    this.uniform4fv = function(location, data) {
-      if (!location) return;
-      commandBuffer.push(21, location.id, new Float32Array(data));
-    };
-    this.uniformMatrix4fv = function(location, transpose, data) {
-      if (!location) return;
-      commandBuffer.push(22, location.id, transpose, new Float32Array(data));
-    };
-    this.vertexAttrib4fv = function(index, values) {
-      commandBuffer.push(23, index, new Float32Array(values));
-    };
-    this.createBuffer = function() {
-      var id = nextId++;
-      commandBuffer.push(24, id);
-      return new WebGLBuffer(id);
-    };
-    this.deleteBuffer = function(buffer) {
-      if (!buffer) return;
-      commandBuffer.push(25, buffer.id);
-    };
-    this.bindBuffer = function(target, buffer) {
-      commandBuffer.push(26, target, buffer ? buffer.id : 0);
-      switch (target) {
-       case this.ARRAY_BUFFER_BINDING:
-        {
-          bindings.arrayBuffer = buffer;
-          break;
-        }
-
-       case this.ELEMENT_ARRAY_BUFFER_BINDING:
-        {
-          bindings.elementArrayBuffer = buffer;
-          break;
-        }
-      }
-    };
-    function duplicate(something) {
-      // clone data properly: handles numbers, null, typed arrays, js arrays and array buffers
-      if (!something || typeof something == "number") return something;
-      if (something.slice) return something.slice(0);
-      // ArrayBuffer or js array
-      return new something.constructor(something);
-    }
-    // typed array
-    this.bufferData = function(target, something, usage) {
-      commandBuffer.push(27, target, duplicate(something), usage);
-    };
-    this.bufferSubData = function(target, offset, something) {
-      commandBuffer.push(28, target, offset, duplicate(something));
-    };
-    this.viewport = function(x, y, w, h) {
-      commandBuffer.push(29, x, y, w, h);
-    };
-    this.vertexAttribPointer = function(index, size, type, normalized, stride, offset) {
-      commandBuffer.push(30, index, size, type, normalized, stride, offset);
-    };
-    this.enableVertexAttribArray = function(index) {
-      commandBuffer.push(31, index);
-    };
-    this.disableVertexAttribArray = function(index) {
-      commandBuffer.push(32, index);
-    };
-    this.drawArrays = function(mode, first, count) {
-      commandBuffer.push(33, mode, first, count);
-    };
-    this.drawElements = function(mode, count, type, offset) {
-      commandBuffer.push(34, mode, count, type, offset);
-    };
-    this.getError = function() {
-      // optimisticaly return success; client will abort on an actual error. we assume an error-free async workflow
-      commandBuffer.push(35);
-      return this.NO_ERROR;
-    };
-    this.createTexture = function() {
-      var id = nextId++;
-      commandBuffer.push(36, id);
-      return new WebGLTexture(id);
-    };
-    this.deleteTexture = function(texture) {
-      if (!texture) return;
-      commandBuffer.push(37, texture.id);
-      texture.id = 0;
-    };
-    this.isTexture = function(texture) {
-      return texture && texture.what === "texture" && texture.id > 0 && texture.binding;
-    };
-    this.bindTexture = function(target, texture) {
-      switch (target) {
-       case that.TEXTURE_2D:
-        {
-          bindings.texture2D = texture;
-          break;
-        }
-      }
-      if (texture) texture.binding = target;
-      commandBuffer.push(38, target, texture ? texture.id : 0);
-    };
-    this.texParameteri = function(target, pname, param) {
-      commandBuffer.push(39, target, pname, param);
-    };
-    this.texImage2D = function(target, level, internalformat, width, height, border, format, type, pixels) {
-      if (pixels === undefined) {
-        format = width;
-        // width, height, border do not exist in the shorter overload
-        type = height;
-        pixels = border;
-        assert(pixels instanceof Image);
-        assert(internalformat === format && format === this.RGBA);
-        // HTML Images are RGBA, 8-bit
-        assert(type === this.UNSIGNED_BYTE);
-        var data = pixels.data;
-        width = data.width;
-        height = data.height;
-        border = 0;
-        pixels = new Uint8Array(data.data);
-      }
-      // XXX transform from clamped to normal, could have been done in duplicate
-      commandBuffer.push(40, target, level, internalformat, width, height, border, format, type, duplicate(pixels));
-    };
-    this.compressedTexImage2D = function(target, level, internalformat, width, height, border, pixels) {
-      commandBuffer.push(41, target, level, internalformat, width, height, border, duplicate(pixels));
-    };
-    this.activeTexture = function(texture) {
-      commandBuffer.push(42, texture);
-      bindings.activeTexture = texture;
-    };
-    this.getShaderParameter = function(shader, pname) {
-      switch (pname) {
-       case this.SHADER_TYPE:
-        return shader.type;
-
-       case this.COMPILE_STATUS:
-        {
-          // optimisticaly return success; client will abort on an actual error. we assume an error-free async workflow
-          commandBuffer.push(43, shader.id, pname);
-          return true;
-        }
-
-       default:
-        throw "unsupported getShaderParameter " + pname;
-      }
-    };
-    this.clearDepth = function(depth) {
-      commandBuffer.push(44, depth);
-    };
-    this.depthFunc = function(depth) {
-      commandBuffer.push(45, depth);
-    };
-    this.frontFace = function(depth) {
-      commandBuffer.push(46, depth);
-    };
-    this.cullFace = function(depth) {
-      commandBuffer.push(47, depth);
-    };
-    this.readPixels = function(depth) {
-      abort("readPixels is impossible, we are async GL");
-    };
-    this.pixelStorei = function(pname, param) {
-      commandBuffer.push(48, pname, param);
-    };
-    this.depthMask = function(flag) {
-      commandBuffer.push(49, flag);
-    };
-    this.depthRange = function(near, far) {
-      commandBuffer.push(50, near, far);
-    };
-    this.blendFunc = function(sfactor, dfactor) {
-      commandBuffer.push(51, sfactor, dfactor);
-      bindings.blendSrcRGB = bindings.blendSrcAlpha = sfactor;
-      bindings.blendDstRGB = bindings.blendDstAlpha = dfactor;
-    };
-    this.scissor = function(x, y, width, height) {
-      commandBuffer.push(52, x, y, width, height);
-    };
-    this.colorMask = function(red, green, blue, alpha) {
-      commandBuffer.push(53, red, green, blue, alpha);
-    };
-    this.lineWidth = function(width) {
-      commandBuffer.push(54, width);
-    };
-    this.createFramebuffer = function() {
-      var id = nextId++;
-      commandBuffer.push(55, id);
-      return new WebGLFramebuffer(id);
-    };
-    this.deleteFramebuffer = function(framebuffer) {
-      if (!framebuffer) return;
-      commandBuffer.push(56, framebuffer.id);
-    };
-    this.bindFramebuffer = function(target, framebuffer) {
-      commandBuffer.push(57, target, framebuffer ? framebuffer.id : 0);
-      bindings.framebuffer = framebuffer;
-    };
-    this.framebufferTexture2D = function(target, attachment, textarget, texture, level) {
-      commandBuffer.push(58, target, attachment, textarget, texture ? texture.id : 0, level);
-    };
-    this.checkFramebufferStatus = function(target) {
-      return this.FRAMEBUFFER_COMPLETE;
-    };
-    // XXX totally wrong
-    this.createRenderbuffer = function() {
-      var id = nextId++;
-      commandBuffer.push(59, id);
-      return new WebGLRenderbuffer(id);
-    };
-    this.deleteRenderbuffer = function(renderbuffer) {
-      if (!renderbuffer) return;
-      commandBuffer.push(60, renderbuffer.id);
-    };
-    this.bindRenderbuffer = function(target, renderbuffer) {
-      commandBuffer.push(61, target, renderbuffer ? renderbuffer.id : 0);
-    };
-    this.renderbufferStorage = function(target, internalformat, width, height) {
-      commandBuffer.push(62, target, internalformat, width, height);
-    };
-    this.framebufferRenderbuffer = function(target, attachment, renderbuffertarget, renderbuffer) {
-      commandBuffer.push(63, target, attachment, renderbuffertarget, renderbuffer ? renderbuffer.id : 0);
-    };
-    this.debugPrint = function(text) {
-      // useful to interleave debug output properly with client GL commands
-      commandBuffer.push(64, text);
-    };
-    this.hint = function(target, mode) {
-      commandBuffer.push(65, target, mode);
-      if (target == this.GENERATE_MIPMAP_HINT) bindings.generateMipmapHint = mode;
-    };
-    this.blendEquation = function(mode) {
-      commandBuffer.push(66, mode);
-      bindings.blendEquationRGB = bindings.blendEquationAlpha = mode;
-    };
-    this.generateMipmap = function(target) {
-      commandBuffer.push(67, target);
-    };
-    this.uniformMatrix3fv = function(location, transpose, data) {
-      if (!location) return;
-      commandBuffer.push(68, location.id, transpose, new Float32Array(data));
-    };
-    this.stencilMask = function(mask) {
-      commandBuffer.push(69, mask);
-    };
-    this.clearStencil = function(s) {
-      commandBuffer.push(70, s);
-    };
-    this.texSubImage2D = function(target, level, xoffset, yoffset, width, height, format, type, pixels) {
-      if (pixels === undefined) {
-        // shorter overload:      target, level, xoffset, yoffset, format,  type, pixels
-        var formatTemp = format;
-        format = width;
-        type = height;
-        pixels = formatTemp;
-        assert(pixels instanceof Image);
-        assert(format === this.RGBA);
-        // HTML Images are RGBA, 8-bit
-        assert(type === this.UNSIGNED_BYTE);
-        var data = pixels.data;
-        width = data.width;
-        height = data.height;
-        pixels = new Uint8Array(data.data);
-      }
-      // XXX transform from clamped to normal, could have been done in duplicate
-      commandBuffer.push(71, target, level, xoffset, yoffset, width, height, format, type, duplicate(pixels));
-    };
-    this.uniform3f = function(location, x, y, z) {
-      if (!location) return;
-      commandBuffer.push(72, location.id, x, y, z);
-    };
-    this.blendFuncSeparate = function(srcRGB, dstRGB, srcAlpha, dstAlpha) {
-      commandBuffer.push(73, srcRGB, dstRGB, srcAlpha, dstAlpha);
-      bindings.blendSrcRGB = srcRGB;
-      bindings.blendSrcAlpha = srcAlpha;
-      bindings.blendDstRGB = dstRGB;
-      bindings.blendDstAlpha = dstAlpha;
-    };
-    this.uniform2fv = function(location, data) {
-      if (!location) return;
-      commandBuffer.push(74, location.id, new Float32Array(data));
-    };
-    this.texParameterf = function(target, pname, param) {
-      commandBuffer.push(75, target, pname, param);
-    };
-    this.isContextLost = function() {
-      // optimisticaly return that everything is ok; client will abort on an actual context loss. we assume an error-free async workflow
-      commandBuffer.push(76);
-      return false;
-    };
-    this.isProgram = function(program) {
-      return program && program.what === "program";
-    };
-    this.blendEquationSeparate = function(rgb, alpha) {
-      commandBuffer.push(77, rgb, alpha);
-      bindings.blendEquationRGB = rgb;
-      bindings.blendEquationAlpha = alpha;
-    };
-    this.stencilFuncSeparate = function(face, func, ref, mask) {
-      commandBuffer.push(78, face, func, ref, mask);
-    };
-    this.stencilOpSeparate = function(face, fail, zfail, zpass) {
-      commandBuffer.push(79, face, fail, zfail, zpass);
-    };
-    this.drawBuffersWEBGL = function(buffers) {
-      commandBuffer.push(80, buffers);
-    };
-    this.uniform1iv = function(location, data) {
-      if (!location) return;
-      commandBuffer.push(81, location.id, new Int32Array(data));
-    };
-    this.uniform1fv = function(location, data) {
-      if (!location) return;
-      commandBuffer.push(82, location.id, new Float32Array(data));
-    };
-    // Setup
-    var theoreticalTracker = new FPSTracker("server (theoretical)");
-    var throttledTracker = new FPSTracker("server (client-throttled)");
-    function preRAF() {
-      //theoreticalTracker.tick();
-      // if too many frames in queue, skip a main loop iter
-      if (Math.abs(frameId - clientFrameId) >= 4) {
-        return false;
-      }
-    }
-    //throttledTracker.tick();
-    var postRAFed = false;
-    function postRAF() {
-      if (commandBuffer.length > 0) {
-        postMessage({
-          target: "gl",
-          op: "render",
-          commandBuffer
-        });
-        commandBuffer = [];
-      }
-      postRAFed = true;
-    }
-    assert(!Browser.doSwapBuffers);
-    Browser.doSwapBuffers = postRAF;
-    var trueRAF = window.requestAnimationFrame;
-    window.requestAnimationFrame = func => {
-      trueRAF(() => {
-        if (preRAF() === false) {
-          window.requestAnimationFrame(func);
-          // skip this frame, do it later
-          return;
-        }
-        postRAFed = false;
-        func();
-        if (!postRAFed) {
-          // if we already posted this frame (e.g. from doSwapBuffers) do not post again
-          postRAF();
-        }
-      });
-    };
-  }
-  // share prefetched data among all instances
-  WebGLWorker.prototype.prefetchedParameters = {};
-  WebGLWorker.prototype.prefetchedExtensions = {};
-  WebGLWorker.prototype.prefetchedPrecisions = {};
-  // end include: webGLWorker.js
-  // include: proxyWorker.js
-  /*
- * Implements the server/worker side of proxyClient.js.
- * This code gets included in the main emscripten output
- * when PROXY_TO_WORKER is used. The resulting code then
- * needs to be run in a worker and receive events from
- * proxyClient.js running on the main thread.
- */ if (!ENVIRONMENT_IS_NODE) {
-    function FPSTracker(text) {
-      var last = 0;
-      var mean = 0;
-      var counter = 0;
-      this.tick = () => {
-        var now = Date.now();
-        if (last > 0) {
-          var diff = now - last;
-          mean = .99 * mean + .01 * diff;
-          if (counter++ === 60) {
-            counter = 0;
-            dump(text + " fps: " + (1e3 / mean).toFixed(2) + "\n");
-          }
-        }
-        last = now;
-      };
-    }
-    function Element() {
-      throw "TODO: Element";
-    }
-    function HTMLCanvasElement() {
-      throw "TODO: HTMLCanvasElement";
-    }
-    function HTMLVideoElement() {
-      throw "TODO: HTMLVideoElement";
-    }
-    var KeyboardEvent = {
-      "DOM_KEY_LOCATION_RIGHT": 2
-    };
-    function PropertyBag() {
-      this.addProperty = () => {};
-      this.removeProperty = () => {};
-      this.setProperty = () => {};
-    }
-    var IndexedObjects = {
-      nextId: 1,
-      cache: {},
-      add(object) {
-        object.id = this.nextId++;
-        this.cache[object.id] = object;
-      }
-    };
-    function EventListener() {
-      this.listeners = {};
-      this.addEventListener = function addEventListener(event, func) {
-        this.listeners[event] ||= [];
-        this.listeners[event].push(func);
-      };
-      this.removeEventListener = function(event, func) {
-        var list = this.listeners[event];
-        if (!list) return;
-        var me = list.indexOf(func);
-        if (me < 0) return;
-        list.splice(me, 1);
-      };
-      this.fireEvent = function(event) {
-        event.preventDefault = () => {};
-        if (event.type in this.listeners) {
-          this.listeners[event.type].forEach(listener => listener(event));
-        }
-      };
-    }
-    function Image() {
-      IndexedObjects.add(this);
-      EventListener.call(this);
-      var src = "";
-      Object.defineProperty(this, "src", {
-        set: value => {
-          src = value;
-          assert(this.id);
-          postMessage({
-            target: "Image",
-            method: "src",
-            src,
-            id: this.id
-          });
-        },
-        get: () => src
-      });
-    }
-    Image.prototype.onload = () => {};
-    Image.prototype.onerror = () => {};
-    var HTMLImageElement = Image;
-    var window = this;
-    var windowExtra = new EventListener;
-    for (var x in windowExtra) window[x] = windowExtra[x];
-    window.close = () => {
-      postMessage({
-        target: "window",
-        method: "close"
-      });
-    };
-    window.alert = text => {
-      err(`alert forever: ${text}`);
-      while (1) {}
-    };
-    window.scrollX = window.scrollY = 0;
-    // TODO: proxy these
-    window.WebGLRenderingContext = WebGLWorker;
-    window.requestAnimationFrame = (() => {
-      // similar to Browser.requestAnimationFrame
-      var nextRAF = 0;
-      return func => {
-        // try to keep 60fps between calls to here
-        var now = Date.now();
-        if (nextRAF === 0) {
-          nextRAF = now + 1e3 / 60;
-        } else {
-          while (now + 2 >= nextRAF) {
-            // fudge a little, to avoid timer jitter causing us to do lots of delay:0
-            nextRAF += 1e3 / 60;
-          }
-        }
-        var delay = Math.max(nextRAF - now, 0);
-        setTimeout(func, delay);
-      };
-    })();
-    var webGLWorker = new WebGLWorker;
-    var document = new EventListener;
-    document.createElement = what => {
-      switch (what) {
-       case "canvas":
-        {
-          var canvas = new EventListener;
-          canvas.ensureData = () => {
-            if (!canvas.data || canvas.data.width !== canvas.width || canvas.data.height !== canvas.height) {
-              canvas.data = {
-                width: canvas.width,
-                height: canvas.height,
-                data: new Uint8Array(canvas.width * canvas.height * 4)
-              };
-              if (canvas === Module["canvas"]) {
-                postMessage({
-                  target: "canvas",
-                  op: "resize",
-                  width: canvas.width,
-                  height: canvas.height
-                });
-              }
-            }
-          };
-          canvas.getContext = (type, attributes) => {
-            if (canvas === Module["canvas"]) {
-              postMessage({
-                target: "canvas",
-                op: "getContext",
-                type,
-                attributes
-              });
-            }
-            if (type === "2d") {
-              return {
-                getImageData: (x, y, w, h) => {
-                  assert(x == 0 && y == 0 && w == canvas.width && h == canvas.height);
-                  canvas.ensureData();
-                  return {
-                    width: canvas.data.width,
-                    height: canvas.data.height,
-                    data: new Uint8Array(canvas.data.data)
-                  };
-                },
-                putImageData: (image, x, y) => {
-                  canvas.ensureData();
-                  assert(x == 0 && y == 0 && image.width == canvas.width && image.height == canvas.height);
-                  canvas.data.data.set(image.data);
-                  // TODO: can we avoid this copy?
-                  if (canvas === Module["canvas"]) {
-                    postMessage({
-                      target: "canvas",
-                      op: "render",
-                      image: canvas.data
-                    });
-                  }
-                },
-                drawImage: (image, x, y, w, h, ox, oy, ow, oh) => {
-                  assert(!x && !y && !ox && !oy);
-                  assert(w === ow && h === oh);
-                  assert(canvas.width === w || w === undefined);
-                  assert(canvas.height === h || h === undefined);
-                  assert(image.width === canvas.width && image.height === canvas.height);
-                  canvas.ensureData();
-                  canvas.data.data.set(image.data.data);
-                  // TODO: can we avoid this copy?
-                  if (canvas === Module["canvas"]) {
-                    postMessage({
-                      target: "canvas",
-                      op: "render",
-                      image: canvas.data
-                    });
-                  }
-                }
-              };
-            } else {
-              return webGLWorker;
-            }
-          };
-          canvas.boundingClientRect = {};
-          canvas.getBoundingClientRect = () => ({
-            width: canvas.boundingClientRect.width,
-            height: canvas.boundingClientRect.height,
-            top: canvas.boundingClientRect.top,
-            left: canvas.boundingClientRect.left,
-            bottom: canvas.boundingClientRect.bottom,
-            right: canvas.boundingClientRect.right
-          });
-          canvas.style = new PropertyBag;
-          canvas.exitPointerLock = () => {};
-          canvas.width_ ||= 0;
-          canvas.height_ ||= 0;
-          Object.defineProperty(canvas, "width", {
-            set: value => {
-              canvas.width_ = value;
-              if (canvas === Module["canvas"]) {
-                postMessage({
-                  target: "canvas",
-                  op: "resize",
-                  width: canvas.width_,
-                  height: canvas.height_
-                });
-              }
-            },
-            get: () => canvas.width_
-          });
-          Object.defineProperty(canvas, "height", {
-            set: value => {
-              canvas.height_ = value;
-              if (canvas === Module["canvas"]) {
-                postMessage({
-                  target: "canvas",
-                  op: "resize",
-                  width: canvas.width_,
-                  height: canvas.height_
-                });
-              }
-            },
-            get: () => canvas.height_
-          });
-          var style = {
-            parentCanvas: canvas,
-            removeProperty: () => {},
-            setProperty: () => {}
-          };
-          Object.defineProperty(style, "cursor", {
-            set: value => {
-              if (!style.cursor_ || style.cursor_ !== value) {
-                style.cursor_ = value;
-                if (style.parentCanvas === Module["canvas"]) {
-                  postMessage({
-                    target: "canvas",
-                    op: "setObjectProperty",
-                    object: "style",
-                    property: "cursor",
-                    value: style.cursor_
-                  });
-                }
-              }
-            },
-            get: () => style.cursor
-          });
-          canvas.style = style;
-          return canvas;
-        }
-
-       default:
-        {
-          throw "document.createElement " + what;
-        }
-      }
-    };
-    document.getElementById = id => {
-      if (id === "canvas" || id === "application-canvas") {
-        return Module["canvas"];
-      }
-      throw "document.getElementById failed on " + id;
-    };
-    document.querySelector = id => {
-      if (id === "#canvas" || id === "#application-canvas" || id === "canvas" || id === "application-canvas") {
-        return Module["canvas"];
-      }
-      throw "document.querySelector failed on " + id;
-    };
-    document.documentElement = {};
-    document.styleSheets = [ {
-      cssRules: [],
-      // TODO: forward to client
-      insertRule(rule, i) {
-        this.cssRules.splice(i, 0, rule);
-      }
-    } ];
-    document.URL = "http://worker.not.yet.ready.wait.for.window.onload?fake";
-    function Audio() {
-      warnOnce("faking Audio elements, no actual sound will play");
-    }
-    Audio.prototype = new EventListener;
-    Object.defineProperty(Audio.prototype, "src", {
-      set(value) {
-        if (value[0] === "d") return;
-        // ignore data urls
-        this.onerror();
-      }
-    });
-    Audio.prototype.play = () => {};
-    Audio.prototype.pause = () => {};
-    Audio.prototype.cloneNode = () => new Audio;
-    function AudioContext() {
-      warnOnce("faking WebAudio elements, no actual sound will play");
-      var makeNode = () => ({
-        connect: () => {},
-        disconnect: () => {}
-      });
-      this.listener = {
-        setPosition: () => {},
-        setOrientation: () => {}
-      };
-      this.decodeAudioData = () => {};
-      // ignore callbacks
-      this.createBuffer = makeNode;
-      this.createBufferSource = makeNode;
-      this.createGain = makeNode;
-      this.createPanner = makeNode;
-    }
-    var screen = {
-      width: 0,
-      height: 0
-    };
-    Module["canvas"] = document.createElement("canvas");
-    Module.setStatus = () => {};
-    out = x => {
-      //dump('OUT: ' + x + '\n');
-      postMessage({
-        target: "stdout",
-        content: x
-      });
-    };
-    err = x => {
-      //dump('ERR: ' + x + '\n');
-      postMessage({
-        target: "stderr",
-        content: x
-      });
-    };
-    // Frame throttling
-    var frameId = 0;
-    var clientFrameId = 0;
-    var postMainLoop = Module["postMainLoop"];
-    Module["postMainLoop"] = () => {
-      postMainLoop?.();
-      // frame complete, send a frame id
-      postMessage({
-        target: "tick",
-        id: frameId++
-      });
-      commandBuffer = [];
-    };
-    // Wait to start running until we receive some info from the client
-    if (!ENVIRONMENT_IS_PTHREAD) {
-      addRunDependency("gl-prefetch");
-      addRunDependency("worker-init");
-    }
-  }
-  // buffer messages until the program starts to run
-  var messageBuffer = null;
-  var messageResenderTimeout = null;
-  var calledMain = false;
-  // Set calledMain to true during postRun which happens once main returns
-  Module["postRun"] ||= [];
-  if (typeof Module["postRun"] == "function") Module["postRun"] = [ Module["postRun"] ];
-  Module["postRun"].push(() => {
-    calledMain = true;
-  });
-  function messageResender() {
-    if (calledMain) {
-      assert(messageBuffer && messageBuffer.length > 0);
-      messageResenderTimeout = null;
-      messageBuffer.forEach(onmessage);
-      messageBuffer = null;
-    } else {
-      messageResenderTimeout = setTimeout(messageResender, 100);
-    }
-  }
-  function onMessageFromMainEmscriptenThread(message) {
-    if (!calledMain && !message.data.preMain) {
-      if (!messageBuffer) {
-        messageBuffer = [];
-        messageResenderTimeout = setTimeout(messageResender, 100);
-      }
-      messageBuffer.push(message);
-      return;
-    }
-    if (calledMain && messageResenderTimeout) {
-      clearTimeout(messageResenderTimeout);
-      messageResender();
-    }
-    //dump('worker got ' + JSON.stringify(message.data).substr(0, 150) + '\n');
-    switch (message.data.target) {
-     case "document":
-      {
-        document.fireEvent(message.data.event);
-        break;
-      }
-
-     case "window":
-      {
-        window.fireEvent(message.data.event);
-        break;
-      }
-
-     case "canvas":
-      {
-        if (message.data.event) {
-          Module["canvas"].fireEvent(message.data.event);
-        } else if (message.data.boundingClientRect) {
-          Module["canvas"].boundingClientRect = message.data.boundingClientRect;
-        } else throw "ey?";
-        break;
-      }
-
-     case "gl":
-      {
-        webGLWorker.onmessage(message.data);
-        break;
-      }
-
-     case "tock":
-      {
-        clientFrameId = message.data.id;
-        break;
-      }
-
-     case "Image":
-      {
-        var img = IndexedObjects.cache[message.data.id];
-        switch (message.data.method) {
-         case "onload":
-          {
-            img.width = message.data.width;
-            img.height = message.data.height;
-            img.data = {
-              width: img.width,
-              height: img.height,
-              data: message.data.data
-            };
-            img.complete = true;
-            img.onload();
-            break;
-          }
-
-         case "onerror":
-          {
-            img.onerror({
-              srcElement: img
-            });
-            break;
-          }
-        }
-        break;
-      }
-
-     case "IDBStore":
-      {
-        assert(message.data.method === "response");
-        assert(IDBStore.pending);
-        IDBStore.pending(message.data);
-        break;
-      }
-
-     case "worker-init":
-      {
-        Module["canvas"] = document.createElement("canvas");
-        screen.width = Module["canvas"].width_ = message.data.width;
-        screen.height = Module["canvas"].height_ = message.data.height;
-        Module["canvas"].boundingClientRect = message.data.boundingClientRect;
-        if (ENVIRONMENT_IS_NODE) document.URL = message.data.URL;
-        currentScriptUrl = message.data.currentScriptUrl;
-        window.fireEvent({
-          type: "load"
-        });
-        removeRunDependency("worker-init");
-        break;
-      }
-
-     case "custom":
-      {
-        if (Module["onCustomMessage"]) {
-          Module["onCustomMessage"](message);
-        } else {
-          throw "Custom message received but worker Module.onCustomMessage not implemented.";
-        }
-        break;
-      }
-
-     case "setimmediate":
-      {
-        Module["setImmediates"]?.shift()();
-        break;
-      }
-
-     default:
-      throw "wha? " + message.data.target;
-    }
-  }
-  if (!ENVIRONMENT_IS_PTHREAD) {
-    onmessage = onMessageFromMainEmscriptenThread;
-  }
-  // proxyWorker.js has defined 'document' and 'window' objects above, so need to
-  // initialize them for library_html5.js explicitly here.
-  if (typeof specialHTMLTargets != "undefined") {
-    specialHTMLTargets = [ 0, document, window ];
-  }
-  function postCustomMessage(data) {
-    postMessage({
-      target: "custom",
-      userData: data
-    });
-  }
-}
-
-// end include: proxyWorker.js
 Module["addRunDependency"] = addRunDependency;
 
 Module["removeRunDependency"] = removeRunDependency;
@@ -15679,7 +13995,10 @@ dependenciesFulfilled = function runCaller() {
 function callMain(args = []) {
   assert(runDependencies == 0, 'cannot call main when async dependencies remain! (listen on Module["onRuntimeInitialized"])');
   assert(__ATPRERUN__.length == 0, "cannot call main when preRun functions remain to be called");
-  var entryFunction = _main;
+  var entryFunction = __emscripten_proxy_main;
+  // With PROXY_TO_PTHREAD make sure we keep the runtime alive until the
+  // proxied main calls exit (see exitOnMainThread() for where Pop is called).
+  runtimeKeepalivePush();
   args.unshift(thisProgram);
   var argc = args.length;
   var argv = stackAlloc((argc + 1) * 4);
