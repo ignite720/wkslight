@@ -11,7 +11,7 @@ static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
     const auto symbol = utils::string::str_repeats("=", 98);
     printf("%s>>\nweb_fetch: %s\nfetch status => %d\n", symbol.c_str(), fetch->url, fetch->status);
     
-    auto *user_data = static_cast<WebFetchUserData *>(fetch->userData);
+    auto *user_data = static_cast<utils::web::WebFetchUserData *>(fetch->userData);
     if (user_data) {
         if (fetch->status == 200) {
             assert(user_data->size == fetch->numBytes);
