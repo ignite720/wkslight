@@ -62,9 +62,11 @@ workspace(g_wkslight.workspace.name)
         defines({ "TARGET_PLATFORM_WEB=1" })
         platforms({ "wasm" })
         toolset("emcc")
+        buildoptions({
+            "-pthread",
+        })
         linkoptions({
             "--proxy-to-worker",
-            "-pthread",
             "-sNO_DISABLE_EXCEPTION_CATCHING",
             --"-sPROXY_TO_WORKER=1",
             --"-sUSE_PTHREADS=1",
