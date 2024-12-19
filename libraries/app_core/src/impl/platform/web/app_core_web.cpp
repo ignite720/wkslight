@@ -132,7 +132,6 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
 
         auto &game_info_stats = this->app_info_as_mut().game_info.stats;
         auto _ret = utils::web::web_fetch_persist_file_load_sync(consts::text::GAME_SAVE_FILE_NAME, &game_info_stats, sizeof(game_info_stats));
-        //utils::web::web_fetch_persist_file_load(consts::text::GAME_SAVE_FILE_NAME, &game_info_stats, sizeof(game_info_stats));
         return 0;
     } while(false);
     

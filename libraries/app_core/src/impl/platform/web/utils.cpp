@@ -100,7 +100,7 @@ void utils::web::web_fetch_persist_file_store(const char *url, const void *data,
     emscripten_fetch(&attr, url);
 }
 
-void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size) {
+bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size) {
     PRINT_FUNCTION_NAME();
 
     emscripten_fetch_attr_t attr;
@@ -116,11 +116,13 @@ void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
     attr.onerror = s_web_fetch_failed;
     attr.userData = user_data;
     emscripten_fetch(&attr, url);
+    return true;
 }
 
 bool utils::web::web_fetch_persist_file_load_sync(const char *url, void *data, size_t size) {
     PRINT_FUNCTION_NAME();
 
+    #if WEB_SYNC_FETCH
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     
@@ -142,6 +144,9 @@ bool utils::web::web_fetch_persist_file_load_sync(const char *url, void *data, s
 
     printf("%s: %d\n", FUNCTION_NAME, ret);
     return ret;
+    #else
+    return utils::web::web_fetch_persist_file_load(url, data, size);
+    #endif
 }
 
 void utils::web::web_fetch_persist_file_delete(const char *url) {

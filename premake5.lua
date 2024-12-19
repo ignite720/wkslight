@@ -8,6 +8,10 @@ newoption({
     description = "Enable AddressSanitizer.",
 })
 newoption({
+    trigger = "web_sync_fetch",
+    description = "Synchronous Fetch operations are available both on the main thread and pthreads.",
+})
+newoption({
     trigger = "target_platform",
     description = "Generate project files for the specified target platform",
     value = "<TARGET_PLATFORM>",
@@ -62,15 +66,8 @@ workspace(g_wkslight.workspace.name)
         defines({ "TARGET_PLATFORM_WEB=1" })
         platforms({ "wasm" })
         toolset("emcc")
-        buildoptions({
-            "-pthread",
-        })
         linkoptions({
-            "--proxy-to-worker",
             "-sNO_DISABLE_EXCEPTION_CATCHING",
-            --"-sPROXY_TO_WORKER=1",
-            "-sUSE_PTHREADS=1",
-            "-sPTHREAD_POOL_SIZE=8",
         })
     filter("system:windows")
         systemversion("latest")
@@ -116,6 +113,16 @@ workspace(g_wkslight.workspace.name)
     filter({ "options:asan", "options:target_platform=pc", "configurations:Debug", "action:gmake*", "system:linux", "toolset:gcc or toolset:clang" })
         buildoptions({ "-fsanitize=address" })
         linkoptions({ "-fsanitize=address" })
+    filter({ "options:web_sync_fetch", "options:target_platform=web" })
+        defines({ "WEB_SYNC_FETCH=1" })
+        buildoptions({ "-pthread" })
+        linkoptions({
+            --"--proxy-to-worker",
+            --"-sPROXY_TO_WORKER=1",
+            "-sPROXY_TO_PTHREAD=1",
+            "-sUSE_PTHREADS=1",
+            "-sPTHREAD_POOL_SIZE=8",
+        })
 group(g_wkslight.workspace.libraries.group)
     for k, v in pairs(g_wkslight.workspace.libraries.projects) do
         if v.location ~= nil then
