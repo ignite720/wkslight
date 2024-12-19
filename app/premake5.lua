@@ -3,7 +3,7 @@ project("app")
     targetdir(g_wkslight.targetdir)
     kind("ConsoleApp")
     language("C++")
-    uuid("BE2461B7-236F-4278-81D3-F0D476F9A4C0")
+    --uuid("BE2461B7-236F-4278-81D3-F0D476F9A4C0")
     debugdir("")
     debugargs({
         "--foobar",

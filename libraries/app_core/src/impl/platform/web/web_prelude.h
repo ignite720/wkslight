@@ -8,61 +8,10 @@
 
 #endif
 
-#if 1
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
-#else
-// todo: temporary test code
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <SDL_ttf.h>
-
-struct SDL_FPoint {
-    float x;
-    float y;
-};
-
-struct SDL_FRect {
-    float x;
-    float y;
-    float w;
-    float h;
-};
-
-inline SDL_bool SDL_HasIntersectionF(const SDL_FRect * A, const SDL_FRect * B) {
-    auto a = SDL_Rect { int(A->x), int(A->y), int(A->w), int(A->h) };
-    auto b = SDL_Rect { int(B->x), int(B->y), int(B->w), int(B->h) };
-    return SDL_HasIntersection(&a, &b);
-}
-
-enum SDL_RendererFlip {
-    SDL_FLIP_NONE = 0,
-};
-
-inline auto SDL_RenderCopyEx(
-    SDL_Renderer *renderer,
-    SDL_Texture *texture,
-    const SDL_Rect *srcrect,
-    const SDL_Rect *dstrect,
-    const double angle,
-    const SDL_Point *center,
-    const SDL_RendererFlip flip
-) -> int {
-    return SDL_RenderCopy(renderer, texture, srcrect, dstrect);
-}
-
-inline auto TTF_RenderUTF8_Blended_Wrapped(
-    TTF_Font *font,
-    const char *text,
-    SDL_Color fg,
-    Uint32 wrapLength
-) -> SDL_Surface * {
-    return nullptr;
-}
-#endif
 
 enum MOVE_STATE {
     MOVE_STATE_NONE = 0,

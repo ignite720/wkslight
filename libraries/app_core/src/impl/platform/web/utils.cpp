@@ -42,12 +42,12 @@ SDL_Rect utils::sdl::to_rect(const SDL_FRect *rect) {
 }
 
 void utils::sdl::clear_with_color(SDL_Renderer *renderer, const SDL_Color &color) {
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, /*color.a*/0xff);
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
     SDL_RenderClear(renderer);
 }
 
 void utils::sdl::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color) {
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, /*color.a*/0xff);
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
     auto tmp_rect = utils::sdl::to_rect(rect);
     SDL_RenderFillRect(renderer, &tmp_rect);
