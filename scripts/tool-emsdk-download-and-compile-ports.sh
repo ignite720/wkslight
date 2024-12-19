@@ -1,3 +1,6 @@
+emcc -v
+emcc --show-ports
+
 echo -e '#include <SDL2/SDL.h>\nint main() { SDL_Init(SDL_INIT_VIDEO); SDL_Quit(); return 0; }' > main.c
 emcc main.c -O2 -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -sSDL2_IMAGE_FORMATS='["bmp", "jpg", "png"]' -sUSE_SDL_MIXER=2 -sUSE_SDL_NET=2 -sUSE_SDL_TTF=2 -o main.js
 

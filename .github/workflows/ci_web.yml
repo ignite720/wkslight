@@ -29,7 +29,6 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          emcc -v
           source scripts/tool-setup-dot-emscripten.sh
           source scripts/tool-emsdk-download-and-compile-ports.sh
 
