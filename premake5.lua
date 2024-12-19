@@ -117,11 +117,11 @@ workspace(g_wkslight.workspace.name)
         defines({ "WEB_SYNC_FETCH=1" })
         buildoptions({ "-pthread" })
         linkoptions({
-            --"--proxy-to-worker",
-            "-sPROXY_TO_WORKER=1",
+            "--proxy-to-worker",
+            --"-sPROXY_TO_WORKER=1",
             --"-sPROXY_TO_PTHREAD=1",
-            "-sUSE_PTHREADS=1",
-            "-sPTHREAD_POOL_SIZE=8",
+            --"-sUSE_PTHREADS=1",
+            --"-sPTHREAD_POOL_SIZE=8",
         })
 group(g_wkslight.workspace.libraries.group)
     for k, v in pairs(g_wkslight.workspace.libraries.projects) do
