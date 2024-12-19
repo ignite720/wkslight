@@ -1,4 +1,4 @@
-[[ "$(pwd)" != "$(git rev-parse --show-toplevel)" ]] && { return 1; }
+[[ "$(pwd)" != "$(git rev-parse --show-toplevel 2>/dev/null)" ]] && { return 1; }
 
 pushd build
 make config=release_wasm

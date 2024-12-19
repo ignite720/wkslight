@@ -1,4 +1,4 @@
-[[ "$(pwd)" != "$(git rev-parse --show-toplevel)" ]] && { return 1; }
+[[ "$(pwd)" != "$(git rev-parse --show-toplevel 2>/dev/null)" ]] && { return 1; }
 
 EMSDK_TMP_CACHE_SYSROOT_INC_PATH=~/emsdk-tmp/cache/sysroot/include
 echo $EMSDK_TMP_CACHE_SYSROOT_INC_PATH

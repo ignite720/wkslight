@@ -73,17 +73,20 @@ void utils::web::web_fetch_persist_file_store(const char *url, const void *data,
 
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
+
+    auto *data_on_heap = static_cast<char *>(malloc(size));
+    memcpy(data_on_heap, data, size);
     
     strcpy(attr.requestMethod, "EM_IDB_STORE");
     attr.attributes = (EMSCRIPTEN_FETCH_REPLACE | EMSCRIPTEN_FETCH_PERSIST_FILE);
-    attr.requestData = reinterpret_cast<const char *>(data);
+    attr.requestData = data_on_heap;
     attr.requestDataSize = size;
     attr.onsuccess = s_web_fetch_succeeded;
     attr.onerror = s_web_fetch_failed;
     emscripten_fetch(&attr, url);
 }
 
-void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size) {
+bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size) {
     PRINT_FUNCTION_NAME();
 
     emscripten_fetch_attr_t attr;
@@ -91,15 +94,21 @@ void utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
     
     strcpy(attr.requestMethod, "GET");
     attr.attributes = (EMSCRIPTEN_FETCH_LOAD_TO_MEMORY | EMSCRIPTEN_FETCH_SYNCHRONOUS);
+
+    auto ret = false;
     auto *fetch = emscripten_fetch(&attr, url);
     if (fetch) {
-        if (fetch->status == 200) {
+        ret = (fetch->status == 200);
+        if (ret) {
             assert(size == fetch->numBytes);
             memcpy(data, fetch->data, size);
         }
 
         emscripten_fetch_close(fetch);
     }
+
+    printf("%s: %d\n", FUNCTION_NAME, ret);
+    return ret;
 }
 
 void utils::web::web_fetch_persist_file_delete(const char *url) {
