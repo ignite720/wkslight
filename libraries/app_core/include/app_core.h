@@ -53,6 +53,7 @@ struct APP_CORE_API AppCore {
         } stats;
         struct GameInfo {
             bool game_over = true;
+            bool stats_ready = false;
             bool paddle_friction = false;
 
             struct Stats {

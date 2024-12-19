@@ -7,28 +7,31 @@ static constexpr const char *const REQUEST_HEADERS[] = {
     nullptr
 };
 
-struct WebFetchUserData {
-    void *data = nullptr;
-    size_t size = 0;
-};
-
 static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
-    if (fetch->data && (fetch->numBytes > 0)) {
-        const auto symbol = utils::string::str_repeats("=", 98);
-
-        auto *user_data = static_cast<WebFetchUserData *>(fetch->userData);
-        if (user_data) {
+    const auto symbol = utils::string::str_repeats("=", 98);
+    printf("%s>>\nweb_fetch: %s\nfetch status => %d\n", symbol.c_str(), fetch->url, fetch->status);
+    
+    auto *user_data = static_cast<WebFetchUserData *>(fetch->userData);
+    if (user_data) {
+        if (fetch->status == 200) {
             assert(user_data->size == fetch->numBytes);
             memcpy(user_data->data, fetch->data, fetch->numBytes);
-            delete user_data;
-
-            printf("%s>>\nweb_fetch: %s\nfetch status => %d\n<<%s\n\n", symbol.c_str(), fetch->url, fetch->status, symbol.c_str());
-        } else {
-            const auto text = String { fetch->data, fetch->data + fetch->numBytes };
-            printf("%s>>\nweb_fetch: %s\n%s\n<<%s\n\n", symbol.c_str(), fetch->url, text.c_str(), symbol.c_str());
         }
+
+        switch (user_data->usage) {
+            case WebFetchUserData::USAGE_GAME_INFO_STATS: {
+                user_data->app_core->app_info_as_mut().game_info.stats_ready = true;
+            } break;
+        }
+        delete user_data;
+    }
+
+    if (fetch->data && (fetch->numBytes > 0)) {
+        const auto text = String { fetch->data, fetch->data + fetch->numBytes };
+        printf("%s\n", text.c_str());
     }
     
+    printf("<<%s\n\n", symbol.c_str());
     emscripten_fetch_close(fetch);
 }
 
@@ -100,13 +103,15 @@ void utils::web::web_fetch_persist_file_store(const char *url, const void *data,
     emscripten_fetch(&attr, url);
 }
 
-bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size) {
+bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t size, AppCore *app_core, WebFetchUserData::USAGE usage) {
     PRINT_FUNCTION_NAME();
 
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
 
     auto *user_data = new WebFetchUserData();
+    user_data->app_core = app_core;
+    user_data->usage = usage;
     user_data->data = data;
     user_data->size = size;
     
@@ -119,7 +124,7 @@ bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
     return true;
 }
 
-bool utils::web::web_fetch_persist_file_load_sync(const char *url, void *data, size_t size) {
+bool utils::web::web_fetch_persist_file_load_sync(const char *url, void *data, size_t size, AppCore *app_core, WebFetchUserData::USAGE usage) {
     PRINT_FUNCTION_NAME();
 
     #if WEB_SYNC_FETCH
@@ -145,7 +150,7 @@ bool utils::web::web_fetch_persist_file_load_sync(const char *url, void *data, s
     printf("%s: %d\n", FUNCTION_NAME, ret);
     return ret;
     #else
-    return utils::web::web_fetch_persist_file_load(url, data, size);
+    return utils::web::web_fetch_persist_file_load(url, data, size, app_core, usage);
     #endif
 }
 

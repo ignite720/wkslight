@@ -111,7 +111,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         }
     
         {
-            m_resource_bundle = std::make_unique<ResourceBundle>();
+            m_resource_bundle = std::make_unique<ResourceBundle>(this);
             m_resource_bundle->put(ResourceBundle::AUDIO_MUSIC_INSERT_COIN, std::make_unique<AudioMusic>("assets/sounds/Insert Coin.ogg"));
             m_resource_bundle->put(ResourceBundle::AUDIO_MUSIC_ITEM_SHOP, std::make_unique<AudioMusic>("assets/sounds/Item Shop.ogg"));
             this->play_audio_music(ResourceBundle::AUDIO_MUSIC_ITEM_SHOP);
@@ -131,7 +131,7 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
         utils::web::web_fetch("https://httpbin.org/xml");
 
         auto &game_info_stats = this->app_info_as_mut().game_info.stats;
-        auto _ret = utils::web::web_fetch_persist_file_load_sync(consts::text::GAME_SAVE_FILE_NAME, &game_info_stats, sizeof(game_info_stats));
+        auto _ret = utils::web::web_fetch_persist_file_load_sync(this, consts::text::GAME_SAVE_FILE_NAME, &game_info_stats, sizeof(game_info_stats), utils::web::WebFetchUserData::USAGE_GAME_INFO_STATS);
         return 0;
     } while(false);
     
@@ -219,17 +219,17 @@ void AppCoreWeb::render() {
                 + "\nrounds: " + std::to_string(app_info.game_info.stats.num_rounds)
                 + "\nscore: " + std::to_string(app_info.game_info.stats.score)
             );
-            m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
+            m_resource_bundle->draw_text(ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, 5.0f);
         }
 
         {
-            m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, "RIGHT TOP", 0.75f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP, consts::colors::PURPLE);
-            m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, "RIGHT BOTTOM", 0.5f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM, consts::colors::TEAL);
-            m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, "LEFT BOTTOM", 0.5f, 0.0f, app_info.window_height, consts::anchor_point::LEFT_BOTTOM, consts::colors::GOLD);
+            m_resource_bundle->draw_text(ResourceBundle::FONT_PRESS_START_2P, "RIGHT TOP", 0.75f, app_info.window_width, 0.0f, consts::anchor_point::RIGHT_TOP, consts::colors::PURPLE);
+            m_resource_bundle->draw_text(ResourceBundle::FONT_PRESS_START_2P, "RIGHT BOTTOM", 0.5f, app_info.window_width, app_info.window_height, consts::anchor_point::RIGHT_BOTTOM, consts::colors::TEAL);
+            m_resource_bundle->draw_text(ResourceBundle::FONT_PRESS_START_2P, "LEFT BOTTOM", 0.5f, 0.0f, app_info.window_height, consts::anchor_point::LEFT_BOTTOM, consts::colors::GOLD);
         }
 
         if (m_ball->get_dead()) {
-            m_resource_bundle->draw_text(this, ResourceBundle::FONT_PRESS_START_2P, consts::text::GAME_OVER_HINT, 2.0f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER, consts::colors::ORANGE);
+            m_resource_bundle->draw_text(ResourceBundle::FONT_PRESS_START_2P, consts::text::GAME_OVER_HINT, 2.0f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER, consts::colors::ORANGE);
         }
     }
 

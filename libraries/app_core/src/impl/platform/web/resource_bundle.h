@@ -13,7 +13,7 @@ namespace utils {
     }
 }
 
-struct ResourceBundle {
+struct ResourceBundle final : public WebObject {
     enum AUDIO_MUSIC {
         AUDIO_MUSIC_INSERT_COIN = 0,
         AUDIO_MUSIC_ITEM_SHOP,
@@ -32,6 +32,8 @@ struct ResourceBundle {
         FONT_PRESS_START_2P = 0,
         FONT_COUNT,
     };
+
+    explicit ResourceBundle(AppCore *app_core) : WebObject(app_core) {}
 
     template<typename E, typename T>
     std::enable_if_t<std::is_enum_v<E>, void> put(E index, std::unique_ptr<T> value) {
@@ -58,8 +60,8 @@ struct ResourceBundle {
         m_clips[index]->play();
     }
 
-    void draw_text(AppCore *app_core, FONT font, const String &text, float scale = 1.0f, float x = 0.0f, float y = 0.0f, const SDL_FPoint &anchor = consts::anchor_point::LEFT_TOP, const SDL_Color &color = consts::colors::WHITE) {
-        auto *texture = this->get_or_bake_text_texture(app_core, font, text, color);
+    void draw_text(FONT font, const String &text, float scale = 1.0f, float x = 0.0f, float y = 0.0f, const SDL_FPoint &anchor = consts::anchor_point::LEFT_TOP, const SDL_Color &color = consts::colors::WHITE) {
+        auto *texture = this->get_or_bake_text_texture(font, text, color);
         this->draw_texture(texture, scale, x, y, anchor);
     }
 
@@ -75,7 +77,7 @@ private:
         return hash;
     }
 
-    Texture * get_or_bake_text_texture(AppCore *app_core, FONT font, const String &text, const SDL_Color &color) {
+    Texture * get_or_bake_text_texture(FONT font, const String &text, const SDL_Color &color) {
         Texture *ptr = nullptr;
         const auto hash = this->text_texture_hash(font, text, color);
 
@@ -84,14 +86,14 @@ private:
             ptr = iter->second.get();
         } else {
             auto &texture = m_text_texture_cache[hash];
-            texture = std::make_unique<Texture>(app_core);
-
+            texture = std::make_unique<Texture>(this->app_core_as_mut_ptr());
+            
             auto ret = texture->load_from_text(m_fonts[font]->get_raw_handle(), text.c_str(), color);
             if (ret) {
                 texture->set_blend_mode(SDL_BLENDMODE_BLEND);
             }
             
-            if (app_core->app_info_as_ref().config.logger_verbose) {
+            if (this->app_core_as_ptr()->app_info_as_ref().config.logger_verbose) {
                 printf("Text texture[%zu] baked %ssuccessfully.\n", m_text_texture_cache.size(), ret ? "" : "un");
             }
             ptr = texture.get();
