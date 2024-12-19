@@ -98,6 +98,7 @@ bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
     auto ret = false;
     auto *fetch = emscripten_fetch(&attr, url);
     if (fetch) {
+        printf("%s: fetch status => %d\n", FUNCTION_NAME, fetch->status);
         ret = (fetch->status == 200);
         if (ret) {
             assert(size == fetch->numBytes);
