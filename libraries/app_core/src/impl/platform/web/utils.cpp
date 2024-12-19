@@ -20,6 +20,7 @@ static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
         if (user_data) {
             assert(user_data->size == fetch->numBytes);
             memcpy(user_data->data, fetch->data, fetch->numBytes);
+            delete user_data;
 
             printf("%s>>\nweb_fetch: %s\nfetch status => %d\n<<%s\n\n", symbol.c_str(), fetch->url, fetch->status, symbol.c_str());
         } else {
