@@ -1,9 +1,9 @@
 #pragma once
 
-#include <foo.h>
-
 #include <rtm/math.h>
 #include <simplerand/simplerand.hpp>
+
+#include <foo.h>
 
 #include "app_core_api.h"
 
