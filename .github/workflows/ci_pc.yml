@@ -1,0 +1,76 @@
+name: CI pc
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.2
+        with:
+          version: "5.0.0-beta2"
+
+      - name: Add msbuild to PATH
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: "latest"
+
+      - name: Build app for Windows
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          pushd scripts
+          call premake5-generate-windows.bat dummy
+          popd
+
+          pushd scripts
+          tool-msbuild-windows.bat
+          popd
+
+          pushd scripts
+          tool-run-pc.bat
+          popd
+
+      - name: Generate project for Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          source scripts/12-premake5-generate-pc.sh
+
+      - name: Generate project for macOS
+        if: runner.os == 'macOS'
+        run: |
+          source scripts/12-premake5-generate-pc.sh
+        
+      - name: Build app for Linux & macOS
+        if: runner.os != 'Windows'
+        run: |
+          source scripts/22-gmake-pc.sh
+          source scripts/32-tool-run-pc.sh
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/${{ runner.os }}
+          cp -r bin/* temp/artifact/${{ runner.os }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release-Artifact-${{ runner.os }}
+          path: temp
