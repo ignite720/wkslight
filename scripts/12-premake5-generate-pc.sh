@@ -1,0 +1,1 @@
+premake5 gmake --asan --pc_deploy_assets
