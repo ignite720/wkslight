@@ -1,0 +1,1 @@
+premake5 ninja --pc_deploy_assets
