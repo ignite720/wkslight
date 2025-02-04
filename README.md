@@ -37,11 +37,11 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > ```
 
 #### Clean
-> Double click `scripts\premake5-clean.bat`
-
 > ```shell
 > source scripts/0-premake5-clean.sh 
 > ```
+
+> Double click `scripts\premake5-clean.bat`
 
 ### 1. Android
 ---
