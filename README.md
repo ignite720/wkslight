@@ -42,9 +42,10 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > ```
 
 > Double click `scripts\premake5-clean.bat`
+---
+<br />
 
 ### 1. Android
----
 > 1.1 install The `Android SDK`
 
 > 1.2 `gradle`
@@ -65,7 +66,6 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > => bin/android-cargo-apk/app.apk
 
 ### 2. PC
----
 #### 2.1 Linux & macOS
 > ```shell
 > # gmake
@@ -86,15 +86,14 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > Double click `scripts\premake5-generate-pc-vs.bat`
 
 ### 3. Windows UWP
----
 > Double click `scripts\premake5-generate-uwp.bat`
 
 ### 4. Web
----
 > ```shell
 > source scripts/14-premake5-generate-web.sh 
 > source scripts/34-tool-run-web.sh 
 > ```
+---
 <br />
 
 ## Assets
