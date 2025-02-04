@@ -91,7 +91,7 @@ void Net::on_message(const uint8_t *data, uint32_t size, bool is_text) {
         auto message = String { data, data + size };
         printf("message(text): %s\n", message.c_str());
     } else {
-        auto kind = static_cast<NetPacketKind>(data[0]);
+        const auto kind = static_cast<NetPacketKind>(data[0]);
         switch (kind) {
             case NetPacketKind::Foo: {
                 const auto *pkt = reinterpret_cast<const FooNetPacket *>(data);

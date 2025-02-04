@@ -13,5 +13,6 @@ project("bar")
     })
     defines({
         g_wkslight.workspace.libraries.projects.bar.defines,
-        "BAR_BUILD_AS_DLL",
     })
+    filter("kind:SharedLib")
+        defines({ "__BAR_CONFIG_BUILD_DLL" })

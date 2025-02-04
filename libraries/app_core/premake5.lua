@@ -17,7 +17,6 @@ project("app_core")
     })
     defines({
         g_wkslight.workspace.libraries.projects.app_core.defines,
-        "APP_CORE_BUILD_AS_DLL",
     })
     g_wkslight.libs({
         "app_core_d3d12",
@@ -57,6 +56,8 @@ project("app_core")
         })
     filter("options:target_platform=android or options:target_platform=web")
         kind("StaticLib")
+    filter("kind:SharedLib")
+        defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
 project("app_core_d3d12")
     location(path.join(g_wkslight.workspacedir, "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
@@ -72,7 +73,6 @@ project("app_core_d3d12")
     })
     defines({
         g_wkslight.workspace.libraries.projects.app_core.defines,
-        "APP_CORE_BUILD_AS_DLL",
     })
     g_wkslight.libs({
         "foo",
@@ -81,6 +81,8 @@ project("app_core_d3d12")
     })
     filter("options:target_platform=android or options:target_platform=web")
         kind("StaticLib")
+    filter("kind:SharedLib")
+        defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
 project("app_core_vulkan")
     location(path.join(g_wkslight.workspacedir, "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
@@ -96,7 +98,6 @@ project("app_core_vulkan")
     })
     defines({
         g_wkslight.workspace.libraries.projects.app_core.defines,
-        "APP_CORE_BUILD_AS_DLL",
     })
     g_wkslight.libs({
         "foo",
@@ -105,3 +106,5 @@ project("app_core_vulkan")
     })
     filter("options:target_platform=android or options:target_platform=web")
         kind("StaticLib")
+    filter("kind:SharedLib")
+        defines({ "__APP_CORE_CONFIG_BUILD_DLL" })

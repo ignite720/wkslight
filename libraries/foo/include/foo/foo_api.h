@@ -1,26 +1,26 @@
 #pragma once
 
-#ifdef FOO_STATIC_LIB
-    #define FOO_TEMPLATE_EXTERN
-    #define FOO_API
-#else
-    #ifdef FOO_BUILD_AS_DLL
-        #define FOO_TEMPLATE_EXTERN
-
+#ifdef FOO_DLL
+    #ifdef __FOO_CONFIG_BUILD_DLL
         #ifdef _WIN32
             #define FOO_API                                     __declspec(dllexport)
         #else
             #define FOO_API                                     __attribute__((visibility("default")))
         #endif
+
+        #define FOO_TEMPLATE_EXTERN
     #else
-        #define FOO_TEMPLATE_EXTERN                             extern
-        
         #ifdef _WIN32
             #define FOO_API                                     __declspec(dllimport)
         #else
             #define FOO_API
         #endif
+
+        #define FOO_TEMPLATE_EXTERN                             extern
     #endif
+#else
+    #define FOO_API
+    #define FOO_TEMPLATE_EXTERN
 #endif
 
 #if defined(__clang__) || defined(__GNUC__)

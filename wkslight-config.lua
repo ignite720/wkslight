@@ -68,7 +68,7 @@ g_wkslight.workspace = {
                     "app_core_vulkan",
                 },
                 defines = {
-                    --"APP_CORE_STATIC_LIB",
+                    "APP_CORE_DLL",
                 },
             },
             app_core_d3d12 = {
@@ -98,7 +98,7 @@ g_wkslight.workspace = {
                     "bar",
                 },
                 defines = {
-                    "BAR_STATIC_LIB",
+                    --"BAR_CORE_DLL",
                 },
             },
             foo = {
@@ -110,7 +110,7 @@ g_wkslight.workspace = {
                     "foo",
                 },
                 defines = {
-                    --"FOO_STATIC_LIB",
+                    "FOO_CORE_DLL",
                 },
             },
             headeronly = {

@@ -10,7 +10,7 @@ using JSON = nlohmann::json;
 //#define SOL_PRINT_ERRORS 1
 #include <sol/sol.hpp>
 
-static constexpr int RESOLUTION_SCALE_FACTOR = 2;
+static constexpr auto RESOLUTION_SCALE_FACTOR = int(2);
 static constexpr auto WINDOW_WIDTH = int(1920 / RESOLUTION_SCALE_FACTOR);
 static constexpr auto WINDOW_HEIGHT = int(1080 / RESOLUTION_SCALE_FACTOR);
 

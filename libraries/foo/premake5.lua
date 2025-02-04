@@ -13,7 +13,8 @@ project("foo")
     })
     defines({
         g_wkslight.workspace.libraries.projects.foo.defines,
-        "FOO_BUILD_AS_DLL",
     })
-    filter("options:target_platform=android")
+    filter("options:target_platform=android or options:target_platform=web")
         kind("StaticLib")
+    filter("kind:SharedLib")
+        defines({ "__FOO_CONFIG_BUILD_DLL" })
