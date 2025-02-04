@@ -98,7 +98,7 @@ g_wkslight.workspace = {
                     "bar",
                 },
                 defines = {
-                    --"BAR_CORE_DLL",
+                    --"BAR_DLL",
                 },
             },
             foo = {
@@ -110,7 +110,7 @@ g_wkslight.workspace = {
                     "foo",
                 },
                 defines = {
-                    "FOO_CORE_DLL",
+                    "FOO_DLL",
                 },
             },
             headeronly = {
