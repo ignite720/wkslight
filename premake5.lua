@@ -50,7 +50,7 @@ workspace(g_wkslight.workspace.name)
         "__STDC_LIMIT_MACROS",
         "_USE_MATH_DEFINES",
     })
-    filter("options:not target_platform=android")
+    filter("options:target_platform=pc or options:target_platform=uwp")
         platforms({
             --"x86",
             "x64",
