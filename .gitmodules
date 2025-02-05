@@ -26,3 +26,6 @@
 [submodule "premake5-modules/wkslight"]
 	path = premake5-modules/wkslight
 	url = https://github.com/ignite720/premake-wkslight.git
+[submodule "libraries/spdlog"]
+	path = libraries/spdlog
+	url = https://github.com/wkslight/spdlog.git
