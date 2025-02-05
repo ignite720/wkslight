@@ -3,6 +3,8 @@
 #include <foo/foo.h>
 #include <simplerand/simplerand.hpp>
 
+#include "app_core/logger.h"
+
 #include "app_core/math_rtm.h"
 using namespace rtm;
 

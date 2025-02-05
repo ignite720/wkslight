@@ -36,6 +36,7 @@ project("app")
         "foo",
         "headeronly",
         "lua",
+        "spdlog",
         "XMath",
     })
     filter("options:target_platform=android")

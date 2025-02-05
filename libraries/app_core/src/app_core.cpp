@@ -23,6 +23,18 @@ static void s_my_lua_panic(sol::optional<String> maybe_msg) {
     // When this function exits, Lua will exhibit default behavior and abort()
 }
 
+static void s_test_logger() {
+    PRINT_FUNCTION_NAME();
+
+    g_setup_logger();
+    LOG_TRACE("This is a trace message, {}", "zero");
+    LOG_DEBUG("This is a debug message, {}", "one");
+    LOG_INFO("This is a info message, {}", "two");
+    LOG_WARN("This is a warn[ing] message, {}", 3);
+    LOG_ERROR("This is a error message, {}", 4.12f);
+    LOG_CRITICAL("This is a critical message, {}", 5.12345);
+}
+
 static void s_test_rtm() {
     PRINT_FUNCTION_NAME();
 
@@ -251,6 +263,8 @@ static int s_test_app_core() {
 
 int app_core_startup() {
     PRINT_FUNCTION_NAME();
+
+    s_test_logger();
 
     s_test_rtm();
     s_test_xmath();

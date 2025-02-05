@@ -134,6 +134,19 @@ g_wkslight.workspace = {
                     "%{g_wkslight.librariesdir}/sol2/include",
                 },
             },
+            spdlog = {
+                location = "libraries/spdlog",
+                includedirs = {
+                    "%{g_wkslight.librariesdir}/spdlog/include",
+                },
+                links = {
+                    "spdlog",
+                },
+                defines = {
+                    "SPDLOG_COMPILED_LIB",
+                    "SPDLOG_NO_EXCEPTIONS",
+                },
+            },
             XMath = {
                 location = nil,
                 includedirs = {

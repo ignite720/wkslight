@@ -26,6 +26,7 @@ project("app_core")
         "headeronly",
         "lua",
         "sol2",
+        "spdlog",
         "XMath",
     })
     filter("options:target_platform=android")
@@ -77,6 +78,7 @@ project("app_core_d3d12")
     g_wkslight.libs({
         "foo",
         "headeronly",
+        "spdlog",
         "XMath",
     })
     filter("options:target_platform=android or options:target_platform=web")
@@ -102,6 +104,7 @@ project("app_core_vulkan")
     g_wkslight.libs({
         "foo",
         "headeronly",
+        "spdlog",
         "XMath",
     })
     filter("options:target_platform=android or options:target_platform=web")
