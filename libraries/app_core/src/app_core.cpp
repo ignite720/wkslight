@@ -38,8 +38,8 @@ static void s_test_logging() {
     logging::init();
 
     auto zero = "zero";
-    auto one = "one";
-    auto two = "two";
+    auto one = fmt::format("{}", "one");
+    auto two = fmt::format("{}", "two");
     auto three = 3;
     auto four = 4.12f;
     auto five = 5.12345;
