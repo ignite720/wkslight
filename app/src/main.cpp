@@ -3,13 +3,19 @@
 #include <foobar/foobar.h>
 #include <app_core/app_core.h>
 
-static int s_main() {
+static void s_test_foobar() {
+    PRINT_FUNCTION_NAME();
+    
     {
         foobar_t foobar;
         foobar_default_init(&foobar);
-        
+
         foobar_print(&foobar);
     }
+}
+
+static int s_main() {
+    s_test_foobar();
     return app_core_startup();
 }
 
