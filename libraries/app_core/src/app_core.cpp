@@ -1,9 +1,13 @@
 #include "app_core/app_core.h"
 
 #include <bar/bar.h>
+#include <FastNoise/FastNoise.h>
+#include <FastNoiseLite/FastNoiseLite.h>
 
 #include <json/nlohmann/json.hpp>
 using JSON = nlohmann::json;
+
+#include <magic_enum/magic_enum.hpp>
 
 //#define SOL_NO_EXCEPTIONS 1
 //#define SOL_ALL_SAFETIES_ON 1
@@ -23,16 +27,64 @@ static void s_my_lua_panic(sol::optional<String> maybe_msg) {
     // When this function exits, Lua will exhibit default behavior and abort()
 }
 
-static void s_test_logger() {
+template <typename E>
+static auto s_to_integer(magic_enum::Enum<E> value) {
+    return static_cast<magic_enum::underlying_type_t<E>>(value);
+}
+
+static void s_test_logging() {
     PRINT_FUNCTION_NAME();
 
-    g_setup_logger();
-    LOG_TRACE("This is a trace message, {}", "zero");
-    LOG_DEBUG("This is a debug message, {}", "one");
-    LOG_INFO("This is a info message, {}", "two");
-    LOG_WARN("This is a warn[ing] message, {}", 3);
-    LOG_ERROR("This is a error message, {}", 4.12f);
-    LOG_CRITICAL("This is a critical message, {}", 5.12345);
+    logging::init();
+
+    auto zero = "zero";
+    auto one = "one";
+    auto two = "two";
+    auto three = 3;
+    auto four = 4.12f;
+    auto five = 5.12345;
+    LOG_TRACE("This is a trace message, {}", zero);
+    LOG_DEBUG("This is a debug message, {}", one);
+    LOG_INFO("This is a info message, {}", two);
+    LOG_WARN("This is a warn[ing] message, {}", three);
+    LOG_ERROR("This is a error message, {}", four);
+    LOG_CRITICAL("This is a critical message, {}", five);
+}
+
+static void s_test_noise() {
+    PRINT_FUNCTION_NAME();
+
+    {
+        FastNoiseLite noise;
+        noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+
+        Vec<float> noiseData(128 * 128);
+
+        int index = 0;
+        for (int y = 0; y < 128; y++) {
+            for (int x = 0; x < 128; x++) {
+                noiseData[index++] = noise.GetNoise(static_cast<float>(x), static_cast<float>(y));
+            }
+        }
+    }
+
+    {
+        auto simplex = FastNoise::New<FastNoise::Simplex>();
+        auto fractal = FastNoise::New<FastNoise::FractalFBm>();
+
+        fractal->SetSource(simplex);
+        fractal->SetOctaveCount(5);
+
+        Vec<float> noise(16 * 16);
+        fractal->GenUniformGrid2D(noise.data(), 0, 0, 16, 16, 0.02f, 1337);
+
+        int index = 0;
+        for (int y = 0; y < 16; y++) {
+            for (int x = 0; x < 16; x++) {
+                std::cout << "x " << x << "\ty " << y << "\t: " << noise[index++] << std::endl;
+            }
+        }
+    }
 }
 
 static void s_test_rtm() {
@@ -176,6 +228,8 @@ static void s_test_xmath() {
 }
 
 static void s_test_bar() {
+    PRINT_FUNCTION_NAME();
+
     Bar<int> bar;
     bar.print(100);
 
@@ -189,6 +243,8 @@ static void s_test_bar() {
 }
 
 static void s_test_foo() {
+    PRINT_FUNCTION_NAME();
+
     foo_print(10.0);
     foo_printi(20);
     foo_printi64(30000123456789);
@@ -198,6 +254,8 @@ static void s_test_foo() {
 }
 
 static void s_test_json() {
+    PRINT_FUNCTION_NAME();
+
     JSON j;
     j["foo"] = 0.12345;
     j["bar"] = true;
@@ -207,10 +265,51 @@ static void s_test_json() {
     j["tasks"] = { 100, 0, 150 };
     j["fruit"] = { {"name", "apple"}, {"price", 25.99} };
 
-    std::cout << "j = " << j.dump(4) << "\n" << std::endl;
+    std::cout << "j = " << j.dump(4) << std::endl;
+}
+
+static void s_test_enum() {
+    PRINT_FUNCTION_NAME();
+
+    enum class Color : int {
+        RED = -10,
+        BLUE = 0,
+        GREEN = 10
+    };
+
+    Color c1 = Color::RED;
+    auto c1_name = magic_enum::enum_name(c1);
+    std::cout << c1_name << std::endl;
+
+    constexpr auto names = magic_enum::enum_names<Color>();
+    std::cout << "Color names:";
+    for (const auto &n : names) {
+        std::cout << " " << n;
+    }
+    std::cout << std::endl;
+
+    auto c2 = magic_enum::enum_cast<Color>("BLUE");
+    if (c2.has_value()) {
+        std::cout << "BLUE = " << s_to_integer(c2.value()) << std::endl;
+    }
+
+    c2 = magic_enum::enum_cast<Color>("blue", magic_enum::case_insensitive);
+    if (c2.has_value()) {
+        std::cout << "BLUE = " << s_to_integer(c2.value()) << std::endl;
+    }
+
+    auto c3 = magic_enum::enum_cast<Color>(10);
+    if (c3.has_value()) {
+        std::cout << "GREEN = " << magic_enum::enum_integer(c3.value()) << std::endl;
+    }
+
+    auto c4_integer = magic_enum::enum_integer(Color::RED);
+    std::cout << "RED = " << c4_integer << std::endl;
 }
 
 static void s_test_lua() {
+    PRINT_FUNCTION_NAME();
+
     sol::state lua_state/*(sol::c_call<decltype(&s_my_lua_panic), s_my_lua_panic>)*/;
     lua_state.open_libraries(/*sol::lib::ffi, sol::lib::jit*/);
 
@@ -223,7 +322,19 @@ static void s_test_lua() {
         );
     }
 
-    auto result = lua_state.script("print('1, <LUA>: hello')");
+    {
+        lua_state["hello"] = [=](const std::shared_ptr<GameObject> &go) {
+            printf("2-3, <LUA>: %s\n", go->get_name().c_str());
+        };
+        lua_state["yield"] = sol::yielding([=](double seconds) {
+            return seconds;
+        });
+    }
+
+    sol::object version = lua_state["_VERSION"];
+    printf("1-1, <LUA>: %s\n", version.as<String>().c_str());
+
+    auto result = lua_state.script("print('1-2, <LUA>: hello')");
     result = lua_state.do_file("assets/scripts/main.lua");
     if (result.valid()) {
         sol::function hi_func = lua_state["hi"];
@@ -233,11 +344,14 @@ static void s_test_lua() {
 
         hi_func(go);
         lua_state["hi2"](go);
+        lua_state["hello"](go);
     }
-    result = lua_state.script(R"(print('4, <LUA>: bye\n'))");
+    result = lua_state.script(R"(print('3, <LUA>: bye\n'))");
 }
 
 static void s_test_gfx() {
+    PRINT_FUNCTION_NAME();
+
     {
         auto app_core_gfx = AppCoreGfx::create(GfxApi::D3D12);
         app_core_gfx->test();
@@ -250,6 +364,8 @@ static void s_test_gfx() {
 }
 
 static int s_test_app_core() {
+    PRINT_FUNCTION_NAME();
+
     auto app_core = AppCore::create();
     app_core->preload();
     
@@ -264,7 +380,8 @@ static int s_test_app_core() {
 int app_core_startup() {
     PRINT_FUNCTION_NAME();
 
-    s_test_logger();
+    s_test_logging();
+    s_test_noise();
 
     s_test_rtm();
     s_test_xmath();
@@ -273,7 +390,9 @@ int app_core_startup() {
     s_test_foo();
 
     s_test_json();
+    s_test_enum();
     s_test_lua();
+
     s_test_gfx();
     return s_test_app_core();
 }

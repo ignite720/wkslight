@@ -3,7 +3,7 @@
 #include <foo/foo.h>
 #include <simplerand/simplerand.hpp>
 
-#include "app_core/logger.h"
+#include "app_core/logging.h"
 
 #include "app_core/math_rtm.h"
 using namespace rtm;
@@ -19,7 +19,7 @@ extern "C" {
     APP_CORE_API int app_core_startup();
 }
 
-class APP_CORE_API GameObject {
+class /*APP_CORE_API*/ GameObject {
 public:
     static std::shared_ptr<GameObject> create() {
         static int s_id_counter = 0;

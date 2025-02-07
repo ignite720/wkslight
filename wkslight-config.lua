@@ -31,12 +31,12 @@ g_wkslight.workspace = {
                         "%{wks.librariesdir}/bar/%{cfg.system}/" .. _OPTIONS["target_platform"] .. "/lib",
                     }
                 end,
+                defines = {
+                    "BAR_CONFIG1",
+                },
                 links = {
                     "bar",
                     --"bar-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
-                },
-                defines = {
-                    "BAR_CONFIG1",
                 },
                 debugenvs = {
                     "VAR1=value1",
@@ -62,13 +62,13 @@ g_wkslight.workspace = {
                 libdirs = {
                     "%{g_wkslight.targetdir}",
                 },
+                defines = {
+                    "APP_CORE_DLL",
+                },
                 links = {
                     "app_core",
                     "app_core_d3d12",
                     "app_core_vulkan",
-                },
-                defines = {
-                    "APP_CORE_DLL",
                 },
             },
             app_core_d3d12 = {
@@ -94,11 +94,23 @@ g_wkslight.workspace = {
                 includedirs = {
                     "%{g_wkslight.librariesdir}/bar/include",
                 },
+                defines = {
+                    --"BAR_DLL",
+                },
                 links = {
                     "bar",
                 },
+            },
+            FastNoise2 = {
+                location = "libraries/FastNoise2",
+                includedirs = {
+                    "%{g_wkslight.librariesdir}/FastNoise2/include",
+                },
                 defines = {
-                    --"BAR_DLL",
+                    "FASTNOISE_STATIC_LIB",
+                },
+                links = {
+                    "FastNoise2",
                 },
             },
             foo = {
@@ -106,11 +118,11 @@ g_wkslight.workspace = {
                 includedirs = {
                     "%{g_wkslight.librariesdir}/foo/include",
                 },
-                links = {
-                    "foo",
-                },
                 defines = {
                     "FOO_DLL",
+                },
+                links = {
+                    "foo",
                 },
             },
             headeronly = {
@@ -139,12 +151,18 @@ g_wkslight.workspace = {
                 includedirs = {
                     "%{g_wkslight.librariesdir}/spdlog/include",
                 },
+                defines = {
+                    "SPDLOG_COMPILED_LIB",
+                    --"SPDLOG_NO_EXCEPTIONS",
+                },
                 links = {
                     "spdlog",
                 },
-                defines = {
-                    "SPDLOG_COMPILED_LIB",
-                    "SPDLOG_NO_EXCEPTIONS",
+            },
+            spdlog_headeronly = {
+                location = nil,
+                includedirs = {
+                    "%{g_wkslight.librariesdir}/spdlog/include",
                 },
             },
             XMath = {

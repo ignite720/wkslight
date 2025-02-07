@@ -29,5 +29,5 @@
     #define FUNCTION_NAME                                       __FUNCTION__
 #endif
 
-#define PRINT_FUNCTION_NAME()                                   printf("%s\n", FUNCTION_NAME)
+#define PRINT_FUNCTION_NAME()                                   printf("\n%s\n", FUNCTION_NAME)
 #define COUNTOF(arr)                                            (sizeof(arr) / sizeof(arr[0]))

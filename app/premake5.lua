@@ -80,7 +80,7 @@ project("app")
         })
         -- fix uwp dll end
         --]]
-    filter({ "options:target_platform=uwp", "files:assets/*.png", "files:assets/**/*.png" })
+    filter({ "options:target_platform=uwp", "files:assets/*.png or assets/**/*.png" })
         deploy("true")
     filter("platforms:wasm")
         g_wkslight.wasmlinkoptions(g_wkslight.extras.wasm)

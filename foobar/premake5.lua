@@ -11,3 +11,6 @@ project("foobar")
     includedirs({
         "include",
     })
+    g_wkslight.libs({
+        "spdlog_headeronly",
+    })

@@ -29,3 +29,6 @@
 [submodule "libraries/spdlog"]
 	path = libraries/spdlog
 	url = https://github.com/wkslight/spdlog.git
+[submodule "libraries/FastNoise2"]
+	path = libraries/FastNoise2
+	url = https://github.com/wkslight/FastNoise2.git
