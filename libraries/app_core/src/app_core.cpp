@@ -7,7 +7,7 @@
 #include <json/nlohmann/json.hpp>
 using JSON = nlohmann::json;
 
-#include <magic_enum/magic_enum.hpp>
+#include <magic_enum/magic_enum_all.hpp>
 
 //#define SOL_NO_EXCEPTIONS 1
 //#define SOL_ALL_SAFETIES_ON 1
