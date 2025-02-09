@@ -324,7 +324,7 @@ static void s_test_lua() {
 
     {
         lua_state["hello"] = [=](const std::shared_ptr<GameObject> &go) {
-            printf("2-3, <LUA>: %s\n", go->get_name().c_str());
+            printf("3-3, <LUA>: %s\n", go->get_name().c_str());
         };
         lua_state["yield"] = sol::yielding([=](double seconds) {
             return seconds;
@@ -346,7 +346,7 @@ static void s_test_lua() {
         lua_state["hi2"](go);
         lua_state["hello"](go);
     }
-    result = lua_state.script(R"(print('3, <LUA>: bye\n'))");
+    result = lua_state.script(R"(print('4, <LUA>: bye\n'))");
 }
 
 static void s_test_gfx() {

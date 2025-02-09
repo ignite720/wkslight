@@ -1,12 +1,12 @@
 require("assets.scripts.foobar")
 
 function hi(go)
-    print("2-1, <LUA>: hi " .. go:get_name())
+    print("3-1, <LUA>: hi " .. go:get_name())
 end
 
 function hi2(go)
     go:set_name("Emily")
-    print("2-2, <LUA>: hi2 " .. go:get_name())
+    print("3-2, <LUA>: hi2 " .. go:get_name())
 end
 
 local co = coroutine.create(function()
@@ -39,5 +39,5 @@ Bar.print()
 print("")
 
 coroutine.resume(co)
-print("3, <LUA>:")
+print("2, <LUA>:")
 print("")
