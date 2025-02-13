@@ -12,5 +12,5 @@ project("foobar")
         "include",
     })
     g_wkslight.libs({
-        "spdlog_headeronly",
+        "spdlog",
     })

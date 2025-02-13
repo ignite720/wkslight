@@ -35,7 +35,7 @@ jobs:
           popd
           
           pushd scripts
-          call premake5-generate-uwp.bat "dummy"
+          call premake5-generate-uwp.bat "gh-action"
           popd
 
           pushd scripts

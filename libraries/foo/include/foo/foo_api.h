@@ -48,7 +48,7 @@
 #if defined(_MSC_VER)
     #define FUNCTION_NAME                                       __FUNCTION__
 
-    #define PRAGMA(x)                                           __pragma(#x)
+    #define PRAGMA(x)                                           __pragma(x)
     #define PRAGMA_WARNING_PUSH                                 PRAGMA(warning(push))
     #define PRAGMA_WARNING_POP                                  PRAGMA(warning(pop))
     #define PRAGMA_WARNING_IGNORE_MSVC(x)                       PRAGMA(warning(disable : x))
