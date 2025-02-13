@@ -54,7 +54,7 @@ project("app")
         })
         --[[
         androidprojectdependencies({
-            "baz",
+            "quux",
         })
         --]]
         androidkeystorefile("../../../../.android/wkslight.keystore")

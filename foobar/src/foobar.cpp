@@ -6,6 +6,10 @@
 
 #include <spdlog/spdlog.h>
 
+int foobar_version(void) {
+    return FOOBAR_VERSION;
+}
+
 void foobar_default_init(foobar_t *foobar) {
     foobar->a = 1000;
     foobar->b = 2000.0f;

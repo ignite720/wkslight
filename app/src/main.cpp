@@ -7,6 +7,8 @@ static void s_test_foobar() {
     PRINT_FUNCTION_NAME();
     
     {
+        printf("foobar version: %d\n", foobar_version());
+
         foobar_t foobar;
         foobar_default_init(&foobar);
 
@@ -26,13 +28,19 @@ static int s_main() {
 #define LOGI(...)                                               __android_log_write(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...)                                               __android_log_write(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
+#ifdef __cplusplus
 extern "C" {
-    JNIEXPORT jint Java_com_wkslight_example_main_1activity_app_1init(JNIEnv *env, jclass clazz) {
-        LOGI("0-2, <JNI>: world");
+#endif
 
-        return s_main();
-    }
+JNIEXPORT jint Java_com_wkslight_example_main_1activity_app_1init(JNIEnv *env, jclass clazz) {
+    LOGI("0-2, <JNI>: world");
+
+    return s_main();
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #else
 

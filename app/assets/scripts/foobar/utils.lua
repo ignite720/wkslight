@@ -13,3 +13,10 @@ function Utils.print_debug_info()
         dinfo.lastlinedefined
     ))
 end
+
+function Utils.print_args(...)
+    local args = { ... }
+    for i, v in ipairs(args) do
+        print("#", i, v)
+    end
+end

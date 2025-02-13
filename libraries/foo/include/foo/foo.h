@@ -58,11 +58,17 @@ FOO_TEMPLATE_EXTERN template
 class FOO_API rs::string::String;
 #endif
 
+#ifdef __cplusplus
 extern "C" {
-    FOO_API void foo_print(double n);
-    FOO_API void foo_printi(int n);
-    FOO_API void foo_printi64(int64_t n);
+#endif
+
+FOO_API void foo_print(double n);
+FOO_API void foo_printi(int n);
+FOO_API void foo_printi64(int64_t n);
+
+#ifdef __cplusplus
 }
+#endif
 
 class FOO_API Foo {
 public:

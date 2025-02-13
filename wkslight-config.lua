@@ -44,15 +44,6 @@ g_wkslight.workspace = {
                 },
                 vslocaldebugenv = "PATH=%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
             },
-            ["foo_bar"] = {
-                location = "libraries/foo_bar",
-                includedirs = {
-                    "%{g_wkslight.librariesdir}/foo_bar/include",
-                },
-                links = {
-                    "foo_bar",
-                },
-            },
             --]]
             app_core = {
                 location = "libraries/app_core",
@@ -99,6 +90,15 @@ g_wkslight.workspace = {
                 },
                 links = {
                     "bar",
+                },
+            },
+            ["baz-qux"] = {
+                location = "libraries/baz-qux",
+                includedirs = {
+                    "%{g_wkslight.librariesdir}/baz-qux/include",
+                },
+                links = {
+                    "baz-qux",
                 },
             },
             FastNoise2 = {

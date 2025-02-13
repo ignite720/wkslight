@@ -22,6 +22,7 @@ project("app_core")
         "app_core_d3d12",
         "app_core_vulkan",
         "bar",
+        "baz-qux",
         "FastNoise2",
         "foo",
         "headeronly",

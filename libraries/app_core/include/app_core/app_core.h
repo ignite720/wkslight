@@ -9,15 +9,27 @@
 using namespace rtm;
 
 #if !defined(__APPLE__)
+PRAGMA_WARNING_PUSH
+PRAGMA_WARNING_IGNORE_CLANG("-Wattributes")
+PRAGMA_WARNING_IGNORE_GCC("-Wattributes")
+PRAGMA_WARNING_IGNORE_MSVC(0)
 #include "app_core/math_xmath.h"
+PRAGMA_WARNING_POP
+
 using namespace XMath;
 #endif
 
 #include "app_core/app_core_api.h"
 
+#ifdef __cplusplus
 extern "C" {
-    APP_CORE_API int app_core_startup();
+#endif
+
+APP_CORE_API int app_core_startup(void);
+
+#ifdef __cplusplus
 }
+#endif
 
 class /*APP_CORE_API*/ GameObject {
 public:

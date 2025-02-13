@@ -1,6 +1,8 @@
 #include "app_core/app_core.h"
 
 #include <bar/bar.h>
+#include <baz-qux/baz-qux.h>
+
 #include <FastNoise/FastNoise.h>
 #include <FastNoiseLite/FastNoiseLite.h>
 
@@ -42,13 +44,13 @@ static void s_test_logging() {
     auto two = fmt::format("{}", "two");
     auto three = 3;
     auto four = 4.12f;
-    auto five = 5.12345;
-    LOG_TRACE("This is a trace message, {}", zero);
-    LOG_DEBUG("This is a debug message, {}", one);
-    LOG_INFO("This is a info message, {}", two);
-    LOG_WARN("This is a warn[ing] message, {}", three);
-    LOG_ERROR("This is a error message, {}", four);
-    LOG_CRITICAL("This is a critical message, {}", five);
+    auto five = 5.123456789;
+    LOG_TRACE("This is a trace message. {}", zero);
+    LOG_DEBUG("This is a debug message. {}", one);
+    LOG_INFO("This is a info message. {}", two);
+    LOG_WARN("This is a warn[ing] message. Support for int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", three);
+    LOG_ERROR("This is a error message. {1:<30} {0}", four, "left aligned");
+    LOG_CRITICAL("This is a critical message. Support for floats {:03.2f}", five);
 }
 
 static void s_test_noise() {
@@ -242,6 +244,12 @@ static void s_test_bar() {
 #endif
 }
 
+static void s_test_baz_qux() {
+    PRINT_FUNCTION_NAME();
+    
+    printf("baz_qux version: %d\n", baz_qux_version());
+}
+
 static void s_test_foo() {
     PRINT_FUNCTION_NAME();
 
@@ -260,10 +268,10 @@ static void s_test_json() {
     j["foo"] = 0.12345;
     j["bar"] = true;
     j["name"] = "John";
-    j["baz"] = nullptr;
+    j["foobar"] = nullptr;
     j["buzz"]["fizz"] = 30;
     j["tasks"] = { 100, 0, 150 };
-    j["fruit"] = { {"name", "apple"}, {"price", 25.99} };
+    j["fruit"] = { { "name", "apple" }, { "price", 25.99 } };
 
     std::cout << "j = " << j.dump(4) << std::endl;
 }
@@ -377,7 +385,7 @@ static int s_test_app_core() {
     return ret;
 }
 
-int app_core_startup() {
+int app_core_startup(void) {
     PRINT_FUNCTION_NAME();
 
     s_test_logging();
@@ -387,6 +395,7 @@ int app_core_startup() {
     s_test_xmath();
 
     s_test_bar();
+    s_test_baz_qux();
     s_test_foo();
 
     s_test_json();

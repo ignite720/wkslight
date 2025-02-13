@@ -23,10 +23,37 @@
     #define FOO_TEMPLATE_EXTERN
 #endif
 
-#if defined(__clang__) || defined(__GNUC__)
+#if defined(__clang__)
     #define FUNCTION_NAME                                       __PRETTY_FUNCTION__
-#elif defined(_MSC_VER)
+
+    #define PRAGMA(x)                                           _Pragma(#x)
+    #define PRAGMA_WARNING_PUSH                                 PRAGMA(clang diagnostic push)
+    #define PRAGMA_WARNING_POP                                  PRAGMA(clang diagnostic pop)
+    #define PRAGMA_WARNING_IGNORE_CLANG(x)                      PRAGMA(clang diagnostic ignored x)
+#else
+    #define PRAGMA_WARNING_IGNORE_CLANG(x)
+#endif
+
+#if defined(__GNUC__)
+    #define FUNCTION_NAME                                       __PRETTY_FUNCTION__
+
+    #define PRAGMA(x)                                           _Pragma(#x)
+    #define PRAGMA_WARNING_PUSH                                 PRAGMA(GCC diagnostic push)
+    #define PRAGMA_WARNING_POP                                  PRAGMA(GCC diagnostic pop)
+    #define PRAGMA_WARNING_IGNORE_GCC(x)                        PRAGMA(GCC diagnostic ignored x)
+#else
+    #define PRAGMA_WARNING_IGNORE_GCC(x)
+#endif
+
+#if defined(_MSC_VER)
     #define FUNCTION_NAME                                       __FUNCTION__
+
+    #define PRAGMA(x)                                           __pragma(#x)
+    #define PRAGMA_WARNING_PUSH                                 PRAGMA(warning(push))
+    #define PRAGMA_WARNING_POP                                  PRAGMA(warning(pop))
+    #define PRAGMA_WARNING_IGNORE_MSVC(x)                       PRAGMA(warning(disable : x))
+#else
+    #define PRAGMA_WARNING_IGNORE_MSVC(x)
 #endif
 
 #define PRINT_FUNCTION_NAME()                                   printf("\n%s\n", FUNCTION_NAME)

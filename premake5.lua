@@ -158,3 +158,9 @@ group("")
     for i, v in ipairs(g_wkslight.workspace.projects) do
         include(v)
     end
+group("gen")
+    project("all_gen")
+        kind("StaticLib")
+        language("C")
+        filter("action:vs*")
+            prebuildcommands({ "%{g_wkslight.location}/scripts/premake5-generate-pc-vs.bat" })
