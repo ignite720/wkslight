@@ -6,6 +6,8 @@ require("premake5-modules/winrt")
 g_wkslight = require("premake5-modules/wkslight")
 
 require("wkslight-config")
+--g_wkslight = g_wkslight.makereadonlytbl(g_wkslight)
+
 newoption({
     trigger = "target_platform",
     description = "Generate project files for the specified target platform",

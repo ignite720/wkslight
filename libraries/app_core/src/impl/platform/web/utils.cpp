@@ -5,7 +5,7 @@ static constexpr const char *const REQUEST_HEADERS[] = {
     nullptr
 };
 
-static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
+static void __web_fetch_succeeded(emscripten_fetch_t *fetch) {
     const auto symbol = utils::string::str_repeats("=", 98);
     printf("%s>>\n>>> %s: %s, status => %d\n", symbol.c_str(), FUNCTION_NAME, fetch->url, fetch->status);
     
@@ -33,7 +33,7 @@ static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
     emscripten_fetch_close(fetch);
 }
 
-static void s_web_fetch_failed(emscripten_fetch_t *fetch) {
+static void __web_fetch_failed(emscripten_fetch_t *fetch) {
     emscripten_fetch_close(fetch);
 }
 

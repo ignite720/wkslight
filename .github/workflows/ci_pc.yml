@@ -94,9 +94,14 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           source scripts/0-premake5-clean.sh
+          
           source scripts/12-premake5-generate-pc-gmake.sh
           source scripts/22-gmake-pc.sh
           source scripts/32-tool-run-pc.sh
+          source scripts/42-test-py.sh
+          source scripts/50-tool-tree.sh
+
+          source scripts/cargo-run-pc.sh
 
       - name: Create artifact
         run: |

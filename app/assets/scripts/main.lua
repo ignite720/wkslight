@@ -30,10 +30,10 @@ print("1-7, <LUA>:", table.concat(t, ", "))
 
 io.write(string.format("1-8, <LUA>: %d, %d\n\n", 1000, 2000))
 
-Foo.print(coroutine.resume(co), coroutine.status(co))
+Foo.print(table.pack(coroutine.resume(co)), coroutine.status(co))
 print("")
 
-Bar.print(coroutine.resume(co), coroutine.status(co))
+Bar.print(table.pack(coroutine.resume(co)), coroutine.status(co))
 print("")
 
 coroutine.resume(co)

@@ -20,7 +20,7 @@ static constexpr auto RESOLUTION_SCALE_FACTOR = int(2);
 static constexpr auto WINDOW_WIDTH = int(1920 / RESOLUTION_SCALE_FACTOR);
 static constexpr auto WINDOW_HEIGHT = int(1080 / RESOLUTION_SCALE_FACTOR);
 
-static void s_my_lua_panic(sol::optional<String> maybe_msg) {
+static void __my_lua_panic(sol::optional<String> maybe_msg) {
     std::cerr << "Lua is in a panic state and will now abort() the application" << std::endl;
     if (maybe_msg) {
         const auto &msg = maybe_msg.value();
@@ -30,11 +30,11 @@ static void s_my_lua_panic(sol::optional<String> maybe_msg) {
 }
 
 template <typename E>
-static auto s_to_integer(magic_enum::Enum<E> value) {
+static auto __to_integer(magic_enum::Enum<E> value) {
     return static_cast<magic_enum::underlying_type_t<E>>(value);
 }
 
-static void s_test_logging() {
+static void __test_logging() {
     PRINT_FUNCTION_NAME();
 
     logging::init();
@@ -53,7 +53,7 @@ static void s_test_logging() {
     LOG_CRITICAL("This is a critical message. Support for floats {:03.2f}", five);
 }
 
-static void s_test_noise() {
+static void __test_noise() {
     PRINT_FUNCTION_NAME();
 
     {
@@ -89,7 +89,7 @@ static void s_test_noise() {
     }
 }
 
-static void s_test_rtm() {
+static void __test_rtm() {
     PRINT_FUNCTION_NAME();
 
     {
@@ -160,7 +160,7 @@ static void s_test_rtm() {
     }
 }
 
-static void s_test_xmath() {
+static void __test_xmath() {
     PRINT_FUNCTION_NAME();
 
 #if !defined(__APPLE__)
@@ -229,7 +229,7 @@ static void s_test_xmath() {
 #endif
 }
 
-static void s_test_bar() {
+static void __test_bar() {
     PRINT_FUNCTION_NAME();
 
     Bar<int> bar;
@@ -244,13 +244,13 @@ static void s_test_bar() {
 #endif
 }
 
-static void s_test_baz_qux() {
+static void __test_baz_qux() {
     PRINT_FUNCTION_NAME();
     
     printf("baz_qux version: %d\n", baz_qux_version());
 }
 
-static void s_test_foo() {
+static void __test_foo() {
     PRINT_FUNCTION_NAME();
 
     foo_print(10.0);
@@ -261,7 +261,7 @@ static void s_test_foo() {
     foo.print(400);
 }
 
-static void s_test_json() {
+static void __test_json() {
     PRINT_FUNCTION_NAME();
 
     JSON j;
@@ -276,7 +276,7 @@ static void s_test_json() {
     std::cout << "j = " << j.dump(4) << std::endl;
 }
 
-static void s_test_enum() {
+static void __test_enum() {
     PRINT_FUNCTION_NAME();
 
     enum class Color : int {
@@ -298,12 +298,12 @@ static void s_test_enum() {
 
     auto c2 = magic_enum::enum_cast<Color>("BLUE");
     if (c2.has_value()) {
-        std::cout << "BLUE = " << s_to_integer(c2.value()) << std::endl;
+        std::cout << "BLUE = " << __to_integer(c2.value()) << std::endl;
     }
 
     c2 = magic_enum::enum_cast<Color>("blue", magic_enum::case_insensitive);
     if (c2.has_value()) {
-        std::cout << "BLUE = " << s_to_integer(c2.value()) << std::endl;
+        std::cout << "BLUE = " << __to_integer(c2.value()) << std::endl;
     }
 
     auto c3 = magic_enum::enum_cast<Color>(10);
@@ -315,7 +315,7 @@ static void s_test_enum() {
     std::cout << "RED = " << c4_integer << std::endl;
 }
 
-static void s_test_lua() {
+static void __test_lua() {
     PRINT_FUNCTION_NAME();
 
     sol::state lua_state/*(sol::c_call<decltype(&s_my_lua_panic), s_my_lua_panic>)*/;
@@ -357,7 +357,7 @@ static void s_test_lua() {
     result = lua_state.script(R"(print('4, <LUA>: bye\n'))");
 }
 
-static void s_test_gfx() {
+static void __test_gfx() {
     PRINT_FUNCTION_NAME();
 
     {
@@ -371,7 +371,7 @@ static void s_test_gfx() {
     }
 }
 
-static int s_test_app_core() {
+static int __test_app_core() {
     PRINT_FUNCTION_NAME();
 
     auto app_core = AppCore::create();
@@ -388,22 +388,22 @@ static int s_test_app_core() {
 int app_core_startup(void) {
     PRINT_FUNCTION_NAME();
 
-    s_test_logging();
-    s_test_noise();
+    __test_logging();
+    __test_noise();
 
-    s_test_rtm();
-    s_test_xmath();
+    __test_rtm();
+    __test_xmath();
 
-    s_test_bar();
-    s_test_baz_qux();
-    s_test_foo();
+    __test_bar();
+    __test_baz_qux();
+    __test_foo();
 
-    s_test_json();
-    s_test_enum();
-    s_test_lua();
+    __test_json();
+    __test_enum();
+    __test_lua();
 
-    s_test_gfx();
-    return s_test_app_core();
+    __test_gfx();
+    return __test_app_core();
 }
 
 std::unique_ptr<AppCore> AppCore::create() {

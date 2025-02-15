@@ -1,24 +1,24 @@
 #include "app_core_web.h"
 
-static EM_BOOL s_onopen(int event_type, const EmscriptenWebSocketOpenEvent *websocket_event, void *user_data) {
+static EM_BOOL __ws_onopen(int event_type, const EmscriptenWebSocketOpenEvent *websocket_event, void *user_data) {
     auto *net = static_cast<Net *>(user_data);
     net->on_open();
     return EM_TRUE;
 }
 
-static EM_BOOL s_onclose(int event_type, const EmscriptenWebSocketCloseEvent *websocket_event, void *user_data) {
+static EM_BOOL __ws_onclose(int event_type, const EmscriptenWebSocketCloseEvent *websocket_event, void *user_data) {
     auto *net = static_cast<Net *>(user_data);
     net->on_close();
     return EM_TRUE;
 }
 
-static EM_BOOL s_onerror(int event_type, const EmscriptenWebSocketErrorEvent *websocket_event, void *user_data) {
+static EM_BOOL __ws_onerror(int event_type, const EmscriptenWebSocketErrorEvent *websocket_event, void *user_data) {
     auto *net = static_cast<Net *>(user_data);
     net->on_error();
     return EM_TRUE;
 }
 
-static EM_BOOL s_onmessage(int event_type, const EmscriptenWebSocketMessageEvent *websocket_event, void *user_data) {
+static EM_BOOL __ws_onmessage(int event_type, const EmscriptenWebSocketMessageEvent *websocket_event, void *user_data) {
     auto *net = static_cast<Net *>(user_data);
     net->on_message(websocket_event->data, websocket_event->numBytes, websocket_event->isText);
     return EM_TRUE;
@@ -39,10 +39,10 @@ void Net::connect(const char *url) {
     auto create_attrs = EmscriptenWebSocketCreateAttributes { url, nullptr, EM_TRUE };
     m_socket = emscripten_websocket_new(&create_attrs);
 
-    emscripten_websocket_set_onopen_callback(m_socket, this, s_onopen);
-    emscripten_websocket_set_onclose_callback(m_socket, this, s_onclose);
-    emscripten_websocket_set_onerror_callback(m_socket, this, s_onerror);
-    emscripten_websocket_set_onmessage_callback(m_socket, this, s_onmessage);
+    emscripten_websocket_set_onopen_callback(m_socket, this, __ws_onopen);
+    emscripten_websocket_set_onclose_callback(m_socket, this, __ws_onclose);
+    emscripten_websocket_set_onerror_callback(m_socket, this, __ws_onerror);
+    emscripten_websocket_set_onmessage_callback(m_socket, this, __ws_onmessage);
 }
 
 void Net::close() {

@@ -3,7 +3,7 @@
 #include <foobar/foobar.h>
 #include <app_core/app_core.h>
 
-static void s_test_foobar() {
+static void __test_foobar() {
     PRINT_FUNCTION_NAME();
     
     {
@@ -16,8 +16,8 @@ static void s_test_foobar() {
     }
 }
 
-static int s_main() {
-    s_test_foobar();
+static int __main() {
+    __test_foobar();
     return app_core_startup();
 }
 
@@ -35,7 +35,7 @@ extern "C" {
 JNIEXPORT jint Java_com_wkslight_example_main_1activity_app_1init(JNIEnv *env, jclass clazz) {
     LOGI("0-2, <JNI>: world");
 
-    return s_main();
+    return __main();
 }
 
 #ifdef __cplusplus
@@ -45,7 +45,7 @@ JNIEXPORT jint Java_com_wkslight_example_main_1activity_app_1init(JNIEnv *env, j
 #else
 
 int main(int argc, char *argv[]) {
-    return s_main();
+    return __main();
 }
 
 #endif

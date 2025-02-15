@@ -17,6 +17,10 @@ end
 function Utils.print_args(...)
     local args = { ... }
     for i, v in ipairs(args) do
-        print("#", i, v)
+        if type(v) == "table" then
+            Utils.print_args(table.unpack(v))
+        else
+            print("#", i, v, type(v))
+        end
     end
 end

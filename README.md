@@ -72,6 +72,7 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > source scripts/12-premake5-generate-pc-gmake.sh 
 > source scripts/22-gmake-pc.sh 
 > source scripts/32-tool-run-pc.sh 
+> source scripts/42-test-py.sh 
 >
 > # ninja
 > source scripts/premake5-generate-pc-ninja.sh 
@@ -79,7 +80,6 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 >
 > # cargo (optional)
 > source scripts/cargo-run-pc.sh 
-> source scripts/42-test-py.sh 
 > ```
 
 #### 2.2 Windows
