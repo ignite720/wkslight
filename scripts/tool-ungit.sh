@@ -5,8 +5,10 @@ rm -fr .git
 rm -fv .gitmodules
 rm -fv LICENSE
 
+rm -fr libraries/FastNoise2
 rm -fr libraries/headeronly/simplerand
 rm -fr libraries/lua
+rm -fr libraries/spdlog
 rm -fr libraries/XMath
 
 rm -fr premake5-modules

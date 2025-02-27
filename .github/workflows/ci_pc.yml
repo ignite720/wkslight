@@ -23,7 +23,7 @@ jobs:
       - name: Setup premake5
         uses: abel0b/setup-premake@v2.4
         with:
-          version: "5.0.0-beta4"
+          version: "5.0.0-beta5"
 
       - name: Add msbuild to PATH
         if: runner.os == 'Windows'
