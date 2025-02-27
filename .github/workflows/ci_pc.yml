@@ -87,8 +87,8 @@ jobs:
           source scripts/tool-premake5+x.sh ${{ github.workspace }}
 
           source scripts/premake5-generate-pc-xcode.sh
-          #source scripts/xcode-build.sh
-          #source scripts/tool-run-pc-macos.sh
+          source scripts/xcode-build.sh
+          source scripts/tool-run-pc-macos.sh
 
       - name: Build project for Linux & macOS
         if: runner.os != 'Windows'
