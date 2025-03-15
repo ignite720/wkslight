@@ -1,0 +1,2 @@
+mkdir -p $HOME/.android
+keytool -genkey -v -keystore $HOME/.android/wkslight.keystore -storepass android -alias wkslightkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=wkslight"
