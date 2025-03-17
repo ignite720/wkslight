@@ -18,27 +18,25 @@ namespace logging {
         String console_pattern = "[%H:%M:%S.%e][%L] %v",
         std::chrono::seconds interval = std::chrono::seconds(5)
     ) -> void {
-        {
-            #if !TARGET_PLATFORM_WEB
-            auto daily_file_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(
-                std::move(base_filename),
-                rotation_hour,
-                rotation_minute
-            );
-            daily_file_sink->set_level(spdlog::level::trace);
-            daily_file_sink->set_pattern(std::move(file_pattern));
-            logger_sinks->add_sink(daily_file_sink);
+        #if !TARGET_PLATFORM_WEB
+        auto daily_file_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(
+            std::move(base_filename),
+            rotation_hour,
+            rotation_minute
+        );
+        daily_file_sink->set_level(spdlog::level::trace);
+        daily_file_sink->set_pattern(std::move(file_pattern));
+        logger_sinks->add_sink(daily_file_sink);
 
-            auto console_sink = std::make_shared<spdlog::sinks::stderr_color_sink_mt>();
-            console_sink->set_level(spdlog::level::debug);
-            console_sink->set_pattern(std::move(console_pattern));
-            logger_sinks->add_sink(console_sink);
-            #endif
-        }
+        auto console_sink = std::make_shared<spdlog::sinks::stderr_color_sink_mt>();
+        console_sink->set_level(spdlog::level::debug);
+        console_sink->set_pattern(std::move(console_pattern));
+        logger_sinks->add_sink(console_sink);
 
         logger->flush_on(spdlog::level::info);
         logger->set_level(spdlog::level::trace);
         spdlog::flush_every(interval);
+        #endif
     }
 }
 
