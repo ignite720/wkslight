@@ -158,7 +158,7 @@ int AppCoreWeb::run() {
 
     const int fps = -1;
     const bool simulate_infinite_loop = true;
-    emscripten_set_main_loop_arg(s_main_loop, this, fps, simulate_infinite_loop);
+    emscripten_set_main_loop_arg(__main_loop, this, fps, simulate_infinite_loop);
     return 0;
 }
 
