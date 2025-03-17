@@ -9,6 +9,14 @@ g_wkslight.workspace = {
     },
     libraries = {
         group = "libraries",
+        projects_to_exclude = function(k)
+            if _OPTIONS["target_platform"] == "web" then
+                if k == "FastNoise2" then
+                    return true
+                end
+            end
+            return false
+        end,
         projects = {
             -- Sort alphabetically
             --[[
