@@ -57,6 +57,9 @@ project("app_core")
         files({
             "src/impl/platform/web/**.*",
         })
+        removelinks({
+            "FastNoise2",
+        })
     filter("options:target_platform=android or options:target_platform=web")
         kind("StaticLib")
     filter({ "action:vs* or ninja", "system:windows*" })
