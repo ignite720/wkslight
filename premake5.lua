@@ -92,7 +92,6 @@ workspace(g_wkslight.workspace.name)
         --buildoptions({ "-iquote" })
     filter({ "action:vs* or ninja", "system:windows*" })
         startproject(g_wkslight.workspace.startproject)
-        exceptionhandling("SEH")
         staticruntime("Off")
         characterset("MBCS")
         --usestandardpreprocessor("On")
@@ -135,8 +134,14 @@ workspace(g_wkslight.workspace.name)
         optimize("Speed")
         symbols("Off")
     filter({ "options:target_platform=pc", "options:asan", "configurations:Debug", "action:gmake*", "system:linux", "toolset:gcc or clang" })
-        buildoptions({ "-fsanitize=address" })
-        linkoptions({ "-fsanitize=address" })
+        sanitize({
+            "Address",
+            --"Fuzzer",
+            --"Thread",
+            --"UndefinedBehavior",
+        })
+        --buildoptions({ "-fsanitize=address" })
+        --linkoptions({ "-fsanitize=address" })
     filter({ "options:target_platform=pc", "options:avx2" })
         vectorextensions("AVX2")
     filter({ "options:target_platform=web", "options:web_sync_fetch" })
