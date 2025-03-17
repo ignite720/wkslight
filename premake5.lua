@@ -140,8 +140,6 @@ workspace(g_wkslight.workspace.name)
             --"Thread",
             --"UndefinedBehavior",
         })
-        --buildoptions({ "-fsanitize=address" })
-        --linkoptions({ "-fsanitize=address" })
     filter({ "options:target_platform=pc", "options:avx2" })
         vectorextensions("AVX2")
     filter({ "options:target_platform=web", "options:web_sync_fetch" })
