@@ -11,9 +11,10 @@ g_wkslight.workspace = {
         group = "libraries",
         projects_to_exclude = function(k)
             if _OPTIONS["target_platform"] == "web" then
-                if k == "FastNoise2" then
-                    return true
-                end
+                local prjs_to_exclude = {
+                    FastNoise2 = true,
+                }
+                return prjs_to_exclude[k]
             end
             return false
         end,
@@ -161,7 +162,7 @@ g_wkslight.workspace = {
                 },
                 defines = {
                     "SPDLOG_COMPILED_LIB",
-                    --"SPDLOG_NO_EXCEPTIONS",
+                    "SPDLOG_NO_EXCEPTIONS",
                 },
                 links = {
                     "spdlog",

@@ -10,22 +10,26 @@ namespace logging {
     inline auto logger_sinks = std::make_shared<spdlog::sinks::dist_sink_mt>();
     inline auto logger = std::make_shared<spdlog::logger>("logger", logger_sinks);
 
-    inline void init(
+    inline auto init(
         String base_filename = "logs/log.txt",
         int rotation_hour = 0,
         int rotation_minute = 5,
         String file_pattern = "[%Y-%m-%d %H:%M:%S.%e][%l] %v",
         String console_pattern = "[%H:%M:%S.%e][%L] %v",
         std::chrono::seconds interval = std::chrono::seconds(5)
-    ) {
-        auto daily_file_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(
-            std::move(base_filename),
-            rotation_hour,
-            rotation_minute
-        );
-        daily_file_sink->set_level(spdlog::level::trace);
-        daily_file_sink->set_pattern(std::move(file_pattern));
-        logger_sinks->add_sink(daily_file_sink);
+    ) -> void {
+        {
+            #if !TARGET_PLATFORM_WEB
+            auto daily_file_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(
+                std::move(base_filename),
+                rotation_hour,
+                rotation_minute
+            );
+            daily_file_sink->set_level(spdlog::level::trace);
+            daily_file_sink->set_pattern(std::move(file_pattern));
+            logger_sinks->add_sink(daily_file_sink);
+            #endif
+        }
 
         auto console_sink = std::make_shared<spdlog::sinks::stderr_color_sink_mt>();
         console_sink->set_level(spdlog::level::debug);
