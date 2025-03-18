@@ -27,7 +27,6 @@ namespace logging {
         daily_file_sink->set_level(spdlog::level::trace);
         daily_file_sink->set_pattern(std::move(file_pattern));
         logger_sinks->add_sink(daily_file_sink);
-        #endif
 
         auto console_sink = std::make_shared<spdlog::sinks::stderr_color_sink_mt>();
         console_sink->set_level(spdlog::level::debug);
@@ -37,7 +36,7 @@ namespace logging {
         logger->flush_on(spdlog::level::info);
         logger->set_level(spdlog::level::trace);
         spdlog::flush_every(interval);
-        //#endif
+        #endif
     }
 }
 
