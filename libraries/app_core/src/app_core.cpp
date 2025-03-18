@@ -370,7 +370,7 @@ static void __test_lua() {
         }
 
         lua_state.script(R"(print('4, <LUA>: bye\n'))");
-    } catch (const std::exception/*sol::error*/ &e) {
+    } catch (const sol::error &e) {
         std::cout << e.what() << std::endl;
     }
 }

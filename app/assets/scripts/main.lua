@@ -14,7 +14,8 @@ local co = coroutine.create(function()
     coroutine.yield()
 
     print("Coroutine resumed")
-    yield(0.5)
+    --yield(0.5)
+    coroutine.yield()
 
     print("Coroutine resumed2")
 end)
