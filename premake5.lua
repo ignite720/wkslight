@@ -81,7 +81,11 @@ workspace(g_wkslight.workspace.name)
         defines({ "TARGET_PLATFORM_WEB=1" })
         platforms({ "wasm" })
         toolset("emcc")
+        buildoptions({
+            "-fexceptions",
+        })
         linkoptions({
+            "-fexceptions",
             "-sNO_DISABLE_EXCEPTION_CATCHING",
         })
     filter("system:windows")
