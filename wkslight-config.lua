@@ -9,12 +9,12 @@ g_wkslight.workspace = {
     },
     libraries = {
         group = "libraries",
-        projects_to_exclude = function(k)
+        projects_to_exclude = function(name)
             if _OPTIONS["target_platform"] == "web" then
                 local prjs_to_exclude = {
                     FastNoise2 = true,
                 }
-                return prjs_to_exclude[k]
+                return prjs_to_exclude[name]
             end
             return false
         end,
