@@ -86,8 +86,8 @@ workspace(g_wkslight.workspace.name)
         })
         linkoptions({
             "-fexceptions",
+            "-sNO_DISABLE_EXCEPTION_CATCHING",
             "-sDISABLE_EXCEPTION_CATCHING=0",
-            --"-sNO_DISABLE_EXCEPTION_CATCHING",
         })
     filter("system:windows")
         systemversion("latest")
