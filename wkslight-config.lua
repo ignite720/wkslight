@@ -10,13 +10,15 @@ g_wkslight.workspace = {
     libraries = {
         group = "libraries",
         projects_to_exclude = function(name)
-            if _OPTIONS["target_platform"] == "web" then
-                local prjs_to_exclude = {
+            local prjs_to_exclude = {
+                android = {},
+                pc = {},
+                uwp = {},
+                web = {
                     FastNoise2 = true,
-                }
-                return prjs_to_exclude[name]
-            end
-            return false
+                },
+            }
+            return prjs_to_exclude[_OPTIONS["target_platform"]][name]
         end,
         projects = {
             -- Sort alphabetically
