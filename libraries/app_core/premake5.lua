@@ -54,7 +54,6 @@ project("app_core")
         -- fix uwp dll end
         --]]
     filter("options:target_platform=web")
-        exceptionhandling("SEH")
         files({
             "src/impl/platform/web/**.*",
         })
