@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpdqt84zqp.js
+// include: /tmp/tmpcny611ya.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -214,25 +214,25 @@ Module['FS_createPath']("/assets", "textures", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/assets/fonts/PressStart2P/LICENSE.txt", "start": 0, "end": 4407}, {"filename": "/assets/fonts/PressStart2P/PressStart2P.ttf", "start": 4407, "end": 74155}, {"filename": "/assets/scripts/foobar/bar.lua", "start": 74155, "end": 74252}, {"filename": "/assets/scripts/foobar/foo.lua", "start": 74252, "end": 74349}, {"filename": "/assets/scripts/foobar/init.lua", "start": 74349, "end": 74461}, {"filename": "/assets/scripts/foobar/utils.lua", "start": 74461, "end": 75043}, {"filename": "/assets/scripts/main.lua", "start": 75043, "end": 75971}, {"filename": "/assets/sounds/Insert Coin.ogg", "start": 75971, "end": 935672, "audio": 1}, {"filename": "/assets/sounds/Item Shop.ogg", "start": 935672, "end": 1837427, "audio": 1}, {"filename": "/assets/sounds/bounce.wav", "start": 1837427, "end": 1858617, "audio": 1}, {"filename": "/assets/sounds/coin.wav", "start": 1858617, "end": 1890406, "audio": 1}, {"filename": "/assets/sounds/hit.wav", "start": 1890406, "end": 1911596, "audio": 1}, {"filename": "/assets/sounds/lose.wav", "start": 1911596, "end": 1983129, "audio": 1}, {"filename": "/assets/sounds/new record.wav", "start": 1983129, "end": 2054662, "audio": 1}, {"filename": "/assets/textures/ball.png", "start": 2054662, "end": 2055858}], "remote_package_size": 2055858});
+    loadPackage({"files": [{"filename": "/assets/fonts/PressStart2P/LICENSE.txt", "start": 0, "end": 4407}, {"filename": "/assets/fonts/PressStart2P/PressStart2P.ttf", "start": 4407, "end": 74155}, {"filename": "/assets/scripts/foobar/bar.lua", "start": 74155, "end": 74252}, {"filename": "/assets/scripts/foobar/foo.lua", "start": 74252, "end": 74349}, {"filename": "/assets/scripts/foobar/init.lua", "start": 74349, "end": 74461}, {"filename": "/assets/scripts/foobar/utils.lua", "start": 74461, "end": 75043}, {"filename": "/assets/scripts/main.lua", "start": 75043, "end": 75995}, {"filename": "/assets/sounds/Insert Coin.ogg", "start": 75995, "end": 935696, "audio": 1}, {"filename": "/assets/sounds/Item Shop.ogg", "start": 935696, "end": 1837451, "audio": 1}, {"filename": "/assets/sounds/bounce.wav", "start": 1837451, "end": 1858641, "audio": 1}, {"filename": "/assets/sounds/coin.wav", "start": 1858641, "end": 1890430, "audio": 1}, {"filename": "/assets/sounds/hit.wav", "start": 1890430, "end": 1911620, "audio": 1}, {"filename": "/assets/sounds/lose.wav", "start": 1911620, "end": 1983153, "audio": 1}, {"filename": "/assets/sounds/new record.wav", "start": 1983153, "end": 2054686, "audio": 1}, {"filename": "/assets/textures/ball.png", "start": 2054686, "end": 2055882}], "remote_package_size": 2055882});
 
   })();
 
-// end include: /tmp/tmpdqt84zqp.js
-// include: /tmp/tmpa_zzj1dy.js
+// end include: /tmp/tmpcny611ya.js
+// include: /tmp/tmpwawwavk2.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpa_zzj1dy.js
-// include: /tmp/tmpo70yp7o0.js
+  // end include: /tmp/tmpwawwavk2.js
+// include: /tmp/tmp9qn5ehl8.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpo70yp7o0.js
+  // end include: /tmp/tmp9qn5ehl8.js
 
 
 // Sometimes an existing Module object exists with properties
