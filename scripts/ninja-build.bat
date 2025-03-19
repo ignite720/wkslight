@@ -9,6 +9,7 @@ if "%~1"=="" (
 )
 
 cd ..
+
 ninja -C build Release
 if "%~1"=="" (
     timeout /t 2 > nul
