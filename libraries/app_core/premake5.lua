@@ -48,7 +48,6 @@ project("app_core")
         links({
             "app_core_d3d12.lib",
             "app_core_vulkan.lib",
-            "bar.lib",
             "foo.lib",
         })
         -- fix uwp dll end
@@ -62,7 +61,7 @@ project("app_core")
         })
     filter("options:target_platform=android or options:target_platform=web")
         kind("StaticLib")
-    filter({ "action:vs* or ninja", "system:windows*" })
+    filter({ "action:vs* or ninja", "system:windows*", "configurations:Release" })
         exceptionhandling("SEH")
     filter("kind:SharedLib")
         defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
