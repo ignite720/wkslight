@@ -39,10 +39,10 @@ void Net::connect(const char *url) {
     auto create_attrs = EmscriptenWebSocketCreateAttributes { url, nullptr, EM_TRUE };
     m_socket = emscripten_websocket_new(&create_attrs);
 
-    emscripten_websocket_set_onopen_callback(m_socket, this, __ws_onopen);
-    emscripten_websocket_set_onclose_callback(m_socket, this, __ws_onclose);
-    emscripten_websocket_set_onerror_callback(m_socket, this, __ws_onerror);
-    emscripten_websocket_set_onmessage_callback(m_socket, this, __ws_onmessage);
+    emscripten_websocket_set_onopen_callback(m_socket, this, s_ws_onopen);
+    emscripten_websocket_set_onclose_callback(m_socket, this, s_ws_onclose);
+    emscripten_websocket_set_onerror_callback(m_socket, this, s_ws_onerror);
+    emscripten_websocket_set_onmessage_callback(m_socket, this, s_ws_onmessage);
 }
 
 void Net::close() {
