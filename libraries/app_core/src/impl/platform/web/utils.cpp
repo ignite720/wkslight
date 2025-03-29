@@ -5,7 +5,7 @@ static constexpr const char *const REQUEST_HEADERS[] = {
     nullptr
 };
 
-static void __web_fetch_succeeded(emscripten_fetch_t *fetch) {
+static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
     const auto symbol = utils::string::str_repeats("=", 98);
     printf("%s>>\n>>> %s: %s, status => %d\n", symbol.c_str(), FUNCTION_NAME, fetch->url, fetch->status);
     
@@ -33,7 +33,7 @@ static void __web_fetch_succeeded(emscripten_fetch_t *fetch) {
     emscripten_fetch_close(fetch);
 }
 
-static void __web_fetch_failed(emscripten_fetch_t *fetch) {
+static void s_web_fetch_failed(emscripten_fetch_t *fetch) {
     emscripten_fetch_close(fetch);
 }
 
@@ -85,8 +85,8 @@ void utils::web::web_fetch(const char *url) {
     
     strcpy(attr.requestMethod, "GET");
     attr.attributes = (EMSCRIPTEN_FETCH_LOAD_TO_MEMORY/* | EMSCRIPTEN_FETCH_WAITABLE*/);
-    attr.onsuccess = __web_fetch_succeeded;
-    attr.onerror = __web_fetch_failed;
+    attr.onsuccess = s_web_fetch_succeeded;
+    attr.onerror = s_web_fetch_failed;
     attr.requestHeaders = REQUEST_HEADERS;
     emscripten_fetch(&attr, url);
 }
@@ -104,8 +104,8 @@ void utils::web::web_fetch_persist_file_store(const char *url, const void *data,
     attr.attributes = (EMSCRIPTEN_FETCH_REPLACE | EMSCRIPTEN_FETCH_PERSIST_FILE);
     attr.requestData = data_on_heap;
     attr.requestDataSize = size;
-    attr.onsuccess = __web_fetch_succeeded;
-    attr.onerror = __web_fetch_failed;
+    attr.onsuccess = s_web_fetch_succeeded;
+    attr.onerror = s_web_fetch_failed;
     emscripten_fetch(&attr, url);
 }
 
@@ -123,8 +123,8 @@ bool utils::web::web_fetch_persist_file_load(const char *url, void *data, size_t
     
     strcpy(attr.requestMethod, "GET");
     attr.attributes = (EMSCRIPTEN_FETCH_LOAD_TO_MEMORY | EMSCRIPTEN_FETCH_PERSIST_FILE);
-    attr.onsuccess = __web_fetch_succeeded;
-    attr.onerror = __web_fetch_failed;
+    attr.onsuccess = s_web_fetch_succeeded;
+    attr.onerror = s_web_fetch_failed;
     attr.userData = user_data;
     emscripten_fetch(&attr, url);
     return true;

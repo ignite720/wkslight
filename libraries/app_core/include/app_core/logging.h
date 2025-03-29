@@ -2,7 +2,6 @@
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/dist_sink.h>
-
 #include <spdlog/sinks/daily_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 

@@ -12,7 +12,7 @@ case key2_: { \
     } \
 } break
 
-static void __main_loop(void *arg) {
+static void s_main_loop(void *arg) {
     auto *app_core = static_cast<AppCore *>(arg);
 
     app_core->update();
