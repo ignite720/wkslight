@@ -1,0 +1,112 @@
+name: CI pc
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-13 ]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.4
+        with:
+          version: "5.0.0-beta5"
+
+      - name: Add msbuild to PATH
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: "latest"
+
+      - name: Setup ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+        with:
+          version: "1.12.1"
+
+      - name: Build
+        run: |
+          ninja --version
+
+      - name: Add cl.exe to PATH
+        if: runner.os == 'Windows' && false
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Build project for Windows
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          cd scripts
+          call premake5-generate-pc-ninja.bat gh-action
+
+          cd scripts
+          call ninja-build.bat gh-action
+
+          cd scripts
+          tool-run-pc.bat
+
+          cd scripts
+          call premake5-clean.bat
+
+          cd scripts
+          call premake5-generate-pc-vs.bat gh-action
+
+          cd scripts
+          tool-msbuild-pc-vs.bat
+
+          cd scripts
+          tool-run-pc.bat
+
+      - name: Generate project for Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          echo ${{ runner.os }}
+          source scripts/tool-premake5+x.sh ${{ github.workspace }}
+
+          make ninja
+          make run
+
+      - name: Generate project for macOS
+        if: runner.os == 'macOS'
+        run: |
+          echo ${{ runner.os }}
+          source scripts/tool-premake5+x.sh ${{ github.workspace }}
+          
+          brew install tree
+          brew install bash
+          echo $SHELL
+
+          make xcode
+
+      - name: Build project for Linux & macOS
+        if: runner.os != 'Windows'
+        run: |
+          make clean
+          make
+          make run
+          make tree
+          make cargo_run
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/${{ runner.os }}
+          cp -r bin/* temp/artifact/${{ runner.os }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release-Artifact-${{ runner.os }}
+          path: ${{ github.workspace }}/temp
