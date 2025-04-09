@@ -322,7 +322,11 @@ static void s_test_enum() {
 static void s_test_lua() {
     PRINT_FUNCTION_NAME();
 
-    sol::state lua_state/*(sol::c_call<decltype(&__my_lua_panic), __my_lua_panic>)*/;
+    sol::state lua_state {
+        #if SOL_NO_EXCEPTIONS
+        sol::c_call<decltype(&s_my_lua_panic), s_my_lua_panic>
+        #endif
+    };
     lua_state.open_libraries(/*sol::lib::ffi, sol::lib::jit*/);
 
     {

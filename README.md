@@ -68,7 +68,7 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 #### 2.1 Linux & macOS
 > ```shell
 > # gmake
-> make
+> make pc
 > make run
 >
 > # ninja

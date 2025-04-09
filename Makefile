@@ -7,7 +7,8 @@ endif
 
 .PNONY: all clean install test rebuild deps
 
-all: pc
+all:
+	@echo all
 
 pc:
 	source scripts/premake5-generate-pc-gmake.sh

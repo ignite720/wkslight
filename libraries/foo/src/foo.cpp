@@ -1,5 +1,20 @@
 #include "foo/foo.h"
 
+class Foo::Impl {
+public:
+    void print(int n) {
+        std::cout << FUNCTION_NAME << " => " << n << std::endl;
+    }
+};
+
+Foo::Foo() : m_impl(new Impl()) {
+
+}
+
+Foo::~Foo() {
+    delete m_impl;
+}
+
 void foo_print(double n) {
     printf("%s => %f\n", FUNCTION_NAME, n);
 }
@@ -13,5 +28,5 @@ void foo_printi64(int64_t n) {
 }
 
 void Foo::print(int n) {
-    std::cout << FUNCTION_NAME << " => " << n << std::endl;
+    m_impl->print(n);
 }

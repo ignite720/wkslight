@@ -6,8 +6,8 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace logging {
-    inline auto logger_sinks = std::make_shared<spdlog::sinks::dist_sink_mt>();
-    inline auto logger = std::make_shared<spdlog::logger>("logger", logger_sinks);
+    inline std::shared_ptr<spdlog::sinks::dist_sink_mt> logger_sinks;
+    inline std::shared_ptr<spdlog::logger> logger;
 
     inline auto init(
         String base_filename = "logs/log.txt",
@@ -17,6 +17,11 @@ namespace logging {
         String console_pattern = "[%H:%M:%S.%e][%L] %v",
         std::chrono::seconds interval = std::chrono::seconds(5)
     ) -> void {
+        assert(!logger_sinks && !logger);
+
+        logger_sinks = std::make_shared<spdlog::sinks::dist_sink_mt>();
+        logger = std::make_shared<spdlog::logger>("logger", logger_sinks);
+
         #if !TARGET_PLATFORM_WEB
         auto daily_file_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(
             std::move(base_filename),

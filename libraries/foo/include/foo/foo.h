@@ -54,8 +54,7 @@ using namespace rs::vec;
 #include "foo/foo_api.h"
 
 #if 0
-FOO_TEMPLATE_EXTERN template
-class FOO_API rs::string::String;
+FOO_TEMPLATE_EXTERN template class FOO_API rs::string::String;
 #endif
 
 #ifdef __cplusplus
@@ -72,5 +71,12 @@ FOO_API void foo_printi64(int64_t n);
 
 class FOO_API Foo {
 public:
+    Foo();
+    ~Foo();
+
     void print(int n);
+
+private:
+    class Impl;
+    Impl *m_impl = nullptr;
 };
