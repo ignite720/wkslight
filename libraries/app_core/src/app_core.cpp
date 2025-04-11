@@ -153,7 +153,7 @@ void AppCore::render_imgui() {
             ImGui::Text("SDL: %d.%d.%d(C %u.%u.%u, L %u.%u.%u)",
                 SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL,
                 compiled.major, compiled.minor, compiled.patch,
-                linked.major, linked.minor, linked.patch,
+                linked.major, linked.minor, linked.patch
             );
             ImGui::Text("ImGui: %s", IMGUI_VERSION);
         }
