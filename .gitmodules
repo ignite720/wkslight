@@ -35,3 +35,6 @@
 [submodule "premake5-modules/wkslight"]
 	path = premake5-modules/wkslight
 	url = https://github.com/ignite720/premake-wkslight.git
+[submodule "libraries/imgui"]
+	path = libraries/imgui
+	url = https://github.com/wkslight/imgui.git

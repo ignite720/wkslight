@@ -2,6 +2,7 @@
 
 class AppCorePC : public AppCore {
 public:
+    #if 0
     virtual int init(int width, int height, bool linear_filter) override {
         PRINT_FUNCTION_NAME();
         
@@ -13,6 +14,7 @@ public:
         PRINT_FUNCTION_NAME();
         return 0;
     }
+    #endif
 };
 
 std::unique_ptr<AppCore> AppCore::create_pc() {

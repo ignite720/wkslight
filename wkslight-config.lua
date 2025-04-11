@@ -142,6 +142,15 @@ g_wkslight.workspace = {
                     "%{g_wkslight.librariesdir}/headeronly",
                 },
             },
+            imgui = {
+                location = "libraries/imgui",
+                includedirs = {
+                    "%{g_wkslight.librariesdir}/imgui",
+                },
+                links = {
+                    "imgui",
+                },
+            },
             lua = {
                 location = "libraries/lua",
                 includedirs = {

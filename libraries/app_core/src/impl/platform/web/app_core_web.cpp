@@ -29,6 +29,7 @@ public:
 
     virtual void update() override;
     virtual void render() override;
+    virtual void render_imgui() override;
 
     virtual void restart() override;
     virtual void * renderer_as_mut_ptr() override { return m_renderer; }
@@ -42,26 +43,17 @@ private:
     std::unique_ptr<Net> m_net;
 
 private:
-    SDL_Window *m_window = nullptr;
-    SDL_Renderer *m_renderer = nullptr;
-
     std::unique_ptr<ResourceBundle> m_resource_bundle;
     std::unique_ptr<Ball> m_ball;
     std::unique_ptr<Paddle> m_paddle;
 };
 
 AppCoreWeb::~AppCoreWeb() {
+    PRINT_FUNCTION_NAME();
+
     m_paddle.reset();
     m_ball.reset();
     m_resource_bundle.reset();
-
-    SDL_DestroyRenderer(m_renderer);
-    SDL_DestroyWindow(m_window);
-
-    TTF_Quit();
-    Mix_CloseAudio();
-    IMG_Quit();
-    SDL_Quit();
 }
 
 void AppCoreWeb::preload() {
@@ -82,51 +74,6 @@ int AppCoreWeb::init(int width, int height, bool linear_filter) {
     
     do {
         if (AppCore::init(width, height, linear_filter) != 0) {
-            break;
-        }
-
-        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
-            printf("%s => Failed to initialize SDL: %s\n", FUNCTION_NAME, SDL_GetError());
-            break;
-        }
-
-        if (linear_filter) {
-            if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
-                break;
-            }
-        }
-        
-        Uint32 flags = SDL_WINDOW_SHOWN;
-        m_window = SDL_CreateWindow("AppCoreWeb", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
-        if (!m_window) {
-            printf("%s => Failed to create Window: %s\n", FUNCTION_NAME, SDL_GetError());
-            break;
-        }
-
-        flags = (SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-        m_renderer = SDL_CreateRenderer(m_window, -1, flags);
-        if (!m_renderer) {
-            printf("%s => Failed to create Renderer: %s\n", FUNCTION_NAME, SDL_GetError());
-            break;
-        }
-
-        if (SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND) != 0) {
-            break;
-        }
-        
-        const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
-        if ((IMG_Init(img_loaders) & img_loaders) != img_loaders) {
-            printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
-            break;
-        }
-
-        if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-            printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
-            break;
-        }
-
-        if (TTF_Init() != 0) {
-            printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
             break;
         }
     
@@ -275,8 +222,18 @@ void AppCoreWeb::render() {
             m_resource_bundle->draw_text(ResourceBundle::FONT_PRESS_START_2P, consts::text::GAME_OVER_HINT, 2.0f, app_info.window_width * 0.5f, app_info.window_height * 0.5f, consts::anchor_point::CENTER, consts::colors::ORANGE);
         }
     }
+    
+    AppCore::render();
+}
 
-    SDL_RenderPresent(m_renderer);
+void AppCoreWeb::render_imgui() {
+    AppCore::render_imgui();
+
+    {
+        ImGui::Begin("Another Window");
+        ImGui::Text("Hello from another window!");
+        ImGui::End();
+    }
 }
 
 void AppCoreWeb::restart() {

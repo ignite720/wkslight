@@ -7,6 +7,8 @@ project("app_core")
     files({
         "include/**.h",
         --"src/impl/platform/**.*",
+        "src/impl/test/*.cpp",
+        "src/impl/*.cpp",
         "src/*.cpp",
     })
     includedirs({
@@ -38,6 +40,16 @@ project("app_core")
     filter("options:target_platform=pc")
         files({
             "src/impl/platform/pc/**.*",
+        })
+    filter({ "options:target_platform=pc", "system:linux" })
+        g_wkslight.libs({
+            "imgui",
+        })
+        links({
+            "SDL2",
+            "SDL2_image",
+            "SDL2_mixer",
+            "SDL2_ttf",
         })
     filter("options:target_platform=uwp")
         files({

@@ -70,6 +70,7 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > # gmake
 > make pc
 > make run
+> make test
 >
 > # ninja
 > make ninja

@@ -9,11 +9,6 @@
 
 #endif
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_ttf.h>
-
 enum MOVE_STATE {
     MOVE_STATE_NONE = 0,
     MOVE_STATE_UP = 1 << 0,

@@ -1,5 +1,10 @@
 #pragma once
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
 #include <foo/foo.h>
 
 #include <mathx/mathx_rtm.h>
@@ -26,6 +31,17 @@ extern "C" {
 #endif
 
 APP_CORE_API int app_core_startup(void);
+
+APP_CORE_API void app_core_test_bar(void);
+APP_CORE_API void app_core_test_baz_qux(void);
+APP_CORE_API void app_core_test_enum(void);
+APP_CORE_API void app_core_test_foo(void);
+APP_CORE_API void app_core_test_json(void);
+APP_CORE_API void app_core_test_logging(void);
+APP_CORE_API void app_core_test_lua(void);
+APP_CORE_API void app_core_test_noise(void);
+APP_CORE_API void app_core_test_rtm(void);
+APP_CORE_API void app_core_test_xmath(void);
 
 #ifdef __cplusplus
 }
@@ -124,21 +140,15 @@ private:
     static std::unique_ptr<AppCore> create_web();
 
 public:
-    virtual ~AppCore() = default;
+    virtual ~AppCore();
 
     virtual void preload() {}
-    virtual int init(int width, int height, bool linear_filter) {
-        m_app_info.window_width = float(width);
-        m_app_info.window_height = float(height);
+    virtual int init(int width, int height, bool linear_filter);
+    virtual int run();
 
-        simplerand::from_seed(static_cast<unsigned>(std::time(nullptr)));
-        return 0;
-    }
-
-    virtual int run() = 0;
-
-    virtual void update() {}
-    virtual void render() {}
+    virtual void update();
+    virtual void render();
+    virtual void render_imgui();
 
     virtual void restart() { m_app_info.game_info.game_over = false; }
     virtual void * renderer_as_mut_ptr() { return nullptr; }
@@ -154,4 +164,11 @@ public:
 
 private:
     AppInfo m_app_info;
+
+protected:
+    SDL_Window *m_window = nullptr;
+    SDL_Renderer *m_renderer = nullptr;
+    
+    bool m_quit = false;
+    bool m_show_demo_window = false;
 };

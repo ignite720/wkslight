@@ -6,7 +6,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace logging {
-    inline std::shared_ptr<spdlog::sinks::dist_sink_mt> logger_sinks;
+    inline std::shared_ptr<spdlog::sinks::dist_sink_mt> __logger_sinks;
     inline std::shared_ptr<spdlog::logger> logger;
 
     inline auto init(
@@ -17,10 +17,10 @@ namespace logging {
         String console_pattern = "[%H:%M:%S.%e][%L] %v",
         std::chrono::seconds interval = std::chrono::seconds(5)
     ) -> void {
-        assert(!logger_sinks && !logger);
+        assert(!__logger_sinks && !logger);
 
-        logger_sinks = std::make_shared<spdlog::sinks::dist_sink_mt>();
-        logger = std::make_shared<spdlog::logger>("logger", logger_sinks);
+        __logger_sinks = std::make_shared<spdlog::sinks::dist_sink_mt>();
+        logger = std::make_shared<spdlog::logger>("logger", __logger_sinks);
 
         #if !TARGET_PLATFORM_WEB
         auto daily_file_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(
@@ -30,12 +30,12 @@ namespace logging {
         );
         daily_file_sink->set_level(spdlog::level::trace);
         daily_file_sink->set_pattern(std::move(file_pattern));
-        logger_sinks->add_sink(daily_file_sink);
+        __logger_sinks->add_sink(daily_file_sink);
 
         auto console_sink = std::make_shared<spdlog::sinks::stderr_color_sink_mt>();
         console_sink->set_level(spdlog::level::debug);
         console_sink->set_pattern(std::move(console_pattern));
-        logger_sinks->add_sink(console_sink);
+        __logger_sinks->add_sink(console_sink);
 
         logger->flush_on(spdlog::level::info);
         logger->set_level(spdlog::level::trace);

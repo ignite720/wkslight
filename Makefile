@@ -35,16 +35,15 @@ web: clean
 
 run:
 	source scripts/tool-run-pc.sh
-	source scripts/test-py.sh
 
 clean:
-	source scripts/0-premake5-clean.sh
+	source scripts/premake5-clean.sh
 
 install:
 	@echo install
 
 test:
-	@echo test
+	source scripts/test-py.sh
 
 rebuild:
 	@echo rebuild
