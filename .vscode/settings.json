@@ -1,0 +1,13 @@
+{
+    "search.exclude": {
+        "app/doc": true,
+        "libraries/FastNoise2": true,
+        "libraries/headeronly": true,
+        "libraries/imgui": true,
+        "libraries/lua": true,
+        "libraries/sol2": true,
+        "libraries/spdlog": true,
+        "libraries/XMath": true,
+        "premake5-modules": true
+    }
+}
