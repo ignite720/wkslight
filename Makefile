@@ -54,5 +54,5 @@ deps:
 tree:
 	source scripts/tool-tree.sh
 
-cargo_run: run
+cargo_run: pc
 	source scripts/cargo-run-pc.sh $(argv)
