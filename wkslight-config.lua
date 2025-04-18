@@ -173,7 +173,7 @@ g_wkslight.workspace = {
             },
             sdl2 = {
                 enabled = function()
-                    if _OPTIONS["target_platform"] == "android" then
+                    if _OPTIONS["target_platform"] == "android" or _OPTIONS["target_platform"] == "web" then
                         return false
                     end
                     return true

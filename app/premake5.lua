@@ -15,7 +15,7 @@ project("app")
         "src/**.cpp",
         "src-java/**.*",
     })
-    -- [[
+    --[[
     vpaths({
         --["*"] = "src",
         ["VHeaders/*"] = { "src/**.h", "src/**.hpp", "src/**.inl" },
@@ -90,7 +90,8 @@ project("app")
     filter("platforms:wasm")
         g_wkslight.wasmlinkoptions(g_wkslight.extras.wasm)
     filter({ "action:codelite" })
-    filter("action:not ninja")
+    filter({ "action:ninja", "system:windows*" })
+        links({ "Shell32" })
     filter({ "action:ninja", "system:windows*", "kind:ConsoleApp" })
         linkoptions({ "/SUBSYSTEM:CONSOLE" })
     filter({ "action:ninja", "system:windows*", "kind:WindowedApp" })
