@@ -8,9 +8,10 @@ PRAGMA_WARNING_IGNORE_CLANG("-Woverflow")
 PRAGMA_WARNING_IGNORE_GCC("-Woverflow")
 PRAGMA_WARNING_IGNORE_MSVC(4616)
 #include <FastNoise/FastNoise.h>
-#include <FastNoiseLite/FastNoiseLite.h>
 PRAGMA_WARNING_POP
 #endif
+
+#include <FastNoiseLite/FastNoiseLite.h>
 
 void app_core_test_noise(void) {
     PRINT_FUNCTION_NAME();

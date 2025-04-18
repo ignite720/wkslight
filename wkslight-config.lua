@@ -39,6 +39,9 @@ g_wkslight.workspace = {
                 includedirs = {
                     "%{g_wkslight.librariesdir}/app_core/include",
                 },
+                libdirs = {
+                    "%{g_wkslight.targetdir}",
+                },
                 defines = {
                     "APP_CORE_DLL",
                 },
@@ -80,7 +83,6 @@ g_wkslight.workspace = {
                     }
                 end,
                 libdirs = {
-                    --"%{g_wkslight.targetdir}",
                     --"%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
                     --"%{g_wkslight.librariesdir}/bar/lib/%{cfg.system}/%{cfg.platform:gsub('x86', 'Win32'):gsub('x64', 'Win64')}",
                 },
