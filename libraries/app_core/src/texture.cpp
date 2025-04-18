@@ -56,8 +56,8 @@ void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float
     if (src_rect) {
         tmp_src_rect = utils::sdl::to_rect(dst_rect);
 
-        tmp_dst_rect.w = src_rect->w;
-        tmp_dst_rect.h = src_rect->h;
+        tmp_dst_rect.w = int(src_rect->w);
+        tmp_dst_rect.h = int(src_rect->h);
     }
     SDL_RenderCopyEx(APP_CORE_OBJ_GET_RENDERER, m_raw_texture, src_rect ? &tmp_src_rect : nullptr, &tmp_dst_rect, angle, center, flip);
 }

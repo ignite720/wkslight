@@ -36,6 +36,7 @@ project("app")
         "foo",
         "headeronly",
         "lua",
+        "sdl2",
         "spdlog",
         "XMath",
     })
@@ -89,13 +90,9 @@ project("app")
     filter("platforms:wasm")
         g_wkslight.wasmlinkoptions(g_wkslight.extras.wasm)
     filter({ "action:codelite" })
-        -- pass
     filter("action:not ninja")
-        -- pass
     filter("action:not xcode*")
         pchheader("pch.h")
         pchsource("src/pch.cpp")
     filter("action:vs*")
-        vspropertysheets({
-            [[..\..\app\doc\SDL2.props]],
-        })
+        --vspropertysheets({ [[..\..\app\doc\SDL2.props]] })

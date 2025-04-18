@@ -162,7 +162,7 @@ workspace(g_wkslight.workspace.name)
         })
 group(g_wkslight.workspace.libraries.group)
     for k, v in pairs(g_wkslight.workspace.libraries.projects) do
-        if v.location ~= nil and not g_wkslight.workspace.libraries.projects_to_exclude(k, v) then
+        if g_wkslight.isenabled(v) and v.location ~= nil then
             include(v.location)
         end
     end

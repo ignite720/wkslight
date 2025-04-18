@@ -1,68 +1,43 @@
+g_wkslight.clean = {
+    dirs_to_delete = {
+        enabled = true,
+        items = {
+            ".vs",
+            "bin",
+            "build",
+        },
+    },
+    files_to_delete = {
+        enabled = false,
+        items = {
+            --"*.db",
+            --"*.Makefile",
+            --"*.make",
+            --"*.opendb",
+            --"*.sln",
+            --"*.vcxproj",
+            --"*.vcxproj.filters",
+            --"*.vcxproj.user",
+            --"*.xcodeproj",
+            --"*.xcworkspace",
+        },
+    },
+}
 g_wkslight.workspace = {
     name = "wkslight",
     startproject = "app",
     cppdialect = "C++20",
-    projects = {
-        -- Sort by dependencies
+    projects = { -- Sort by dependencies
         "foobar",
         "app",
     },
     libraries = {
         group = "libraries",
-        projects_to_exclude = function(name)
-            local prjs_to_exclude = {
-                android = {},
-                pc = {},
-                uwp = {},
-                web = {
-                    FastNoise2 = true,
-                },
-            }
-            return prjs_to_exclude[_OPTIONS["target_platform"]][name]
-        end,
-        projects = {
-            -- Sort alphabetically
-            --[[
-            bar = {
-                location = nil,
-                includedirs = {
-                    "%{g_wkslight.librariesdir}/bar/include",
-                },
-                additionalincludedirs = function()
-                    return {
-                        "%{g_wkslight.librariesdir}/bar/%{cfg.system}/" .. _OPTIONS["target_platform"] .. "/include",
-                    }
-                end,
-                libdirs = {
-                    "%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
-                    --"%{g_wkslight.librariesdir}/bar/lib/%{cfg.system}/%{cfg.platform:gsub('x86', 'Win32'):gsub('x64', 'Win64')}",
-                },
-                additionallibdirs = function()
-                    return {
-                        "%{g_wkslight.librariesdir}/bar/%{cfg.system}/" .. _OPTIONS["target_platform"] .. "/lib",
-                    }
-                end,
-                defines = {
-                    "BAR_CONFIG1",
-                },
-                links = {
-                    "bar",
-                    --"bar-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
-                },
-                debugenvs = {
-                    "VAR1=value1",
-                    "VAR2=value2",
-                },
-                vslocaldebugenv = "PATH=%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
-            },
-            --]]
+        projects = { -- Sort alphabetically
             app_core = {
                 location = "libraries/app_core",
                 includedirs = {
                     "%{g_wkslight.librariesdir}/app_core/include",
-                },
-                libdirs = {
-                    "%{g_wkslight.targetdir}",
                 },
                 defines = {
                     "APP_CORE_DLL",
@@ -92,15 +67,43 @@ g_wkslight.workspace = {
                 },
             },
             bar = {
+                enabled = function()
+                    return true
+                end,
                 location = "libraries/bar",
                 includedirs = {
                     "%{g_wkslight.librariesdir}/bar/include",
                 },
+                additionalincludedirs = function()
+                    return {
+                        --"%{g_wkslight.librariesdir}/bar/%{cfg.system}/" .. _OPTIONS["target_platform"] .. "/include",
+                    }
+                end,
+                libdirs = {
+                    --"%{g_wkslight.targetdir}",
+                    --"%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
+                    --"%{g_wkslight.librariesdir}/bar/lib/%{cfg.system}/%{cfg.platform:gsub('x86', 'Win32'):gsub('x64', 'Win64')}",
+                },
+                additionallibdirs = function()
+                    return {
+                        --"%{g_wkslight.librariesdir}/bar/%{cfg.system}/" .. _OPTIONS["target_platform"] .. "/lib",
+                        --path.join("%{g_wkslight.librariesdir}/bar/%{cfg.system}/", _OPTIONS["target_platform"], "lib"),
+                        --path.join(g_wkslight.librariesdir, "bar", "%{cfg.system}", _OPTIONS["target_platform"], "lib"),
+                    }
+                end,
                 defines = {
                     --"BAR_DLL",
                 },
                 links = {
                     "bar",
+                    --"bar-s%{cfg.buildcfg:gsub('[Dd]ebug', '-d'):gsub('[Rr]elease', '')}",
+                },
+                debugenvs = {
+                    "VAR1=value1",
+                    "VAR2=value2",
+                },
+                vslocaldebugenvs = {
+                    --"%{g_wkslight.librariesdir}/bar/lib/%{g_wkslight.targettriple}",
                 },
             },
             ["baz-qux"] = {
@@ -113,6 +116,12 @@ g_wkslight.workspace = {
                 },
             },
             FastNoise2 = {
+                enabled = function()
+                    if _OPTIONS["target_platform"] == "web" then
+                        return false
+                    end
+                    return true
+                end,
                 location = "libraries/FastNoise2",
                 includedirs = {
                     "%{g_wkslight.librariesdir}/FastNoise2/include",
@@ -158,6 +167,45 @@ g_wkslight.workspace = {
                 },
                 links = {
                     "lua",
+                },
+            },
+            sdl2 = {
+                enabled = function()
+                    if _OPTIONS["target_platform"] == "android" then
+                        return false
+                    end
+                    return true
+                end,
+                location = nil,
+                includedirs = {
+                    "%{g_wkslight.librariesdir}/sdl2/include",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2-2.32.4/include",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_image-2.8.8/include",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_mixer-2.8.1/include",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_net-2.2.0/include",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_ttf-2.24.0/include",
+                },
+                libdirs = {
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2-2.32.4/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_image-2.8.8/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_mixer-2.8.1/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_net-2.2.0/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_ttf-2.24.0/lib/x64",
+                },
+                links = {
+                    "SDL2",
+                    "SDL2main",
+                    "SDL2_image",
+                    "SDL2_mixer",
+                    "SDL2_net",
+                    "SDL2_ttf",
+                },
+                vslocaldebugenvs = {
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2-2.32.4/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_image-2.8.8/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_mixer-2.8.1/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_net-2.2.0/lib/x64",
+                    "%{g_wkslight.workspacedir}/../bin/opt/SDL2_ttf-2.24.0/lib/x64",
                 },
             },
             sol2 = {

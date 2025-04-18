@@ -29,6 +29,7 @@ project("app_core")
         "headeronly",
         "imgui",
         "lua",
+        "sdl2",
         "sol2",
         "spdlog",
         "XMath",
@@ -42,12 +43,6 @@ project("app_core")
             "src/impl/platform/pc/**.*",
         })
     filter({ "options:target_platform=pc", "system:linux" })
-        links({
-            "SDL2",
-            "SDL2_image",
-            "SDL2_mixer",
-            "SDL2_ttf",
-        })
     filter("options:target_platform=uwp")
         files({
             "src/impl/platform/uwp/**.*",
@@ -65,19 +60,12 @@ project("app_core")
         files({
             "src/impl/platform/web/**.*",
         })
-        removelinks({
-            "FastNoise2",
-        })
     filter("options:target_platform=android or options:target_platform=web")
         kind("StaticLib")
     filter({ "action:vs* or ninja", "system:windows*", "configurations:Release" })
         exceptionhandling("SEH")
     filter("kind:SharedLib")
         defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
-    filter("action:vs*")
-        vspropertysheets({
-            [[..\..\..\app\doc\SDL2.props]],
-        })
 project("app_core_d3d12")
     location(path.join(g_wkslight.workspacedir, g_wkslight.placeholders[2], "%{prj.name}"))
     targetdir(g_wkslight.targetdir)

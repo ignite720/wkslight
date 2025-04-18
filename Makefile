@@ -7,8 +7,7 @@ endif
 
 .PHONY: all clean install test rebuild deps
 
-all:
-	@echo all
+all: pc
 
 pc:
 	source scripts/premake5-generate-pc-gmake.sh
