@@ -2,6 +2,7 @@
 
 #include <foo/foo_macros.h>
 
+#if !(TARGET_PLATFORM_ANDROID || TARGET_PLATFORM_WEB)
 PRAGMA_WARNING_PUSH
 PRAGMA_WARNING_IGNORE_CLANG("-Woverflow")
 PRAGMA_WARNING_IGNORE_GCC("-Woverflow")
@@ -9,6 +10,7 @@ PRAGMA_WARNING_IGNORE_MSVC(4616)
 #include <FastNoise/FastNoise.h>
 #include <FastNoiseLite/FastNoiseLite.h>
 PRAGMA_WARNING_POP
+#endif
 
 void app_core_test_noise(void) {
     PRINT_FUNCTION_NAME();
