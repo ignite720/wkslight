@@ -55,10 +55,10 @@ jobs:
           call premake5-generate-pc-ninja.bat gh-action
 
           cd scripts
-          #call ninja-build.bat gh-action
+          call ninja-build.bat gh-action
 
           cd scripts
-          #tool-run-pc.bat
+          tool-run-pc.bat
 
           cd scripts
           call premake5-clean.bat
