@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app_core/app_core_sdl.h"
+#include "app_core/app_core_sdl2.h"
 
 class Font {
     friend class ResourceBundle;

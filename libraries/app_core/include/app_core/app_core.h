@@ -4,7 +4,7 @@
 
 #include "app_core/app_core_api.h"
 #include "app_core/app_core_fwd.h"
-#include "app_core/app_core_sdl.h"
+#include "app_core/app_core_sdl2.h"
 
 #define APP_CORE_OBJ_GET_RENDERER                               reinterpret_cast<SDL_Renderer *>(this->app_core_as_mut_ptr()->renderer_as_mut_ptr())
 

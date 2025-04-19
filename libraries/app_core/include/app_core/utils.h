@@ -3,7 +3,7 @@
 #include <foo/foo_types.h>
 
 #include "app_core/app_core_fwd.h"
-#include "app_core/app_core_sdl.h"
+#include "app_core/app_core_sdl2.h"
 
 namespace utils {
     namespace concepts {

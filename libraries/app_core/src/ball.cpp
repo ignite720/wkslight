@@ -7,7 +7,7 @@
 #include <simplerand/simplerand.hpp>
 
 Ball::Ball(AppCore &app_core)
-    : Actor(app_core, 0.0f, 0.0f) {
+    : Actor(app_core, app_core.app_info_as_ref().window_width * 0.5f, app_core.app_info_as_ref().window_height * 0.2f) {
     m_texture = std::make_unique<Texture>(app_core);
     auto ret = m_texture->load_from_file("assets/textures/ball.png");
     if (ret) {

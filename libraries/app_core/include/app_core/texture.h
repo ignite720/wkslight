@@ -1,7 +1,7 @@
 #pragma once
 
 #include "app_core/app_core_obj.h"
-#include "app_core/app_core_sdl.h"
+#include "app_core/app_core_sdl2.h"
 
 class Texture : public AppCoreObj {
 public:

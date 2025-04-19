@@ -14,7 +14,7 @@
 
 #include <simplerand/simplerand.hpp>
 
-#define CASE_PADDLE_MOVE_STATE_FROM_KEYS(key1_, key2_, state_) \
+#define __CASE_PADDLE_MOVE_STATE_FROM_KEYS(key1_, key2_, state_) \
 case key1_: \
 case key2_: { \
     if (evt.key.type == SDL_KEYDOWN) { \
@@ -123,10 +123,10 @@ void AppCore::update() {
                     this->reset_gamesave();
                 }
             } break;
-            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_w, SDLK_UP, UP);
-            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_s, SDLK_DOWN, DOWN);
-            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_a, SDLK_LEFT, LEFT);
-            CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_d, SDLK_RIGHT, RIGHT);
+            __CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_w, SDLK_UP, UP);
+            __CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_s, SDLK_DOWN, DOWN);
+            __CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_a, SDLK_LEFT, LEFT);
+            __CASE_PADDLE_MOVE_STATE_FROM_KEYS(SDLK_d, SDLK_RIGHT, RIGHT);
         }
     }
 
@@ -169,7 +169,7 @@ void AppCore::render() {
             const auto &app_info = this->app_info_as_ref();
     
             {
-                float y = 30.0f;
+                float y = 25.0f;
     
                 {
                     auto text = ("fps: " + std::to_string(app_info.stats.fps));
