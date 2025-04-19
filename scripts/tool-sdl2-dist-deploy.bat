@@ -32,7 +32,7 @@ set SDL2_TTF_DIST_DIRNAME=%SDL2_TTF_NAME%-%SDL2_TTF_DIST_VERSION%
 
 set BIN_DIRNAME=bin
 set TARGET_DIRNAME=target/%SDL2_ARCH%/Release
-set OUT_DIRNAME=opt
+set OPT_DIRNAME=opt
 
 mkdir %BIN_DIRNAME%
 pushd %BIN_DIRNAME%
@@ -45,18 +45,18 @@ if "%~1"=="download" (
     curl -LO https://github.com/libsdl-org/SDL_ttf/releases/download/release-%SDL2_TTF_DIST_VERSION%/%SDL2_TTF_DIST_FILENAME%
 )
 
-mkdir %OUT_DIRNAME%
-rem tar -xf %SDL2_DIST_FILENAME% -C %OUT_DIRNAME%
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_DIST_FILENAME% -DestinationPath %OUT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_IMAGE_DIST_FILENAME% -DestinationPath %OUT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_MIXER_DIST_FILENAME% -DestinationPath %OUT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_NET_DIST_FILENAME% -DestinationPath %OUT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_TTF_DIST_FILENAME% -DestinationPath %OUT_DIRNAME%"
+mkdir %OPT_DIRNAME%
+rem tar -xf %SDL2_DIST_FILENAME% -C %OPT_DIRNAME%
+powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
+powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_IMAGE_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
+powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_MIXER_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
+powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_NET_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
+powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_TTF_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
 
-xcopy "%OUT_DIRNAME%\%SDL2_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OUT_DIRNAME%\%SDL2_IMAGE_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OUT_DIRNAME%\%SDL2_MIXER_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OUT_DIRNAME%\%SDL2_NET_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OUT_DIRNAME%\%SDL2_TTF_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
+xcopy "%OPT_DIRNAME%\%SDL2_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
+xcopy "%OPT_DIRNAME%\%SDL2_IMAGE_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
+xcopy "%OPT_DIRNAME%\%SDL2_MIXER_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
+xcopy "%OPT_DIRNAME%\%SDL2_NET_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
+xcopy "%OPT_DIRNAME%\%SDL2_TTF_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
 
 popd
