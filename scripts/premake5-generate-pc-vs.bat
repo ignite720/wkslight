@@ -1,7 +1,7 @@
 @echo off
 
 cd ..
-if not "%~1"=="" (
+if "%~1"=="dummy" (
     cd ..
 )
 
