@@ -27,6 +27,7 @@ g_wkslight.workspace = {
     name = "wkslight",
     startproject = "app",
     cppdialect = "C++20",
+    cppdialectuwp = "C++20",
     projects = { -- Sort by dependencies
         "foobar",
         "app",
