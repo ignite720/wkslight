@@ -67,6 +67,7 @@ jobs:
           call tool-sdl2-dist-deploy.bat download
 
           echo %CD%
+          dir .
 
           cd scripts
           call premake5-generate-pc-vs.bat gh-action
