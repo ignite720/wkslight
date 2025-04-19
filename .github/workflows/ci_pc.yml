@@ -58,7 +58,7 @@ jobs:
           call ninja-build.bat gh-action
 
           cd scripts
-          tool-run-pc.bat
+          tool-run-pc.bat 5
 
           cd scripts
           call premake5-clean.bat
@@ -73,7 +73,7 @@ jobs:
           tool-msbuild-pc-vs.bat
 
           cd scripts
-          tool-run-pc.bat
+          tool-run-pc.bat 5
 
       - name: Generate project for Linux
         if: runner.os == 'Linux'
@@ -109,7 +109,7 @@ jobs:
           brew install sdl2_net
           brew install sdl2_ttf
           
-          make xcode
+          make xcode_run argv=5
 
       - name: Build project for Linux & macOS
         if: runner.os != 'Windows'

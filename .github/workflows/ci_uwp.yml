@@ -46,7 +46,7 @@ jobs:
           popd
 
           pushd scripts
-          "tool-run-pc.bat"
+          "tool-run-pc.bat 5"
           popd
 
       - name: Create artifact

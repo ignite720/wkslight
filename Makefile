@@ -17,10 +17,10 @@ ninja: clean
 	source scripts/premake5-generate-pc-ninja.sh
 	source scripts/ninja-build.sh
 
-xcode: clean
+xcode_run: clean
 	source scripts/premake5-generate-pc-xcode.sh
-	#source scripts/xcode-build.sh
-	#source scripts/tool-run-pc-macos.sh
+	source scripts/xcode-build.sh
+	source scripts/tool-run-pc-macos.sh $(argv)
 
 android: clean
 	ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME

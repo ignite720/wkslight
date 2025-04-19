@@ -46,7 +46,7 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 <br />
 
 ### 1. Android
-> 1.1 install The `Android SDK`
+> 1.1 Install the `Android SDK`
 
 > 1.2 `gradle`
 > ```shell

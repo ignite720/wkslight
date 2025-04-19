@@ -63,6 +63,5 @@ int app_core_startup(int argc, char *argv[]) {
     app_core_test_lua();
 
     s_test_gfx();
-    //return s_test_app_core(argc, argv);
-    return 0;
+    return s_test_app_core(argc, argv);
 }

@@ -3,7 +3,7 @@
 cd ..
 
 pushd "bin/target/x64/Release"
-.\app
+.\app "%~1"
 popd
 
 pause
