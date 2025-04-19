@@ -1,7 +1,7 @@
 #pragma once
 
 #if !TARGET_PLATFORM_ANDROID
-    #if defined(_WIN32) || defined(__APPLE__)
+    #if defined(_WIN32)/* || defined(__APPLE__)*/
         #include <SDL.h>
         #include <SDL_image.h>
         #include <SDL_mixer.h>
