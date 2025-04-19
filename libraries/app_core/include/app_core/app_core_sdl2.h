@@ -1,6 +1,8 @@
 #pragma once
 
-#ifdef _WIN32
+#if !TARGET_PLATFORM_ANDROID
+
+#if defined(_WIN32) || defined(__APPLE__)
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -9,8 +11,6 @@
 #include <SDL_ttf.h>
 
 #else
-
-#if !TARGET_PLATFORM_ANDROID
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
