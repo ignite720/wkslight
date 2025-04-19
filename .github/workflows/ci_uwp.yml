@@ -35,7 +35,7 @@ jobs:
           popd
 
           cd scripts
-          call tool-sdl2-dist-deploy.bat
+          call tool-sdl2-dist-deploy.bat download
           
           pushd scripts
           call premake5-generate-uwp.bat "gh-action"
