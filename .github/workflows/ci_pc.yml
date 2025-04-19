@@ -111,7 +111,7 @@ jobs:
           brew install sdl2_net
           brew install sdl2_ttf
           
-          make xcode_run argv=5
+          #make xcode_run argv=5
 
       - name: Build project for Linux & macOS
         if: runner.os != 'Windows'
