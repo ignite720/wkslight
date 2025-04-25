@@ -371,13 +371,13 @@ bool AppCore::init_sdl2_libs() {
 bool AppCore::init_imgui() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-
+    
     ImGuiIO &io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-
-    ImGui::StyleColorsDark();
-
+    
+    ImGui::StyleColorsClassic();
+    
     ImGui_ImplSDL2_InitForSDLRenderer(m_window, m_renderer);
     ImGui_ImplSDLRenderer2_Init(m_renderer);
     return true;
