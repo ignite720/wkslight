@@ -77,7 +77,7 @@ echo SDL2_DIST_FILELIST_ALL_EXIST=!SDL2_DIST_FILELIST_ALL_EXIST!
 
 if %SDL2_DIST_FILELIST_ALL_EXIST% equ 0 (
     for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
-        curl -LO "https://github.com/libsdl-org/!SDL2_DIST_URL_PART1_ARR[%%i]!/releases/download/release-!SDL2_DIST_URL_PART1_ARR[%%i]!/!SDL2_DIST_URL_PART1_ARR[%%i]!"
+        curl -LO "https://github.com/libsdl-org/!SDL2_DIST_URL_PART1_ARR[%%i]!/releases/download/release-!SDL2_DIST_URL_PART2_ARR[%%i]!/!SDL2_DIST_URL_PART3_ARR[%%i]!"
     )
 )
 
@@ -85,7 +85,7 @@ if not exist %OPT_DIRNAME% (
     mkdir %OPT_DIRNAME%
     
     for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
-        powershell -Command "Expand-Archive -Force -LiteralPath !SDL2_DIST_URL_PART1_ARR[%%i]! -DestinationPath %OPT_DIRNAME%"
+        powershell -Command "Expand-Archive -Force -LiteralPath !SDL2_DIST_URL_PART3_ARR[%%i]! -DestinationPath %OPT_DIRNAME%"
     )
 )
 
