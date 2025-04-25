@@ -29,13 +29,17 @@ bool utils::sdl::color_equals(const SDL_Color &color1, const SDL_Color &color2) 
         && color1.a == color2.a;
 }
 
-void utils::sdl::clear_with_color(SDL_Renderer *renderer, const SDL_Color &color) {
+void utils::sdl::set_draw_color(SDL_Renderer *renderer, const SDL_Color &color) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+}
+
+void utils::sdl::clear_with_color(SDL_Renderer *renderer, const SDL_Color &color) {
+    set_draw_color(renderer, color);
     SDL_RenderClear(renderer);
 }
 
 void utils::sdl::fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color) {
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+    set_draw_color(renderer, color);
 
     auto tmp_rect = utils::sdl::to_rect(rect);
     SDL_RenderFillRect(renderer, &tmp_rect);

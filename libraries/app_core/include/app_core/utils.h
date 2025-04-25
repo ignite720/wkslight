@@ -43,6 +43,8 @@ namespace utils {
         SDL_Rect to_rect(const SDL_FRect *rect);
 
         bool color_equals(const SDL_Color &color1, const SDL_Color &color2);
+        
+        void set_draw_color(SDL_Renderer *renderer, const SDL_Color &color);
         void clear_with_color(SDL_Renderer *renderer, const SDL_Color &color);
         void fill_rect_with_color(SDL_Renderer *renderer, const SDL_FRect *rect, const SDL_Color &color);
     }

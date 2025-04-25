@@ -21,6 +21,7 @@ project("app")
         ["VHeaders/*"] = { "src/**.h", "src/**.hpp", "src/**.inl" },
         ["VSources/*"] = { "**.c", "**.cpp" },
         ["VDocs/*"] = "**.txt",
+        ["VResources/*"] = { "*.rc", "**.ico" },
     })
     --]]
     includedirs({
@@ -69,6 +70,11 @@ project("app")
     filter({ "options:target_platform=pc", "options:pc_deploy_assets" })
         postbuildcommands({
             "{COPYDIR} %[%{!cfg.debugdir}/assets] %[%{!cfg.targetdir}/assets]",
+        })
+    filter({ "options:target_platform=pc", "system:windows" })
+        files({
+            "*.rc",
+            "**.ico",
         })
     filter("options:target_platform=uwp")
         files({

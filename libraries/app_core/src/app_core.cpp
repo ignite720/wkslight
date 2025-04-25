@@ -87,7 +87,8 @@ int AppCore::run() {
 void AppCore::update() {
     SDL_Event evt = {};
     while (SDL_PollEvent(&evt)) {
-        //ImGui_ImplSDL2_ProcessEvent(&evt);
+        ImGui_ImplSDL2_ProcessEvent(&evt);
+
         if (evt.type == SDL_QUIT) {
             m_app_info.quit = true;
             break;
@@ -213,7 +214,7 @@ void AppCore::render() {
         }
     }
 
-    if (false) {
+    if (true) {
         this->render_imgui_begin();
         this->render_imgui();
         this->render_imgui_end();
@@ -453,8 +454,6 @@ void AppCore::render_imgui_end() {
 
     ImGui::Render();
     SDL_RenderSetScale(m_renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-    SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
-    SDL_RenderClear(m_renderer);
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), m_renderer);
 }
 #endif

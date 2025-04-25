@@ -49,7 +49,7 @@ jobs:
         shell: cmd
         run: |
           cd scripts
-          call tool-sdl2-dist-deploy.bat download
+          call tool-sdl2-dist-deploy.bat
 
           cd scripts
           call premake5-generate-pc-ninja.bat gh-action
@@ -64,7 +64,7 @@ jobs:
           call premake5-clean.bat
 
           cd scripts
-          call tool-sdl2-dist-deploy.bat download
+          call tool-sdl2-dist-deploy.bat
 
           cd scripts
           call tool-tree.bat gh-action

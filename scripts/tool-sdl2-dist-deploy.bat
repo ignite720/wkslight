@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 
 cd ..
 
@@ -24,11 +25,38 @@ set SDL2_MIXER_DIST_FILENAME=%SDL2_MIXER_NAME%-%SDL2_DEV%-%SDL2_MIXER_DIST_VERSI
 set SDL2_NET_DIST_FILENAME=%SDL2_NET_NAME%-%SDL2_DEV%-%SDL2_NET_DIST_VERSION%-%SDL2_DIST_SUFFIX%
 set SDL2_TTF_DIST_FILENAME=%SDL2_TTF_NAME%-%SDL2_DEV%-%SDL2_TTF_DIST_VERSION%-%SDL2_DIST_SUFFIX%
 
-set SDL2_DIST_DIRNAME=%SDL2_NAME%-%SDL2_DIST_VERSION%
-set SDL2_IMAGE_DIST_DIRNAME=%SDL2_IMAGE_NAME%-%SDL2_IMAGE_DIST_VERSION%
-set SDL2_MIXER_DIST_DIRNAME=%SDL2_MIXER_NAME%-%SDL2_MIXER_DIST_VERSION%
-set SDL2_NET_DIST_DIRNAME=%SDL2_NET_NAME%-%SDL2_NET_DIST_VERSION%
-set SDL2_TTF_DIST_DIRNAME=%SDL2_TTF_NAME%-%SDL2_TTF_DIST_VERSION%
+set SDL2_DIST_URL_PART1_ARR[0]=SDL
+set SDL2_DIST_URL_PART1_ARR[1]=SDL_image
+set SDL2_DIST_URL_PART1_ARR[2]=SDL_mixer
+set SDL2_DIST_URL_PART1_ARR[3]=SDL_net
+set SDL2_DIST_URL_PART1_ARR[4]=SDL_ttf
+
+set SDL2_DIST_URL_PART2_ARR[0]=%SDL2_DIST_VERSION%
+set SDL2_DIST_URL_PART2_ARR[1]=%SDL2_IMAGE_DIST_VERSION%
+set SDL2_DIST_URL_PART2_ARR[2]=%SDL2_MIXER_DIST_VERSION%
+set SDL2_DIST_URL_PART2_ARR[3]=%SDL2_NET_DIST_VERSION%
+set SDL2_DIST_URL_PART2_ARR[4]=%SDL2_TTF_DIST_VERSION%
+
+set SDL2_DIST_URL_PART3_ARR[0]=%SDL2_DIST_FILENAME%
+set SDL2_DIST_URL_PART3_ARR[1]=%SDL2_IMAGE_DIST_FILENAME%
+set SDL2_DIST_URL_PART3_ARR[2]=%SDL2_MIXER_DIST_FILENAME%
+set SDL2_DIST_URL_PART3_ARR[3]=%SDL2_NET_DIST_FILENAME%
+set SDL2_DIST_URL_PART3_ARR[4]=%SDL2_TTF_DIST_FILENAME%
+
+set SDL2_DIST_DIRNAME_ARR[0]=%SDL2_NAME%-%SDL2_DIST_VERSION%
+set SDL2_DIST_DIRNAME_ARR[1]=%SDL2_IMAGE_NAME%-%SDL2_IMAGE_DIST_VERSION%
+set SDL2_DIST_DIRNAME_ARR[2]=%SDL2_MIXER_NAME%-%SDL2_MIXER_DIST_VERSION%
+set SDL2_DIST_DIRNAME_ARR[3]=%SDL2_NET_NAME%-%SDL2_NET_DIST_VERSION%
+set SDL2_DIST_DIRNAME_ARR[4]=%SDL2_TTF_NAME%-%SDL2_TTF_DIST_VERSION%
+
+set /a SDL2_DIST_LEN=5
+set /a SDL2_DIST_FILELIST_ALL_EXIST=1
+
+set "SDL2_DIST_FILELIST="
+for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+    set "SDL2_DIST_FILELIST=!SDL2_DIST_FILELIST! !SDL2_DIST_URL_PART3_ARR[%%i]!"
+)
+set "SDL2_DIST_FILELIST=%SDL2_DIST_FILELIST:~1,-1%"
 
 set BIN_DIRNAME=bin
 set TARGET_DIRNAME=target/%SDL2_ARCH%/Release
@@ -37,26 +65,32 @@ set OPT_DIRNAME=opt
 mkdir %BIN_DIRNAME%
 pushd %BIN_DIRNAME%
 
-if "%~1"=="download" (
-    curl -LO https://github.com/libsdl-org/SDL/releases/download/release-%SDL2_DIST_VERSION%/%SDL2_DIST_FILENAME%
-    curl -LO https://github.com/libsdl-org/SDL_image/releases/download/release-%SDL2_IMAGE_DIST_VERSION%/%SDL2_IMAGE_DIST_FILENAME%
-    curl -LO https://github.com/libsdl-org/SDL_mixer/releases/download/release-%SDL2_MIXER_DIST_VERSION%/%SDL2_MIXER_DIST_FILENAME%
-    curl -LO https://github.com/libsdl-org/SDL_net/releases/download/release-%SDL2_NET_DIST_VERSION%/%SDL2_NET_DIST_FILENAME%
-    curl -LO https://github.com/libsdl-org/SDL_ttf/releases/download/release-%SDL2_TTF_DIST_VERSION%/%SDL2_TTF_DIST_FILENAME%
+for %%i in (%SDL2_DIST_FILELIST%) do (
+    if not exist %%i (
+        set /a SDL2_DIST_FILELIST_ALL_EXIST=0
+        goto BREAK1
+    )
 )
 
-mkdir %OPT_DIRNAME%
-rem tar -xf %SDL2_DIST_FILENAME% -C %OPT_DIRNAME%
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_IMAGE_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_MIXER_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_NET_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
-powershell -Command "Expand-Archive -Force -LiteralPath %SDL2_TTF_DIST_FILENAME% -DestinationPath %OPT_DIRNAME%"
+:BREAK1
+echo SDL2_DIST_FILELIST_ALL_EXIST=!SDL2_DIST_FILELIST_ALL_EXIST!
 
-xcopy "%OPT_DIRNAME%\%SDL2_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OPT_DIRNAME%\%SDL2_IMAGE_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OPT_DIRNAME%\%SDL2_MIXER_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OPT_DIRNAME%\%SDL2_NET_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
-xcopy "%OPT_DIRNAME%\%SDL2_TTF_DIST_DIRNAME%\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%" /I /Y
+if %SDL2_DIST_FILELIST_ALL_EXIST% equ 0 (
+    for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+        curl -LO "https://github.com/libsdl-org/!SDL2_DIST_URL_PART1_ARR[%%i]!/releases/download/release-!SDL2_DIST_URL_PART1_ARR[%%i]!/!SDL2_DIST_URL_PART1_ARR[%%i]!"
+    )
+)
+
+if not exist %OPT_DIRNAME% (
+    mkdir %OPT_DIRNAME%
+    
+    for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+        powershell -Command "Expand-Archive -Force -LiteralPath !SDL2_DIST_URL_PART1_ARR[%%i]! -DestinationPath %OPT_DIRNAME%"
+    )
+)
+
+for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+    xcopy /I /Y "%OPT_DIRNAME%\!SDL2_DIST_DIRNAME_ARR[%%i]!\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%"
+)
 
 popd
