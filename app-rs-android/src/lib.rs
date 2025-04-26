@@ -19,7 +19,7 @@ fn android_main(app: android_activity::AndroidApp) {
     let argc = (argv.len() - 1) as i32;
 
     unsafe {
-        let ret = app_core_startup();
+        let ret = app_core_startup(argc, argv.as_ptr());
         info!("RUST: {ret}");
     }
     info!("world");
