@@ -71,10 +71,10 @@ void app_core_test_lua(void) {
             lua_state["hello"](go);
         }
 
-        lua_state.script(R"(print('4, <LUA>: bye\n'))");
+        lua_state.script(R"(print('4, <LUA>: bye'))");
     } catch (const sol::error &e) {
         std::cout << e.what() << std::endl;
     }
     
-    printf("5, <LUA>:\n");
+    printf("5, <LUA>: bye bye!\n");
 }
