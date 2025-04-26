@@ -12,7 +12,7 @@ fn main() {
         .iter()
         .map(|s| std::ffi::CString::new(s.as_str()).unwrap())
         .collect();
-    let argv: Vec<_> = c_args.iter().map(|s| s.as_ptr()).collect();
+    let mut argv: Vec<_> = c_args.iter().map(|s| s.as_ptr()).collect();
     argv.push(core::ptr::null());
 
     unsafe {
