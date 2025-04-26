@@ -55,12 +55,8 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > => bin/apk-debug/app.apk
 
 > 1.3 `cargo-apk`
->
-> Note that folder `544xd5c4` may change, so pass it in as an argument.
 > ```shell
-> rustup target add aarch64-linux-android
-> cargo install cargo-apk
-> RUSTFLAGS="-L ../build/app/app/.cxx/Debug/544xd5c4/arm64-v8a" source scripts/cargo-apk.sh
+> make cargo-apk
 > ```
 > => bin/android-cargo-apk/app.apk
 

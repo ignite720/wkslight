@@ -55,3 +55,6 @@ tree:
 
 cargo_run: pc
 	source scripts/cargo-run-pc.sh $(argv)
+
+cargo-apk:
+	source scripts/cargo-apk.sh

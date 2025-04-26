@@ -1,5 +1,6 @@
 pushd app-rs-android
-RUSTFLAGS="${RUSTFLAGS} -lc++_shared -lapp_core_d3d12 -lapp_core_vulkan -lbar -lfoo -llua" cargo apk build --profile android-cargo-apk
+THE_SO_DIR=$(find ../build/app/app/.cxx/Debug -type d -path "*/arm64-v8a" | head -n 1)
+RUSTFLAGS="-L${THE_SO_DIR} -lc++_shared -lapp_core_d3d12 -lapp_core_vulkan -lbar -lfoo -llua" cargo apk build --profile android-cargo-apk
 popd
 
 mkdir -p bin/android-cargo-apk

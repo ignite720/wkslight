@@ -115,13 +115,13 @@ workspace(g_wkslight.workspace.name)
             "NOMINMAX",
         })
         buildoptions({
+            --"/permissive",
             --"/sdl-",
             "/utf-8",
+            "/wd4616",
             "/Zc:char8_t-",
             "/Zc:preprocessor",
             "/Zc:__cplusplus",
-            --"/permissive",
-            --"/wd4616",
         })
         disablewarnings({
             "4005",

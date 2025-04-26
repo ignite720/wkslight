@@ -12,7 +12,8 @@ fn main() {
         .iter()
         .map(|s| std::ffi::CString::new(s.as_str()).unwrap())
         .collect();
-    let argv: Vec<_> = c_args.iter().map(|c| c.as_ptr()).collect();
+    c_args.push(core::ptr::null());
+    let argv: Vec<_> = c_args.iter().map(|s| s.as_ptr()).collect();
 
     unsafe {
         let ret = app_core_startup(argc, argv.as_ptr());
