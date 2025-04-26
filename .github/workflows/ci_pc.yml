@@ -90,7 +90,7 @@ jobs:
           sudo apt install libsdl2-mixer-dev
           sudo apt install libsdl2-net-dev
           sudo apt install libsdl2-ttf-dev
-          sudo apt install alsa-utils libasound2-dev
+          sudo apt install alsa-base alsa-utils
 
           make ninja
           make run argv=5
