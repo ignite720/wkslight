@@ -1,5 +1,5 @@
 #[cfg_attr(not(target_os = "android"), link(name = "app_core"))]
-extern "C" {
+unsafe extern "C" {
     fn app_core_startup(argc: core::ffi::c_int, argv: *const *const core::ffi::c_char) -> core::ffi::c_int;
 }
 
