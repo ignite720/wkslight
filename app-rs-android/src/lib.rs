@@ -6,7 +6,7 @@ unsafe extern "C" {
 }
 
 #[no_mangle]
-fn android_main(app: android_activity::AndroidApp) {
+fn android_main(_app: android_activity::AndroidApp) {
     android_logger::init_once(android_logger::Config::default().with_min_level(log::Level::Info));
 
     info!("hi");

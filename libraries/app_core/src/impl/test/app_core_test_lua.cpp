@@ -75,4 +75,6 @@ void app_core_test_lua(void) {
     } catch (const sol::error &e) {
         std::cout << e.what() << std::endl;
     }
+    
+    printf("5, <LUA>:\n");
 }
