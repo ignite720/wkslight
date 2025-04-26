@@ -1,7 +1,7 @@
 use log::info;
 
 #[link(name = "app_core")]
-extern {
+extern "C" {
     fn app_core_startup(argc: core::ffi::c_int, argv: *const *const core::ffi::c_char) -> core::ffi::c_int;
 }
 
