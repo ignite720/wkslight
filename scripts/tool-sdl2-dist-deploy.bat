@@ -50,10 +50,11 @@ set SDL2_DIST_DIRNAME_ARR[3]=%SDL2_NET_NAME%-%SDL2_NET_DIST_VERSION%
 set SDL2_DIST_DIRNAME_ARR[4]=%SDL2_TTF_NAME%-%SDL2_TTF_DIST_VERSION%
 
 set /a SDL2_DIST_LEN=5
+set /a SDL2_DIST_LAST=%SDL2_DIST_LEN%-1
 set /a SDL2_DIST_FILELIST_ALL_EXIST=1
 
 set "SDL2_DIST_FILELIST="
-for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+for /L %%i in (0,1,%SDL2_DIST_LEN%) do (
     set "SDL2_DIST_FILELIST=!SDL2_DIST_FILELIST! !SDL2_DIST_URL_PART3_ARR[%%i]!"
 )
 set "SDL2_DIST_FILELIST=%SDL2_DIST_FILELIST:~1,-1%"
@@ -76,7 +77,7 @@ for %%i in (%SDL2_DIST_FILELIST%) do (
 echo SDL2_DIST_FILELIST_ALL_EXIST=!SDL2_DIST_FILELIST_ALL_EXIST!
 
 if %SDL2_DIST_FILELIST_ALL_EXIST% equ 0 (
-    for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+    for /L %%i in (0,1,%SDL2_DIST_LAST%) do (
         curl -LO "https://github.com/libsdl-org/!SDL2_DIST_URL_PART1_ARR[%%i]!/releases/download/release-!SDL2_DIST_URL_PART2_ARR[%%i]!/!SDL2_DIST_URL_PART3_ARR[%%i]!"
     )
 )
@@ -84,12 +85,12 @@ if %SDL2_DIST_FILELIST_ALL_EXIST% equ 0 (
 if not exist %OPT_DIRNAME% (
     mkdir %OPT_DIRNAME%
     
-    for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+    for /L %%i in (0,1,%SDL2_DIST_LAST%) do (
         powershell -Command "Expand-Archive -Force -LiteralPath !SDL2_DIST_URL_PART3_ARR[%%i]! -DestinationPath %OPT_DIRNAME%"
     )
 )
 
-for /L %%i in (0,1,%SDL2_DIST_LEN%-1) do (
+for /L %%i in (0,1,%SDL2_DIST_LAST%) do (
     xcopy /I /Y "%OPT_DIRNAME%\!SDL2_DIST_DIRNAME_ARR[%%i]!\lib\%SDL2_ARCH%\*.dll" "%TARGET_DIRNAME%"
 )
 
