@@ -85,11 +85,7 @@ jobs:
           echo ${{ runner.os }}
           source scripts/tool-premake5+x.sh ${{ github.workspace }}
 
-          sudo apt install libsdl2-dev
-          sudo apt install libsdl2-image-dev
-          sudo apt install libsdl2-mixer-dev
-          sudo apt install libsdl2-net-dev
-          sudo apt install libsdl2-ttf-dev
+          sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev
           sudo apt install alsa-base alsa-utils
 
           make ninja
