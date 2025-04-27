@@ -9,6 +9,11 @@ endif
 
 all: pc
 
+android: clean
+	ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME
+	source scripts/premake5-generate-android.sh
+	source scripts/android-buildw.sh
+
 pc:
 	source scripts/premake5-generate-pc-gmake.sh
 	source scripts/gmake-pc.sh
@@ -21,11 +26,6 @@ xcode_run: clean
 	source scripts/premake5-generate-pc-xcode.sh
 	source scripts/xcode-build.sh
 	source scripts/tool-run-pc-macos.sh $(argv)
-
-android: clean
-	ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME
-	source scripts/premake5-generate-android.sh
-	source scripts/android-buildw.sh
 
 web: clean
 	source scripts/premake5-generate-web.sh
