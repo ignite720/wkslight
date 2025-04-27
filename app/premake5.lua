@@ -106,4 +106,6 @@ project("app")
         pchheader("pch.h")
         pchsource("src/pch.cpp")
     filter("action:vs*")
-        --vspropertysheets({ [[..\..\app\doc\SDL2.props]] })
+        vspropertysheets({
+            -- [[..\..\app\doc\SDL2.props]],
+        })
