@@ -1,10 +1,11 @@
 #pragma once
 
-#include <foo/foo_types.h>
+#include <foo/foo.h>
 
 #include "app_core/app_core_api.h"
 #include "app_core/app_core_fwd.h"
 #include "app_core/app_core_sdl2.h"
+#include "app_core/app_info.h"
 
 #define APP_CORE_OBJ_GET_RENDERER                               reinterpret_cast<SDL_Renderer *>(this->app_core_as_mut_ptr()->renderer_as_mut_ptr())
 
@@ -23,6 +24,7 @@ APP_CORE_API void app_core_test_logging(void);
 APP_CORE_API void app_core_test_lua(void);
 APP_CORE_API void app_core_test_noise(void);
 APP_CORE_API void app_core_test_rtm(void);
+APP_CORE_API void app_core_test_stb(void);
 APP_CORE_API void app_core_test_xmath(void);
 
 #ifdef __cplusplus
@@ -48,59 +50,17 @@ public:
 public:
     int get_id() const { return m_id; }
 
-    const String & get_name() const { return m_name; }
-    void set_name(const String &value) { m_name = value; }
+    const std::string & get_name() const { return m_name; }
+    void set_name(const std::string &value) { m_name = value; }
 
 private:
     int m_id;
-    String m_name;
+    std::string m_name;
 };
 
 #if !TARGET_PLATFORM_ANDROID
 class APP_CORE_API AppCore {
 public:
-    struct AppInfo {
-        float window_width = 0.0f;
-        float window_height = 0.0f;
-        bool linear_filter = false;
-        float auto_close_timer = 0.0f;
-
-        bool quit = false;
-        bool show_demo_window = false;
-
-        struct Config {
-            bool logger_verbose = false;
-        } config;
-
-        struct GameSave {
-            int high_score = 0;
-        } gamesave;
-
-        struct Stats {
-            float now = 0.0f;
-            float last_time = 0.0f;
-
-            float delta_time = 0.0f;
-            int fps = 0;
-
-            struct Staging {
-                int frames_accumulated = 0;
-                float time_accumulated = 0.0f;
-            } staging;
-        } stats;
-
-        struct GameInfo {
-            bool game_over = true;
-            bool stats_ready = false;
-            bool paddle_friction = false;
-
-            struct Stats {
-                int num_rounds = 0;
-                int score = 0;
-            } stats;
-        } game_info;
-    };
-
     static std::unique_ptr<AppCore> create();
     
 private:

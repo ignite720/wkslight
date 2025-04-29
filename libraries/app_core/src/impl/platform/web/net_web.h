@@ -11,7 +11,7 @@ public:
     virtual void connect(const char *url) override;
     virtual void close() override;
 
-    virtual void send_text(const String &value) override;
+    virtual void send_text(const std::string &value) override;
     virtual void send_binary(const void *data, size_t size) override;
     
 public:

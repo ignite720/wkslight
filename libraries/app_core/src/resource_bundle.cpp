@@ -17,13 +17,13 @@ void ResourceBundle::play_audio_clip(AUDIO_CLIP index) {
     m_clips[index]->play();
 }
 
-bool ResourceBundle::text_size(FONT font, const String &text, int *w, int *h) {
+bool ResourceBundle::text_size(FONT font, const std::string &text, int *w, int *h) {
     return m_fonts[font]->text_size(text.c_str(), w, h);
 }
 
 SDL_FRect ResourceBundle::draw_text(
     FONT font,
-    const String &text,
+    const std::string &text,
     float scale,
     float x,
     float y,
@@ -34,7 +34,7 @@ SDL_FRect ResourceBundle::draw_text(
     return this->draw_texture(texture, scale, x, y, anchor);
 }
 
-Texture * ResourceBundle::get_or_bake_text_texture(FONT font, const String &text, const SDL_Color &color) {
+Texture * ResourceBundle::get_or_bake_text_texture(FONT font, const std::string &text, const SDL_Color &color) {
     Texture *ptr = nullptr;
     const auto key = TextTextureInfo { font, color, text };
 

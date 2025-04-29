@@ -1,8 +1,8 @@
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/utils.h"
 
-String utils::string::str_repeats(const String &s, size_t times) {
-    String result;
+std::string utils::string::str_repeats(const std::string &s, size_t times) {
+    std::string result;
     for (size_t i = 0; i < times; ++i) {
         result += s;
     }

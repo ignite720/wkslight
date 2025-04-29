@@ -2,7 +2,7 @@
 #include "app_core/font.h"
 
 #include <foo/foo_macros.h>
-#include <foo/foo_types.h>
+#include <foo/foo.h>
 
 Font::Font(const char *path, int pt_size) {
     auto _ret = this->load_from_file(path, pt_size);

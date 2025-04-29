@@ -22,7 +22,7 @@ void Net::close() {
     PRINT_FUNCTION_NAME();
 }
 
-void Net::send_text(const String &value) {
+void Net::send_text(const std::string &value) {
     PRINT_FUNCTION_NAME();
 }
 

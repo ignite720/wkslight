@@ -1,6 +1,6 @@
 #pragma once
 
-#include <foo/foo_types.h>
+#include <foo/foo.h>
 
 #include "app_core/app_core_consts.h"
 #include "app_core/app_core_obj.h"
@@ -44,7 +44,7 @@ public:
     struct TextTextureInfo {
         FONT font;
         SDL_Color color;
-        String text;
+        std::string text;
     };
 
     struct TextTextureInfoHash {
@@ -97,11 +97,11 @@ public:
     void play_audio_music(AUDIO_MUSIC index);
     void play_audio_clip(AUDIO_CLIP index);
 
-    bool text_size(FONT font, const String &text, int *w, int *h);
+    bool text_size(FONT font, const std::string &text, int *w, int *h);
 
     SDL_FRect draw_text(
         FONT font,
-        const String &text,
+        const std::string &text,
         float scale = 1.0f,
         float x = 0.0f,
         float y = 0.0f,
@@ -110,12 +110,12 @@ public:
     );
 
 private:
-    Texture * get_or_bake_text_texture(FONT font, const String &text, const SDL_Color &color);
+    Texture * get_or_bake_text_texture(FONT font, const std::string &text, const SDL_Color &color);
     SDL_FRect draw_texture(Texture *texture, float scale, float x, float y, const SDL_FPoint &anchor) const;
 
 private:
     std::unique_ptr<AudioMusic> m_musics[AUDIO_MUSIC_COUNT];
     std::unique_ptr<AudioClip> m_clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font> m_fonts[FONT_COUNT];
-    HashMap<TextTextureInfo, std::unique_ptr<Texture>, TextTextureInfoHash, TextTextureInfoEqual> m_text_texture_cache;
+    std::unordered_map<TextTextureInfo, std::unique_ptr<Texture>, TextTextureInfoHash, TextTextureInfoEqual> m_text_texture_cache;
 };

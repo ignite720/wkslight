@@ -8,7 +8,7 @@
 //#define SOL_PRINT_ERRORS 1
 #include <sol/sol.hpp>
 
-static void s_my_lua_panic(sol::optional<String> maybe_msg) {
+static void s_my_lua_panic(sol::optional<std::string> maybe_msg) {
     std::cerr << "Lua is in a panic state and will now abort() the application" << std::endl;
     if (maybe_msg) {
         const auto &msg = maybe_msg.value();
@@ -46,7 +46,7 @@ void app_core_test_lua(void) {
     }
 
     sol::object version = lua_state["_VERSION"];
-    printf("1-1, <LUA>: %s\n", version.as<String>().c_str());
+    printf("1-1, <LUA>: %s\n", version.as<std::string>().c_str());
 
     try {
         lua_state.script(R"(print9('error\n'))");

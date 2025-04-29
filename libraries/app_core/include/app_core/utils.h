@@ -1,6 +1,6 @@
 #pragma once
 
-#include <foo/foo_types.h>
+#include <foo/foo.h>
 
 #include "app_core/app_core_fwd.h"
 #include "app_core/app_core_sdl2.h"
@@ -23,7 +23,7 @@ namespace utils {
     }
 
     namespace string {
-        inline String format(const char *fmt, ...) {
+        inline std::string format(const char *fmt, ...) {
             char buf[1024] = {0};
 
             va_list args;
@@ -33,7 +33,7 @@ namespace utils {
             return buf;
         }
 
-        String str_repeats(const String &s, size_t times);
+        std::string str_repeats(const std::string &s, size_t times);
     }
 
     namespace sdl {

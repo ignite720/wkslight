@@ -1,6 +1,6 @@
 #pragma once
 
-#include <foo/foo_types.h>
+#include <foo/foo.h>
 
 #include "app_core/app_core_api.h"
 

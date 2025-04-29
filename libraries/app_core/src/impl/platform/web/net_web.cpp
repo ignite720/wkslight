@@ -51,7 +51,7 @@ void NetWeb::close() {
     }
 }
 
-void NetWeb::send_text(const String &value) {
+void NetWeb::send_text(const std::string &value) {
     Net::send_text(value);
 
     emscripten_websocket_send_utf8_text(m_socket, value.c_str());
@@ -90,7 +90,7 @@ void NetWeb::on_message(const uint8_t *data, uint32_t size, bool is_text) {
     Net::on_message(data, size, is_text);
 
     if (is_text) {
-        auto message = String { data, data + size };
+        auto message = std::string { data, data + size };
         printf("message(text): %s\n", message.c_str());
     } else {
         const auto kind = static_cast<NetPacketKind>(data[0]);

@@ -47,21 +47,21 @@ static int s_test_app_core(int argc, char *argv[]) {
 
 int app_core_startup(int argc, char *argv[]) {
     PRINT_FUNCTION_NAME();
-
-    app_core_test_logging();
-    app_core_test_noise();
-
-    app_core_test_rtm();
-    app_core_test_xmath();
-
+    
     app_core_test_bar();
     app_core_test_baz_qux();
+    app_core_test_enum();
     app_core_test_foo();
 
     app_core_test_json();
-    app_core_test_enum();
+    app_core_test_logging();
     app_core_test_lua();
 
+    app_core_test_noise();
+    app_core_test_rtm();
+    app_core_test_stb();
+    app_core_test_xmath();
+    
     s_test_gfx();
     return s_test_app_core(argc, argv);
 }

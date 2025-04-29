@@ -30,7 +30,7 @@ static void s_web_fetch_succeeded(emscripten_fetch_t *fetch) {
     }
 
     if (fetch->data && (fetch->numBytes > 0)) {
-        const auto text = String { fetch->data, fetch->data + fetch->numBytes };
+        const auto text = std::string { fetch->data, fetch->data + fetch->numBytes };
         printf("%s\n", text.c_str());
     }
     

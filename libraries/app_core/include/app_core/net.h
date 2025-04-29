@@ -1,6 +1,6 @@
 #pragma once
 
-#include <foo/foo_types.h>
+#include <foo/foo.h>
 
 #include "app_core/actor.h"
 
@@ -37,7 +37,7 @@ public:
     virtual void connect(const char *url);
     virtual void close();
 
-    virtual void send_text(const String &value);
+    virtual void send_text(const std::string &value);
     virtual void send_binary(const void *data, size_t size);
     
 public:

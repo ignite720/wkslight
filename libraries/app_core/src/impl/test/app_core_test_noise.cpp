@@ -20,7 +20,7 @@ void app_core_test_noise(void) {
         FastNoiseLite noise;
         noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
 
-        Vec<float> noiseData(128 * 128);
+        std::vector<float> noiseData(128 * 128);
 
         int index = 0;
         for (int y = 0; y < 128; y++) {
@@ -38,7 +38,7 @@ void app_core_test_noise(void) {
         fractal->SetSource(simplex);
         fractal->SetOctaveCount(5);
 
-        Vec<float> noise(16 * 16);
+        std::vector<float> noise(16 * 16);
         fractal->GenUniformGrid2D(noise.data(), 0, 0, 16, 16, 0.02f, 1337);
 
         int index = 0;

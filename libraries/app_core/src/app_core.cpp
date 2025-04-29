@@ -150,7 +150,7 @@ void AppCore::update() {
 
 void AppCore::render() {
     {
-        const auto lam_draw_text = [=](const String &text, float &y, float line_spacing = 3.0f) {
+        const auto lam_draw_text = [=](const std::string &text, float &y, float line_spacing = 3.0f) {
             int w = 0, h = 0;
             //auto ret = m_resource_bundle->text_size(ResourceBundle::FONT_PRESS_START_2P, text, &w, &h);
             const auto rect = m_resource_bundle->draw_text(ResourceBundle::FONT_PRESS_START_2P, text, 1.0f, 5.0f, y);

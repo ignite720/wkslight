@@ -1,6 +1,6 @@
 #pragma once
 
-#include <foo/foo_types.h>
+#include <foo/foo.h>
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/dist_sink.h>
@@ -12,11 +12,11 @@ namespace logging {
     inline std::shared_ptr<spdlog::logger> logger;
 
     inline auto init(
-        String base_filename = "logs/log.txt",
+        std::string base_filename = "logs/log.txt",
         int rotation_hour = 0,
         int rotation_minute = 5,
-        String file_pattern = "[%Y-%m-%d %H:%M:%S.%e][%l] %v",
-        String console_pattern = "[%H:%M:%S.%e][%L] %v",
+        std::string file_pattern = "[%Y-%m-%d %H:%M:%S.%e][%l] %v",
+        std::string console_pattern = "[%H:%M:%S.%e][%L] %v",
         std::chrono::seconds interval = std::chrono::seconds(5)
     ) -> void {
         assert(!__logger_sinks && !logger);
