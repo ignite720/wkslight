@@ -119,9 +119,9 @@ workspace(g_wkslight.workspace.name)
             --"/sdl-",
             "/utf-8",
             "/wd4005",
-            "/Zc:char8_t-",
-            "/Zc:preprocessor",
             "/Zc:__cplusplus",
+            --"/Zc:char8_t-",
+            "/Zc:preprocessor",
         })
         disablewarnings({
             "4251",
