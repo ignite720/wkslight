@@ -1,9 +1,6 @@
 #include "app_core/app_core.h"
 
-#include <foo/foo_macros.h>
-
 #include <json/nlohmann/json.hpp>
-using JSON = nlohmann::json;
 
 void app_core_test_json(void) {
     PRINT_FUNCTION_NAME();

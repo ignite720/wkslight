@@ -3,8 +3,6 @@
 #include "app_core/app_core_emsdk.h"
 #include "app_core/app_core.h"
 
-#include <foo/foo_macros.h>
-
 static str_literal REQUEST_HEADERS[] = {
     //"Accept", "application/json",
     nullptr

@@ -1,7 +1,5 @@
 #include "app_core/app_core.h"
 
-#include <foo/foo_macros.h>
-
 #include <magic_enum/magic_enum.hpp>
 
 template <typename E>

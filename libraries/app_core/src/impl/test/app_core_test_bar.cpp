@@ -1,7 +1,6 @@
 #include "app_core/app_core.h"
 
 #include <bar/bar.h>
-#include <foo/foo_macros.h>
 
 void app_core_test_bar(void) {
     PRINT_FUNCTION_NAME();

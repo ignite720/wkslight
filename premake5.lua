@@ -118,13 +118,15 @@ workspace(g_wkslight.workspace.name)
             --"/permissive",
             --"/sdl-",
             "/utf-8",
-            "/wd4616",
+            "/wd4005",
             "/Zc:char8_t-",
             "/Zc:preprocessor",
             "/Zc:__cplusplus",
         })
         disablewarnings({
-            "4005",
+            "4251",
+            "4503",
+            "4616",
         })
     filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
         buildoptions({

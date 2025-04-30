@@ -1,7 +1,5 @@
 #include "app_core/app_core.h"
 
-#include <foo/foo_macros.h>
-
 #include <stb/stb_image.h>
 #include <stb/stb_image_write.h>
 
@@ -36,5 +34,4 @@ void app_core_test_stb(void) {
     } else {
         assert(false);
     }
-    
 }

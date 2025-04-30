@@ -31,7 +31,7 @@ APP_CORE_API void app_core_test_xmath(void);
 }
 #endif
 
-class /*APP_CORE_API*/ GameObject {
+class APP_CORE_API GameObject {
 public:
     static std::shared_ptr<GameObject> create() {
         static int s_id_counter = 0;

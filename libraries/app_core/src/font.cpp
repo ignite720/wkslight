@@ -1,7 +1,6 @@
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/font.h"
 
-#include <foo/foo_macros.h>
 #include <foo/foo.h>
 
 Font::Font(const char *path, int pt_size) {

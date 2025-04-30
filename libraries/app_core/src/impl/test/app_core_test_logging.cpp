@@ -2,8 +2,6 @@
 
 #include "app_core/logging.h"
 
-#include <foo/foo_macros.h>
-
 void app_core_test_logging(void) {
     PRINT_FUNCTION_NAME();
 

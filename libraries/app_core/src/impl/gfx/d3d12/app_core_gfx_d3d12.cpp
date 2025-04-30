@@ -1,7 +1,5 @@
 #include "app_core/app_core_gfx.h"
 
-#include <foo/foo_macros.h>
-
 class AppCoreGfxD3D12 : public AppCoreGfx {
 public:
     virtual void test() const override {

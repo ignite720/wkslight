@@ -1,5 +1,8 @@
 #pragma once
 
+#include <json/nlohmann/json_fwd.hpp>
+using JSON = nlohmann::json;
+
 #include "app_core/app_core_api.h"
 
 class APP_CORE_API AppCore;

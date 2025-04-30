@@ -1,6 +1,6 @@
 #pragma once
 
-#include <foo/foo_macros.h>
+#include <foo/foo.h>
 
 #include <mathx/mathx_rtm.h>
 using namespace rtm;

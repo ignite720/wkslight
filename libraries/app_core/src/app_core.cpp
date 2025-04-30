@@ -6,8 +6,6 @@
 #include "app_core/paddle.h"
 #include "app_core/resource_bundle.h"
 
-#include <foo/foo_macros.h>
-
 #include <backends/imgui_impl_sdl2.h>
 #include <backends/imgui_impl_sdlrenderer2.h>
 #include <imgui.h>

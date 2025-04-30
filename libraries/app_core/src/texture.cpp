@@ -5,8 +5,6 @@
 #include "app_core/font.h"
 #include "app_core/utils.h"
 
-#include <foo/foo_macros.h>
-
 Texture::Texture(AppCore &app_core)
     : AppCoreObj(app_core) {
 

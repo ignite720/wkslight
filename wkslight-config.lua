@@ -89,7 +89,7 @@ g_wkslight.workspace = {
                 },
                 additionallibdirs = function()
                     return {
-                        --"%{g_wkslight.librariesdir}/bar/%{cfg.system}/" .. _OPTIONS["target_platform"] .. "/lib",
+                        --"%{g_wkslight.librariesdir}/bar/%{cfg.system}/" .. _OPTIONS["target_platform"] .. "/%{cfg.buildcfg}/lib",
                         --path.join("%{g_wkslight.librariesdir}/bar/%{cfg.system}/", _OPTIONS["target_platform"], "lib"),
                         --path.join(g_wkslight.librariesdir, "bar", "%{cfg.system}", _OPTIONS["target_platform"], "lib"),
                     }

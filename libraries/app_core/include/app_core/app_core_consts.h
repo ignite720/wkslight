@@ -1,7 +1,5 @@
 #pragma once
 
-#include <foo/foo_macros.h>
-
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/app_core_sdl2.h"
 

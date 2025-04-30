@@ -1,7 +1,5 @@
 #include "app_core/app_core.h"
 
-#include <foo/foo_macros.h>
-
 class AppCoreUWP : public AppCore {
 public:
     virtual int init(int width, int height, bool linear_filter, int auto_close_secs) override {

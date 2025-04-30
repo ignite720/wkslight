@@ -3,8 +3,6 @@
 #include "app_core/app_core_consts.h"
 #include "app_core/app_core_gfx.h"
 
-#include <foo/foo_macros.h>
-
 static void s_test_gfx() {
     PRINT_FUNCTION_NAME();
 

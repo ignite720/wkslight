@@ -1,7 +1,5 @@
 #include "app_core/app_core.h"
 
-#include <foo/foo_macros.h>
-
 #if !(TARGET_PLATFORM_ANDROID || TARGET_PLATFORM_WEB)
 PRAGMA_WARNING_PUSH
 PRAGMA_WARNING_IGNORE_CLANG("-Woverflow")

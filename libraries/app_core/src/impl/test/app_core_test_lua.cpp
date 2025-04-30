@@ -1,7 +1,5 @@
 #include "app_core/app_core.h"
 
-#include <foo/foo_macros.h>
-
 //#define SOL_ALL_SAFETIES_ON 1
 //#define SOL_EXCEPTIONS_SAFE_PROPAGATION 1
 //#define SOL_NO_EXCEPTIONS 1

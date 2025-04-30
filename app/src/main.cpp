@@ -2,7 +2,6 @@
 
 #include <foobar/foobar.h>
 #include <app_core/app_core.h>
-#include <foo/foo_macros.h>
 
 static void s_test_foobar() {
     PRINT_FUNCTION_NAME();

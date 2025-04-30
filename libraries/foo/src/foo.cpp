@@ -1,7 +1,5 @@
 #include "foo/foo.h"
 
-#include "foo/foo_macros.h"
-
 class Foo::Impl {
 public:
     void print(int n) {
