@@ -116,7 +116,7 @@ workspace(g_wkslight.workspace.name)
         })
         buildoptions({
             --"/permissive",
-            --"/sdl-",
+            "/sdl",
             "/utf-8",
             "/wd4005",
             "/Zc:__cplusplus",
