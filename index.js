@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpi3cte3p0.js
+// include: /tmp/tmpm2ef4jw5.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -218,21 +218,21 @@ Module['FS_createPath']("/assets", "textures", true, true);
 
   })();
 
-// end include: /tmp/tmpi3cte3p0.js
-// include: /tmp/tmpasccjlu5.js
+// end include: /tmp/tmpm2ef4jw5.js
+// include: /tmp/tmp7793fbut.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
-    if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
+    if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != 'undefined' && ENVIRONMENT_IS_AUDIO_WORKLET)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpasccjlu5.js
-// include: /tmp/tmp87vahwip.js
+  // end include: /tmp/tmp7793fbut.js
+// include: /tmp/tmpj5iget6c.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmp87vahwip.js
+  // end include: /tmp/tmpj5iget6c.js
 
 
 var arguments_ = [];
@@ -240,6 +240,17 @@ var thisProgram = './this.program';
 var quit_ = (status, toThrow) => {
   throw toThrow;
 };
+
+// In MODULARIZE mode _scriptName needs to be captured already at the very top of the page immediately when the page is parsed, so it is generated there
+// before the page load. In non-MODULARIZE modes generate it here.
+var _scriptName = typeof document != 'undefined' ? document.currentScript?.src : undefined;
+
+if (typeof __filename != 'undefined') { // Node
+  _scriptName = __filename;
+} else
+if (ENVIRONMENT_IS_WORKER) {
+  _scriptName = self.location.href;
+}
 
 // `/` should be present at the end if `scriptDirectory` is not empty
 var scriptDirectory = '';
@@ -315,21 +326,11 @@ if (ENVIRONMENT_IS_SHELL) {
 // Node.js workers are detected as a combination of ENVIRONMENT_IS_WORKER and
 // ENVIRONMENT_IS_NODE.
 if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
-  if (ENVIRONMENT_IS_WORKER) { // Check worker, not web, since window could be polyfilled
-    scriptDirectory = self.location.href;
-  } else if (typeof document != 'undefined' && document.currentScript) { // web
-    scriptDirectory = document.currentScript.src;
-  }
-  // blob urls look like blob:http://site.com/etc/etc and we cannot infer anything from them.
-  // otherwise, slice off the final part of the url to find the script directory.
-  // if scriptDirectory does not contain a slash, lastIndexOf will return -1,
-  // and scriptDirectory will correctly be replaced with an empty string.
-  // If scriptDirectory contains a query (starting with ?) or a fragment (starting with #),
-  // they are removed because they could contain a slash.
-  if (scriptDirectory.startsWith('blob:')) {
-    scriptDirectory = '';
-  } else {
-    scriptDirectory = scriptDirectory.slice(0, scriptDirectory.replace(/[?#].*/, '').lastIndexOf('/')+1);
+  try {
+    scriptDirectory = new URL('.', _scriptName).href; // includes trailing slash
+  } catch {
+    // Must be a `blob:` or `data:` URL (e.g. `blob:http://site.com/etc/etc`), we cannot
+    // infer anything from them.
   }
 
   if (!(typeof window == 'object' || typeof WorkerGlobalScope != 'undefined')) throw new Error('not compiled for this environment (did you build to HTML and try to run it not on the web, or set ENVIRONMENT to something - like node - and run it someplace else - like on the web?)');
@@ -538,6 +539,16 @@ class CppException extends EmscriptenEH {
 }
 // end include: runtime_exceptions.js
 // include: runtime_debug.js
+var runtimeDebug = true; // Switch to false at runtime to disable logging at the right times
+
+// Used by XXXXX_DEBUG settings to output debug messages.
+function dbg(...args) {
+  if (!runtimeDebug && typeof runtimeDebug != 'undefined') return;
+  // TODO(sbc): Make this configurable somehow.  Its not always convenient for
+  // logging to show up as warnings.
+  console.warn(...args);
+}
+
 // Endianness check
 (() => {
   var h16 = new Int16Array(1);
@@ -642,15 +653,6 @@ function unexportedRuntimeSymbol(sym) {
   }
 }
 
-var runtimeDebug = true; // Switch to false at runtime to disable logging at the right times
-
-// Used by XXXXX_DEBUG settings to output debug messages.
-function dbg(...args) {
-  if (!runtimeDebug && typeof runtimeDebug != 'undefined') return;
-  // TODO(sbc): Make this configurable somehow.  Its not always convenient for
-  // logging to show up as warnings.
-  console.warn(...args);
-}
 // end include: runtime_debug.js
 // include: memoryprofiler.js
 // end include: memoryprofiler.js
@@ -712,6 +714,7 @@ function preMain() {
 
 function postRun() {
   checkStackCookie();
+   // PThreads reuse the runtime from the main thread.
 
   if (Module['postRun']) {
     if (typeof Module['postRun'] == 'function') Module['postRun'] = [Module['postRun']];
@@ -2079,9 +2082,7 @@ async function createWasm() {
     };
   
   
-  var FS_createDataFile = (parent, name, fileData, canRead, canWrite, canOwn) => {
-      FS.createDataFile(parent, name, fileData, canRead, canWrite, canOwn);
-    };
+  var FS_createDataFile = (...args) => FS.createDataFile(...args);
   
   var preloadPlugins = [];
   var FS_handledByPreloadPlugin = (byteArray, fullname, finish, onerror) => {
@@ -11926,15 +11927,15 @@ async function createWasm() {
       return (...args) => ccall(ident, returnType, argTypes, args, opts);
     };
 
-  var FS_createPath = FS.createPath;
+  var FS_createPath = (...args) => FS.createPath(...args);
 
 
 
-  var FS_unlink = (path) => FS.unlink(path);
+  var FS_unlink = (...args) => FS.unlink(...args);
 
-  var FS_createLazyFile = FS.createLazyFile;
+  var FS_createLazyFile = (...args) => FS.createLazyFile(...args);
 
-  var FS_createDevice = FS.createDevice;
+  var FS_createDevice = (...args) => FS.createDevice(...args);
 
   var incrementExceptionRefcount = (ptr) => ___cxa_increment_exception_refcount(ptr);
 
@@ -11965,15 +11966,7 @@ async function createWasm() {
   var getExceptionMessage = (ptr) => getExceptionMessageCommon(ptr);
 
   FS.createPreloadedFile = FS_createPreloadedFile;
-  FS.staticInit();
-  // Set module methods based on EXPORTED_RUNTIME_METHODS
-  Module['FS_createPath'] = FS.createPath;
-  Module['FS_createDataFile'] = FS.createDataFile;
-  Module['FS_createPreloadedFile'] = FS.createPreloadedFile;
-  Module['FS_unlink'] = FS.unlink;
-  Module['FS_createLazyFile'] = FS.createLazyFile;
-  Module['FS_createDevice'] = FS.createDevice;
-  ;
+  FS.staticInit();;
 
       // exports
       Module['requestFullscreen'] = Browser.requestFullscreen;
@@ -12190,7 +12183,6 @@ missingLibrarySymbols.forEach(missingLibrarySymbol)
   'runEmAsmFunction',
   'runMainThreadEmAsm',
   'jstoi_q',
-  'jstoi_s',
   'getExecutableName',
   'listenOnce',
   'autoResumeAudioContext',
@@ -12295,6 +12287,116 @@ missingLibrarySymbols.forEach(missingLibrarySymbol)
   'FS_stdin_getChar',
   'FS_readFile',
   'FS',
+  'FS_root',
+  'FS_mounts',
+  'FS_devices',
+  'FS_streams',
+  'FS_nextInode',
+  'FS_nameTable',
+  'FS_currentPath',
+  'FS_initialized',
+  'FS_ignorePermissions',
+  'FS_filesystems',
+  'FS_syncFSRequests',
+  'FS_readFiles',
+  'FS_lookupPath',
+  'FS_getPath',
+  'FS_hashName',
+  'FS_hashAddNode',
+  'FS_hashRemoveNode',
+  'FS_lookupNode',
+  'FS_createNode',
+  'FS_destroyNode',
+  'FS_isRoot',
+  'FS_isMountpoint',
+  'FS_isFile',
+  'FS_isDir',
+  'FS_isLink',
+  'FS_isChrdev',
+  'FS_isBlkdev',
+  'FS_isFIFO',
+  'FS_isSocket',
+  'FS_flagsToPermissionString',
+  'FS_nodePermissions',
+  'FS_mayLookup',
+  'FS_mayCreate',
+  'FS_mayDelete',
+  'FS_mayOpen',
+  'FS_checkOpExists',
+  'FS_nextfd',
+  'FS_getStreamChecked',
+  'FS_getStream',
+  'FS_createStream',
+  'FS_closeStream',
+  'FS_dupStream',
+  'FS_doSetAttr',
+  'FS_chrdev_stream_ops',
+  'FS_major',
+  'FS_minor',
+  'FS_makedev',
+  'FS_registerDevice',
+  'FS_getDevice',
+  'FS_getMounts',
+  'FS_syncfs',
+  'FS_mount',
+  'FS_unmount',
+  'FS_lookup',
+  'FS_mknod',
+  'FS_statfs',
+  'FS_statfsStream',
+  'FS_statfsNode',
+  'FS_create',
+  'FS_mkdir',
+  'FS_mkdev',
+  'FS_symlink',
+  'FS_rename',
+  'FS_rmdir',
+  'FS_readdir',
+  'FS_readlink',
+  'FS_stat',
+  'FS_fstat',
+  'FS_lstat',
+  'FS_doChmod',
+  'FS_chmod',
+  'FS_lchmod',
+  'FS_fchmod',
+  'FS_doChown',
+  'FS_chown',
+  'FS_lchown',
+  'FS_fchown',
+  'FS_doTruncate',
+  'FS_truncate',
+  'FS_ftruncate',
+  'FS_utime',
+  'FS_open',
+  'FS_close',
+  'FS_isClosed',
+  'FS_llseek',
+  'FS_read',
+  'FS_write',
+  'FS_mmap',
+  'FS_msync',
+  'FS_ioctl',
+  'FS_writeFile',
+  'FS_cwd',
+  'FS_chdir',
+  'FS_createDefaultDirectories',
+  'FS_createDefaultDevices',
+  'FS_createSpecialDirectories',
+  'FS_createStandardStreams',
+  'FS_staticInit',
+  'FS_init',
+  'FS_quit',
+  'FS_findObject',
+  'FS_analyzePath',
+  'FS_createFile',
+  'FS_forceLoadFile',
+  'FS_absolutePath',
+  'FS_createFolder',
+  'FS_createLink',
+  'FS_joinPath',
+  'FS_mmapAlloc',
+  'FS_standardizePath',
   'MEMFS',
   'TTY',
   'PIPEFS',
@@ -12333,6 +12435,7 @@ missingLibrarySymbols.forEach(missingLibrarySymbol)
   'allocateUTF8OnStack',
   'print',
   'printErr',
+  'jstoi_s',
   'IDBFS',
   'webSockets',
   'WS',
