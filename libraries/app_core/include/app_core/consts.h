@@ -1,8 +1,6 @@
 #pragma once
 
 #if !TARGET_PLATFORM_ANDROID
-#include "app_core/app_core_sdl2.h"
-
 enum MOVE_STATE {
     MOVE_STATE_NONE = 0,
     MOVE_STATE_UP = 1 << 0,
@@ -41,7 +39,7 @@ namespace consts {
     }
 
     namespace text {
-        static str_literal CONGRATULATIONS[] = {
+        static constexpr const char *const CONGRATULATIONS[] = {
             "AMAZING!",
             "BRAVO!",
             "EXCELLENT!",
@@ -61,8 +59,8 @@ namespace consts {
             "WELL PLAYED!",
         };
 
-        static str_literal GAME_OVER_HINT = "PRESS [I] OR [SPACE] OR CLICK\nINSERT COIN TO CONTINUE!";
-        static str_literal GAMESAVE_FILE_NAME = "gamesave001.dat";
+        static constexpr const char *const GAME_OVER_HINT = "PRESS [I] OR [SPACE] OR CLICK\nINSERT COIN TO CONTINUE!";
+        static constexpr const char *const GAMESAVE_FILE_NAME = "gamesave001.dat";
     }
 
     static constexpr auto RESOLUTION_SCALE_FACTOR = int(2);

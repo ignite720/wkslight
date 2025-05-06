@@ -1,8 +1,5 @@
 #pragma once
 
-#include <foo/foo.h>
-
-#include "app_core/app_core_consts.h"
 #include "app_core/app_core_obj.h"
 #include "app_core/audio.h"
 
@@ -15,7 +12,7 @@ namespace utils {
         concept is_audio_clip = std::is_same_v<T, AudioClip>;
 
         template<typename T>
-        concept is_font = std::is_same_v<T, Font>;
+        concept is_font2 = std::is_same_v<T, Font2>;
     }
 }
 
@@ -86,7 +83,7 @@ public:
             static_assert(std::is_same_v<E, AUDIO_CLIP>);
 
             m_clips[index] = std::move(value);
-        } else if constexpr (utils::concepts::is_font<T>) {
+        } else if constexpr (utils::concepts::is_font2<T>) {
             static_assert(std::is_same_v<E, FONT>);
 
             m_fonts[index] = std::move(value);
@@ -116,6 +113,6 @@ private:
 private:
     std::unique_ptr<AudioMusic> m_musics[AUDIO_MUSIC_COUNT];
     std::unique_ptr<AudioClip> m_clips[AUDIO_CLIP_COUNT];
-    std::unique_ptr<Font> m_fonts[FONT_COUNT];
+    std::unique_ptr<Font2> m_fonts[FONT_COUNT];
     std::unordered_map<TextTextureInfo, std::unique_ptr<Texture>, TextTextureInfoHash, TextTextureInfoEqual> m_text_texture_cache;
 };

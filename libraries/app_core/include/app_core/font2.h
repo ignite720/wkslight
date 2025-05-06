@@ -1,13 +1,11 @@
 #pragma once
 
-#include "app_core/app_core_sdl2.h"
-
-class Font {
+class Font2 {
     friend class ResourceBundle;
 private:
-    explicit Font(const char *path, int pt_size);
+    explicit Font2(const char *path, int pt_size);
 public:
-    ~Font();
+    ~Font2();
 
 public:
     bool text_size(const char *text, int *w, int *h);

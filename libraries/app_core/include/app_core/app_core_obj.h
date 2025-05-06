@@ -1,7 +1,5 @@
 #pragma once
 
-#include "app_core/app_core_fwd.h"
-
 class AppCoreObj {
 public:
     AppCoreObj(AppCore &app_core) : m_app_core(app_core) {}

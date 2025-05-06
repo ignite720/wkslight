@@ -37,5 +37,3 @@
 #define COUNTOF(arr)                                            (sizeof(arr) / sizeof(arr[0]))
 #define SAFE_DELETE(p)                                          do { if (p) { delete p; p = nullptr; } } while(false)
 #define SAFE_DELETE_ARRAY(p)                                    do { if (p) { delete[] p; p = nullptr; } } while(false)
-
-#define str_literal                                             constexpr const char *const

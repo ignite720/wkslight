@@ -1,8 +1,6 @@
 #pragma once
 
-#include <foo/foo.h>
-
-#include "app_core/actor.h"
+#include "app_core/app_core_obj.h"
 
 enum class NetPacketKind : uint8_t {
     Foo,

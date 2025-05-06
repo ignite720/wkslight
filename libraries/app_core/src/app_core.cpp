@@ -1,8 +1,10 @@
+#include "pch.h"
+
 #include "app_core/app_core.h"
 
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/ball.h"
-#include "app_core/font.h"
+#include "app_core/font2.h"
 #include "app_core/paddle.h"
 #include "app_core/resource_bundle.h"
 
@@ -394,7 +396,7 @@ bool AppCore::init_assets() {
         m_resource_bundle->put<AudioClip>(ResourceBundle::AUDIO_CLIP_LOSE, "assets/sounds/lose.wav");
         m_resource_bundle->put<AudioClip>(ResourceBundle::AUDIO_CLIP_NEW_RECORD, "assets/sounds/new record.wav");
 
-        m_resource_bundle->put<Font>(ResourceBundle::FONT_PRESS_START_2P, "assets/fonts/PressStart2P/PressStart2P.ttf", 12);
+        m_resource_bundle->put<Font2>(ResourceBundle::FONT_PRESS_START_2P, "assets/fonts/PressStart2P/PressStart2P.ttf", 12);
     }
 
     m_ball = new Ball(*this);

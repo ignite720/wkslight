@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "app_core/app_core.h"
 
 #include <json/nlohmann/json.hpp>

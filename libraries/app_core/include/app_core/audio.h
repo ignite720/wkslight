@@ -1,6 +1,5 @@
 #pragma once
 
-#include "app_core/app_core_sdl2.h"
 #include "app_core/utils.h"
 
 template<typename T>

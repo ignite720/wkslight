@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "app_core/app_core.h"
 
 #if !(TARGET_PLATFORM_ANDROID || TARGET_PLATFORM_WEB)

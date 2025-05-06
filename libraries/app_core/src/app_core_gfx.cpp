@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "app_core/app_core_gfx.h"
 
 std::unique_ptr<AppCoreGfx> AppCoreGfx::create(GfxApi api) {

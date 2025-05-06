@@ -4,6 +4,8 @@ project("app_core")
     objdir(path.join(g_wkslight.baseobjdir, g_wkslight.placeholders[2], "%{prj.name}"))
     kind("SharedLib")
     language("C++")
+    pchheader("pch.h")
+    pchsource("src/pch.cpp")
     files({
         "include/**.h",
         "src/impl/libs/*.cpp",
@@ -12,6 +14,7 @@ project("app_core")
     })
     includedirs({
         g_wkslight.workspace.libraries.projects.app_core.includedirs,
+        "include/app_core",
     })
     libdirs({
         g_wkslight.workspace.libraries.projects.app_core.libdirs,

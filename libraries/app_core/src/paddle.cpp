@@ -1,6 +1,7 @@
+#include "pch.h"
+
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/paddle.h"
-
 #include "app_core/app_core.h"
 #include "app_core/utils.h"
 

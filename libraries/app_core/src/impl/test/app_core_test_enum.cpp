@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "app_core/app_core.h"
 
 #include <magic_enum/magic_enum.hpp>

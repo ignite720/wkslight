@@ -1,6 +1,5 @@
 #pragma once
 
-#include "app_core/app_core_emsdk.h"
 #include "app_core/net.h"
 
 class NetWeb : public Net {

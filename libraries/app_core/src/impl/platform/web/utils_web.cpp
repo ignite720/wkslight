@@ -1,9 +1,9 @@
-#include "app_core/utils.h"
+#include "pch.h"
 
-#include "app_core/app_core_emsdk.h"
+#include "app_core/utils.h"
 #include "app_core/app_core.h"
 
-static str_literal REQUEST_HEADERS[] = {
+static constexpr const char *const REQUEST_HEADERS[] = {
     //"Accept", "application/json",
     nullptr
 };

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "app_core/actor.h"
-#include "app_core/app_core_consts.h"
 
 class Paddle : public Actor {
 public:

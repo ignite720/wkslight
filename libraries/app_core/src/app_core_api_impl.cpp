@@ -1,6 +1,6 @@
-#include "app_core/app_core.h"
+#include "pch.h"
 
-#include "app_core/app_core_consts.h"
+#include "app_core/app_core.h"
 #include "app_core/app_core_gfx.h"
 
 static void s_test_gfx() {

@@ -5,6 +5,8 @@ project("app")
     kind("ConsoleApp")
     language("C++")
     --uuid("BE2461B7-236F-4278-81D3-F0D476F9A4C0")
+    pchheader("pch.h")
+    pchsource("src/pch.cpp")
     debugdir("")
     debugargs({
         "99999",
@@ -103,8 +105,6 @@ project("app")
     filter({ "action:ninja", "system:windows*", "kind:WindowedApp" })
         linkoptions({ "/SUBSYSTEM:WINDOWS" })
     filter("action:not xcode*")
-        pchheader("pch.h")
-        pchsource("src/pch.cpp")
     filter("action:vs*")
         vspropertysheets({
             -- [[..\..\app\doc\SDL2.props]],

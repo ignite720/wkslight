@@ -1,10 +1,5 @@
 #pragma once
 
-#include <foo/foo.h>
-
-#include "app_core/app_core_fwd.h"
-#include "app_core/app_core_sdl2.h"
-
 namespace utils {
     namespace concepts {
         template<typename T>

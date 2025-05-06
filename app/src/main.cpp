@@ -1,6 +1,9 @@
 #include "pch.h"
 
 #include <foobar/foobar.h>
+#include <foo/foo.h>
+
+#include <app_core/app_core_fwd.h>
 #include <app_core/app_core.h>
 
 static void s_test_foobar() {
@@ -31,7 +34,7 @@ JNIEXPORT jint Java_com_wkslight_example_main_1activity_app_1init(JNIEnv *env, j
     LOGI("0-2, <JNI>: world");
 
     const int argc = 1;
-    str_literal argv[] = { "/proc/self/exe" };
+    constexpr const char *const argv[] = { "/proc/self/exe" };
     return s_main(argc, const_cast<char **>(argv));
 }
 

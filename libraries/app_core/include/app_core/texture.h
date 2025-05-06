@@ -1,7 +1,6 @@
 #pragma once
 
 #include "app_core/app_core_obj.h"
-#include "app_core/app_core_sdl2.h"
 
 class Texture : public AppCoreObj {
 public:
@@ -14,7 +13,7 @@ public:
 
 public:
     bool load_from_file(const char *path, SDL_bool set_color_key = SDL_FALSE);
-    bool load_from_text(Font *font, const char *text, const SDL_Color &fg_color, Uint32 wrap_length = 0);
+    bool load_from_text(Font2 *font, const char *text, const SDL_Color &fg_color, Uint32 wrap_length = 0);
 
     void set_color_mod(Uint8 r, Uint8 g, Uint8 b);
     void set_alpha_mod(Uint8 value);

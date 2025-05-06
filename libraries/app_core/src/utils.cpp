@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/utils.h"
 

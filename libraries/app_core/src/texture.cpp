@@ -1,8 +1,9 @@
+#include "pch.h"
+
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/texture.h"
-
 #include "app_core/app_core.h"
-#include "app_core/font.h"
+#include "app_core/font2.h"
 #include "app_core/utils.h"
 
 Texture::Texture(AppCore &app_core)
@@ -25,7 +26,7 @@ bool Texture::load_from_file(const char *path, SDL_bool set_color_key) {
     return this->load_from_surface(surface, "Image", path, set_color_key);
 }
 
-bool Texture::load_from_text(Font *font, const char *text, const SDL_Color &fg_color, Uint32 wrap_length) {
+bool Texture::load_from_text(Font2 *font, const char *text, const SDL_Color &fg_color, Uint32 wrap_length) {
     this->drop();
     
     SDL_Surface *surface = font->render_text(text, fg_color, wrap_length);

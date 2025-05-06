@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "net_web.h"
 
 static EM_BOOL s_ws_onopen(int event_type, const EmscriptenWebSocketOpenEvent *websocket_event, void *user_data) {

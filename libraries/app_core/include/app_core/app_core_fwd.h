@@ -1,5 +1,8 @@
 #pragma once
 
+struct SDL_Window;
+struct SDL_Renderer;
+
 #include <json/nlohmann/json_fwd.hpp>
 using JSON = nlohmann::json;
 
@@ -8,7 +11,7 @@ using JSON = nlohmann::json;
 class APP_CORE_API AppCore;
 
 class Ball;
-class Font;
+class Font2;
 class Paddle;
 class ResourceBundle;
 class Texture;

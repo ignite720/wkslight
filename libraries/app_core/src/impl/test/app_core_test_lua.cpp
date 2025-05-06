@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "app_core/app_core.h"
 
 //#define SOL_ALL_SAFETIES_ON 1

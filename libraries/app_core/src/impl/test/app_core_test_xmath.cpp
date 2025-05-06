@@ -1,6 +1,6 @@
-#include "app_core/app_core.h"
+#include "pch.h"
 
-#include "app_core/app_core_math.h"
+#include "app_core/app_core.h"
 
 void app_core_test_xmath(void) {
     PRINT_FUNCTION_NAME();

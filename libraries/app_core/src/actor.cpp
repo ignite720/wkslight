@@ -1,6 +1,7 @@
+#include "pch.h"
+
 #if !TARGET_PLATFORM_ANDROID
 #include "app_core/actor.h"
-
 #include "app_core/utils.h"
 
 Actor::Actor(AppCore &app_core, float x, float y)

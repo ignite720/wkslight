@@ -1,8 +1,6 @@
 #pragma once
 
-#include "app_core/app_core_math.h"
 #include "app_core/app_core_obj.h"
-#include "app_core/app_core_sdl2.h"
 
 class Actor : public AppCoreObj {
 public:
@@ -10,6 +8,7 @@ public:
 
     Actor(AppCore &app_core, float x, float y);
 
+public:
     virtual void update(float dt);
     virtual void render() = 0;
 
