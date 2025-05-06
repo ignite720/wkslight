@@ -5,6 +5,7 @@ g_wkslight.clean = {
             ".vs",
             "bin",
             "build",
+            "build-cmake",
         },
     },
     files_to_delete = {

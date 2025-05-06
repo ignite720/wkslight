@@ -38,3 +38,6 @@
 [submodule "premake5-modules/wkslight"]
 	path = premake5-modules/wkslight
 	url = https://github.com/ignite720/premake-wkslight.git
+[submodule "premake5-modules/cmake"]
+	path = premake5-modules/cmake
+	url = https://github.com/ignite720/premake-cmake.git

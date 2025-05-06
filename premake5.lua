@@ -1,4 +1,5 @@
 require("premake5-modules/android-studio/android_studio")
+require("premake5-modules/cmake")
 require("premake5-modules/emscripten")
 require("premake5-modules/ninja")
 require("premake5-modules/vspropertysheets")

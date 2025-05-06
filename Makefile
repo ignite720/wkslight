@@ -22,6 +22,10 @@ ninja: clean
 	source scripts/premake5-generate-pc-ninja.sh
 	source scripts/ninja-build.sh
 
+cmake: clean
+	source scripts/premake5-generate-pc-cmake.sh
+	source scripts/cmake-build.sh
+
 xcode_run: clean
 	source scripts/premake5-generate-pc-xcode.sh
 	source scripts/xcode-build.sh

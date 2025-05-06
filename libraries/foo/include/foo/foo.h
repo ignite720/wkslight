@@ -25,10 +25,6 @@
 #include "foo/foo_api.h"
 #include "foo/foo_macros.h"
 
-#if 0
-FOO_TEMPLATE_EXTERN template class FOO_API std::string;
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
