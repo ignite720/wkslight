@@ -71,7 +71,7 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > # ninja
 > make ninja
 >
-> # cargo (optional)
+> # cargo
 > make cargo_run
 > ```
 
