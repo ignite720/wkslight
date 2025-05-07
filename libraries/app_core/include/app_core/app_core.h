@@ -1,5 +1,7 @@
 #pragma once
 
+#include "deletion_queue.h"
+
 #define APP_CORE_OBJ_GET_RENDERER                               reinterpret_cast<SDL_Renderer *>(this->app_core_as_mut_ptr()->renderer_as_mut_ptr())
 
 #ifdef __cplusplus
@@ -136,16 +138,13 @@ private:
     bool init_assets();
 
     void drop();
-    void drop_sdl2();
-    void drop_sdl2_libs();
-    void drop_imgui();
-    void drop_assets();
 
     void render_imgui_begin();
     void render_imgui_end();
 
 private:
     AppInfo m_app_info;
+    DeletionQueue m_deletion_queue;
 
 protected:
     SDL_Window *m_window = nullptr;

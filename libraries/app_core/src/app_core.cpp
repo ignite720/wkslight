@@ -310,6 +310,9 @@ bool AppCore::init_sdl2() {
             printf("%s => Failed to initialize SDL: %s\n", FUNCTION_NAME, SDL_GetError());
             break;
         }
+        m_deletion_queue.push([=]() {
+            SDL_Quit();
+        });
 
         SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
         if (m_app_info.linear_filter) {
@@ -328,6 +331,9 @@ bool AppCore::init_sdl2() {
             printf("%s => Failed to create Window: %s\n", FUNCTION_NAME, SDL_GetError());
             break;
         }
+        m_deletion_queue.push([=]() {
+            SDL_DestroyWindow(m_window);
+        });
 
         flags = (SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
         m_renderer = SDL_CreateRenderer(m_window, -1, flags);
@@ -335,11 +341,13 @@ bool AppCore::init_sdl2() {
             printf("%s => Failed to create Renderer: %s\n", FUNCTION_NAME, SDL_GetError());
             break;
         }
+        m_deletion_queue.push([=]() {
+            SDL_DestroyRenderer(m_renderer);
+        });
 
         if (SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND) != 0) {
             break;
         }
-
         return true;
     } while(false);
     return false;
@@ -352,17 +360,25 @@ bool AppCore::init_sdl2_libs() {
             printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
             break;
         }
+        m_deletion_queue.push([=]() {
+            IMG_Quit();
+        });
 
         if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
             printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
             break;
         }
+        m_deletion_queue.push([=]() {
+            Mix_CloseAudio();
+        });
 
         if (TTF_Init() != 0) {
             printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
             break;
         }
-
+        m_deletion_queue.push([=]() {
+            TTF_Quit();
+        });
         return true;
     } while(false);
     return false;
@@ -380,6 +396,11 @@ bool AppCore::init_imgui() {
     
     ImGui_ImplSDL2_InitForSDLRenderer(m_window, m_renderer);
     ImGui_ImplSDLRenderer2_Init(m_renderer);
+    m_deletion_queue.push([=]() {
+        ImGui_ImplSDLRenderer2_Shutdown();
+        ImGui_ImplSDL2_Shutdown();
+        ImGui::DestroyContext();
+    });
     return true;
 }
 
@@ -401,46 +422,16 @@ bool AppCore::init_assets() {
 
     m_ball = new Ball(*this);
     m_paddle = new Paddle(*this);
+    m_deletion_queue.push([=]() {
+        SAFE_DELETE(m_paddle);
+        SAFE_DELETE(m_ball);
+        SAFE_DELETE(m_resource_bundle);
+    });
     return true;
 }
 
 void AppCore::drop() {
-    this->drop_assets();
-    this->drop_imgui();
-    this->drop_sdl2_libs();
-    this->drop_sdl2();
-}
-
-void AppCore::drop_sdl2() {
-    PRINT_FUNCTION_NAME();
-
-    SDL_DestroyRenderer(m_renderer);
-    SDL_DestroyWindow(m_window);
-    SDL_Quit();
-}
-
-void AppCore::drop_sdl2_libs() {
-    PRINT_FUNCTION_NAME();
-
-    TTF_Quit();
-    Mix_CloseAudio();
-    IMG_Quit();
-}
-
-void AppCore::drop_imgui() {
-    PRINT_FUNCTION_NAME();
-
-    ImGui_ImplSDLRenderer2_Shutdown();
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
-}
-
-void AppCore::drop_assets() {
-    PRINT_FUNCTION_NAME();
-
-    SAFE_DELETE(m_paddle);
-    SAFE_DELETE(m_ball);
-    SAFE_DELETE(m_resource_bundle);
+    m_deletion_queue.flush();
 }
 
 void AppCore::render_imgui_begin() {
