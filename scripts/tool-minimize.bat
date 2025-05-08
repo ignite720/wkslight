@@ -15,6 +15,10 @@ del /F /S /Q /A "libraries\*.git"
 rd /S /Q "premake5-modules\android-studio\.github"
 rd /S /Q "premake5-modules\android-studio\example"
 del /F /Q /A "premake5-modules\android-studio\premake5"
+
+rd /S /Q "premake5-modules\ninja\.github"
+rd /S /Q "premake5-modules\ninja\tests"
+
 del /F /S /Q /A "premake5-modules\*.git"
 
 rem del /F /Q /A ".gitignore"
