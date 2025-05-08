@@ -283,6 +283,9 @@ void AppCore::render_background() {
         CLAY({ .id = CLAY_ID("Header"), .layout = { .sizing = { CLAY_SIZING_GROW(0), CLAY_SIZING_FIXED(50) }, .padding = { 32, 32 }, .childGap = 16, .childAlignment = { CLAY_ALIGN_X_LEFT, CLAY_ALIGN_Y_CENTER } } }) {
             CLAY_TEXT(CLAY_STRING("Clay"), &s_clay.header_text_config);
             CLAY({ .id = CLAY_ID("Spacer"), .layout = { .sizing = { .width = CLAY_SIZING_GROW(0) } } }) {}
+            CLAY({ .id = CLAY_ID("LinkDocsOuter"), .layout = { .padding = {8, 8} }, .userData = nullptr }) {
+                CLAY_TEXT(CLAY_STRING("Docs"), CLAY_TEXT_CONFIG({ .textColor = {61, 26, 5, 255}, .fontId = 0, .fontSize = 24 }));
+            }
             CLAY({ .id = CLAY_ID("DebugMode"), .layout = { .padding = {16, 16, 6, 6} },
                 .backgroundColor = Clay_Hovered() ? Clay::COLOR_LIGHT_HOVER : Clay::COLOR_LIGHT,
                 .cornerRadius = CLAY_CORNER_RADIUS(10),
