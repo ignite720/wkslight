@@ -63,8 +63,8 @@ namespace consts {
         static constexpr const char *const GAMESAVE_FILE_NAME = "gamesave001.dat";
     }
 
-    static constexpr auto RESOLUTION_SCALE_FACTOR = int(2);
-    static constexpr auto WINDOW_WIDTH = int(1920 / RESOLUTION_SCALE_FACTOR);
-    static constexpr auto WINDOW_HEIGHT = int(1080 / RESOLUTION_SCALE_FACTOR);
+    static constexpr auto RESOLUTION_SCALE_FACTOR = 0.5f;
+    static constexpr auto WINDOW_WIDTH = int(1920 * RESOLUTION_SCALE_FACTOR);
+    static constexpr auto WINDOW_HEIGHT = int(1080 * RESOLUTION_SCALE_FACTOR);
 }
 #endif

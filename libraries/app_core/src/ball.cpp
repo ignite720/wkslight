@@ -15,7 +15,7 @@ Ball::Ball(AppCore &app_core)
         m_texture->set_blend_mode(SDL_BLENDMODE_BLEND);
     }
 
-    this->set_rect_size(m_texture->get_width(), m_texture->get_height());
+    this->set_rect_size(float(m_texture->get_width()), float(m_texture->get_height()));
     this->set_dead();
 }
 

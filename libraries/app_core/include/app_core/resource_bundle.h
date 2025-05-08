@@ -72,19 +72,26 @@ public:
 public:
     template<typename T, typename E, typename ...Args>
     std::enable_if_t<std::is_enum_v<E>, T *> put(E index, Args &&...args) {
+        #if 0
+        auto value = std::make_unique<T>(std::forward<Args>(args)...);
+        #else
         std::unique_ptr<T> value(new T(std::forward<Args>(args)...));
+        #endif
         auto *raw_ptr = value.get();
 
         if constexpr (utils::concepts::is_audio_music<T>) {
             static_assert(std::is_same_v<E, AUDIO_MUSIC>);
+            assert(!m_musics[index]);
 
             m_musics[index] = std::move(value);
         } else if constexpr (utils::concepts::is_audio_clip<T>) {
             static_assert(std::is_same_v<E, AUDIO_CLIP>);
+            assert(!m_audio_clips[index]);
 
-            m_clips[index] = std::move(value);
+            m_audio_clips[index] = std::move(value);
         } else if constexpr (utils::concepts::is_font2<T>) {
             static_assert(std::is_same_v<E, FONT>);
+            assert(!m_fonts[index]);
 
             m_fonts[index] = std::move(value);
         }
@@ -112,7 +119,7 @@ private:
 
 private:
     std::unique_ptr<AudioMusic> m_musics[AUDIO_MUSIC_COUNT];
-    std::unique_ptr<AudioClip> m_clips[AUDIO_CLIP_COUNT];
+    std::unique_ptr<AudioClip> m_audio_clips[AUDIO_CLIP_COUNT];
     std::unique_ptr<Font2> m_fonts[FONT_COUNT];
     std::unordered_map<TextTextureInfo, std::unique_ptr<Texture>, TextTextureInfoHash, TextTextureInfoEqual> m_text_texture_cache;
 };

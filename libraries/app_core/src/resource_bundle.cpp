@@ -15,7 +15,7 @@ void ResourceBundle::play_audio_music(AUDIO_MUSIC index) {
 }
 
 void ResourceBundle::play_audio_clip(AUDIO_CLIP index) {
-    m_clips[index]->play();
+    m_audio_clips[index]->play();
 }
 
 bool ResourceBundle::text_size(FONT font, const std::string &text, int *w, int *h) {

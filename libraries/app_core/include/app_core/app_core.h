@@ -115,6 +115,8 @@ public:
 
     virtual void update();
     virtual void render();
+    virtual void render_background();
+    virtual void render_foreground();
     virtual void render_imgui();
 
     virtual void restart();
@@ -149,6 +151,18 @@ private:
 protected:
     SDL_Window *m_window = nullptr;
     SDL_Renderer *m_renderer = nullptr;
+
+private:
+    struct {
+        // todo
+        //float2f mouse_position = {};
+        //float2f mouse_wheel = {};
+        float mouse_position_x = 0.0f;
+        float mouse_position_y = 0.0f;
+        float mouse_wheel_x = 0.0f;
+        float mouse_wheel_y = 0.0f;
+        bool is_mouse_down = false;
+    } m_input;
 
 private:
     ResourceBundle *m_resource_bundle = nullptr;
