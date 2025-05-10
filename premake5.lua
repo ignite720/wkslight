@@ -128,6 +128,8 @@ workspace(g_wkslight.workspace.name)
             "4251",
             "4503",
             "4616",
+            "4819",
+            "4996",
         })
     filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
         buildoptions({

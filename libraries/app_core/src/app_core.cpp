@@ -12,10 +12,7 @@
 PRAGMA_WARNING_PUSH
 PRAGMA_WARNING_IGNORE_CLANG("-Wnarrowing")
 PRAGMA_WARNING_IGNORE_GCC("-Wnarrowing")
-PRAGMA_WARNING_IGNORE_MSVC(4018)
-PRAGMA_WARNING_IGNORE_MSVC(4244)
-PRAGMA_WARNING_IGNORE_MSVC(4576)
-PRAGMA_WARNING_IGNORE_MSVC(4838)
+PRAGMA_WARNING_IGNORE_MSVC(4018 4244 4576 4838)
 #include <clay/renderers/SDL2/clay_renderer_SDL2.c>
 PRAGMA_WARNING_POP
 
@@ -191,7 +188,7 @@ void AppCore::update() {
                 }
             } break;
             case SDL_MOUSEWHEEL: {
-                m_input.mouse_wheel_x = float(evt.wheel.x), m_input.mouse_wheel_y = float(evt.wheel.y);
+                m_input.mouse_wheel.x = float(evt.wheel.x), m_input.mouse_wheel.y = float(evt.wheel.y);
             } break;
         }
         
@@ -271,11 +268,11 @@ void AppCore::render_background() {
 
         int mouse_x = 0, mouse_y = 0;
         auto mouse_state = SDL_GetMouseState(&mouse_x, &mouse_y);
-        m_input.mouse_position_x = float(mouse_x), m_input.mouse_position_y = float(mouse_y);
+        m_input.mouse_position.x = float(mouse_x), m_input.mouse_position.y = float(mouse_y);
         m_input.is_mouse_down = (mouse_state & SDL_BUTTON(SDL_BUTTON_LEFT));
 
-        Clay_SetPointerState(Clay_Vector2 { m_input.mouse_position_x, m_input.mouse_position_y }, m_input.is_mouse_down);
-        Clay_UpdateScrollContainers(true, Clay_Vector2 { m_input.mouse_wheel_x, m_input.mouse_wheel_y }, m_app_info.stats.delta_time);
+        Clay_SetPointerState(Clay_Vector2 { m_input.mouse_position.x, m_input.mouse_position.y }, m_input.is_mouse_down);
+        Clay_UpdateScrollContainers(true, Clay_Vector2 { m_input.mouse_wheel.x, m_input.mouse_wheel.y }, m_app_info.stats.delta_time);
     }
     
     Clay_BeginLayout();
