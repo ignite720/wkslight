@@ -1,0 +1,132 @@
+name: CI pc
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-13 ]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.4
+        with:
+          version: "5.0.0-beta6"
+
+      - name: Add msbuild to PATH
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: "latest"
+
+      - name: Setup ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+        with:
+          version: "1.12.1"
+
+      - name: Build
+        run: |
+          ninja --version
+
+      - name: Add cl.exe to PATH
+        if: runner.os == 'Windows' && false
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install Vulkan SDK
+        uses: humbletim/install-vulkan-sdk@v1.2
+        with:
+          version: 1.4.309.0
+          cache: true
+
+      - name: Build project for Windows
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          cd scripts
+          call tool-install-deps.bat
+
+          cd scripts
+          call premake5-generate-pc-ninja.bat gh-action
+
+          cd scripts
+          call ninja-build.bat gh-action
+
+          rem cd scripts
+          rem tool-run-pc.bat 5
+
+          cd scripts
+          call premake5-clean.bat
+
+          cd scripts
+          call tool-install-deps.bat
+
+          cd scripts
+          call tool-tree.bat gh-action
+
+          cd scripts
+          call premake5-generate-pc-vs.bat gh-action
+
+          cd scripts
+          tool-msbuild-pc-vs.bat
+
+          cd scripts
+          tool-run-pc.bat 5
+
+      - name: Generate project for Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          echo ${{ runner.os }}
+          source scripts/tool-premake5+x.sh ${{ github.workspace }}
+
+          make install_deps
+          make ninja
+          make run argv=5
+          make test
+
+      - name: Generate project for macOS
+        if: runner.os == 'macOS'
+        run: |
+          echo ${{ runner.os }}
+          source scripts/tool-premake5+x.sh ${{ github.workspace }}
+
+          brew install tree
+          brew install coreutils
+          brew install bash
+          echo $SHELL
+          
+          make install_deps
+          #make xcode_run argv=5
+
+      - name: Build project for Linux & macOS
+        if: runner.os != 'Windows'
+        run: |
+          make clean
+          make pc
+          make run argv=5
+          make test
+          make tree
+          make cargo_run argv=5
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/${{ runner.os }}
+          cp -r bin/* temp/artifact/${{ runner.os }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release-Artifact-${{ runner.os }}
+          path: ${{ github.workspace }}/temp

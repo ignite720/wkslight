@@ -1,0 +1,62 @@
+name: CI android
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.4
+        with:
+          version: "5.0.0-beta6"
+
+      - name: Setup jdk
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 7.5.1
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Dependencies
+        run: |
+          rustup target add aarch64-linux-android
+          cargo install cargo-apk
+
+      - name: Build
+        run: |
+          java --version
+          gradle -V
+          source scripts/tool-keygen.sh
+          source scripts/tool-premake5+x.sh ${{ github.workspace }}
+
+          make android
+          make cargo-apk
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/android
+          cp -rv bin/* temp/artifact/android
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release-Artifact-android
+          path: ${{ github.workspace }}/temp

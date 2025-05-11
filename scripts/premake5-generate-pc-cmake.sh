@@ -1,0 +1,1 @@
+premake5 cmake --target_platform=pc --pc_deploy_assets

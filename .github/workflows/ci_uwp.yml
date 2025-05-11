@@ -1,0 +1,61 @@
+name: CI uwp
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.4
+        with:
+          version: "5.0.0-beta6"
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: "latest"
+
+      - name: Build
+        shell: cmd
+        run: |
+          pushd scripts
+          call premake5-clean.bat
+          popd
+
+          cd scripts
+          call tool-install-deps.bat
+          
+          pushd scripts
+          call premake5-generate-uwp.bat "gh-action"
+          popd
+
+          pushd scripts
+          tool-msbuild-uwp.bat
+          popd
+
+          pushd scripts
+          "tool-run-pc.bat 5"
+          popd
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/${{ runner.os }}-uwp
+          cp -r bin/* temp/artifact/${{ runner.os }}-uwp
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release-Artifact-${{ runner.os }}-uwp
+          path: ${{ github.workspace }}/temp

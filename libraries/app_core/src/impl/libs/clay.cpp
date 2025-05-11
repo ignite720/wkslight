@@ -1,0 +1,9 @@
+#include "pch.h"
+
+PRAGMA_WARNING_PUSH
+PRAGMA_WARNING_IGNORE_MSVC(4244)
+
+#define CLAY_IMPLEMENTATION
+#include <clay/clay.h>
+
+PRAGMA_WARNING_POP

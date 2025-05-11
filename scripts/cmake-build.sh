@@ -1,0 +1,6 @@
+BUILD_DIR="build-cmake"
+SRC_DIR=build
+CONFIG_OR_BUILD_TYPE=Release
+
+cmake -B ${BUILD_DIR} -S ${SRC_DIR} -DCMAKE_BUILD_TYPE=${CONFIG_OR_BUILD_TYPE}
+cmake --build ${BUILD_DIR}

@@ -1,0 +1,55 @@
+name: CI web
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup premake5
+        uses: abel0b/setup-premake@v2.4
+        with:
+          version: "5.0.0-beta6"
+
+      - name: Setup emsdk
+        uses: mymindstorm/setup-emsdk@v14
+
+      - name: Install Dependencies
+        run: |
+          source scripts/tool-setup-dot-emscripten.sh
+          source scripts/tool-emsdk-download-and-compile-ports.sh
+
+      - name: Build
+        run: |
+          source scripts/tool-premake5+x.sh ${{ github.workspace }}
+
+          make web
+
+      - name: Create artifact
+        run: |
+          mkdir -p temp/artifact/web
+          cp -rv bin/* temp/artifact/web
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release-Artifact-web
+          path: ${{ github.workspace }}/temp
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{ github.workspace }}/bin/target

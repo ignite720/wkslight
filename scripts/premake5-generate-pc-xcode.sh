@@ -1,0 +1,1 @@
+premake5 xcode4 --pc_deploy_assets

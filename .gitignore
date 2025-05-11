@@ -1,0 +1,7 @@
+logs/
+
+/app-rs/assets
+/bin
+/build*
+
+imgui.ini
