@@ -5,7 +5,7 @@
 #include "app_core/app_core.h"
 #include "app_core/resource_bundle.h"
 
-#include <simplerand/simplerand.hpp>
+#include <wkstk/simplerand.hpp>
 
 Ball::Ball(AppCore &app_core)
     : Actor(app_core, app_core.app_info_as_ref().window_width * 0.5f, app_core.app_info_as_ref().window_height * 0.2f) {

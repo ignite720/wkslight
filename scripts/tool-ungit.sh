@@ -7,7 +7,7 @@ rm -fv LICENSE
 
 rm -fr libraries/FastNoise2
 rm -fr libraries/headeronly/mathx
-rm -fr libraries/headeronly/simplerand
+rm -fr libraries/headeronly/wkstk
 rm -fr libraries/imgui
 rm -fr libraries/lua
 rm -fr libraries/spdlog

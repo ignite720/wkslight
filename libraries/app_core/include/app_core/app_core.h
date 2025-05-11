@@ -1,8 +1,9 @@
 #pragma once
 
 #include "app_info.h"
-#include "deletion_queue.h"
 #include "input.h"
+
+#include <wkstk/deletion_queue.h>
 
 #define APP_CORE_OBJ_GET_RENDERER                               reinterpret_cast<SDL_Renderer *>(this->app_core_as_mut_ptr()->renderer_as_mut_ptr())
 

@@ -1,7 +1,8 @@
 #include "pch.h"
 
 #include "app_core/app_core.h"
-#include "app_core/logging.h"
+
+#include <wkstk/logging.h>
 
 void app_core_test_logging(void) {
     PRINT_FUNCTION_NAME();
