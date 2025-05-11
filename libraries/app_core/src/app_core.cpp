@@ -16,11 +16,11 @@ PRAGMA_WARNING_IGNORE_MSVC(4018 4244 4576 4838)
 #include <clay/renderers/SDL2/clay_renderer_SDL2.c>
 PRAGMA_WARNING_POP
 
+#include <wkstk/simplerand.hpp>
+
 #include <backends/imgui_impl_sdl2.h>
 #include <backends/imgui_impl_sdlrenderer2.h>
 #include <imgui.h>
-
-#include <wkstk/simplerand.hpp>
 
 #define __CASE_PADDLE_MOVE_STATE_FROM_KEYS(key1_, key2_, state_) \
 case key1_: \
