@@ -1,0 +1,43 @@
+[submodule "libraries/headeronly/mathx"]
+	path = libraries/headeronly/mathx
+	url = https://github.com/ignite720/mathx.git
+[submodule "libraries/headeronly/wkstk"]
+	path = libraries/headeronly/wkstk
+	url = https://github.com/ignite720/wkstk.git
+[submodule "libraries/FastNoise2"]
+	path = libraries/FastNoise2
+	url = https://github.com/wkslight/FastNoise2.git
+[submodule "libraries/imgui"]
+	path = libraries/imgui
+	url = https://github.com/wkslight/imgui.git
+[submodule "libraries/lua"]
+	path = libraries/lua
+	url = https://github.com/wkslight/lua.git
+[submodule "libraries/spdlog"]
+	path = libraries/spdlog
+	url = https://github.com/wkslight/spdlog.git
+[submodule "libraries/XMath"]
+	path = libraries/XMath
+	url = https://github.com/ignite720/XMath.git
+[submodule "premake5-modules/android-studio"]
+	path = premake5-modules/android-studio
+	url = https://github.com/ignite720/premake-android-studio
+[submodule "premake5-modules/cmake"]
+	path = premake5-modules/cmake
+	url = https://github.com/ignite720/premake-cmake.git
+[submodule "premake5-modules/emscripten"]
+	path = premake5-modules/emscripten
+	url = https://github.com/ignite720/premake-emscripten.git
+[submodule "premake5-modules/ninja"]
+	path = premake5-modules/ninja
+	url = https://github.com/ignite720/premake-ninja.git
+[submodule "premake5-modules/vspropertysheets"]
+	path = premake5-modules/vspropertysheets
+	url = https://github.com/ignite720/premake-vspropertysheets.git
+[submodule "premake5-modules/winrt"]
+	path = premake5-modules/winrt
+	url = https://github.com/ignite720/premake-winrt.git
+	branch = win10
+[submodule "premake5-modules/wkslight"]
+	path = premake5-modules/wkslight
+	url = https://github.com/ignite720/premake-wkslight.git
