@@ -8,7 +8,7 @@ if "%~1"=="CI" (
     call "scripts/tool-option-handler.bat" "%*"
 )
 
-premake5 vs2022 --pc_deploy_assets
+premake5 vs2022 --pc_deploy_assets %OPTION_CI%
 if "%~1"=="" (
     timeout /t 2 > nul
     start build
