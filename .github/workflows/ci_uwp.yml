@@ -38,7 +38,7 @@ jobs:
           call tool-install-deps.bat
           
           pushd scripts
-          call premake5-generate-uwp.bat "gh-action"
+          call premake5-generate-uwp.bat "CI"
           popd
 
           pushd scripts

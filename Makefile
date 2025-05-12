@@ -15,29 +15,31 @@ android: clean
 	source scripts/android-buildw.sh
 
 pc:
-	source scripts/premake5-generate-pc-gmake.sh
+	source scripts/premake5-generate-pc-gmake.sh $(ARGV)
 	source scripts/gmake-pc.sh
 
 ninja: clean
-	source scripts/premake5-generate-pc-ninja.sh
+	source scripts/premake5-generate-pc-ninja.sh $(ARGV)
 	source scripts/ninja-build.sh
 
 cmake: clean
-	source scripts/premake5-generate-pc-cmake.sh
+	source scripts/premake5-generate-pc-cmake.sh $(ARGV)
 	source scripts/cmake-build.sh
 
-xcode_run: clean
-	source scripts/premake5-generate-pc-xcode.sh
+xcode: clean
+	source scripts/premake5-generate-pc-xcode.sh $(ARGV)
 	source scripts/xcode-build.sh
-	source scripts/tool-run-pc-macos.sh $(argv)
-
+	
 web: clean
 	source scripts/premake5-generate-web.sh
 	source scripts/gmake-web.sh
 	source scripts/tool-web-post-build.sh
 
 run: pc
-	source scripts/tool-run-pc.sh $(argv)
+	source scripts/tool-run-pc.sh $(ARGV)
+
+run_macos: xcode
+	source scripts/tool-run-pc-macos.sh $(ARGV)
 
 clean:
 	source scripts/premake5-clean.sh
@@ -61,7 +63,7 @@ tree:
 	source scripts/tool-tree.sh
 
 cargo_run: pc
-	source scripts/cargo-run-pc.sh $(argv)
+	source scripts/cargo-run-pc.sh $(ARGV)
 
 cargo-apk: android
 	source scripts/cargo-apk.sh

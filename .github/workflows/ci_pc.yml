@@ -58,10 +58,10 @@ jobs:
           call tool-install-deps.bat
 
           cd scripts
-          call premake5-generate-pc-ninja.bat gh-action
+          call premake5-generate-pc-ninja.bat CI
 
           cd scripts
-          call ninja-build.bat gh-action
+          call ninja-build.bat CI
 
           rem cd scripts
           rem tool-run-pc.bat 5
@@ -73,10 +73,10 @@ jobs:
           call tool-install-deps.bat
 
           cd scripts
-          call tool-tree.bat gh-action
+          call tool-tree.bat CI
 
           cd scripts
-          call premake5-generate-pc-vs.bat gh-action
+          call premake5-generate-pc-vs.bat CI
 
           cd scripts
           tool-msbuild-pc-vs.bat
@@ -92,8 +92,8 @@ jobs:
           source scripts/tool-premake5+x.sh ${{ github.workspace }}
 
           make install_deps
-          make ninja
-          make run argv=5
+          make ninja ARGV=CI=1
+          make run ARGV=5
           make test
 
       - name: Generate project for macOS
@@ -108,17 +108,18 @@ jobs:
           echo $SHELL
           
           make install_deps
-          #make xcode_run argv=5
+          #make xcode ARGV=CI=1
+          #make run_macos ARGV=5
 
       - name: Build project for Linux & macOS
         if: runner.os != 'Windows'
         run: |
           make clean
-          make pc
-          make run argv=5
+          make pc ARGV=CI=1
+          make run ARGV=5
           make test
           make tree
-          make cargo_run argv=5
+          make cargo_run ARGV=5
 
       - name: Create artifact
         run: |

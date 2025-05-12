@@ -3,7 +3,7 @@
 if "%~1"=="" (
     call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 ) else (
-    if "%~1"=="gh-action" (
+    if "%~1"=="CI" (
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
     )
 )

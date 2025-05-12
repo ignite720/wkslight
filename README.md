@@ -63,6 +63,8 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 ### 2. PC
 #### 2.1 Linux & macOS
 > ```shell
+> make install_deps
+>
 > # gmake
 > make pc
 > make run
@@ -76,6 +78,7 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 > ```
 
 #### 2.2 Windows
+> Double click `scripts\tool-install-deps.bat`  
 > Double click `scripts\premake5-generate-pc-vs.bat`
 
 ### 3. Windows UWP

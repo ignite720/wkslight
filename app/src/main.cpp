@@ -1,7 +1,6 @@
 #include "pch.h"
 
 #include <foobar/foobar.h>
-#include <foo/foo.h>
 
 #include <app_core/pch.h>
 #include <app_core/app_core.h>

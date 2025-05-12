@@ -2,7 +2,7 @@
 
 #include "app_core/app_core.h"
 
-#include <wkstk/logging.h>
+#include <wkstk/logging.hpp>
 
 void app_core_test_logging(void) {
     PRINT_FUNCTION_NAME();

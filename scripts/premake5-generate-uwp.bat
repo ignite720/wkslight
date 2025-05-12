@@ -1,7 +1,7 @@
 @echo off
 
 cd ..
-if "%~1"=="dummy" (
+if "%~1"=="rebuild_me" (
     cd ..
 )
 

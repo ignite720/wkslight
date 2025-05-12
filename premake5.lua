@@ -31,6 +31,10 @@ newoption({
     description = "Enable Advanced Vector Extensions 2.",
 })
 newoption({
+    trigger = "ci",
+    description = "Continuous Integration.",
+})
+newoption({
     trigger = "pc_deploy_assets",
     description = "Whether to deploy assets on PC platform.",
 })
@@ -190,6 +194,6 @@ group("all_gen")
         files({ "dummy.c" })
         filter({ "options:target_platform=pc", "action:vs*" })
             kind("Utility")
-            prebuildcommands({ "%{g_wkslight.location}/scripts/premake5-generate-pc-vs.bat dummy" })
+            prebuildcommands({ "%{g_wkslight.location}/scripts/premake5-generate-pc-vs.bat rebuild_me" })
         filter({ "options:target_platform=uwp", "action:vs*" })
-            postbuildcommands({ "%{g_wkslight.location}/scripts/premake5-generate-uwp.bat dummy" })
+            postbuildcommands({ "%{g_wkslight.location}/scripts/premake5-generate-uwp.bat rebuild_me" })
