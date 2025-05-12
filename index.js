@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpg9to76n2.js
+// include: /tmp/tmpu_bn4clv.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -146,7 +146,6 @@ Module['FS_createPath']("/assets", "fonts", true, true);
 Module['FS_createPath']("/assets/fonts", "PressStart2P", true, true);
 Module['FS_createPath']("/assets", "scripts", true, true);
 Module['FS_createPath']("/assets/scripts", "foobar", true, true);
-Module['FS_createPath']("/assets", "shaders", true, true);
 Module['FS_createPath']("/assets", "sounds", true, true);
 Module['FS_createPath']("/assets", "textures", true, true);
 
@@ -215,25 +214,25 @@ Module['FS_createPath']("/assets", "textures", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/assets/fonts/PressStart2P/LICENSE.txt", "start": 0, "end": 4407}, {"filename": "/assets/fonts/PressStart2P/PressStart2P.ttf", "start": 4407, "end": 74155}, {"filename": "/assets/scripts/foobar/bar.lua", "start": 74155, "end": 74252}, {"filename": "/assets/scripts/foobar/foo.lua", "start": 74252, "end": 74349}, {"filename": "/assets/scripts/foobar/init.lua", "start": 74349, "end": 74461}, {"filename": "/assets/scripts/foobar/utils.lua", "start": 74461, "end": 75043}, {"filename": "/assets/scripts/main.lua", "start": 75043, "end": 75995}, {"filename": "/assets/shaders/.gitkeep", "start": 75995, "end": 75995}, {"filename": "/assets/sounds/Insert Coin.ogg", "start": 75995, "end": 935696, "audio": 1}, {"filename": "/assets/sounds/Item Shop.ogg", "start": 935696, "end": 1837451, "audio": 1}, {"filename": "/assets/sounds/bounce.wav", "start": 1837451, "end": 1858641, "audio": 1}, {"filename": "/assets/sounds/coin.wav", "start": 1858641, "end": 1890430, "audio": 1}, {"filename": "/assets/sounds/hit.wav", "start": 1890430, "end": 1911620, "audio": 1}, {"filename": "/assets/sounds/lose.wav", "start": 1911620, "end": 1983153, "audio": 1}, {"filename": "/assets/sounds/new record.wav", "start": 1983153, "end": 2054686, "audio": 1}, {"filename": "/assets/textures/ball.png", "start": 2054686, "end": 2055882}], "remote_package_size": 2055882});
+    loadPackage({"files": [{"filename": "/assets/fonts/PressStart2P/LICENSE.txt", "start": 0, "end": 4407}, {"filename": "/assets/fonts/PressStart2P/PressStart2P.ttf", "start": 4407, "end": 74155}, {"filename": "/assets/scripts/foobar/bar.lua", "start": 74155, "end": 74252}, {"filename": "/assets/scripts/foobar/foo.lua", "start": 74252, "end": 74349}, {"filename": "/assets/scripts/foobar/init.lua", "start": 74349, "end": 74461}, {"filename": "/assets/scripts/foobar/utils.lua", "start": 74461, "end": 75043}, {"filename": "/assets/scripts/main.lua", "start": 75043, "end": 75995}, {"filename": "/assets/sounds/Insert Coin.ogg", "start": 75995, "end": 935696, "audio": 1}, {"filename": "/assets/sounds/Item Shop.ogg", "start": 935696, "end": 1837451, "audio": 1}, {"filename": "/assets/sounds/bounce.wav", "start": 1837451, "end": 1858641, "audio": 1}, {"filename": "/assets/sounds/coin.wav", "start": 1858641, "end": 1890430, "audio": 1}, {"filename": "/assets/sounds/hit.wav", "start": 1890430, "end": 1911620, "audio": 1}, {"filename": "/assets/sounds/lose.wav", "start": 1911620, "end": 1983153, "audio": 1}, {"filename": "/assets/sounds/new record.wav", "start": 1983153, "end": 2054686, "audio": 1}, {"filename": "/assets/textures/ball.png", "start": 2054686, "end": 2055882}], "remote_package_size": 2055882});
 
   })();
 
-// end include: /tmp/tmpg9to76n2.js
-// include: /tmp/tmpdx_qfj2e.js
+// end include: /tmp/tmpu_bn4clv.js
+// include: /tmp/tmpi2i13_7f.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD) || (typeof ENVIRONMENT_IS_AUDIO_WORKLET != 'undefined' && ENVIRONMENT_IS_AUDIO_WORKLET)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpdx_qfj2e.js
-// include: /tmp/tmpm9u7ihmh.js
+  // end include: /tmp/tmpi2i13_7f.js
+// include: /tmp/tmp0ztuhljj.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpm9u7ihmh.js
+  // end include: /tmp/tmp0ztuhljj.js
 
 
 var arguments_ = [];
