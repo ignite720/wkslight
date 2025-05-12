@@ -73,11 +73,12 @@ project("app")
     filter({ "options:target_platform=pc", "options:pc_deploy_assets" })
         prebuildcommands({
             "{COPYDIR} %[%{!cfg.debugdir}/assets] %[%{!cfg.targetdir}/assets]",
+            "{MKDIR} %[%{!cfg.targetdir}/assets/shaders]",
         })
     filter({ "options:target_platform=pc", "options:pc_deploy_assets", "options:ci", "files:shaders/**.vert", "action:not ninja" })
-        buildmessage("Compiling %[%{!file.abspath}]")
+        buildmessage("Compiling %[%{!file.relpath}], %[%{!file.abspath}]")
         buildcommands({
-            "glslangValidator -V %[%{!file.relpath}] -o %[%{!cfg.targetdir}/assets/shaders/%{file.name}.spv]",
+            "glslangValidator -V %[%{!file.abspath}] -o %[%{!cfg.targetdir}/assets/shaders/%{file.name}.spv]",
         })
         buildoutputs({
             "%{!cfg.targetdir}/assets/shaders/%{file.name}.spv",

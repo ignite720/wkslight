@@ -1,7 +1,11 @@
 #include "../../clay.h"
-//#include <SDL.h>
-//#include <SDL_ttf.h>
-//#include <SDL_image.h>
+
+#if 0
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+#endif
+
 #include <stdio.h>
 
 #define CLAY_COLOR_TO_SDL_COLOR_ARGS(color) color.r, color.g, color.b, color.a
