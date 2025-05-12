@@ -7,7 +7,7 @@ unsafe extern "C" {
 
 #[no_mangle]
 fn android_main(_app: android_activity::AndroidApp) {
-    android_logger::init_once(android_logger::Config::default().with_max_level(log::Level::Info));
+    android_logger::init_once(android_logger::Config::default().with_max_level(log::LevelFilter::Info));
 
     info!("hi");
     println!("hello");
