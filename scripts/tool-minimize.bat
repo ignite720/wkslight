@@ -10,6 +10,8 @@ rd /S /Q "app-rs\assets"
 rd /S /Q "app-rs\logs"
 rd /S /Q "app-rs\target"
 
+rd /S /Q "app-rs-android\target"
+
 del /F /S /Q /A "libraries\*.git"
 
 rd /S /Q "premake5-modules\android-studio\.github"
