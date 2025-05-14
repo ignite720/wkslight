@@ -138,7 +138,7 @@ int AppCore::init(int width, int height, bool linear_filter, int auto_close_secs
     m_app_info.linear_filter = linear_filter;
     m_app_info.auto_close_timer = float(auto_close_secs);
 
-    simplerand::from_seed(static_cast<unsigned>(std::time(nullptr)));
+    wkstk::simplerand::from_seed(static_cast<unsigned>(std::time(nullptr)));
 
     do {
         if (!this->init_sdl2()) {

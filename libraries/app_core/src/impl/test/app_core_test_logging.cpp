@@ -7,7 +7,7 @@
 void app_core_test_logging(void) {
     PRINT_FUNCTION_NAME();
 
-    logging::init();
+    wkstk::logging::init();
 
     auto zero = "zero";
     auto one = fmt::format("{}", "one");

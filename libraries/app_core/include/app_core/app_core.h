@@ -107,7 +107,7 @@ private:
 
 private:
     AppInfo m_app_info;
-    DeletionQueue m_deletion_queue;
+    wkstk::DeletionQueue m_deletion_queue;
 
 protected:
     SDL_Window *m_window = nullptr;

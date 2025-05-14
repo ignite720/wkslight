@@ -56,10 +56,10 @@ void Ball::render() {
 void Ball::on_spawn(float dt) {
     Actor::on_spawn(dt);
     
-    this->set_rect_left_top(simplerand::gen_range(0.0f, this->app_core_as_mut_ptr()->app_info_as_ref().window_width - this->rect_as_ref().w), 0.0f);
+    this->set_rect_left_top(wkstk::simplerand::gen_range(0.0f, this->app_core_as_mut_ptr()->app_info_as_ref().window_width - this->rect_as_ref().w), 0.0f);
     this->set_velocity({
-        (simplerand::gen() > 0.5f ? 1 : -1) * simplerand::gen_range(MOVE_SPEED_BASE - MOVE_SPEED_BIAS, MOVE_SPEED_BASE + MOVE_SPEED_BIAS) * MOVE_DELTA * dt,
-        simplerand::gen_range(MOVE_SPEED_BASE - MOVE_SPEED_BIAS, MOVE_SPEED_BASE + MOVE_SPEED_BIAS) * MOVE_DELTA * dt,
+        (wkstk::simplerand::gen() > 0.5f ? 1 : -1) * wkstk::simplerand::gen_range(MOVE_SPEED_BASE - MOVE_SPEED_BIAS, MOVE_SPEED_BASE + MOVE_SPEED_BIAS) * MOVE_DELTA * dt,
+        wkstk::simplerand::gen_range(MOVE_SPEED_BASE - MOVE_SPEED_BIAS, MOVE_SPEED_BASE + MOVE_SPEED_BIAS) * MOVE_DELTA * dt,
     });
     
     this->app_core_as_mut_ptr()->play_audio_clip(ResourceBundle::AUDIO_CLIP_COIN);
@@ -110,7 +110,7 @@ bool Ball::update_collision(float dt, const SDL_FRect *paddle_rect) {
             }
         }
         this->app_core_as_mut_ptr()->play_audio_clip(ResourceBundle::AUDIO_CLIP_HIT);
-        printf("%s\n", consts::text::CONGRATULATIONS[simplerand::gen_range(0, static_cast<int>(COUNTOF(consts::text::CONGRATULATIONS)))]);
+        printf("%s\n", consts::text::CONGRATULATIONS[wkstk::simplerand::gen_range(0, static_cast<int>(COUNTOF(consts::text::CONGRATULATIONS)))]);
         return true;
     }
     return false;
