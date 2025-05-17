@@ -1,13 +1,13 @@
 source scripts/tool-prelude.sh
 
 if [[ "${UNAME}" == "Linux" ]]; then
-    apt-get install libsdl2-dev
-    apt-get install libsdl2-image-dev
-    apt-get install libsdl2-mixer-dev
-    apt-get install libsdl2-net-dev
-    apt-get install libsdl2-ttf-dev
+    sudo apt-get install libsdl2-dev
+    sudo apt-get install libsdl2-image-dev
+    sudo apt-get install libsdl2-mixer-dev
+    sudo apt-get install libsdl2-net-dev
+    sudo apt-get install libsdl2-ttf-dev
 
-    apt-get install alsa-base alsa-utils
+    sudo apt-get install alsa-base alsa-utils
 elif [[ "${UNAME}" == "Darwin" ]]; then
     brew install sdl2
     brew install sdl2_image
