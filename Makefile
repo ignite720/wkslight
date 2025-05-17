@@ -5,7 +5,7 @@ else ifeq ($(UNAME),Darwin)
 	SHELL := /usr/local/bin/bash
 endif
 
-.PHONY: all clean install test rebuild deps
+.PHONY: all clean install test rebuild
 
 all: pc
 
@@ -48,16 +48,12 @@ install:
 	@echo install
 
 install_deps:
-	@source scripts/tool-install-deps.sh
+	source scripts/tool-install-deps.sh
 
 test:
 	source scripts/test-py.sh
 
-rebuild:
-	@echo rebuild
-
-deps:
-	@echo deps
+rebuild: clean pc
 	
 tree:
 	source scripts/tool-tree.sh
