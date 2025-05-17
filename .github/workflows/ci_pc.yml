@@ -91,7 +91,7 @@ jobs:
           echo ${{ runner.os }}
           source scripts/tool-premake5+x.sh ${{ github.workspace }}
 
-          make install_deps
+          sudo make install_deps
           make ninja ARGV=CI=1
           make run ARGV=5
           make test
