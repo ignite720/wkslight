@@ -2,7 +2,7 @@
 
 cd ..
 if "%~1"=="CI" (
-    call "scripts/tool-option-handler.bat" "%*"
+    call "scripts/stool-options-handler.bat" "%*"
 )
 
 premake5 ninja --pc_deploy_assets %OPTION_CI%

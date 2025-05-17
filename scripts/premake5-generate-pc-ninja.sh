@@ -1,3 +1,3 @@
-source scripts/tool-option-handler.sh
+source scripts/tool-options-handler.sh
 
-premake5 ninja --pc_deploy_assets ${OPTION_CI}
+premake5 ninja --pc_deploy_assets ${OPTIONS["CI"]}
