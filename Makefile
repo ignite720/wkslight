@@ -48,7 +48,7 @@ install:
 	@echo install
 
 install_deps:
-	@sudo source scripts/tool-install-deps.sh
+	@source scripts/tool-install-deps.sh
 
 test:
 	source scripts/test-py.sh

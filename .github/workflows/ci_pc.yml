@@ -107,7 +107,7 @@ jobs:
           brew install bash
           echo $SHELL
           
-          make install_deps
+          sudo make install_deps
           #make xcode ARGV=CI=1
           #make run_macos ARGV=5
 
