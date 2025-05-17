@@ -1,5 +1,6 @@
-UNAME=$(uname -s)
-if [ "$UNAME" = "Linux" ]; then
+source scripts/tool-prelude.sh
+
+if [[ "${UNAME}" == "Linux" ]]; then
     apt-get install libsdl2-dev
     apt-get install libsdl2-image-dev
     apt-get install libsdl2-mixer-dev
@@ -7,7 +8,7 @@ if [ "$UNAME" = "Linux" ]; then
     apt-get install libsdl2-ttf-dev
 
     apt-get install alsa-base alsa-utils
-elif [ "$OS" = "Darwin" ]; then
+elif [[ "${UNAME}" == "Darwin" ]]; then
     brew install sdl2
     brew install sdl2_image
     brew install sdl2_mixer
