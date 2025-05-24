@@ -50,7 +50,7 @@ jobs:
 
       - name: Create artifact
         run: |
-          ARTIFACT_DIR=temp/artifact/uwp
+          set "ARTIFACT_DIR=temp/artifact/uwp"
           mkdir -p ${ARTIFACT_DIR} && cp -rv bin/* ${ARTIFACT_DIR}
 
       - name: Upload artifact

@@ -122,8 +122,8 @@ jobs:
 
       - name: Create artifact
         run: |
-          ARTIFACT_DIR=temp/artifact/pc/${{ runner.os }}
-          mkdir -p ${ARTIFACT_DIR} && cp -rv bin/* ${ARTIFACT_DIR}
+          mkdir -p temp/artifact/pc/${{ runner.os }}
+          cp -rv bin/* temp/artifact/pc/${{ runner.os }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
