@@ -123,7 +123,7 @@ jobs:
       - name: Create artifact
         run: |
           mkdir -p temp/artifact/pc/${{ runner.os }}
-          cp -rv bin/* temp/artifact/pc/${{ runner.os }}
+          cp -r bin/* temp/artifact/pc/${{ runner.os }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
