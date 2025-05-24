@@ -40,8 +40,8 @@ jobs:
 
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact/web
-          cp -rv bin/* temp/artifact/web
+          ARTIFACT_DIR=temp/artifact/web
+          mkdir -p ${ARTIFACT_DIR} && cp -rv bin/* ${ARTIFACT_DIR}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

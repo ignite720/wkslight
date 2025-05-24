@@ -52,8 +52,8 @@ jobs:
 
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact/android
-          cp -rv bin/* temp/artifact/android
+          ARTIFACT_DIR=temp/artifact/android
+          mkdir -p ${ARTIFACT_DIR} && cp -rv bin/* ${ARTIFACT_DIR}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

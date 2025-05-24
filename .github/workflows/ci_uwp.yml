@@ -50,11 +50,11 @@ jobs:
 
       - name: Create artifact
         run: |
-          mkdir -p temp/artifact/${{ runner.os }}-uwp
-          cp -r bin/* temp/artifact/${{ runner.os }}-uwp
+          ARTIFACT_DIR=temp/artifact/uwp
+          mkdir -p ${ARTIFACT_DIR} && cp -rv bin/* ${ARTIFACT_DIR}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Release-Artifact-${{ runner.os }}-uwp
+          name: Release-Artifact-uwp
           path: ${{ github.workspace }}/temp
