@@ -1,6 +1,7 @@
 {
     "search.exclude": {
         "app/doc": true,
+        "libraries/Catch2": true,
         "libraries/FastNoise2": true,
         "libraries/headeronly": true,
         "libraries/imgui": true,

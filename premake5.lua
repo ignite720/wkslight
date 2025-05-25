@@ -182,8 +182,10 @@ group(g_wkslight.workspace.libraries.group)
         end
     end
 group("")
-    for i, v in ipairs(g_wkslight.workspace.projects) do
-        include(v)
+    for k, v in pairs(g_wkslight.workspace.projects) do
+        if g_wkslight.isenabled(v) and v.location ~= nil then
+            include(v.location)
+        end
     end
 group("all_gen")
     project("rebuild_me")

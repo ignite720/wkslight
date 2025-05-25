@@ -3,7 +3,7 @@ import ctypes
 
 if platform.system() == 'Windows':
     # __stdcall(msvc)
-    the_dll = ctypes.WinDLL("../bin/target/x64/Release/foo.dll")
+    the_dll = ctypes.WinDLL("bin/target/x64/Release/foo.dll")
 else:
     # __cdecl(linux/macOS)
     if platform.system() == 'Linux':

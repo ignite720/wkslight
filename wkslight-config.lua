@@ -30,9 +30,21 @@ g_wkslight.workspace = {
     cppdialect = "C++20",
     cppdialectuwp = "C++20",
     projects = { -- Sort by dependencies
-        "foobar",
-        "app",
-        "tests",
+        foobar = {
+            location = "foobar",
+        },
+        app = {
+            location = "app",
+        },
+        tests = {
+            enabled = function()
+                if _OPTIONS["target_platform"] == "pc" then
+                    return true
+                end
+                return false
+            end,
+            location = "tests",
+        },
     },
     libraries = {
         group = "libraries",

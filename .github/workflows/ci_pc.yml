@@ -83,6 +83,12 @@ jobs:
           cd scripts
           tool-run-pc.bat 5
 
+          cd scripts
+          test-py.bat
+
+          cd scripts
+          tests.bat
+
       - name: Generate project for Linux
         if: runner.os == 'Linux'
         shell: bash
