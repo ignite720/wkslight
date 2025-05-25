@@ -32,6 +32,7 @@ g_wkslight.workspace = {
     projects = { -- Sort by dependencies
         "foobar",
         "app",
+        "tests",
     },
     libraries = {
         group = "libraries",
@@ -117,6 +118,15 @@ g_wkslight.workspace = {
                 },
                 links = {
                     "baz-qux",
+                },
+            },
+            Catch2 = {
+                location = nil,
+                includedirs = {
+                    "%{g_wkslight.librariesdir}/Catch2/single_include",
+                },
+                defines = {
+                    "CATCH_CONFIG_MAIN",
                 },
             },
             FastNoise2 = {

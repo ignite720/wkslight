@@ -41,3 +41,6 @@
 [submodule "premake5-modules/wkslight"]
 	path = premake5-modules/wkslight
 	url = https://github.com/ignite720/premake-wkslight.git
+[submodule "libraries/Catch2"]
+	path = libraries/Catch2
+	url = https://github.com/wkslight/Catch2-2.13.10.git

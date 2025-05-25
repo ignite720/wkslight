@@ -5,6 +5,7 @@ rm -fr .git
 rm -fv .gitmodules
 rm -fv LICENSE
 
+rm -fr libraries/Catch2
 rm -fr libraries/FastNoise2
 rm -fr libraries/headeronly/mathx
 rm -fr libraries/headeronly/wkstk

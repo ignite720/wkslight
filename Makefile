@@ -50,8 +50,9 @@ install:
 install_deps:
 	source scripts/tool-install-deps.sh
 
-test:
+test: pc
 	source scripts/test-py.sh
+	source scripts/tests.sh
 
 rebuild: clean pc
 	
