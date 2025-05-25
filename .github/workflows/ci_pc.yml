@@ -65,6 +65,12 @@ jobs:
           rem cd scripts
           rem tool-run-pc.bat 5
 
+          rem cd scripts
+          rem test-py.bat
+
+          rem cd scripts
+          rem test.bat
+
           cd scripts
           call premake5-clean.bat
 

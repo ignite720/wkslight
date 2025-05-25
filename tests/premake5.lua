@@ -9,5 +9,4 @@ project("tests")
     })
     g_wkslight.libs_executable({
         "Catch2",
-        "headeronly",
     })

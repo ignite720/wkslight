@@ -72,9 +72,10 @@ project("app")
         })
     filter({ "options:target_platform=pc", "options:pc_deploy_assets" })
         prebuildcommands({
-            "{MKDIR} %[%{!cfg.targetdir}/assets]",
-            "{COPYDIR} %{!cfg.debugdir}/assets/* %[%{!cfg.targetdir}/assets]",
+            --"{MKDIR} %[%{!cfg.targetdir}/assets]",
+            --"{COPYDIR} %[%{!cfg.debugdir}/assets/*] %[%{!cfg.targetdir}/assets]",
             --"{MKDIR} %[%{!cfg.targetdir}/assets/shaders]",
+            "{COPYDIR} %[%{!cfg.debugdir}/assets] %[%{!cfg.targetdir}/assets]",
         })
     filter({ "options:target_platform=pc", "options:pc_deploy_assets", "options:ci", "files:shaders/**.vert", "action:not ninja" })
         buildmessage("Compiling %[%{!file.relpath}], %[%{!file.abspath}]")

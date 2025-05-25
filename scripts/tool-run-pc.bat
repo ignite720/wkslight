@@ -6,4 +6,4 @@ pushd "bin/target/x64/Release"
 .\app %~1
 popd
 
-pause
+timeout /t 2 > nul
