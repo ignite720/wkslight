@@ -69,7 +69,7 @@ jobs:
           rem test-py.bat
 
           rem cd scripts
-          rem test.bat
+          rem tests.bat
 
           cd scripts
           call premake5-clean.bat
