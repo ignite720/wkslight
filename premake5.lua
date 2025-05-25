@@ -130,6 +130,7 @@ workspace(g_wkslight.workspace.name)
         })
         disablewarnings({
             "4251",
+            "4275",
             "4503",
             "4616",
             "4819",
