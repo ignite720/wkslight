@@ -9,6 +9,21 @@ endif
 
 all: pc
 
+clean:
+	source scripts/premake5-clean.sh
+
+install:
+	@echo install
+
+install_deps:
+	source scripts/tool-install-deps.sh
+
+test: pc
+	source scripts/test-py.sh
+	source scripts/tests.sh
+
+rebuild: clean pc
+
 android: clean
 	ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME
 	source scripts/premake5-generate-android.sh
@@ -41,21 +56,6 @@ run: pc
 run_macos: xcode
 	source scripts/tool-run-pc-macos.sh $(ARGV)
 
-clean:
-	source scripts/premake5-clean.sh
-
-install:
-	@echo install
-
-install_deps:
-	source scripts/tool-install-deps.sh
-
-test: pc
-	source scripts/test-py.sh
-	source scripts/tests.sh
-
-rebuild: clean pc
-	
 tree:
 	source scripts/tool-tree.sh
 
