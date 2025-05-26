@@ -471,7 +471,7 @@ bool AppCore::init_sdl2() {
             printf("%s => Failed to initialize SDL: %s\n", FUNCTION_NAME, SDL_GetError());
             break;
         }
-        m_deletion_queue.push([=]() {
+        m_deletion_queue.push([]() {
             SDL_Quit();
         });
 
@@ -516,30 +516,46 @@ bool AppCore::init_sdl2() {
 
 bool AppCore::init_sdl2_libs() {
     do {
-        const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
-        if ((IMG_Init(img_loaders) & img_loaders) != img_loaders) {
-            printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
-            break;
+        {
+            const int img_loaders = (IMG_INIT_JPG | IMG_INIT_PNG);
+            if ((IMG_Init(img_loaders) & img_loaders) != img_loaders) {
+                printf("%s => Failed to initialize SDL_image: %s\n", FUNCTION_NAME, IMG_GetError());
+                break;
+            }
+            m_deletion_queue.push([]() {
+                IMG_Quit();
+            });
         }
-        m_deletion_queue.push([=]() {
-            IMG_Quit();
-        });
 
-        if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-            printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
-            break;
+        {
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+                printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
+                break;
+            }
+            m_deletion_queue.push([]() {
+                Mix_CloseAudio();
+            });
         }
-        m_deletion_queue.push([=]() {
-            Mix_CloseAudio();
-        });
 
-        if (TTF_Init() != 0) {
-            printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
-            break;
+        {
+            if (SDLNet_Init() != 0) {
+                printf("%s => Failed to initialize SDL_net: %s\n", FUNCTION_NAME, SDLNet_GetError());
+                break;
+            }
+            m_deletion_queue.push([]() {
+                SDLNet_Quit();
+            });
         }
-        m_deletion_queue.push([=]() {
-            TTF_Quit();
-        });
+
+        {
+            if (TTF_Init() != 0) {
+                printf("%s => Failed to initialize SDL_ttf: %s\n", FUNCTION_NAME, TTF_GetError());
+                break;
+            }
+            m_deletion_queue.push([]() {
+                TTF_Quit();
+            });
+        }
         return true;
     } while(false);
     return false;
@@ -557,7 +573,7 @@ bool AppCore::init_imgui() {
     
     ImGui_ImplSDL2_InitForSDLRenderer(m_window, m_renderer);
     ImGui_ImplSDLRenderer2_Init(m_renderer);
-    m_deletion_queue.push([=]() {
+    m_deletion_queue.push([]() {
         ImGui_ImplSDLRenderer2_Shutdown();
         ImGui_ImplSDL2_Shutdown();
         ImGui::DestroyContext();
