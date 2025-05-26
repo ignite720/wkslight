@@ -26,7 +26,7 @@ private:
     void drop();
     
 private:
-    SDL_Texture *m_raw_texture = nullptr;
+    SDL_Texture *m_texture = nullptr;
     int m_width = 0;
     int m_height = 0;
 };

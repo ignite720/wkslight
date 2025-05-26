@@ -59,12 +59,12 @@ for /L %%i in (0,1,%SDL3_DIST_LEN%) do (
 )
 set "SDL3_DIST_FILELIST=%SDL3_DIST_FILELIST:~1,-1%"
 
-set BIN_DIRNAME=bin
-set TARGET_DIRNAME=target/%SDL3_ARCH%/Release
 set OPT_DIRNAME=opt
+set OPT_TEMP_DIRNAME=temp
+set BINARY_DIR=../bin/target/%SDL3_ARCH%/Release
 
-mkdir %BIN_DIRNAME%
-pushd %BIN_DIRNAME%
+mkdir %OPT_DIRNAME%
+pushd %OPT_DIRNAME%
 
 for %%i in (%SDL3_DIST_FILELIST%) do (
     if not exist %%i (
@@ -82,16 +82,16 @@ if %SDL3_DIST_FILELIST_ALL_EXIST% equ 0 (
     )
 )
 
-if not exist %OPT_DIRNAME% (
-    mkdir %OPT_DIRNAME%
+if not exist %OPT_TEMP_DIRNAME% (
+    mkdir %OPT_TEMP_DIRNAME%
     
     for /L %%i in (0,1,%SDL3_DIST_LAST%) do (
-        powershell -Command "Expand-Archive -Force -LiteralPath !SDL3_DIST_URL_PART3_ARR[%%i]! -DestinationPath %OPT_DIRNAME%"
+        powershell -Command "Expand-Archive -Force -LiteralPath !SDL3_DIST_URL_PART3_ARR[%%i]! -DestinationPath %OPT_TEMP_DIRNAME%"
     )
 )
 
 for /L %%i in (0,1,%SDL3_DIST_LAST%) do (
-    xcopy /I /Y "%OPT_DIRNAME%\!SDL3_DIST_DIRNAME_ARR[%%i]!\lib\%SDL3_ARCH%\*.dll" "%TARGET_DIRNAME%"
+    xcopy /I /Y "%OPT_TEMP_DIRNAME%\!SDL3_DIST_DIRNAME_ARR[%%i]!\lib\%SDL3_ARCH%\*.dll" "%BINARY_DIR%"
 )
 
 popd

@@ -38,15 +38,15 @@ bool Texture::load_from_text(Font2 *font, const char *text, const SDL_Color &fg_
 }
 
 void Texture::set_color_mod(Uint8 r, Uint8 g, Uint8 b) {
-    SDL_SetTextureColorMod(m_raw_texture, r, g, b);
+    SDL_SetTextureColorMod(m_texture, r, g, b);
 }
 
 void Texture::set_alpha_mod(Uint8 value) {
-    SDL_SetTextureAlphaMod(m_raw_texture, value);
+    SDL_SetTextureAlphaMod(m_texture, value);
 }
 
 void Texture::set_blend_mode(SDL_BlendMode value) {
-    SDL_SetTextureBlendMode(m_raw_texture, value);
+    SDL_SetTextureBlendMode(m_texture, value);
 }
 
 void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float angle, const SDL_Point *center, SDL_RendererFlip flip) {
@@ -58,7 +58,7 @@ void Texture::render(const SDL_FRect *dst_rect, const SDL_FRect *src_rect, float
         tmp_dst_rect.w = int(src_rect->w);
         tmp_dst_rect.h = int(src_rect->h);
     }
-    SDL_RenderCopyEx(APP_CORE_OBJ_GET_RENDERER, m_raw_texture, src_rect ? &tmp_src_rect : nullptr, &tmp_dst_rect, angle, center, flip);
+    SDL_RenderCopyEx(APP_CORE_OBJ_GET_RENDERER, m_texture, src_rect ? &tmp_src_rect : nullptr, &tmp_dst_rect, angle, center, flip);
 }
 
 bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const char *from, SDL_bool set_color_key, Uint8 color_key_r, Uint8 color_key_g, Uint8 color_key_b) {
@@ -71,8 +71,8 @@ bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const cha
         SDL_SetColorKey(surface, set_color_key, SDL_MapRGB(surface->format, color_key_r, color_key_g, color_key_b));
     }
 
-    m_raw_texture = SDL_CreateTextureFromSurface(APP_CORE_OBJ_GET_RENDERER, surface);
-    if (!m_raw_texture) {
+    m_texture = SDL_CreateTextureFromSurface(APP_CORE_OBJ_GET_RENDERER, surface);
+    if (!m_texture) {
         printf("%s => Failed to create texture from %s[%s]: %s\n", FUNCTION_NAME, tag, from, SDL_GetError());
         ret = false;
     }
@@ -85,10 +85,10 @@ bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const cha
 }
 
 void Texture::drop() {
-    if (m_raw_texture) {
-        SDL_DestroyTexture(m_raw_texture);
+    if (m_texture) {
+        SDL_DestroyTexture(m_texture);
 
-        m_raw_texture = nullptr;
+        m_texture = nullptr;
     }
 }
 #endif

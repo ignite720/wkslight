@@ -8,28 +8,28 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <ThisLibDllDir>$(SolutionDir)..\bin\opt\SDL2-2.32.4\lib\$(SDL2Platform);$(SolutionDir)..\bin\opt\SDL2_image-2.8.8\lib\$(SDL2Platform);$(SolutionDir)..\bin\opt\SDL2_mixer-2.8.1\lib\$(SDL2Platform);$(SolutionDir)..\bin\opt\SDL2_net-2.2.0\lib\$(SDL2Platform);$(SolutionDir)..\bin\opt\SDL2_ttf-2.24.0\lib\$(SDL2Platform);</ThisLibDllDir>
+        <ThisLibDllDir>$(SolutionDir)..\opt\SDL2-2.32.4\lib\$(SDL2Platform);$(SolutionDir)..\opt\SDL2_image-2.8.8\lib\$(SDL2Platform);$(SolutionDir)..\opt\SDL2_mixer-2.8.1\lib\$(SDL2Platform);$(SolutionDir)..\opt\SDL2_net-2.2.0\lib\$(SDL2Platform);$(SolutionDir)..\opt\SDL2_ttf-2.24.0\lib\$(SDL2Platform);</ThisLibDllDir>
         <LocalDebuggerEnvironment>PATH=$(ThisLibDllDir);$(LocalDebuggerEnvironment.Replace('PATH=', '').Replace('$(PATH)', '').Replace(';;', ';'))</LocalDebuggerEnvironment>
     </PropertyGroup>
     
     <ItemDefinitionGroup>
         <ClCompile>
             <AdditionalIncludeDirectories>
-                $(SolutionDir)..\bin\opt\SDL2-2.32.4\include;
-                $(SolutionDir)..\bin\opt\SDL2_image-2.8.8\include;
-                $(SolutionDir)..\bin\opt\SDL2_mixer-2.8.1\include;
-                $(SolutionDir)..\bin\opt\SDL2_net-2.2.0\include;
-                $(SolutionDir)..\bin\opt\SDL2_ttf-2.24.0\include;
+                $(SolutionDir)..\opt\SDL2-2.32.4\include;
+                $(SolutionDir)..\opt\SDL2_image-2.8.8\include;
+                $(SolutionDir)..\opt\SDL2_mixer-2.8.1\include;
+                $(SolutionDir)..\opt\SDL2_net-2.2.0\include;
+                $(SolutionDir)..\opt\SDL2_ttf-2.24.0\include;
                 %(AdditionalIncludeDirectories)
             </AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
             <AdditionalLibraryDirectories>
-                $(SolutionDir)..\bin\opt\SDL2-2.32.4\lib\$(SDL2Platform);
-                $(SolutionDir)..\bin\opt\SDL2_image-2.8.8\lib\$(SDL2Platform);
-                $(SolutionDir)..\bin\opt\SDL2_mixer-2.8.1\lib\$(SDL2Platform);
-                $(SolutionDir)..\bin\opt\SDL2_net-2.2.0\lib\$(SDL2Platform);
-                $(SolutionDir)..\bin\opt\SDL2_ttf-2.24.0\lib\$(SDL2Platform);
+                $(SolutionDir)..\opt\SDL2-2.32.4\lib\$(SDL2Platform);
+                $(SolutionDir)..\opt\SDL2_image-2.8.8\lib\$(SDL2Platform);
+                $(SolutionDir)..\opt\SDL2_mixer-2.8.1\lib\$(SDL2Platform);
+                $(SolutionDir)..\opt\SDL2_net-2.2.0\lib\$(SDL2Platform);
+                $(SolutionDir)..\opt\SDL2_ttf-2.24.0\lib\$(SDL2Platform);
                 %(AdditionalLibraryDirectories)
             </AdditionalLibraryDirectories>
             <AdditionalDependencies>

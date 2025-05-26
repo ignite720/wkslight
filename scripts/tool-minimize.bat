@@ -5,6 +5,8 @@ cd ..
 rd /S /Q .git
 rd /S /Q bin
 rd /S /Q build
+rd /S /Q build-cmake
+rd /S /Q opt
 
 rd /S /Q "app-rs\assets"
 rd /S /Q "app-rs\logs"
