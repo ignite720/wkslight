@@ -206,18 +206,18 @@ g_wkslight.workspace = {
                 location = nil,
                 includedirs = {
                     "%{g_wkslight.librariesdir}/sdl2/include",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2-2.32.4/include",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_image-2.8.8/include",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_mixer-2.8.1/include",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_net-2.2.0/include",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_ttf-2.24.0/include",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2-2.32.4/include",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_image-2.8.8/include",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_mixer-2.8.1/include",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_net-2.2.0/include",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_ttf-2.24.0/include",
                 },
                 libdirs = {
-                    "%{g_wkslight.workspacedir}/../opt/SDL2-2.32.4/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_image-2.8.8/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_mixer-2.8.1/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_net-2.2.0/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_ttf-2.24.0/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2-2.32.4/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_image-2.8.8/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_mixer-2.8.1/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_net-2.2.0/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_ttf-2.24.0/lib/x64",
                 },
                 links = {
                     "SDL2",
@@ -228,11 +228,11 @@ g_wkslight.workspace = {
                     "SDL2_ttf",
                 },
                 vslocaldebugenvs = {
-                    "%{g_wkslight.workspacedir}/../opt/SDL2-2.32.4/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_image-2.8.8/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_mixer-2.8.1/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_net-2.2.0/lib/x64",
-                    "%{g_wkslight.workspacedir}/../opt/SDL2_ttf-2.24.0/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2-2.32.4/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_image-2.8.8/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_mixer-2.8.1/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_net-2.2.0/lib/x64",
+                    "%{g_wkslight.workspacedir}/../opt/temp/SDL2_ttf-2.24.0/lib/x64",
                 },
             },
             sol2 = {
@@ -305,7 +305,7 @@ g_wkslight.extras = {
             g_wkslight.EWasmFlag.USE_SDL2 |
             g_wkslight.EWasmFlag.USE_SDL_IMAGE |
             g_wkslight.EWasmFlag.USE_SDL_MIXER |
-            --g_wkslight.EWasmFlag.USE_SDL_NET |
+            g_wkslight.EWasmFlag.USE_SDL_NET |
             g_wkslight.EWasmFlag.USE_SDL_TTF |
             g_wkslight.EWasmFlag.USE_WEBGL2 |
             g_wkslight.EWasmFlag.EXPLICIT_SWAP_CONTROL |
