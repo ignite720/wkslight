@@ -18,7 +18,7 @@ public:
     ~AppCoreWeb();
 
     virtual void preload() override;
-    virtual int init(int width, int height, bool linear_filter, int auto_close_secs) override;
+    virtual int init(const char *title, int width, int height, bool fullscreen, bool linear_filter, int auto_close_secs) override;
     virtual int run() override;
 
     virtual void render_imgui() override;
@@ -47,11 +47,11 @@ void AppCoreWeb::preload() {
     m_net->connect("wss://echo.websocket.org");
 }
 
-int AppCoreWeb::init(int width, int height, bool linear_filter, int auto_close_secs) {
+int AppCoreWeb::init(const char *title, int width, int height, bool fullscreen, bool linear_filter, int auto_close_secs) {
     PRINT_FUNCTION_NAME();
     
     do {
-        if (AppCore::init(width, height, linear_filter, auto_close_secs) != 0) {
+        if (AppCore::init(title, width, height, fullscreen, linear_filter, auto_close_secs) != 0) {
             break;
         }
 

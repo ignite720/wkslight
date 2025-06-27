@@ -20,7 +20,11 @@ bool Font2::text_size(const char *text, int *w, int *h) {
 }
 
 SDL_Surface * Font2::render_text(const char *text, const SDL_Color &fg_color, Uint32 wrap_length) {
-    return TTF_RenderUTF8_Blended_Wrapped(m_ttf_font, text, fg_color, wrap_length);
+    auto *surface = TTF_RenderUTF8_Blended_Wrapped(m_ttf_font, text, fg_color, wrap_length);
+    if (!surface) {
+        printf("%s => Failed to render text surface: %s\n", FUNCTION_NAME, TTF_GetError());
+    }
+    return surface;
 }
 
 bool Font2::load_from_file(const char *path, int pt_size) {

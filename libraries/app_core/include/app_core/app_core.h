@@ -71,7 +71,7 @@ public:
     virtual ~AppCore();
 
     virtual void preload() {}
-    virtual int init(int width, int height, bool linear_filter, int auto_close_secs);
+    virtual int init(const char *title, int width, int height, bool fullscreen, bool linear_filter, int auto_close_secs);
     virtual int run();
 
     virtual void update();

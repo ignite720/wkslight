@@ -32,7 +32,7 @@ static int s_test_app_core(int argc, char *argv[]) {
     app_core->preload();
     
     int ret = 0;
-    if ((ret = app_core->init(consts::WINDOW_WIDTH, consts::WINDOW_HEIGHT, false, argc >= 2 ? std::stoi(argv[1]) : 0)) != 0) {
+    if ((ret = app_core->init("App", consts::WINDOW_WIDTH, consts::WINDOW_HEIGHT, false, false, argc >= 2 ? std::stoi(argv[1]) : 0)) != 0) {
         return ret;
     }
     

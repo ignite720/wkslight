@@ -130,11 +130,13 @@ AppCore::~AppCore() {
     this->drop();
 }
 
-int AppCore::init(int width, int height, bool linear_filter, int auto_close_secs) {
+int AppCore::init(const char *title, int width, int height, bool fullscreen, bool linear_filter, int auto_close_secs) {
     PRINT_FUNCTION_NAME();
 
+    m_app_info.title = title;
     m_app_info.window_width = float(width);
     m_app_info.window_height = float(height);
+    m_app_info.fullscreen = fullscreen;
     m_app_info.linear_filter = linear_filter;
     m_app_info.auto_close_timer = float(auto_close_secs);
 
@@ -481,9 +483,19 @@ bool AppCore::init_sdl2() {
                 break;
             }
         }
+        #if TARGET_PLATFORM_PC && defined(_WIN32)
+        SDL_SetHintWithPriority(SDL_HINT_WINDOWS_INTRESOURCE_ICON, "SDL2_APP_ICON", SDL_HINT_OVERRIDE);
+        #endif
         
-        Uint32 flags = (SDL_WINDOW_SHOWN/* | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI*/);
-        m_window = SDL_CreateWindow("App",
+        Uint32 flags = 0;
+        if (m_app_info.fullscreen) {
+            flags |= SDL_WINDOW_FULLSCREEN;
+        }
+        flags |= SDL_WINDOW_SHOWN;
+        //flags |= SDL_WINDOW_RESIZABLE;
+        //flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+        m_window = SDL_CreateWindow(
+            m_app_info.title.c_str(),
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             int(m_app_info.window_width), int(m_app_info.window_height),
             flags
@@ -508,6 +520,13 @@ bool AppCore::init_sdl2() {
 
         if (SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND) != 0) {
             break;
+        }
+
+        {
+            auto icon = std::make_unique<ImageSurface>();
+            if (icon->load_from_file("assets/textures/icon.png")) {
+                SDL_SetWindowIcon(m_window, icon->surface_as_mut_ptr());
+            }
         }
         return true;
     } while(false);

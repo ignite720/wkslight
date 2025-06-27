@@ -1,8 +1,10 @@
 #pragma once
 
 struct AppInfo {
+    std::string title;
     float window_width = 0.0f;
     float window_height = 0.0f;
+    bool fullscreen = false;
     bool linear_filter = false;
     float auto_close_timer = 0.0f;
 

@@ -18,23 +18,21 @@ Texture::~Texture() {
 bool Texture::load_from_file(const char *path, SDL_bool set_color_key) {
     this->drop();
 
-    SDL_Surface *surface = IMG_Load(path);
-    if (!surface) {
-        printf("%s => Failed to load Image[%s]: %s\n", FUNCTION_NAME, path, IMG_GetError());
+    auto surface = ImageSurface {};
+    if (!surface.load_from_file(path)) {
         return false;
     }
-    return this->load_from_surface(surface, "Image", path, set_color_key);
+    return this->load_from_surface(surface.surface_as_mut_ptr(), "Image", path, set_color_key);
 }
 
 bool Texture::load_from_text(Font2 *font, const char *text, const SDL_Color &fg_color, Uint32 wrap_length) {
     this->drop();
     
-    SDL_Surface *surface = font->render_text(text, fg_color, wrap_length);
+    auto surface = ImageSurface { font->render_text(text, fg_color, wrap_length) };
     if (!surface) {
-        printf("%s => Failed to render text surface: %s\n", FUNCTION_NAME, TTF_GetError());
         return false;
     }
-    return this->load_from_surface(surface, "Text", text, SDL_FALSE);
+    return this->load_from_surface(surface.surface_as_mut_ptr(), "Text", text, SDL_FALSE);
 }
 
 void Texture::set_color_mod(Uint8 r, Uint8 g, Uint8 b) {
@@ -79,8 +77,6 @@ bool Texture::load_from_surface(SDL_Surface *surface, const char *tag, const cha
 
     m_width = surface->w;
     m_height = surface->h;
-
-    SDL_FreeSurface(surface);
     return ret;
 }
 

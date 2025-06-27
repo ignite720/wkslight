@@ -24,7 +24,7 @@ project("app")
         ["VHeaders/*"] = { "src/**.h", "src/**.hpp", "src/**.inl" },
         ["VSources/*"] = { "**.c", "**.cpp" },
         ["VDocs/*"] = "**.txt",
-        ["VResources/*"] = { "*.rc", "**.ico" },
+        ["VResources/*"] = { "**.rc", "*.ico" },
     })
     --]]
     includedirs({
@@ -87,8 +87,8 @@ project("app")
         })
     filter({ "options:target_platform=pc", "system:windows" })
         files({
-            "*.rc",
-            "**.ico",
+            "**.rc",
+            "*.ico",
         })
     filter("options:target_platform=uwp")
         files({

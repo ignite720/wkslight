@@ -2,6 +2,69 @@
 
 #include "app_core/app_core_obj.h"
 
+class ImageSurface {
+public:
+    ImageSurface() = default;
+    explicit ImageSurface(SDL_Surface *surface) { this->set_surface(surface); }
+    ImageSurface(const ImageSurface &other) { this->operator=(other); }
+    ImageSurface(ImageSurface &&other) noexcept { this->operator=(std::move(other)); }
+    ~ImageSurface() {
+        this->drop();
+    }
+
+public:
+    explicit operator bool() const noexcept { return m_surface; }
+    ImageSurface & operator=(const ImageSurface &rhs) {
+        if (this != &rhs) {
+            this->set_surface(rhs.clone_surface());
+        }
+        return *this;
+    }
+    ImageSurface & operator=(ImageSurface &&rhs) noexcept {
+        if (this != &rhs) {
+            this->set_surface(rhs.surface_as_mut_ptr());
+            rhs.set_surface(nullptr, false);
+        }
+        return *this;
+    }
+
+    SDL_Surface * surface_as_mut_ptr() { return m_surface; }
+    void set_surface(SDL_Surface *value, bool drop_res = true) {
+        if (drop_res) {
+            this->drop();
+        }
+        
+        assert(!m_surface);
+        m_surface = value;
+    }
+
+public:
+    void drop() {
+        if (m_surface) {
+            SDL_FreeSurface(m_surface);
+            m_surface = nullptr;
+        }
+    }
+
+    SDL_Surface * clone_surface() const {
+        return SDL_ConvertSurface(m_surface, m_surface->format, 0);
+    }
+
+    bool load_from_file(const char *path) {
+        auto *surface = IMG_Load(path);
+        if (!surface) {
+            printf("%s => Failed to load Image[%s]: %s\n", FUNCTION_NAME, path, IMG_GetError());
+            return false;
+        }
+
+        this->set_surface(surface);
+        return true;
+    }
+
+private:
+    SDL_Surface *m_surface = nullptr;
+};
+
 class Texture : public AppCoreObj {
 public:
     explicit Texture(AppCore &app_core);
