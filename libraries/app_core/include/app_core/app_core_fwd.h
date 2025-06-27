@@ -1,8 +1,5 @@
 #pragma once
 
-//struct SDL_Window;
-//struct SDL_Renderer;
-
 #include <json/nlohmann/json_fwd.hpp>
 using JSON = nlohmann::json;
 

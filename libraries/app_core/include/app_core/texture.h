@@ -34,7 +34,6 @@ public:
             this->drop();
         }
         
-        assert(!m_surface);
         m_surface = value;
     }
 
