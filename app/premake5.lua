@@ -85,7 +85,7 @@ project("app")
         buildoutputs({
             "%{!cfg.targetdir}/assets/shaders/%{file.name}.spv",
         })
-    filter({ "options:target_platform=pc", "system:windows" })
+    filter({ "options:target_platform=pc", "system:windows", "action:not ninja" })
         files({
             "**.rc",
             "*.ico",
