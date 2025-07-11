@@ -5,14 +5,15 @@
 #include <app_core/pch.h>
 #include <app_core/app_core.h>
 
-static void s_test_foobar() {
+static void s_print_env(const char *name) {
     PRINT_FUNCTION_NAME();
     
-    {
-        auto foo = getenv("FOO");
-        auto bar = getenv("BAR");
-        printf("FOO: %s, BAR: %s\n", foo, bar);
-    }
+    auto value = getenv(name);
+    printf("%s=%s\n", name, value);
+}
+
+static void s_test_foobar() {
+    PRINT_FUNCTION_NAME();
 
     {
         printf("foobar version: %d\n", foobar_version());
@@ -25,6 +26,13 @@ static void s_test_foobar() {
 }
 
 static int s_main(int argc, char *argv[]) {
+    PRINT_FUNCTION_NAME();
+
+    {
+        s_print_env("FOO");
+        s_print_env("BAR");
+    }
+
     s_test_foobar();
     return app_core_startup(argc, argv);
 }

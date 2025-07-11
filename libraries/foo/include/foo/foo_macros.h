@@ -33,7 +33,7 @@
     #define PRAGMA_WARNING_IGNORE_MSVC(x)
 #endif
 
-#define PRINT_FUNCTION_NAME()                                   printf("\n%s\n", FUNCTION_NAME)
+#define PRINT_FUNCTION_NAME()                                   printf("\nfn %s ->\n", FUNCTION_NAME)
 #define COUNTOF(arr)                                            (sizeof(arr) / sizeof(arr[0]))
 #define SAFE_DELETE(p)                                          do { if (p) { delete p; p = nullptr; } } while(false)
 #define SAFE_DELETE_ARRAY(p)                                    do { if (p) { delete[] p; p = nullptr; } } while(false)
