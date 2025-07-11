@@ -123,18 +123,18 @@ workspace(g_wkslight.workspace.name)
             --"/permissive",
             "/sdl-",
             "/utf-8",
-            "/wd4005",
+            "/wd4005",                  -- 'identifier' : macro redefinition
             "/Zc:__cplusplus",
             --"/Zc:char8_t-",
             "/Zc:preprocessor",
         })
         disablewarnings({
-            "4251",
-            "4275",
-            "4503",
-            "4616",
-            "4819",
-            "4996",
+            "4251",                     -- 'type': 'type1' needs to have dll-interface to be used by clients of 'type2'
+            "4275",                     -- non - DLL-interface class 'class_1' used as base for DLL-interface class 'class_2'
+            "4503",                     -- 'identifier' : decorated name length exceeded, name was truncated
+            "4616",                     -- #pragma warning : warning number 'number' not a valid compiler warning
+            "4819",                     -- The file contains a character that cannot be represented in the current code page (number). Save the file in Unicode format to prevent data loss.
+            "4996",                     -- Your code uses a function, class member, variable, or typedef that's marked deprecated.
         })
     filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
         buildoptions({

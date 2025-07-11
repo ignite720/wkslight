@@ -22,7 +22,7 @@ jobs:
       - name: Setup premake5
         uses: abel0b/setup-premake@v2.4
         with:
-          version: "5.0.0-beta6"
+          version: "5.0.0-beta7"
 
       - name: Setup emsdk
         uses: mymindstorm/setup-emsdk@v14

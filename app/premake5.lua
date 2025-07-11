@@ -75,6 +75,7 @@ project("app")
             --"{MKDIR} %[%{!cfg.targetdir}/assets]",
             --"{COPYDIR} %[%{!cfg.debugdir}/assets/*] %[%{!cfg.targetdir}/assets]",
             --"{MKDIR} %[%{!cfg.targetdir}/assets/shaders]",
+            "{RMDIR} %[%{!cfg.targetdir}/assets]",
             "{COPYDIR} %[%{!cfg.debugdir}/assets] %[%{!cfg.targetdir}/assets]",
         })
     filter({ "options:target_platform=pc", "options:pc_deploy_assets", "options:ci", "files:shaders/**.vert", "action:not ninja" })
