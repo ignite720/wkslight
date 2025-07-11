@@ -565,11 +565,14 @@ bool AppCore::init_sdl2_libs() {
                 SDLNet_Quit();
             });
 
-            SDL_version compile_version;
-            const SDLNet_version *link_version = SDLNet_Linked_Version();
-            SDL_NET_VERSION(&compile_version);
-            printf("compiled with SDL_net version: %d.%d.%d\n", compile_version.major, compile_version.minor, compile_version.patch);
-            printf("running with SDL_net version: %d.%d.%d\n", link_version->major, link_version->minor, link_version->patch);
+            {
+                SDL_version compile_version;
+                
+                const SDLNet_version *link_version = SDLNet_Linked_Version();
+                SDL_NET_VERSION(&compile_version);
+                printf("compiled with SDL_net version: %d.%d.%d\n", compile_version.major, compile_version.minor, compile_version.patch);
+                printf("running with SDL_net version: %d.%d.%d\n", link_version->major, link_version->minor, link_version->patch);
+            }
         }
 
         {
