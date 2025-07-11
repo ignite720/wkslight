@@ -8,10 +8,14 @@ if [[ "${UNAME}" == "Linux" ]]; then
     sudo apt-get install libsdl2-ttf-dev
 
     sudo apt-get install alsa-base alsa-utils
+
+    ls -lah /usr/include
 elif [[ "${UNAME}" == "Darwin" ]]; then
     brew install sdl2
     brew install sdl2_image
     brew install sdl2_mixer
     brew install sdl2_net
     brew install sdl2_ttf
+
+    la -lah ${HOMEBREW_PREFIX}/Cellar
 fi
