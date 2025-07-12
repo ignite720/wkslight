@@ -16,6 +16,6 @@ elif [[ "${UNAME}" == "Darwin" ]]; then
     brew install sdl2_mixer
     brew install sdl2_net
     brew install sdl2_ttf
-
-    la -lah ${HOMEBREW_PREFIX}/Cellar
+    
+    ls -lah ${HOMEBREW_PREFIX}/Cellar
 fi
