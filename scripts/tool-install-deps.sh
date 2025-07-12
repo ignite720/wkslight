@@ -17,5 +17,7 @@ elif [[ "${UNAME}" == "Darwin" ]]; then
     brew install sdl2_net
     brew install sdl2_ttf
     
-    ls -lah ${HOMEBREW_PREFIX}/Cellar
+    brew --prefix
+    echo ${HOMEBREW_PREFIX}
+    ls -lah /usr/local/Cellar
 fi
