@@ -48,17 +48,15 @@ a lightweight `project generation utility` based on [premake5](https://premake.g
 ### 1. Android
 > 1.1 Install the `Android SDK`
 
-> 1.2 `gradle`
+> 1.2 `gradle` => bin/apk-debug/app.apk
 > ```shell
 > make android
 > ```
-> => bin/apk-debug/app.apk
 
-> 1.3 `cargo-apk`
+> 1.3 `cargo-apk` => bin/android-cargo-apk/app.apk
 > ```shell
 > make cargo-apk
 > ```
-> => bin/android-cargo-apk/app.apk
 
 ### 2. PC
 #### 2.1 Linux & macOS
