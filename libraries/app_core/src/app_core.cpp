@@ -86,7 +86,7 @@ void Clay::init(const AppInfo &app_info, Font2 *font2) {
 
 void Clay::landing_page_blob(int index, uint16_t font_size, Clay_Color color, Clay_String text, Clay_String image_url) {
     CLAY({ .id = CLAY_IDI("HeroBlob", index), .layout = { .sizing = { CLAY_SIZING_GROW(.max = 480) }, .padding = CLAY_PADDING_ALL(16), .childGap = 16, .childAlignment = { .y = CLAY_ALIGN_Y_CENTER} }, .cornerRadius = CLAY_CORNER_RADIUS(10), .border = { .color = color, .width = { 2, 2, 2, 2 } } }) {
-        CLAY({ .id = CLAY_IDI("CheckImage", index), .layout = { .sizing = { CLAY_SIZING_FIXED(32) } }, .image = { .sourceDimensions = { 128, 128 } } }) {}
+        CLAY({ .id = CLAY_IDI("CheckImage", index), .layout = { .sizing = { CLAY_SIZING_FIXED(32) } }, .image = { } }) {}
         CLAY_TEXT(text, CLAY_TEXT_CONFIG({ .textColor = color, .fontId = ResourceBundle::FONT_PRESS_START_2P, .fontSize = font_size }));
     }
 }
@@ -303,7 +303,6 @@ void AppCore::render_background() {
         CLAY({ .id = CLAY_ID("TopBorder5"), .layout = top_border_config, .backgroundColor = Clay::COLOR_TOP_BORDER_1 }) {}
         CLAY({ .id = CLAY_ID("OuterScrollContainer"),
             .layout = { .sizing = { CLAY_SIZING_GROW(0), CLAY_SIZING_GROW(0) }, .layoutDirection = CLAY_TOP_TO_BOTTOM },
-            .scroll = { .vertical = true },
             .border = { .color = Clay::COLOR_RED, .width = { .betweenChildren = 2 } }
         }) {
             Clay::landing_page_desktop(m_app_info);
