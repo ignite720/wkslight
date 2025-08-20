@@ -1,7 +1,7 @@
 project("foo")
-    location(path.join(g_wkslight.workspacedir, g_wkslight.placeholders[2], "%{prj.name}"))
+    location(path.join(g_wkslight.workspacedir, "libraries", "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
-    objdir(path.join(g_wkslight.baseobjdir, g_wkslight.placeholders[2], "%{prj.name}"))
+    objdir(path.join(g_wkslight.baseobjdir, "libraries", "%{prj.name}"))
     kind("SharedLib")
     language("C++")
     files({

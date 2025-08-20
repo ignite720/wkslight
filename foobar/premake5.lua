@@ -1,7 +1,7 @@
 project("foobar")
-    location(path.join(g_wkslight.workspacedir, g_wkslight.placeholders[1], "%{prj.name}"))
+    location(path.join(g_wkslight.workspacedir, "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
-    objdir(path.join(g_wkslight.baseobjdir, g_wkslight.placeholders[1], "..", "objs", "thud", "%{wks.name}", "%{prj.name}"))
+    objdir(path.join(g_wkslight.baseobjdir, "%{wks.name}", "%{prj.name}"))
     kind("StaticLib")
     language("C++")
     files({

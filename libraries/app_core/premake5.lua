@@ -1,7 +1,7 @@
 project("app_core")
-    location(path.join(g_wkslight.workspacedir, g_wkslight.placeholders[2], "%{prj.name}"))
+    location(path.join(g_wkslight.workspacedir, "libraries", "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
-    objdir(path.join(g_wkslight.baseobjdir, g_wkslight.placeholders[2], "%{prj.name}"))
+    objdir(path.join(g_wkslight.baseobjdir, "libraries", "%{prj.name}"))
     kind("SharedLib")
     language("C++")
     pchheader("pch.h")
@@ -63,61 +63,45 @@ project("app_core")
         files({
             "src/impl/platform/web/**.*",
         })
-    filter("options:target_platform=android or options:target_platform=web")
-        kind("StaticLib")
     filter({ "action:vs* or ninja", "system:windows*", "configurations:Release" })
         exceptionhandling("SEH")
-    filter("kind:SharedLib")
-        defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
+    usage("PUBLIC")
+        filter("options:target_platform=android or options:target_platform=web")
+            kind("StaticLib")
+        filter("kind:SharedLib")
+            defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
 project("app_core_d3d12")
-    location(path.join(g_wkslight.workspacedir, g_wkslight.placeholders[2], "%{prj.name}"))
+    location(path.join(g_wkslight.workspacedir, "libraries", "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
-    objdir(path.join(g_wkslight.baseobjdir, g_wkslight.placeholders[2], "%{prj.name}"))
+    objdir(path.join(g_wkslight.baseobjdir, "libraries", "%{prj.name}"))
     kind("SharedLib")
     language("C++")
     files({
         "include/**.h",
         "src/impl/gfx/d3d12/**.*",
     })
-    includedirs({
-        g_wkslight.workspace.libraries.projects.app_core.includedirs,
-    })
-    defines({
-        g_wkslight.workspace.libraries.projects.app_core.defines,
-    })
-    g_wkslight.libs({
-        "foo",
-        "headeronly",
-        "spdlog",
-        "XMath",
-    })
-    filter("options:target_platform=android or options:target_platform=web")
-        kind("StaticLib")
-    filter("kind:SharedLib")
-        defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
+    uses({ "app_core" })
+    usage("PUBLIC")
+        includedirs({
+            g_wkslight.workspace.libraries.projects.app_core.includedirs,
+        })
+        defines({
+            g_wkslight.workspace.libraries.projects.app_core.defines,
+        })
+        g_wkslight.libs({
+            "foo",
+            "headeronly",
+            "spdlog",
+            "XMath",
+        })
 project("app_core_vulkan")
-    location(path.join(g_wkslight.workspacedir, g_wkslight.placeholders[2], "%{prj.name}"))
+    location(path.join(g_wkslight.workspacedir, "libraries", "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
-    objdir(path.join(g_wkslight.baseobjdir, g_wkslight.placeholders[2], "%{prj.name}"))
+    objdir(path.join(g_wkslight.baseobjdir, "libraries", "%{prj.name}"))
     kind("SharedLib")
     language("C++")
     files({
         "include/**.h",
         "src/impl/gfx/vulkan/**.*",
     })
-    includedirs({
-        g_wkslight.workspace.libraries.projects.app_core.includedirs,
-    })
-    defines({
-        g_wkslight.workspace.libraries.projects.app_core.defines,
-    })
-    g_wkslight.libs({
-        "foo",
-        "headeronly",
-        "spdlog",
-        "XMath",
-    })
-    filter("options:target_platform=android or options:target_platform=web")
-        kind("StaticLib")
-    filter("kind:SharedLib")
-        defines({ "__APP_CORE_CONFIG_BUILD_DLL" })
+    uses({ "app_core", "app_core_d3d12" })
