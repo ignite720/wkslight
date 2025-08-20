@@ -1,7 +1,7 @@
 project("bar")
-    location(path.join(g_wkslight.workspacedir, "libraries", "%{prj.name}"))
+    location(path.join(g_wkslight.workspacedir, "%{prj.group}", "%{prj.name}"))
     targetdir(g_wkslight.targetdir)
-    objdir(path.join(g_wkslight.baseobjdir, "libraries", "%{prj.name}"))
+    objdir(path.join(g_wkslight.baseobjdir, "%{prj.group}", "%{prj.name}"))
     kind("StaticLib")
     language("C++")
     files({
