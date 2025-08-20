@@ -40,10 +40,7 @@ public:
     }
 
 public:
-    explicit GameObject(int id) : m_id(id) {
-        static int s_id_counter = 0;
-        m_id = s_id_counter++;
-    }
+    explicit GameObject(int id) : m_id(id) {}
 
 public:
     int get_id() const { return m_id; }
