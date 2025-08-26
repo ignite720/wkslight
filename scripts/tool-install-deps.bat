@@ -1,1 +1,3 @@
+@echo off
+
 call tool-install-deps-sdl2.bat
