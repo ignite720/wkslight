@@ -2,7 +2,7 @@
 
 cd ..
 if "%~1"=="rebuild_me" (
-    cd ..
+    cd ../..
 )
 if "%~1"=="CI" (
     call "scripts/tool-options-handler.bat" "%*"
