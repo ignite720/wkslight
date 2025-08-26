@@ -91,13 +91,19 @@ workspace(g_wkslight.workspace.name)
         })
         linkoptions({
             "-fexceptions",
-            "-sNO_DISABLE_EXCEPTION_CATCHING",
             "-sDISABLE_EXCEPTION_CATCHING=0",
+            --"-sNO_DISABLE_EXCEPTION_CATCHING",
         })
     filter("system:windows")
         systemversion("latest")
     filter("system:linux")
         pic("On")
+        buildoptions({
+            --"-fexceptions",
+            "-no-pie",
+            "-Wno-deprecated-declarations",
+            "-Wno-reorder",
+        })
     filter("system:macosx")
         --buildoptions({ "-iquote" })
     filter({ "action:vs* or ninja", "system:windows*" })
@@ -112,6 +118,8 @@ workspace(g_wkslight.workspace.name)
             --"_CRT_NONSTDC_NO_DEPRECATE",
             "_CRT_SECURE_NO_WARNINGS",
             --"_CRT_NONSTDC_NO_WARNINGS",
+            "_DISABLE_STRING_ANNOTATION",
+            "_DISABLE_VECTOR_ANNOTATION",
             "_WINSOCK_DEPRECATED_NO_WARNINGS",
             "_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS",
             "_SILENCE_ALL_CXX20_DEPRECATION_WARNINGS",
@@ -123,6 +131,7 @@ workspace(g_wkslight.workspace.name)
             --"/permissive",
             "/sdl-",
             "/utf-8",
+            "/w34263",                  -- 'function' : member function does not override any base class virtual member function
             "/wd4005",                  -- 'identifier' : macro redefinition
             "/Zc:__cplusplus",
             --"/Zc:char8_t-",
@@ -132,6 +141,7 @@ workspace(g_wkslight.workspace.name)
             "4251",                     -- 'type': 'type1' needs to have dll-interface to be used by clients of 'type2'
             "4275",                     -- non - DLL-interface class 'class_1' used as base for DLL-interface class 'class_2'
             "4503",                     -- 'identifier' : decorated name length exceeded, name was truncated
+            "4576",                     -- a parenthesized type followed by an initializer list is a non-standard explicit type conversion syntax
             "4616",                     -- #pragma warning : warning number 'number' not a valid compiler warning
             "4819",                     -- The file contains a character that cannot be represented in the current code page (number). Save the file in Unicode format to prevent data loss.
             "4996",                     -- Your code uses a function, class member, variable, or typedef that's marked deprecated.

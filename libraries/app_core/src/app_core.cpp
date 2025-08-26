@@ -12,7 +12,7 @@
 PRAGMA_WARNING_PUSH
 PRAGMA_WARNING_IGNORE_CLANG("-Wnarrowing")
 PRAGMA_WARNING_IGNORE_GCC("-Wnarrowing")
-PRAGMA_WARNING_IGNORE_MSVC(4018 4244 4576 4838)
+PRAGMA_WARNING_IGNORE_MSVC(4018 4244 4838)
 #include <clay/renderers/SDL2/clay_renderer_SDL2.c>
 PRAGMA_WARNING_POP
 
@@ -546,8 +546,13 @@ bool AppCore::init_sdl2_libs() {
         }
 
         {
-            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+            const int init_flags = (MIX_INIT_OGG);
+            if (Mix_Init(init_flags) != init_flags) {
                 printf("%s => Failed to initialize SDL_mixer: %s\n", FUNCTION_NAME, Mix_GetError());
+                break;
+            }
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+                printf("%s => Failed to open the default audio device: %s\n", FUNCTION_NAME, Mix_GetError());
                 break;
             }
             m_deletion_queue.push([]() {

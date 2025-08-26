@@ -24,7 +24,7 @@ void app_core_test_stb(void) {
         }
     }
     if (stbi_write_png(__TEST_PNG_PATH, __TEST_PNG_WIDTH, __TEST_PNG_HEIGHT, __TEST_PNG_COMP, pixels, __TEST_PNG_STRIDE_IN_BYTES) == 0) {
-        assert(false);
+        assert(!"Failed to write the PNG file");
     }
 
     int w, h, channels;
@@ -34,6 +34,6 @@ void app_core_test_stb(void) {
 
         stbi_image_free(data);
     } else {
-        assert(false);
+        assert(!"Failed to read the PNG file");
     }
 }
