@@ -1,3 +1,5 @@
+@echo off
+
 if "%~1"=="CI" (
     set OPTION_CI="--ci"
 ) else (
