@@ -99,13 +99,28 @@ workspace(g_wkslight.workspace.name)
     filter("system:linux")
         pic("On")
         buildoptions({
+            --"-fcoroutines",
             --"-fexceptions",
             "-no-pie",
+            --"-pedantic",
+            --"-pedantic-errors",
+            --"-Wall",
+            --"-Werror",
+            --"-Wextra",
             "-Wno-deprecated-declarations",
+            --"-Wno-reorder",
+            "-Wno-deprecated",
+            --"-Wnon-virtual-dtor",
+        })
+    filter({ "system:linux", "files:**.cc or **.cpp" })
+        buildoptions({
             "-Wno-reorder",
+            "-Wnon-virtual-dtor",
         })
     filter("system:macosx")
-        --buildoptions({ "-iquote" })
+        buildoptions({
+            --"-iquote",
+        })
     filter({ "action:vs* or ninja", "system:windows*" })
         startproject(g_wkslight.workspace.startproject)
         staticruntime("Off")
@@ -147,8 +162,9 @@ workspace(g_wkslight.workspace.name)
             "4996",                     -- Your code uses a function, class member, variable, or typedef that's marked deprecated.
         })
     filter({ "action:gmake*", "system:not linux", "kind:*App or StaticLib" })
-        buildoptions({
+        linkoptions({
             "-static",
+            --"-static-libstdc++",
         })
     filter("action:xcode*")
         xcodebuildsettings({
