@@ -129,18 +129,18 @@ workspace(g_wkslight.workspace.name)
         conformancemode("Yes")
         flags({ "MultiProcessorCompile" })
         defines({
-            --"_CRT_SECURE_NO_DEPRECATE",
             --"_CRT_NONSTDC_NO_DEPRECATE",
-            "_CRT_SECURE_NO_WARNINGS",
             --"_CRT_NONSTDC_NO_WARNINGS",
-            "_DISABLE_STRING_ANNOTATION",
-            "_DISABLE_VECTOR_ANNOTATION",
-            "_WINSOCK_DEPRECATED_NO_WARNINGS",
+            --"_CRT_SECURE_NO_DEPRECATE",
+            "_CRT_SECURE_NO_WARNINGS",
+            --"_DISABLE_STRING_ANNOTATION",
+            --"_DISABLE_VECTOR_ANNOTATION",
+            --"_HAS_STD_BYTE=0",
+            "NOMINMAX",
             "_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS",
             "_SILENCE_ALL_CXX20_DEPRECATION_WARNINGS",
             "_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS",
-            --"_HAS_STD_BYTE=0",
-            "NOMINMAX",
+            "_WINSOCK_DEPRECATED_NO_WARNINGS",
         })
         buildoptions({
             --"/permissive",
