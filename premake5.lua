@@ -47,10 +47,12 @@ workspace(g_wkslight.workspace.name)
     location(path.getbasename(g_wkslight.workspacedir))
     configurations({ "Debug", "Release" })
     characterset("Default")
+    --cdialect(g_wkslight.workspace.cdialect)
     cppdialect(g_wkslight.workspace.cppdialect)
     floatingpoint("Default")
     rtti("Default")
     exceptionhandling("Default")
+    --openmp("On")
     defines({
         "__STDC_CONSTANT_MACROS",
         "__STDC_FORMAT_MACROS",

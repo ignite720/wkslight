@@ -28,6 +28,7 @@ g_wkslight.clean = {
 g_wkslight.workspace = {
     name = "wkslight",
     startproject = "app",
+    cdialect = "C99",
     cppdialect = "C++20",
     cppdialectuwp = "C++20",
     projects = { -- Sort by dependencies
