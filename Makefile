@@ -31,7 +31,7 @@ install:
 	@echo install
 
 install_deps:
-	source scripts/tool-install-deps.sh
+	source scripts/tool-install-deps.sh $(ARGV)
 
 ninja: clean
 	source scripts/premake5-generate-pc-ninja.sh $(ARGV)
