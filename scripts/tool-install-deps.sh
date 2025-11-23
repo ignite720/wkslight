@@ -1,5 +1,6 @@
 source scripts/tool-prelude.sh
 
+premake5 --file=tool-install-deps.lua
 if [[ "${UNAME}" == "Linux" ]]; then
     sudo apt-get install libsdl2-dev
     sudo apt-get install libsdl2-image-dev
